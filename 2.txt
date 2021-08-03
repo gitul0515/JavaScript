@@ -1,0 +1,9 @@
+toUpperCase(): 대문자로 변환 
+indexOf(): 지정된 요소를 찾을 수 있는 첫 번째 인덱스를 반환하고 존재하지 않으면 -1을 반환
+trim(): 문자열 양 끝의 공백을 제거
+
+span 태그: 문장 단위로 텍스트 영역을 지정하는 것 
+              Inline Text Container 
+              div 태그가 사각형 박스 모양으로 영역을 지정하는데 반해, 
+              span은 한 문장 단위로 영역을 지정한다. 
+line-height: 행간

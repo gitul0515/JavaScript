@@ -1,0 +1,7 @@
+- JavaScript는 HTML 위에서 작성되는 언어이다.
+  JavaScript는 동적이나 HTML은 정적이다.
+- onclick의 속성 값으로는 javascript가 와야 한다.
+- event
+- 개발자 도구: 콘솔 창
+                   ESC 
+                   현재 웹페이지를 기반으로 콘솔창이 수행된다.
