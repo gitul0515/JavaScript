@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <title>JavaScript Output</title>
+  </head>
+  <body>
+    <h2>2. HTML DOM 요소를 이용한 innerHTML 프로퍼티</h2>
+    <h3>사용 방법</h3>
+    <p>
+      우선 document 객체의 getElementByID()나 getElementsByTagName() 등의
+      메소드를 사용하여 HTML 요소를 선택한다.<br>그리고 innerHTML 프로퍼티를
+      사용하면 선택된 HTML 요소의 내용(content)이나 속성(attribute)값 등을
+      손쉽게 변경할 수 있다.
+    </p>
+
+    <p id="text">이 문장을 바꿀 것입니다!</p>
+    <script>
+      var str = document.getElementById("text");
+      str.innerHTML = "이 문장으로 바뀌었습니다!";
+    </script>
+  </body>
+</html>
