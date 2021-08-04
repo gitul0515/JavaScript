@@ -1,90 +1,43 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8">
-    <title></title>
-		<style>
-			.night_day {
-				width: 50px;
-				height: 50px;
-				font-size: 15px;
-			}
-		</style>
+    <title>함수 테스트</title>
   </head>
   <body>
-    <h1><a href="test.html">WEB</a></h1>
-    <input class="night_day" type="button" value="night" onclick="
-    var target = document.querySelector('body');
-		var list = document.querySelectorAll('.night_day');
-		var i = 0;
-    var alist = document.querySelectorAll('a');
-    var j = 0;
-    if (this.value === 'night') {
-      target.style.backgroundColor = 'black';
-      target.style.color = 'white';
-			this.value = 'day';
-      list[i+1].value = 'day';
+    <h1>Function</h1>
+    <h2>Basic</h2>
+      <ul>
+        <script>
+          function two(){
+            document.write('<li>2-1</li>');
+            document.write('<li>2-2</li>');
+          }
+          two(); two();
+        </script>
+      </ul>
 
-      while (j<alist.length){
-        alist[j].style.color = 'powderblue';
-        j++;}
+    <h2>Parameter & Argument</h2>
+    <script>
+      function plus(left, right){
+        document.write((left+right)+'<br>');
       }
-    else {
-			target.style.backgroundColor = 'white';
-      target.style.color = 'black';
-      this.value = 'night';
-			list[i+1].value = 'night';
-
-      while (j<alist.length){
-        alist[j].style.color = 'blue';
-        j++;}
+      plus(2,3);   //5
+      plus(3,4);   //7
+      function plus_color(left, right){
+        document.write('<div style="color:red">'+(left+right)+'</div>');
       }
-    ">
-    <ol>
-      <li><a href="HTML.html">HTML</a></li>
-      <li><a href="CSS.html">CSS</a></li>
-      <li><a href="JS.html">JavaScript</a></li>
-    </ol>
-    <h2>JavaScript</h2>
-    <p>
-      JavaScript (/ˈdʒɑːvəˌskrɪpt/[6]), often abbreviated as JS,
-      is a high-level, dynamic, weakly typed, prototype-based, multi-paradigm,
-      and interpreted programming language. Alongside HTML and CSS, JavaScript
-      is one of the three core technologies of World Wide Web content production.
-      It is used to make webpages interactive and provide online programs,
-      including video games. The majority of websites employ it, and all modern
-      web browsers support it without the need for plug-ins by means of a
-      built-in JavaScript engine. Each of the many JavaScript engines represent
-      a different implementation of JavaScript, all based on the ECMAScript
-      specification, with some engines not supporting the spec fully, and with
-      many engines supporting additional features beyond ECMA.
-    </p>
-		<input class="night_day" type="button" value="night" onclick="
-    var target = document.querySelector('body');
-		var list = document.querySelectorAll('.night_day');
-		var i = 0;
-    var alist = document.querySelectorAll('a');
-    var j = 0;
-		if (this.value === 'night') {
-			target.style.backgroundColor = 'black';
-			target.style.color = 'white';
-			this.value = 'day';
-			list[i].value = 'day';
+      plus_color(2,3);  //red 5
+    </script>
 
-      while (j<alist.length){
-        alist[j].style.color = 'powderblue';
-        j++;}
-			}
-		else {
-			target.style.backgroundColor = 'white';
-			target.style.color = 'black';
-			this.value = 'night';
-			list[i].value = 'night';
-
-      while (j<alist.length){
-        alist[j].style.color = 'blue';
-        j++;}
-		}
-		">
+    <h2>Return</h2>
+    <script>
+      function plus_answer(left, right){
+        return left+right;
+      }
+      document.write('<div>'+plus_answer(2,3)+'</div>');
+      document.write('<div style="color:red">'+plus_answer(2,3)+'</div>');
+      document.write('<div style="font-size:3rem">'+plus_answer(2,3)+'</div>');
+    </script>
   </body>
 </html>
