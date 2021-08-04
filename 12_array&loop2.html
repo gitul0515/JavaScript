@@ -3,42 +3,40 @@
   <head>
     <meta charset="utf-8">
     <title></title>
-		<style>
-			.night_day {
-				width: 50px;
-				height: 50px;
-				font-size: 15px;
-			}
-		</style>
+    <style>
+    input {
+      width:50px;
+      height:50px;
+      font-size:16px;
+    }
+    </style>
   </head>
   <body>
-    <h1><a href="test.html">WEB</a></h1>
-    <input class="night_day" type="button" value="night" onclick="
+    <h1><a href="7_toggle.html">WEB</a></h1>
+    <input type="button" value="night" onclick="
     var target = document.querySelector('body');
-		var list = document.querySelectorAll('.night_day');
-		var i = 0;
-    var alist = document.querySelectorAll('a');
-    var j = 0;
     if (this.value === 'night') {
       target.style.backgroundColor = 'black';
       target.style.color = 'white';
-			this.value = 'day';
-      list[i+1].value = 'day';
-
-      while (j<alist.length){
-        alist[j].style.color = 'powderblue';
-        j++;}
+      this.value = 'day';
+      var list = document.querySelectorAll('a');
+      var i = 0;
+      while (i<list.length){
+        list[i].style.color = 'powderblue';
+        i++;
       }
+    }
     else {
-			target.style.backgroundColor = 'white';
+      target.style.backgroundColor = 'white';
       target.style.color = 'black';
       this.value = 'night';
-			list[i+1].value = 'night';
-
-      while (j<alist.length){
-        alist[j].style.color = 'blue';
-        j++;}
+      var list = document.querySelectorAll('a');
+      var i = 0;
+      while (i<list.length){
+        list[i].style.color = 'blue';
+        i++;
       }
+    }
     ">
     <ol>
       <li><a href="HTML.html">HTML</a></li>
@@ -59,32 +57,30 @@
       specification, with some engines not supporting the spec fully, and with
       many engines supporting additional features beyond ECMA.
     </p>
-		<input class="night_day" type="button" value="night" onclick="
+    <input type="button" value="night" onclick="
     var target = document.querySelector('body');
-		var list = document.querySelectorAll('.night_day');
-		var i = 0;
-    var alist = document.querySelectorAll('a');
-    var j = 0;
-		if (this.value === 'night') {
-			target.style.backgroundColor = 'black';
-			target.style.color = 'white';
-			this.value = 'day';
-			list[i].value = 'day';
-
-      while (j<alist.length){
-        alist[j].style.color = 'powderblue';
-        j++;}
-			}
-		else {
-			target.style.backgroundColor = 'white';
-			target.style.color = 'black';
-			this.value = 'night';
-			list[i].value = 'night';
-
-      while (j<alist.length){
-        alist[j].style.color = 'blue';
-        j++;}
-		}
-		">
+    if (this.value === 'night') {
+      target.style.backgroundColor = 'black';
+      target.style.color = 'white';
+      this.value = 'day';
+      var list = document.querySelectorAll('a');
+      var i = 0;
+      while (i<list.length){
+        list[i].style.color = 'powderblue';
+        i++;
+      }
+    }
+    else {
+      target.style.backgroundColor = 'white';
+      target.style.color = 'black';
+      this.value = 'night';
+      var list = document.querySelectorAll('a');
+      var i = 0;
+      while (i<list.length){
+        list[i].style.color = 'blue';
+        i++;
+      }
+    }
+    ">
   </body>
 </html>
