@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>객체 기초 문법</title>
+  </head>
+  <body>
+    <h1>Object</h1>
+    <h2>Create</h2>
+    <script>
+      var family = {
+        "Father":"Jae-hyeong",
+        "Mother":"Mi-young"
+      };
+      document.write("Father: "+family.Father+"<br>");
+      document.write("Mother: "+family.Mother+"<br>");
+      family.Sister = "Hye-lin";
+      family.Brother = "Gi-hong";
+      document.write("Mother: "+family.Sister+"<br>");
+      document.write("Mother: "+family.Brother+"<br>");
+      family["dog name"] = "maru";
+      document.write("dog name: "+family["dog name"]+"<br>");
+    </script>
+
+    <h2>Iterate</h2>
+    <script>
+      for (var key in family){
+        document.write(key+' : '+family[key]+'<br>');
+      }
+    </script>
+
+    <h2>Property & Method</h2>
+    <script>
+      family.showAll = function () {
+        for (var key in this){
+          if (key === "showAll")
+            continue;
+          document.write(key+' : '+this[key]+'<br>');
+        }
+      }
+      family.showAll();
+    </script>
+  </body>
+</html>

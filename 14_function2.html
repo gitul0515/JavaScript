@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>테스트 - 버튼</title>
+    <title>함수의 활용</title>
     <style>
     .night_day {
       width: 50px;
@@ -11,50 +11,50 @@
     }
     </style>
     <script>
-      function nightDayHandler(self){
-        var target = document.querySelector('body');
-        if (self.value === 'night') {               //night 모드 시
-          target.style.backgroundColor = 'black';
-          target.style.color = 'white';
+      function nightDayHandler(self) {
+      var target = document.querySelector('body');
+      if (self.value === 'night') {               //night 모드 시
+        target.style.backgroundColor = 'black';
+        target.style.color = 'white';
 
-          //다른 버튼들의 value 값도 함께 변경함
-          var list = document.querySelectorAll('.night_day');
-          var i = 0;
-          while (i < list.length)
-          {
-            list[i].value = 'day';
-            i++;
-          }
-          //하이퍼링크 텍스트의 색깔 변경
-          var alist = document.querySelectorAll('a');
-          var j = 0;
-          while (j < alist.length)
-          {
-            alist[j].style.color = 'powderblue';
-            j++;
-          }
+        //다른 버튼들의 value 값도 함께 변경함
+        var list = document.querySelectorAll('.night_day');
+        var i = 0;
+        while (i < list.length)
+        {
+          list[i].value = 'day';
+          i++;
         }
-        else {                                       //day 모드 시
-          target.style.backgroundColor = 'white';
-          target.style.color = 'black';
+        //하이퍼링크 텍스트의 색깔 변경
+        var alist = document.querySelectorAll('a');
+        var j = 0;
+        while (j < alist.length)
+        {
+          alist[j].style.color = 'powderblue';
+          j++;
+        }
+      }
+      else {                                       //day 모드 시
+        target.style.backgroundColor = 'white';
+        target.style.color = 'black';
 
-          //다른 버튼들의 value 값도 함께 변경함
-          var list = document.querySelectorAll('.night_day');
-          var i = 0;
-          while (i < list.length)
-          {
-            list[i].value = 'night';
-            i++;
-          }
-          //하이퍼링크 텍스트의 색깔 변경
-          var alist = document.querySelectorAll('a');
-          var j = 0;
-          while (j < alist.length)
-          {
-            alist[j].style.color = 'blue';
-            j++;
-          }
+        //다른 버튼들의 value 값도 함께 변경
+        var list = document.querySelectorAll('.night_day');
+        var i = 0;
+        while (i < list.length)
+        {
+          list[i].value = 'night';
+          i++;
         }
+        //하이퍼링크 텍스트의 색깔 변경
+        var alist = document.querySelectorAll('a');
+        var j = 0;
+        while (j < alist.length)
+        {
+          alist[j].style.color = 'blue';
+          j++;
+        }
+      }
       }
     </script>
   </head>
@@ -81,6 +81,8 @@
       specification, with some engines not supporting the spec fully, and with
       many engines supporting additional features beyond ECMA.
     </p>
+    <input class="night_day" type="button" value="night" onclick="
+    nightDayHandler(this);">
     <input class="night_day" type="button" value="night" onclick="
     nightDayHandler(this);">
     <input class="night_day" type="button" value="night" onclick="

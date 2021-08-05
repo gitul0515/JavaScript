@@ -2,43 +2,55 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
-		<style>
-			.night_day {
-				width: 50px;
-				height: 50px;
-				font-size: 15px;
-			}
-		</style>
+    <title>테스트 - 버튼</title>
+    <style>
+    .night_day {
+      width: 50px;
+      height: 50px;
+      font-size: 15px;
+    }
+    </style>
   </head>
   <body>
     <h1><a href="test.html">WEB</a></h1>
     <input class="night_day" type="button" value="night" onclick="
-    var target = document.querySelector('body');
-		var list = document.querySelectorAll('.night_day');
-		var i = 0;
+    var list = document.querySelectorAll('.night_day');
+    var i = 0;
     var alist = document.querySelectorAll('a');
     var j = 0;
-    if (this.value === 'night') {
+    var target = document.querySelector('body');
+    if (this.value === 'night') {               //night 모드 시
       target.style.backgroundColor = 'black';
       target.style.color = 'white';
-			this.value = 'day';
-      list[i+1].value = 'day';
 
-      while (j<alist.length){
+      while (i < list.length)        //다른 버튼들의 value 값도 변경
+      {
+        list[i].value = 'day';
+        i++;
+      }
+
+      while (j < alist.length)       //하이퍼링크 텍스트의 색깔 변경
+      {
         alist[j].style.color = 'powderblue';
-        j++;}
+        j++;
       }
-    else {
-			target.style.backgroundColor = 'white';
+    }
+    else {                                       //day 모드 시
+      target.style.backgroundColor = 'white';
       target.style.color = 'black';
-      this.value = 'night';
-			list[i+1].value = 'night';
 
-      while (j<alist.length){
-        alist[j].style.color = 'blue';
-        j++;}
+      while (i < list.length)        //다른 버튼들의 value 값도 변경
+      {
+        list[i].value = 'night';
+        i++;
       }
+
+      while (j < alist.length)       //하이퍼링크 텍스트의 색깔 변경
+      {
+        alist[j].style.color = 'blue';
+        j++;
+      }
+    }
     ">
     <ol>
       <li><a href="HTML.html">HTML</a></li>
@@ -59,32 +71,83 @@
       specification, with some engines not supporting the spec fully, and with
       many engines supporting additional features beyond ECMA.
     </p>
-		<input class="night_day" type="button" value="night" onclick="
-    var target = document.querySelector('body');
-		var list = document.querySelectorAll('.night_day');
-		var i = 0;
+    <input class="night_day" type="button" value="night" onclick="
+    var list = document.querySelectorAll('.night_day');
+    var i = 0;
     var alist = document.querySelectorAll('a');
     var j = 0;
-		if (this.value === 'night') {
-			target.style.backgroundColor = 'black';
-			target.style.color = 'white';
-			this.value = 'day';
-			list[i].value = 'day';
+    var target = document.querySelector('body');
+    if (this.value === 'night') {               //night 모드 시
+      target.style.backgroundColor = 'black';
+      target.style.color = 'white';
 
-      while (j<alist.length){
+      while (i < list.length)        //다른 버튼들의 value 값도 변경
+      {
+        list[i].value = 'day';
+        i++;
+      }
+
+      while (j < alist.length)       //하이퍼링크 텍스트의 색깔 변경
+      {
         alist[j].style.color = 'powderblue';
-        j++;}
-			}
-		else {
-			target.style.backgroundColor = 'white';
-			target.style.color = 'black';
-			this.value = 'night';
-			list[i].value = 'night';
+        j++;
+      }
+    }
+    else {                                       //day 모드 시
+      target.style.backgroundColor = 'white';
+      target.style.color = 'black';
 
-      while (j<alist.length){
+      while (i < list.length)        //다른 버튼들의 value 값도 변경
+      {
+        list[i].value = 'night';
+        i++;
+      }
+
+      while (j < alist.length)       //하이퍼링크 텍스트의 색깔 변경
+      {
         alist[j].style.color = 'blue';
-        j++;}
-		}
-		">
+        j++;
+      }
+    }
+    ">
+    <input class="night_day" type="button" value="night" onclick="
+    var list = document.querySelectorAll('.night_day');
+    var i = 0;
+    var alist = document.querySelectorAll('a');
+    var j = 0;
+    var target = document.querySelector('body');
+    if (this.value === 'night') {               //night 모드 시
+      target.style.backgroundColor = 'black';
+      target.style.color = 'white';
+
+      while (i < list.length)        //다른 버튼들의 value 값도 변경
+      {
+        list[i].value = 'day';
+        i++;
+      }
+
+      while (j < alist.length)       //하이퍼링크 텍스트의 색깔 변경
+      {
+        alist[j].style.color = 'powderblue';
+        j++;
+      }
+    }
+    else {                                       //day 모드 시
+      target.style.backgroundColor = 'white';
+      target.style.color = 'black';
+
+      while (i < list.length)        //다른 버튼들의 value 값도 변경
+      {
+        list[i].value = 'night';
+        i++;
+      }
+
+      while (j < alist.length)       //하이퍼링크 텍스트의 색깔 변경
+      {
+        alist[j].style.color = 'blue';
+        j++;
+      }
+    }
+    ">
   </body>
 </html>
