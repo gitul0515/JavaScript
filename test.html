@@ -1,89 +1,28 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>테스트 - 버튼</title>
-    <style>
-    .night_day {
-      width: 50px;
-      height: 50px;
-      font-size: 15px;
-    }
-    </style>
-    <script>
-      function nightDayHandler(self){
-        var target = document.querySelector('body');
-        if (self.value === 'night') {               //night 모드 시
-          target.style.backgroundColor = 'black';
-          target.style.color = 'white';
-
-          //다른 버튼들의 value 값도 함께 변경함
-          var list = document.querySelectorAll('.night_day');
-          var i = 0;
-          while (i < list.length)
-          {
-            list[i].value = 'day';
-            i++;
-          }
-          //하이퍼링크 텍스트의 색깔 변경
-          var alist = document.querySelectorAll('a');
-          var j = 0;
-          while (j < alist.length)
-          {
-            alist[j].style.color = 'powderblue';
-            j++;
-          }
-        }
-        else {                                       //day 모드 시
-          target.style.backgroundColor = 'white';
-          target.style.color = 'black';
-
-          //다른 버튼들의 value 값도 함께 변경함
-          var list = document.querySelectorAll('.night_day');
-          var i = 0;
-          while (i < list.length)
-          {
-            list[i].value = 'night';
-            i++;
-          }
-          //하이퍼링크 텍스트의 색깔 변경
-          var alist = document.querySelectorAll('a');
-          var j = 0;
-          while (j < alist.length)
-          {
-            alist[j].style.color = 'blue';
-            j++;
-          }
-        }
-      }
-    </script>
-  </head>
-  <body>
-    <h1><a href="test.html">WEB</a></h1>
-    <input class="night_day" type="button" value="night" onclick="
-    nightDayHandler(this);">
-    <ol>
-      <li><a href="HTML.html">HTML</a></li>
-      <li><a href="CSS.html">CSS</a></li>
-      <li><a href="JS.html">JavaScript</a></li>
-    </ol>
-    <h2>JavaScript</h2>
-    <p>
-      JavaScript (/ˈdʒɑːvəˌskrɪpt/[6]), often abbreviated as JS,
-      is a high-level, dynamic, weakly typed, prototype-based, multi-paradigm,
-      and interpreted programming language. Alongside HTML and CSS, JavaScript
-      is one of the three core technologies of World Wide Web content production.
-      It is used to make webpages interactive and provide online programs,
-      including video games. The majority of websites employ it, and all modern
-      web browsers support it without the need for plug-ins by means of a
-      built-in JavaScript engine. Each of the many JavaScript engines represent
-      a different implementation of JavaScript, all based on the ECMAScript
-      specification, with some engines not supporting the spec fully, and with
-      many engines supporting additional features beyond ECMA.
-    </p>
-    <input class="night_day" type="button" value="night" onclick="
-    nightDayHandler(this);">
-    <input class="night_day" type="button" value="night" onclick="
-    nightDayHandler(this);">
-  </body>
-</html>
+function LinksSetColor(color){
+  var alist = document.querySelectorAll('a');
+  var i = 0;
+  while(i < alist.length){
+    alist[i].style.color = color;
+    i = i + 1;
+  }
+}
+function BodySetColor(color){
+  document.querySelector('body').style.color = color;
+}
+function BodySetBackgroundColor(color){
+  document.querySelector('body').style.backgroundColor = color;
+}
+function nightDayHandler(self){
+  var target = document.querySelector('body');
+  if(self.value === 'night'){
+    Body.setBackgroundColor('black');
+    Body.setColor('white');
+    self.value = 'day';
+    Links.setColor('powderblue');
+  } else {
+    Body.setBackgroundColor('white');
+    Body.setColor('black');
+    self.value = 'night';
+    Links.setColor('blue');
+  }
+}

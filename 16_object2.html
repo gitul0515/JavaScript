@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>객체의 활용</title>
+    <style>
+    .night_day {
+      width: 50px;
+      height: 50px;
+      font-size: 15px;
+    }
+    </style>
+    <script>
+      //객체 Body 생성
+      var Body = {
+        //글자색 변경 메소드
+        SetColor : function(color){
+          document.querySelector('body').style.color = color;
+        },
+        //배경색 변경 메소드
+        SetBackgroundColor : function(color){
+          document.querySelector('body').style.backgroundColor = color;
+        }
+      }
+      //객체 Links 생성
+      var Links = {
+        //링크 텍스트의 색깔 변경 메소드
+        SetColor : function(color){
+          var alist = document.querySelectorAll('a');
+          var j = 0;
+          while (j < alist.length)
+          {
+            alist[j].style.color = color;
+            j++;
+          }
+          }
+      }
+      //객체 Synch 생성 (버튼 동기화의 용도)
+      var Synch = {
+        //모든 버튼의 value 값을 일치시키는 메소드
+        ButtonValue : function(value){
+          var list = document.querySelectorAll('.night_day');
+          var i = 0;
+          while (i < list.length)
+          {
+            list[i].value = value;
+            i++;
+          }
+        }
+      }
+      //야간과 주간 모드로 전환하는 함수
+      function nightDayHandler(self) {
+      if (self.value === 'night') {
+        //야간 모드로 전환
+        Body.SetColor('white');             //글자색 변경
+        Body.SetBackgroundColor('black');   //배경색 변경
+        Links.SetColor('powderblue');       //하이퍼링크 텍스트의 색깔 변경
+        Synch.ButtonValue('day');           //버튼 동기화 메소드(value값을 일치시킴)
+        }
+      else {
+        //주간 모드로 전환
+        Body.SetColor('black');             //글자색 변경
+        Body.SetBackgroundColor('white');   //배경색 변경
+        Links.SetColor('blue');             //하이퍼링크 텍스트의 색깔 변경
+        Synch.ButtonValue('night');         //버튼 동기화 메소드(value값을 일치시킴)
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <h1><a href="test.html">WEB</a></h1>
+    <input class="night_day" type="button" value="night" onclick="
+    nightDayHandler(this);">
+    <ol>
+      <li><a href="HTML.html">HTML</a></li>
+      <li><a href="CSS.html">CSS</a></li>
+      <li><a href="JS.html">JavaScript</a></li>
+    </ol>
+    <h2>JavaScript</h2>
+    <p>
+      JavaScript (/ˈdʒɑːvəˌskrɪpt/[6]), often abbreviated as JS,
+      is a high-level, dynamic, weakly typed, prototype-based, multi-paradigm,
+      and interpreted programming language. Alongside HTML and CSS, JavaScript
+      is one of the three core technologies of World Wide Web content production.
+      It is used to make webpages interactive and provide online programs,
+      including video games. The majority of websites employ it, and all modern
+      web browsers support it without the need for plug-ins by means of a
+      built-in JavaScript engine. Each of the many JavaScript engines represent
+      a different implementation of JavaScript, all based on the ECMAScript
+      specification, with some engines not supporting the spec fully, and with
+      many engines supporting additional features beyond ECMA.
+    </p>
+    <input class="night_day" type="button" value="night" onclick="
+    nightDayHandler(this);">
+    <input class="night_day" type="button" value="night" onclick="
+    nightDayHandler(this);">
+    <input class="night_day" type="button" value="night" onclick="
+    nightDayHandler(this);">
+  </body>
+</html>
