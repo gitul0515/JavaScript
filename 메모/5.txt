@@ -1,0 +1,5 @@
+API: Application Programming Interface
+모든 애플리케이션들은 API를 프로그래밍적으로, 즉 순서대로 실행하여 만들어진다. 
+API와 순서는 뗄래야 뗄 수 없다.
+프로그래머의 UI를 API라고 부른다. 
+alert()도 API

@@ -1,0 +1,5 @@
+- jquery는 js의 가장 중요한 라이브러리 중 하나임
+  js의 생산성을 매우 높일 수 있음
+- CDN은 Content Delivery Network의 약자
+- Ctrl + / : 자동 주석
+- 어떤 라이브러리들이 있는지 아는 것도 중요하다. 
