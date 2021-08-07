@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>연습 - 함수의 이해</title>
+  </head>
+  <body>
+    <h1>Object</h1>
+    <h2>Create</h2>
+    <script>
+      var family = {
+        "Father" : "Jae-hyeong",
+        "Mother" : "Mi-young"
+      }
+      document.write("Father : "+family.Father +"<br>");
+      document.write("Mother : "+family.Mother +"<br>");
+      family.Sister = "Hye-lin";
+      family.Brother = "Gi-hong";
+      family["Puppy dog"] = "Maru";
+      document.write("Sister : "+family.Sister +"<br>");
+      document.write("Brother : "+family.Brother +"<br>");
+      document.write("Puppy dog : "+family["Puppy dog"] +"<br>");
+    </script>
+    <h2>Iterate</h2>
+    <script>
+      for (var key in family){
+        document.write(key+" : "+family[key]+"<br>");
+      }
+    </script>
+    <h2>Property & Method</h2>
+    <script>
+      family.ShowAll = function(){
+        for (var key in this){
+          if (key === "ShowAll")
+            continue;
+          document.write(key+" : "+this[key]+"<br>");
+        }
+      }
+      family.ShowAll();
+    </script>
+  </body>
+</html>
