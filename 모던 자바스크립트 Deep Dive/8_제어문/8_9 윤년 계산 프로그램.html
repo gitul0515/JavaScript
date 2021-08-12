@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            var year = 2000;   //2000년은 윤년으로 2월이 29일이다.
+            var month = 2;
+            var day;
+            switch (month) {
+                case 1: case 3: case 5: case 7: case 8: case 10: case 12:
+                    day = 31;
+                    break;
+                case 4: case 6: case 9: case 11:
+                    day = 30;
+                    break;
+                case 2:
+                    // 윤년 규칙
+                    // 1. 4의 배수인 해는 윤년이다.
+                    // 2. 4의 배수라도 100의 배수인 해는 윤년이 아니다. 
+                    // 3. 400의 배수인 해는 윤년이다.
+                    day = ((year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0))? 29 : 28;
+                    break;
+                default: day = '값 오류'
+            }
+            document.write(day);
+        </script>
+    </body>
+</html>
