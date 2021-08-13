@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            //십진수를 이진수로 변환하는 프로그램 (양의 정수 또는 0일 경우)
+            var Dec = 8;      //십진수
+            var Bin = '';     //이진수
+            var i = 0;
+            
+            //해당 십진수를 나누었을 때 몫이 1인 2**i를 찾는다. 
+            //예시: 15 => 2**3 
+            while (Dec > 0) {
+                if (Dec >= 2**i)
+                    i++;
+                else {
+                    i--;
+                    break;
+                }
+            }
+            //2**i를 바탕으로 십진수를 이진수로 변환한다.
+            for (; i >= 0; i--) {
+                if (parseInt(Dec / (2**i)))   //몫이 1인 경우
+                    Bin += "1";
+                else                          //몫이 0인 경우
+                    Bin += "0";
+                Dec = Dec % (2**i);           //나머지를 구해 새로운 값으로 저장한다.
+            }
+            document.write(Bin);
+            /*
+              parseInt()는 정수로 파싱해 주는 역할을 한다. 
+              나눗셈에서 몫을 정수로 구할 경우 parseInt()를 사용한다. 
+              parseInt(string, radix). radix는 기수이다. 
+              parseFloat()는 실수로 파싱해 주는 역할을 한다. 
+            */
+        </script>
+    </body>
+</html>
