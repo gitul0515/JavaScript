@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            var person = {
+                name: 'Lee',
+                sayHello: function() {
+                    document.write(`Hello! My name is ${this.name}.<br>`);
+                }
+            };
+            person.sayHello();
+            document.write(typeof person + '<br>');
+            console.log(person);
+        </script>
+    </body>
+</html>

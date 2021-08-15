@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            var person = {
+                name: 'Lee'
+            };
+            //프로퍼티 동적 생성
+            person.age = 20;
+            delete person.age;      //age 프로퍼티를 삭제한다.
+            delete person.address;  //존재하지 않는 프로퍼티. 에러 없이 무시된다.
+
+            console.log(person);
+        </script>
+    </body>
+</html>
