@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            var cnt = 0;
+            //비순수 함수
+            var plus = function(){
+                ++cnt;       //외부 상태(cnt)에 의존하며 외부 상태를 변경한다.
+            }
+
+            plus();
+            console.log(cnt);   // 1
+            plus();
+            console.log(cnt);   // 2
+        </script>
+</script>
+    </body>
+</html>

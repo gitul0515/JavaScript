@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            (function () {
+                var x = 2;
+                var y = 4;
+                console.log(x + y);
+            }());
+
+            var res = (function() {
+                var x = 2;
+                var y = 4;
+                return x + y;
+            }());
+            console.log(res);
+
+            var res = (function(x, y) {
+                return x + y;
+            }(2, 4));
+            console.log(res);
+        </script>
+    </body>
+</html>
