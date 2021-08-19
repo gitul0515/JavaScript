@@ -2,23 +2,19 @@
 <html>
     <body>
         <script>
-            (function () {
-                var x = 2;
-                var y = 4;
-                console.log(x + y);
-            }());
+            //전역 함수
+            function foo () {
+                console.log('global');
+            };
 
-            var res = (function() {
-                var x = 2;
-                var y = 4;
-                return x + y;
-            }());
-            console.log(res);
-
-            var res = (function(x, y) {
-                return x + y;
-            }(2, 4));
-            console.log(res);
+            function bar () {
+                //중첩 함수
+                function foo () {
+                    console.log('local');
+                };
+                foo();
+            };
+            bar();
         </script>
     </body>
 </html>

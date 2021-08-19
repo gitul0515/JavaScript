@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            //전역 스코프에서 정의된 변수
+            var x = 1;
+
+            function foo () {
+                var x = 10;            //지역 스코프에서 정의된 변수
+                bar();
+            };
+
+            function bar () {          //전역 스코프에서 정의된 함수
+                console.log(x);
+            };
+
+            foo();         //1
+            bar();         //1
+        </script>
+    </body>
+</html>
