@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            const person = {
+                name : 'Lee'
+            };
+
+            person.address = 'Seoul';
+            person.phoneNum = '010-1111-2222';
+
+            console.log(Object.getOwnPropertyDescriptor(person, 'name'));
+            console.log(Object.getOwnPropertyDescriptors(person));
+        </script>
+    </body>
+</html>
