@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            //일반 함수
+            function add (x, y) {
+                return x + y;            //원시값 반환
+            }
+
+            //생성자 함수로 호출
+            let obj = new add(1, 2);     //원시값은 무시. 빈 객체 반환.
+            console.log(obj); 
+
+            //일반 함수
+            function createUser(name, role) {
+                return { name, role };   //객체 반환
+            }
+
+            //생성자 함수로 호출
+            obj = new createUser('Lee', 'Admin');  //객체 반환
+            console.log(obj);
+            console.log(obj.name);
+            console.log(obj.role);
+        </script>
+    </body>
+</html>
