@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            const increase = function (num) {
+                return ++num;
+            }
+            const decrease = function (num) {
+                return --num;
+            } 
+            const predicate = {increase, decrease};
+
+            function makeCounter (predicate) {
+                let num = 0;
+
+                return function () {
+                    num = predicate(num);
+                    return num;
+                }
+            }
+
+            const increaser = makeCounter(predicate.increase);
+            console.log(increaser());
+            console.log(increaser());
+            console.log(increaser());
+
+            const decreaser = makeCounter(predicate.decrease);
+            console.log(decreaser());
+            console.log(decreaser());
+            console.log(decreaser());
+        </script>
+    </body>
+</html>
