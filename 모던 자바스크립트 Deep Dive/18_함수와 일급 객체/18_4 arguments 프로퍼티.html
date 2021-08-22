@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            function multiply(x, y) {
+                console.log(arguments);
+                return x * y;
+            }
+            console.log(multiply());        //Nan
+            console.log(multiply(1));       //Nan
+            console.log(multiply(1, 2));    //2
+            console.log(multiply(1, 2, 3)); //2
+        </script>
+    </body>
+</html>

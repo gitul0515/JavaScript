@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            //prototype 프로퍼티는 생성자 함수로 호출할 수 있는 함수,
+            //즉 constructor만이 소유한다.
+            //생성자 함수가 생성할 인스턴스의 프로토타입 객체를 가리킨다.
+            
+            //함수 객체는 prototype 프로퍼티를 소유한다.
+            let boolean = (function () {}).hasOwnProperty('prototype');   
+            console.log(boolean);     //true
+
+            //일반 객체는 prototype 프로퍼티를 소유하지 않는다.
+            boolean = ({}).hasOwnProperty('prototype');    
+            console.log(boolean);     //false
+        </script>
+    </body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            //함수 객체의 name 프로퍼티는 함수 이름을 나타낸다.
+            //기명 함수 표현식
+            const foo = function foo() {};
+            console.log(foo.name);    //foo
+
+            //익명 함수 표현식
+            const bar = function() {};
+            console.log(bar.name); 
+            //ES5: name 프로퍼티는 빈 문자열을 값으로 갖는다.
+            //ES6: name 프로퍼티는 식별자(bar)를 값으로 갖는다.
+
+            //함수 선언문
+            function baz() {}
+            console.log(baz.name);   //baz
+        </script>
+    </body>
+</html>

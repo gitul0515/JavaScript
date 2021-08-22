@@ -2,32 +2,14 @@
 <html>
     <body>
         <script>
-            const increase = function (num) {
-                return ++num;
-            }
-            const decrease = function (num) {
-                return --num;
-            } 
-            const predicate = {increase, decrease};
+            //객체 생성
+            const obj = { a : 5 };
 
-            function makeCounter (predicate) {
-                let num = 0;
-
-                return function () {
-                    num = predicate(num);
-                    return num;
-                }
-            }
-
-            const increaser = makeCounter(predicate.increase);
-            console.log(increaser());
-            console.log(increaser());
-            console.log(increaser());
-
-            const decreaser = makeCounter(predicate.decrease);
-            console.log(decreaser());
-            console.log(decreaser());
-            console.log(decreaser());
+            console.log(obj.__proto__ === Object.prototype);
+            console.log(obj.hasOwnProperty('a'));
+            console.log(obj.hasOwnProperty('b'));
+            console.log(obj.hasOwnProperty('__proto__'));
+            console.log(obj.hasOwnProperty('hasOwnProperty'));
         </script>
     </body>
 </html>

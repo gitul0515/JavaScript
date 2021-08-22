@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            //함수 객체의 length 프로퍼티는 
+            //함수를 정의할 때 선언한 매개변수의 개수이다.
+            //arguments 객체의 length 프로퍼티와는 다르다.
+            function foo() {}
+            console.log(foo.length);    //0
+
+            function bar(x) {
+                return x;
+            }
+            console.log(bar.length);    //1
+
+            function baz(x, y) {
+                return x + y;
+            }
+            console.log(baz.length);    //2
+        </script>
+    </body>
+</html>
