@@ -3,20 +3,15 @@
     <body>
         <script>
             //생성자 함수
-            function Circle(radius) {
-                this.radius = radius;
+            function Person(name) {
+                this.name = name;
             }
 
-            Circle.prototype.getArea = function () {
-                return Math.PI * this.radius**2;
-            };
+            const man = new Person('철수');
 
-            const circle1 = new Circle(1);
-            const circle2 = new Circle(2);
-
-            console.log(circle1.getArea === circle2.getArea);
-            console.log(circle1.getArea());
-            console.log(circle2.getArea());
+            console.log(man.constructor === Person);   //true
+            console.log(man.hasOwnProperty('constructor'));    //false
+            console.log((man.__proto__).hasOwnProperty('constructor'));     //true
         </script>
     </body>
 </html>
