@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            //in 연산자는 객체 내에 특정 프로퍼티가 존재하는지를 확인한다.
+            const person = {
+                name: 'Lee',
+                address : 'Seoul'
+            };
+
+            console.log('name' in person);       //true
+            console.log('address' in person);    //true
+            console.log('phoneNum' in person);   //false
+        </script>
+    </body>
+</html>
