@@ -1,9 +1,8 @@
-startAlert = function() {
-    playAlert = setInterval(function () {
-        alert('Hello!');
-    }, 5000
-    );
+const startAlert = function () {
+  const playAlert = setInterval(function () {
+    alert('Hello!');
+  }, 5000);
 };
-stopAlert = function() {
-    clearInterval(playAlert);
+const stopAlert = function () {
+  clearInterval(playAlert);
 };
