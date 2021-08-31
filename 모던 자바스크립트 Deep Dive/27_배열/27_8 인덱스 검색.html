@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            const arr = [1, 2, 3, 4, 5];
+
+            const indexSearch = function (arr, element) {
+              const len = arr.length;
+              for (let i = 0; i < len; i++) {
+                if (arr[i] === element) return i;
+              }
+              return undefined;
+            };
+
+            console.log(indexSearch(arr, 2)); // 1
+            console.log(indexSearch(arr, 4)); // 3
+            console.log(indexSearch(arr, 6)); // undefined
+        </script>
+    </body>
+</html>

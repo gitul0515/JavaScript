@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            /* 배열vs객체의 삽입 연산 비교
+               (배열의 성능이 두 배 가량 빠르다) */
+            const arr = [];
+            console.time('Array Performance Time');
+            for (let i = 0; i < 1000000; i++) {
+              arr[i] = i;
+            }
+            console.timeEnd('Array Performance Time');
+
+            const obj = {};
+            console.time('Object Performance Time');
+            for (let i = 0; i < 1000000; i++) {
+              obj[i] = i;
+            }
+            console.timeEnd('Object Performance Time');
+        </script>
+    </body>
+</html>

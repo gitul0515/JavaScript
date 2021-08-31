@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            const food = ['apple', 'banana', 'orange'];
+            const foodLen = food.length;
+            
+            // food 배열에 'kiwi' 요소가 존재하는지 확인한다.
+            for (let i = 0; i < foodLen; i++) {
+              // food 배열에 'kiwi' 요소가 존재하지 않으면 추가한다.
+              if (food.indexOf('kiwi') === -1) food.push('kiwi');
+            }
+            console.log(food);
+        </script>
+    </body>
+</html>
