@@ -2,13 +2,13 @@
 <html>
     <body>
         <script>
-            //함수는 함수 이름(add)으로 호출하는 것이 아니라
-            //함수 객체를 가리키는 식별자(p)로 호출한다.
-            //함수 이름은 함수 몸체 내에서만 참조할 수 있는 식별자다.
-            var p = function add (x, y){
-                return x + y;
-            }
-            console.log(p(1, 2));  //3
+            // 함수는 함수 이름(add)으로 호출하는 것이 아니라
+            // 함수 객체를 가리키는 식별자(p)로 호출한다.
+            // 함수 이름은 함수 몸체 내에서만 참조할 수 있는 식별자다.
+            const p = function add(x, y) {
+              return x + y;
+            };
+            console.log(p(1, 2)); // 3
         </script>
     </body>
 </html>

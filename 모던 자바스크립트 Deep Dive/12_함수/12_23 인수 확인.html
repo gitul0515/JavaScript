@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            const add = function (x, y) {
+              if (typeof x !== 'number' || typeof y !== 'number'
+                  || arguments.length !== 2) {
+                throw new TypeError('인수는 숫자 값 두 개이어야 합니다.');
+              }
+              return x + y;
+            };
+
+            console.log(add(1)); // TypeError
+            console.log(add('a', 'b')); // TypeError
+            console.log(add(1, 2, 3)); // TypeError
+        </script>
+    </body>
+</html>

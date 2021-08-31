@@ -2,19 +2,13 @@
 <html>
     <body>
         <script>
-            //전역 함수
-            function foo () {
-                console.log('global');
+            const add = function (x, y) {
+              console.log(arguments);
+              console.log(arguments.length);
+              return x + y;
             };
 
-            function bar () {
-                //중첩 함수
-                function foo () {
-                    console.log('local');
-                };
-                foo();
-            };
-            bar();
+            console.log(add(1, 2, 3, 4));
         </script>
     </body>
 </html>

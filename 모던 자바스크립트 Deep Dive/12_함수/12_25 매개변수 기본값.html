@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            // 매개변수 기본값을 사용하면
+            // 인수체크 및 초기화를 간소화할 수 있다.
+            const add = function (x = 0, y = 0, z = 0) {
+              return x + y + z;
+            };
+
+            console.log(add(1, 2, 3)); // 6
+            console.log(add(1, 2)); // 3
+            console.log(add(1)); // 1
+            console.log(add()); // 0
+        </script>
+    </body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            // 배열에서 인수(3)가 저장된 인덱스를 모두 출력하기
+            const arr = [1, 2, 3, 3, 5, 3, 7];
+            let idx = -1;
+            
+            while (true) {
+              // 찾은 인덱스는 제외하고 다음 위치부터 검색한다.
+              idx = arr.indexOf(3, idx + 1);
+              if (idx === -1) {
+                break;
+              }
+              console.log(idx); // 2 3 5
+            }
+        </script>
+    </body>
+</html>
