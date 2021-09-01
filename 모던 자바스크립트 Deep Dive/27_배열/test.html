@@ -1,7 +1,26 @@
 <!DOCTYPE html>
 <html>
     <body>
+        <script>
+            // 배열에서 특정 요소값 제거하기
+            const arr = [1, 2, 3, 1, 2];
 
+            // 배열 array에서 item 요소를 제거
+            const remove = function (array, item) {
+              // item 요소의 인덱스 검색
+              const idx = array.indexOf(item);
+
+              // item 요소가 있으면 제거한다.
+              if (idx !== -1) {
+                array.splice(idx, 1);
+              }
+              return array;
+            };
+
+            console.log(remove(arr, 2));
+            console.log(remove(arr, 10));
+            console.log(remove(arr, 2));
+            console.log(arr);
         </script>
     </body>
 </html>

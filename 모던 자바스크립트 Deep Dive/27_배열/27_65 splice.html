@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            // 배열에서 특정 요소값을 제거하기
+            const arr = [1, 2, 3, 1, 2];
+
+            // 배열 array에서 item 요소를 제거한다.
+            // item 요소가 여러 개 존재하면 첫 번째 요소만 제거한다.
+            const remove = function (array, item) {
+              // 제거할 item 요소의 인덱스를 취득한다.
+              const idx = array.indexOf(item);
+
+              // 제거할 item 요소가 있다면 제거한다.
+              if (idx !== -1) {
+                array.splice(idx, 1);
+              }
+              return array;
+            };
+            console.log(remove(arr, 2)); // [1, 3, 1, 2]
+            console.log(remove(arr, 10)); // [1, 3, 1, 2]
+            console.log(remove(arr, 2)); // [1, 3, 1]
+            console.log(arr); // [1, 3, 1]
+        </script>
+    </body>
+</html>
+
