@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            // sort로 객체 배열을 정렬하기
+            const todos = [
+              { id: 4, content: 'HTML' },
+              { id: 1, content: 'CSS' },
+              { id: 2, content: 'Javascript' }
+            ];
+
+            // 비교함수를 객체로 전달해야 한다.
+            const compare = function (key) {
+              return (a, b) => (a[key] > b[key] ? 1 : (a[key] < b[key] ? -1 : 0));
+            };
+
+            // id를 기준으로 오름차순 정렬
+            todos.sort(compare('id'));
+            todos.forEach(x => console.log(x));
+
+            // content를 기준으로 오름차순 정렬
+            todos.sort(compare('content'));
+            todos.forEach(x => console.log(x));
+        </script>
+    </body>
+</html>

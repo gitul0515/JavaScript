@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            // sort로 숫자 배열을 정렬할 때는 주의가 필요하다.
+            const points = [40, 100, 1, 5, 2, 25, 10];
+
+            // 오름차순 정렬. 비교 함수를 인수로 전달해야 한다.
+            points.sort((a, b) => a - b);
+            points.forEach(x => console.log(x));
+
+            // 내림차순 정렬. 비교 함수를 인수로 전달해야 한다.
+            points.sort((a, b) => b - a);
+            points.forEach(x => console.log(x));
+
+            // 정렬된 배열에서 최대값, 최소값 출력
+            console.log(points[0], points[points.length - 1]); // 100 1
+        </script>
+    </body>
+</html>
