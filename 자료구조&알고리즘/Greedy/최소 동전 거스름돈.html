@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            // 거스름돈의 액수
+            let change = 6770;
+            // 동전들의 개수: 500원, 100원, 50원, 10원
+            let cnt_500 = 0; let cnt_100 = 0;
+            let cnt_50 = 0; let cnt_10 = 0;
+
+            while (change) {
+              if (change >= 500) {
+                change -= 500;
+                cnt_500++;
+              } else if (change >= 100) {
+                change -= 100;
+                cnt_100++;
+              } else if (change >= 50) {
+                change -= 50;
+                cnt_50++;
+              } else {
+                change -= 10;
+                cnt_10++;
+              }
+            }
+            console.log(`500원: ${cnt_500}개, 100원: ${cnt_100}개, 50원: ${cnt_50}개, 10원: ${cnt_10}개`);
+        </script>
+    </body>
+</html>

@@ -2,12 +2,15 @@
 <html>
     <body>
         <script>
+            // Array.from 메서드를 사용하면
+            // 유사 배열 객체를 배열로 변환할 수 있다.
             const sum = function () {
               const arr = Array.from(arguments);
               return arr;
             };
             
-            console.log(sum(1, 2, 3));
+            console.log(sum(1, 2, 3)); // [1, 2, 3]
         </script>
     </body>
 </html>
+
