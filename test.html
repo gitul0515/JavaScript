@@ -2,17 +2,12 @@
 <html>
     <body>
         <script>
-            class Person {
-              constructor(name) {
-                this.name = name;
-              }
-
-              sayHi() {
-                console.log(`Hi! my name is ${this.name}.`);
-              }
+          class Square {
+            static area(width, height) {
+              return width * height;
             }
-            const person = new Person('이만식');
-            person.sayHi();
+          }
+          console.log(Square.area(5, 10));
         </script>
     </body>
 </html>

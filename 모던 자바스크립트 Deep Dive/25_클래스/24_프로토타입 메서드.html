@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+          class Person {
+            // 인스턴스 생성 및 초기화
+            constructor(name) {
+              this.name = name;
+            }
+
+            // 프로토타입 메서드
+            sayHello() {
+              console.log(`Hi! my name is ${this.name}.`);
+            }
+          }
+
+          const me = new Person('Lee');
+          me.sayHello(); // Hi! my name is Lee.
+
+          // 클래스가 생성한 인스턴스는 프로토타입 체인의 일원이 된다.
+          // me 객체의 프로토타입은 Person.prototype이다.
+          console.log(Object.getPrototypeOf(me) === Person.prototype); // true
+          
+          // Person.prototype의 프로토타입은 Object.prototype이다.
+          console.log(Object.getPrototypeOf(Person.prototype) === Object.prototype); // true
+
+          // me 객체의 constructor는 Person 클래스다.
+          console.log(me.constructor === Person); // true
+        </script>
+    </body>
+</html>
