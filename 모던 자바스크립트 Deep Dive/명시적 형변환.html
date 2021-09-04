@@ -2,13 +2,13 @@
 <html>
     <body>
         <script>
-            //이진수를 십진수로 변환하는 프로그램
-            var Bin = '101111000';        //이진수
-            var Dec = 0;                  //십진수
-            for (var i = 0 ; i< Bin.length; i++) {
-                //명시적 형변환: Number()는 문자열을 숫자로 바꾼다. 
-                //(String()은 숫자를 문자열로 바꾼다) 
-                Dec+=Number(Bin[i])*(2**((Bin.length-1)-i));
+            // 이진수를 십진수로 변환하는 프로그램
+            const Bin = '101111000'; // 이진수
+            let Dec = 0; // 십진수
+            for (let i = 0; i < Bin.length; i++) {
+              // 명시적 형변환: Number()는 문자열을 숫자로 바꾼다.
+              // (String()은 숫자를 문자열로 바꾼다)
+              Dec += Number(Bin[i]) * (2 ** ((Bin.length - 1) - i));
             }
             document.write(Dec);
         </script>

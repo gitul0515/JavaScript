@@ -2,11 +2,17 @@
 <html>
     <body>
         <script>
-            const numbers = [1, 2, 3, 4, 5];
+            class Person {
+              constructor(name) {
+                this.name = name;
+              }
 
-            const odds = numbers.filter(item => !(item % 2));
-            console.log(odds);
-            console.log(numbers);
+              sayHi() {
+                console.log(`Hi! my name is ${this.name}.`);
+              }
+            }
+            const person = new Person('이만식');
+            person.sayHi();
         </script>
     </body>
 </html>
