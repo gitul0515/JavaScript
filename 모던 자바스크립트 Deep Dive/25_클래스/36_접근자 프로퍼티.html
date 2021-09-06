@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            class Person {
+              constructor(firstName, lastName) {
+                this.firstName = firstName;
+                this.lastName = lastName;
+              }
+
+              // fullName은 접근자 함수로 구성된 접근자 프로퍼티다.
+              // getter 함수
+              get fullName() {
+                return `${this.firstName} ${this.lastName}`;
+              }
+
+              // setter 함수
+              set fullName(name) {
+                [this.firstName, this.lastName] = name.split(' ');
+              }
+            }
+
+            const me = new Person('Ungmo', 'Lee');
+
+            // 데이터 프로퍼티를 통한 값의 참조
+            console.log(`${me.firstName} ${me.lastName}`); // Ungmo Lee
+
+            // 접근자 프로퍼티를 통한 값의 저장
+            // setter 함수 호출
+            me.fullName = 'Gihong Kwon';
+            console.log(me);
+
+            // 접근자 프로퍼티를 통한 값의 참조
+            // getter 함수 호출
+            console.log(me.fullName); // Gihong Kwon
+
+            // fullName은 접근자 프로퍼티다.
+            console.log(Object.getOwnPropertyDescriptor(Person.prototype, 'fullName'));
+        </script>
+    </body>
+</html>
