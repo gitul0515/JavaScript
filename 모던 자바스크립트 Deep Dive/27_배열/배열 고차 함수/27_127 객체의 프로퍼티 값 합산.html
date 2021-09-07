@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+          // 객체의 특정 프로퍼티 값 합산
+          const products = [
+            { id: 1, price: 100 },
+            { id: 2, price: 200 },
+            { id: 3, price: 300 }
+          ];
+          const totalPrice = products.reduce((acc, cur) => acc + cur.price, 0);
+          console.log(totalPrice); // 600
+        </script>        
+    </body>
+</html>

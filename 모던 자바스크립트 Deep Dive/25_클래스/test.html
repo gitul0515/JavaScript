@@ -12,8 +12,8 @@
                 return `${this.firstName} ${this.lastName}`;
               }
 
-              set fullName(Name) {
-                [this.firstName, this.lastName] = Name.split(' ');
+              set fullName(name) {
+                [this.firstName, this.lastName] = name.split(' ');
               }
             }
 
