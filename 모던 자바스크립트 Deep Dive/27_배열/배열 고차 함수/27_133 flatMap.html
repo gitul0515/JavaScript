@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            // flatMap 메서드는 map과 flat 메서드를
+            // 순차적으로 실행하는 효과가 있다.
+            const arr1 = ['hello', 'world'];
+
+            // map과 flat을 순차적으로 실행
+            const arr2 = arr1.map(item => item.split('')).flat();
+            console.log(arr2); // ['h', 'e', 'l', 'l', 'o', 'w', 'o', 'r', 'l', 'd']
+
+            // flatMap 메서드
+            const arr3 = arr1.flatMap(item => item.split(''));
+            console.log(arr3); // ['h', 'e', 'l', 'l', 'o', 'w', 'o', 'r', 'l', 'd']
+        </script>        
+    </body>
+</html>

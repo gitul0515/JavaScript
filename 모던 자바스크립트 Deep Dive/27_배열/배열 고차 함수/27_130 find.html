@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            // find 메서드는 콜백 함수를 호출하여
+            // 반환값이 true인 첫 번째 요소를 반환한다.
+            const users = [
+              { id: 1, name: 'Lee' },
+              { id: 2, name: 'Kwon' },
+              { id: 2, name: 'Hong' },
+              { id: 3, name: 'Park' },
+            ];
+            console.log(users.find(item => item.id === 2)); // { id: 2, name: 'Kwon' }
+
+            const numbers = [1, 2, 2, 5];
+            // filter는 배열을 만들어 반환한다.
+            console.log(numbers.filter(item => item === 2)); // [2, 2]
+
+            // find는 요소를 반환한다.
+            console.log(numbers.find(item => item === 2)); // 2
+        </script>        
+    </body>
+</html>

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            const arr1 = ['hello', 'world'];
+
+            // flatMap은 1단계만 평탄화한다.
+            const arr2 = arr1.flatMap((str, index) => [index, [str, str.length]]);
+            console.log(arr2); // [0, ['hello', 5], 1, ['world', 5]]
+
+            // map과 flat 메서드를 각각 호출
+            const arr3 = arr1.map((str, index) => [index, [str, str.length]]).flat(2);
+            console.log(arr3); // [0, 'hello', 5, 1, 'world', 5]
+        </script>        
+    </body>
+</html>

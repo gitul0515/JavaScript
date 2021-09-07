@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            // findIndex 메서드는 콜백 함수를 호출하여
+            // 반환값이 true인 첫 번째 요소의 인덱스를 반환한다.
+            const users = [
+              { id: 1, name: 'Lee' },
+              { id: 2, name: 'Kwon' },
+              { id: 3, name: 'Choi' },
+              { id: 4, name: 'Park' },
+            ];
+            console.log(users.findIndex(item => item.id === 2)); // 1
+            console.log(users.findIndex(item => item.name === 'Choi')); // 2
+
+            // 다음과 같이 콜백 함수를 추상화할 수 있다.
+            const predicate = function (key, value) {
+              return item => item[key] === value;
+            };
+
+            // id가 2인 요소의 인덱스를 구한다.
+            console.log(users.findIndex(predicate('id', 2))); // 1
+
+            // name이 'Choi'인 요소의 인덱스를 구한다.
+            console.log(users.findIndex(predicate('name', 'Choi'))); // 2
+        </script>        
+    </body>
+</html>

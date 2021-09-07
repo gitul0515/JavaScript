@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            // some 메서드는 콜백 함수의 반환값이
+            // 단 한 번이라도 참이면 true, 모두 거짓이면 false를 반환한다.
+            const numbers = [5, 10, 15];
+            console.log(numbers.some(item => item > 10)); // true
+            console.log(numbers.some(item => item < 0)); // false
+
+            const fruits = ['apple', 'banana', 'mango'];
+            console.log(fruits.some(item => item === 'mango')); // true
+            
+            // some 메서드를 호출한 배열이 빈 배열이면 false를 반환한다.
+            console.log([].some(item => item > 0)); // false
+        </script>        
+    </body>
+</html>
