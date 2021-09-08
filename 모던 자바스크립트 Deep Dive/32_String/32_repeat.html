@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            // repeat 메서드는 대상 문자열을
+            // 인수로 전달받은 정수만큼 반복해 연결한다.
+            const str = 'abc';
+
+            console.log(str.repeat()); // ''
+            console.log(str.repeat(0)); // ''
+            console.log(str.repeat(1)); // 'abc'
+            console.log(str.repeat(2)); // 'abcabc'
+            console.log(str.repeat(2.5)); // 'abcabc' (2.5 => 2)
+            console.log(str.repeat(-1)); // RangeError
+        </script>
+    </body>
+</html>

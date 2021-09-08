@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+          // endsWith 메서드는 대상 문자열이
+          // 인수로 전달받은 문자열로 끝나는지 검사한다.
+          const str = 'Hello world';
+
+          console.log(str.endsWith('ld')); // true
+          console.log(str.endsWith('x')); // false
+
+          // 두번째 인수로 검색할 문자열의 길이를 전달할 수 있다. (인덱스가 아님에 유의)
+          console.log(str.endsWith('lo', 5)); // true
+        </script>
+    </body>
+</html>

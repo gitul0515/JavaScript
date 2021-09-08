@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+          // slice와 substring 메서드는 동일하게 동작한다.
+          const str1 = 'Hello world';
+
+          const str2 = str1.slice(0, 5);
+          console.log(str2); // 'Hello'
+
+          const str3 = str1.slice(2);
+          console.log(str3); // 'llo world'
+
+          // 단, 음수를 처리하는 데 차이가 있다.
+          // substring은 음수를 0으로 해석한다.
+          console.log(str1.substring(-5)); // 'Hello world'
+
+          // slice는 음수인 인수를 전달할 수 있다. 뒤에서 5자리를 잘라내어 반환한다.
+          console.log(str1.slice(-5)); // 'world'
+        </script>
+    </body>
+</html>
