@@ -2,14 +2,14 @@
 <html>
     <body>
         <script>
-          const str = 'abc';
+          // substring과 indexOf 메서드를 조합하면
+          // 특정 문자열을 기준으로 앞뒤의 부분 문자열을 취득할 수 있다.
+          const str1 = 'Hello world';
+          const str2 = str1.substring(0, str1.indexOf(' '));
+          console.log(str2); // 'Hello'
 
-          console.log(str.repeat());
-          console.log(str.repeat(0));
-          console.log(str.repeat(1));
-          console.log(str.repeat(2));
-          console.log(str.repeat(2.8));
-          console.log(str.repeat(-5));
+          const str3 = str1.substring(str1.indexOf(' ') + 1);
+          console.log(str3); // 'world'
         </script>
     </body>
 </html>
