@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>삽입 정렬</title>
+  </head>
+  <body>
+    <script>
+      // 배열 생성
+      const array = [];
+      for (let i = 0; i < 100; i++) { // 난수를 생성하여 배열에 저장
+        array[i] = Math.floor(Math.random() * 100); // 난수 범위: 0~99
+      }
+
+      // 삽입 정렬 함수
+      const insertionSort = function (array, num) {
+        let i; let j; let key;
+        for (i = 1; i < num; i++) {
+          key = array[i];
+          for (j = i - 1; j >= 0 && array[j] > key; j--) {
+            array[j + 1] = array[j];
+          }
+          array[j + 1] = key;
+        }
+      };
+
+      // 삽입 정렬 호출
+      insertionSort(array, array.length);
+      
+      // 정렬 결과 출력
+      console.log(`정렬 결과: ${array.join(', ')}`);
+    </script>
+  </body>
+</html>
