@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            // OR 검색
+            const target1 = 'A AA B BB Aa Bb';
+
+            // 'A' 또는 'B'를 전역 검색
+            let regExp = /A|B/g;
+            console.log(target1.match(regExp));
+
+            // 분해되지 않은 단어 레벨로 검색하려면 +를 함께 사용한다.
+            // 'A' 또는 'B'가 한 번 이상 반복되는 문자열을 전역 검색
+            regExp = /A+|B+/g;
+            console.log(target1.match(regExp));
+
+            // 다음은 위 코드와 동일하다.
+            // [] 내의 문자는 or로 동작한다.
+            regExp = /[AB]+/g;
+            console.log(target1.match(regExp));
+        </script>
+    </body>
+</html>

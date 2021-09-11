@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            // 정규 표현식의 생성
+            const target = 'Is this all there is?';
+
+            // 대소문자를 구별하지 않고 문자열 'is'를 검색
+            const regexp = /is/i;
+
+            console.log(regexp.test(target)); // true
+            console.log(target.match(regexp)); // ["is", index: 0, input: "Is this all there is?", groups: undefined]
+        </script>
+    </body>
+</html>

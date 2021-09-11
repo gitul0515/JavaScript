@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            // 간략 표현
+            const target1 = 'AA BB 12,345,678';
+
+            // \d는 숫자를 의미한다. [0-9]와 동일.
+            let regExp = /[\d,]+/g;
+            console.log(target1.match(regExp)); // ["12,345,678"]
+
+            // \D는 숫자가 아닌 문자를 의미한다.
+            regExp = /[\D]+/g;
+            console.log(target1.match(regExp)); // ["AA BB ", ",", ","]
+
+            const target2 = 'Aa Bb 12,345 _$%&';
+
+            // \w는 알파벳, 숫자, 언더스코어를 의미한다.
+            // [A-Za-z0-9_]와 동일.
+            regExp = /[\w,]+/g;
+            console.log(target2.match(regExp)); // ["Aa", "Bb", "12,345", "_"]
+
+            // \W는 \w와 반대로 동작한다.
+            regExp = /[\W,]+/g;
+            console.log(target2.match(regExp)); // [" ", " ", ",", " ", "$%&"]
+</script>
+    </body>
+</html>

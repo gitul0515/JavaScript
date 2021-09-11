@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            // 반복 검색
+            const target1 = 'A AA B BB Aa Bb AAA';
+
+            // 'A'가 최소 1번, 최대 2번 반복되는 문자열을 전역 검색
+            let regExp = /A{1,2}/g;
+            console.log(target1.match(regExp));
+
+            // 'A'가 2번 반복되는 문자열을 전역 검색
+            regExp = /A{2}/g;
+            console.log(target1.match(regExp));
+
+            // 'A'가 최소 2번 반복되는 문자열을 전역 검색
+            regExp = /A{2,}/g;
+            console.log(target1.match(regExp));
+
+            // 'A'가 최소 1번 반복되는 문자열을 전역 검색
+            regExp = /A+/g;
+            console.log(target1.match(regExp));
+
+            const target2 = 'color colour colouur';
+
+            // 'colo' 다음 'u'가 최소 0번, 최대 1번 반복되고
+            // 'r'이 이어지는 문자열을 전역 검색
+            regExp = /colou?r/g;
+            console.log(target2.match(regExp));
+        </script>
+    </body>
+</html>
