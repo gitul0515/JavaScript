@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            // 기본 메서드를 사용해 구현하기 (클래스)
+            class Stack {
+                #array; // private class member
+
+                constructor(array = []) {
+                  if (!Array.isArray(array)) {
+                    throw new TypeError(`${array} is not an array.`);
+                  }
+                  this.#array = array;
+                }
+
+                // 스택의 가장 마지막에 데이터를 밀어 넣는다.
+                push(value) {
+                  return this.#array.push(value);
+                }
+
+                // 스택의 가장 마지막 데이터를 꺼낸다.
+                pop() {
+                  return this.#array.pop();
+                }
+
+                // 스택의 가장 마지막 데이터를 확인한다.
+                peek() {
+                  const lastIndex = this.#array.length - 1;
+                  return this.#array[lastIndex];
+                }
+
+                // 스택의 복사본 배열을 반환한다.
+                entries() {
+                  return this.#array.slice();
+                }
+
+                // 접근자 프로퍼티: 배열의 길이
+                get length() {
+                  return this.#array.length;
+                }
+            }
+
+            const stack = new Stack([1, 2]);
+            console.log(stack.entries()); // [1, 2]
+
+            // push 메서드
+            stack.push(3);
+            console.log(stack.entries()); // [1, 2, 3]
+
+            // peek 메서드
+            console.log(stack.peek()); // 3
+
+            // pop 메서드
+            console.log(stack.pop()); // 3
+            console.log(stack.entries()); // [1, 2]
+
+            // 스택 비우기
+            while (stack.length) {
+              console.log(stack.pop()); // 2, 1
+            }
+            console.log(stack.pop()); // undefined
+        </script>
+    </body>
+</html>

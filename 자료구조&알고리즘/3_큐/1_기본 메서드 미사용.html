@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            // 큐: 기본 메서드를 사용하지 않고 구현하기
+            class Queue {
+              constructor() {
+                this.array = [];
+                this.front = -1; // 처음 데이터 이전을 가리킨다.
+                this.rear = -1; // 마지막 데이터를 가리킨다.
+              }
+
+              // 큐의 가장 마지막에 데이터를 밀어 넣는다.
+              enqueue(item) {
+                this.array[++this.rear] = item;
+              }
+
+              // 큐의 가장 처음 데이터를 꺼낸다.
+              dequeue() {
+                if (this.front === this.rear) {
+                  throw new TypeError('큐가 공백상태입니다.');
+                }
+                return this.array[++this.front];
+              }
+
+              // 큐의 가장 처음 데이터를 확인한다.
+              peek() {
+                if (this.front === this.rear) {
+                  throw new TypeError('큐가 공백상태입니다.');
+                }
+                return this.array[this.front + 1];
+              }
+            }
+            const queue = new Queue();
+            queue.enqueue(1); queue.enqueue(2);
+            queue.enqueue(3); queue.enqueue(4);
+            console.log(queue);
+
+            console.log(queue.peek());
+
+            console.log(queue.dequeue()); // 1
+            console.log(queue.dequeue()); // 2
+            console.log(queue.dequeue()); // 3
+            console.log(queue.dequeue()); // 4
+            console.log(queue);
+
+            console.log(queue.dequeue()); // TypeError
+        </script>
+    </body>
+</html>

@@ -2,33 +2,8 @@
 <html>
   <body>
         <script>
-            const array = [];
-            for (let i = 0; i < 100; i++) { // 난수 생성
-              array[i] = Math.floor(Math.random() * 100); // 난수 범위: 0~99
-            
-            // 두 값을 교환하는 함수
-            const swap = function (x, y) {
-                let temp = x;
-                x = y;
-                y = temp;
-            }
-            // 선택 정렬 함수
-            const selectionSort = function (array, num) {
-              let i; let j; let max;
-              for (i = num - 1; i > 0; i--) {
-                max = i;
-                for (j = i - 1; j >= 0; j--) { // 최대값 탐색
-                  if (array[j] > array[max]) max = j;
-                }
-                if (array[i] !== array[max]) { // 최대값이 변경된 경우에만 교환한다.
-                  swap(array[i], array[max]);
-                }
-              }
-            };
-            // 선택 정렬 호출
-            selectionSort(array, array.length);
-            // 정렬 결과 출력
-            array.forEach(item => console.log(item));
+          const arr = [1, 2, 3];
+          console.log(arr[-1]);
         </script>
   </body>
 </html>

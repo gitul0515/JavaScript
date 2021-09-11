@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            // 기본 메서드를 사용해 구현하기 (클래스)
+            class Queue {
+                #array; // private class member
+
+                constructor(array = []) {
+                  if (!Array.isArray(array)) {
+                    throw new TypeError(`${array} is not an array.`);
+                  }
+                  this.#array = array;
+                }
+            
+                // 큐의 가장 마지막에 데이터를 밀어 넣는다.
+                enqueue(value) {
+                  return this.#array.push(value);
+                }
+
+                // 큐의 가장 처음 데이터를 꺼낸다.
+                dequeue() {
+                  return this.#array.shift();
+                }
+
+                // 큐의 가장 처음 데이터를 확인한다.
+                peek() {
+                  return this.#array[0];
+                }
+
+                // 큐의 복사본 배열을 반환한다.
+                entries() {
+                  return this.#array.slice();
+                }
+            }
+            const queue = new Queue([1, 2]);
+            console.log(queue.entries()); // [1, 2]
+
+            queue.enqueue(3); queue.enqueue(4);
+            console.log(queue.entries()); // [1, 2, 3, 4]
+
+            console.log(queue.peek()); // 1
+
+            console.log(queue.dequeue()); // 1
+
+            console.log(queue.entries()); // [2, 3, 4]
+
+            // 공백상태 오류
+            console.log(queue.dequeue()); // 2
+            console.log(queue.dequeue()); // 3
+            console.log(queue.dequeue()); // 4
+            console.log(queue.dequeue()); // undefined
+            console.log(queue.peek()); // undefined
+            console.log(queue.entries()); // []
+        </script>
+    </body>
+</html>

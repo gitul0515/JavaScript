@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            // 스택: 기본 메서드를 사용하지 않고 구현하기
+            class Stack {
+              constructor() {
+                this.array = [];
+                this.idx = -1;
+              }
+
+              // 스택의 가장 마지막에 데이터를 밀어 넣는다.
+              push(item) {
+                this.array[++this.idx] = item;
+              }
+
+              // 스택의 가장 마지막 데이터를 꺼낸다.
+              pop() {
+                if (this.idx === -1) {
+                  throw new TypeError('스택이 공백상태입니다.');
+                }
+                return this.array[this.idx--];
+              }
+
+              // 스택의 가장 마지막 데이터를 확인한다.
+              peek() {
+                if (this.idx === -1) {
+                  throw new TypeError('스택이 공백상태입니다.');
+                }
+                return this.array[this.idx];
+              }
+            }
+            const stack = new Stack();
+
+            stack.push(1); stack.push(2);
+            stack.push(3); stack.push(4);
+            console.log(stack);
+
+            console.log(stack.peek()); // 4
+
+            console.log(stack.pop()); // 4
+            console.log(stack.pop()); // 3
+            console.log(stack.pop()); // 2
+            console.log(stack.pop()); // 1
+            console.log(stack.pop()); // TypeError
+        </script>
+    </body>
+</html>
