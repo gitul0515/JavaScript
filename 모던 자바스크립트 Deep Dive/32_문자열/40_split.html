@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            // 문자열의 split 메서드와
+            // 배열의 reverse, join 메서드를 조합하면
+            // 문자열을 역순으로 뒤집을 수 있다.
+            const str = 'Hello world!';
+
+            // 인수로 전달받은 문자열을 역순으로 뒤집는다.
+            const reverseString = function (str = '') {
+              return str.split('').reverse().join('');
+            };
+
+            console.log(reverseString(str)); // '!dlrow olleH'
+        </script>
+    </body>
+</html>
