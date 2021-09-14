@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            // this는 어디서든지 참조 가능하다.
+            // 전역에서 this는 전역 객체 window를 가리킨다.
+            console.log(this); // window
+
+            const square = function (number) {
+              // 일반 함수 내부에서 this는 전역 객체 window를 가리킨다.
+              // (단, strict mode에서는 this에 undefined가 바인딩된다.)
+              console.log(this); // window
+              return number * number;
+            };
+            square(5);
+
+            const person = {
+              name: 'Lee',
+              getName() {
+                // 메서드 내부에서 this는 메서드를 호출한 객체를 가리킨다.
+                console.log(this); // {name: "Lee", getName: f}
+                return this.name;
+              }
+            };
+            console.log(person.getName()); // 'Lee'
+
+            const Person = function (name) {
+              this.name = name;
+              // 생성자 함수 내부에서 this는
+              // 생성자 함수가 생성할 인스턴스를 가리킨다.
+              console.log(this);
+            };
+            const me1 = new Person('Lee'); // Person {name: "Lee"}
+            const me2 = new Person('Kwon'); // Person {name: "Kwon"}
+            const me3 = new Person('Park'); // Person {name: "Park"}
+
+            console.log(me1.name); // 'Lee'
+            console.log(me2.name); // 'Kwon'
+            console.log(me3.name); // 'Park'
+        </script>
+    </body>
+</html>

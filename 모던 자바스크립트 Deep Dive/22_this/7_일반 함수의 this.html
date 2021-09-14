@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            // 전역 함수와 중첩 함수를 일반 함수로 호출하면
+            // this에 전역 객체가 바인딩된다.
+            const foo = function () {
+              console.log(this); // window
+
+              const bar = function () {
+                console.log(this); // window
+              };
+              bar();
+            };
+            foo();
+
+            // 단, strict mode가 적용된 경우
+            // this에는 undefined가 바인딩된다.
+            const foo1 = function () {
+              // 'use strict';
+
+              console.log(this); // undefined
+
+              const bar1 = function () {
+                console.log(this); // undefined
+              };
+              bar1();
+            };
+            foo1();
+        </script>
+    </body>
+</html>
