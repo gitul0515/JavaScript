@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            const person = {
+              name: 'Lee',
+              getName() {
+                // 메서드 내부의 this는 메서드를 호출한 객체에 바인딩된다.
+                return this.name;
+              }
+            };
+            // 메서드 getName을 호출한 객체는 person이다.
+            console.log(person.getName()); // 'Lee'
+
+            const anotherPerson = {
+              name: 'Kwon'
+            };
+            // getName 메서드를 anotherPerson 객체의 메서드로 할당
+            anotherPerson.getName = person.getName;
+
+            // 메서드 getName을 호출한 객체는 anotherPerson이다.
+            console.log(anotherPerson.getName()); // 'Kwon'
+        </script>
+    </body>
+</html>

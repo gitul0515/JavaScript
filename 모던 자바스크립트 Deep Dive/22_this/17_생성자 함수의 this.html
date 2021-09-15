@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <script>
+            // 생성자 함수 내부의 this에는 생성자 함수가
+            // 생성할 인스턴스가 바인딩된다.
+            const Circle = function (radius) {
+              this.radius = radius;
+              this.getDiameter = function () {
+                return 2 * this.radius;
+              };
+            };
+
+            const circle1 = new Circle(5);
+            const circle2 = new Circle(10);
+
+            console.log(circle1.getDiameter()); // 10
+            console.log(circle2.getDiameter()); // 20
+        </script>
+    </body>
+</html>
