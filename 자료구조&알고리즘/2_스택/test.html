@@ -13,6 +13,11 @@
                   this.#array = array;
                 }
 
+                // 스택이 공백상태인지 확인한다.
+                isEmpty() {
+                  return this.#array.length === 0;
+                }
+
                 // 스택의 가장 마지막에 데이터를 밀어 넣는다.
                 push(value) {
                   return this.#array.push(value);
@@ -20,11 +25,19 @@
 
                 // 스택의 가장 마지막 데이터를 꺼낸다.
                 pop() {
+                  // 스택이 공백상태인지 확인
+                  if (this.isEmpty()) {
+                    return null;
+                  }
                   return this.#array.pop();
                 }
 
                 // 스택의 가장 마지막 데이터를 확인한다.
                 peek() {
+                  // 스택이 공백상태인지 확인
+                  if (this.isEmpty()) {
+                    return null;
+                  }
                   const lastIndex = this.#array.length - 1;
                   return this.#array[lastIndex];
                 }
@@ -34,7 +47,7 @@
                   return this.#array.slice();
                 }
 
-                // 접근자 프로퍼티: 배열의 길이
+                // 접근자 프로퍼티: 배열의 길이 반환
                 get length() {
                   return this.#array.length;
                 }
@@ -53,6 +66,13 @@
             // pop 메서드
             console.log(stack.pop()); // 3
             console.log(stack.entries()); // [1, 2]
+
+            // 스택 비우기
+            while (stack.length) {
+              console.log(stack.pop()); // 2, 1
+            }
+            console.log(stack.pop()); // null
+            console.log(stack.peek()); // null
         </script>
     </body>
 </html>
