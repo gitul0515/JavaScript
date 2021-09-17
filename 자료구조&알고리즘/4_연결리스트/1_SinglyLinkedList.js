@@ -15,7 +15,7 @@ LinkedList.prototype.isEmpty = function () {
   return this.size === 0;
 };
 
-// 연결 리스트에 항목을 삽입하는 메서드
+// 연결 리스트에 삽입하는 메서드 (전위 삽입)
 LinkedList.prototype.insert = function (value) {
   if (this.isEmpty()) {
     this.head = new LinkedListNode(value);
@@ -27,23 +27,22 @@ LinkedList.prototype.insert = function (value) {
   this.size++;
 };
 
-// 특정 항목이 존재하는지 검색하는 메서드
-LinkedList.prototype.search = function (value) {
-  // 연결 리스트가 공백상태일 경우
+// 연결 리스트의 마지막에 삽입하는 메서드 (후위 삽입)
+LinkedList.prototype.insertLast = function (value) {
+  // 공백 상태인 경우
   if (this.isEmpty()) {
-    throw new TypeError('연결 리스트가 공백상태입니다.');
+    this.head = new LinkedListNode(value);
+  } else {
+    // 마지막 노드로 이동한다.
+    let last;
+    for (last = this.head; last.next; last = last.next);
+    // 마지막 노드의 next로 새로운 노드를 생성한다.
+    last.next = new LinkedListNode(value);
   }
-
-  let cur;
-  for (cur = this.head; cur.next; cur = cur.next) {
-    if (cur.data === value) return true;
-  }
-  // 마지막 노드 검사
-  if (cur.data === value) return true;
-  return false; // 항목을 찾을 수 없는 경우
+  this.size++;
 };
 
-// 연결 리스트의 특정 항목을 삭제하는 메서드
+// 연결 리스트에서 특정값을 삭제하는 메서드
 LinkedList.prototype.remove = function (value) {
   // 연결 리스트가 공백상태일 경우
   if (this.isEmpty()) {
@@ -88,19 +87,34 @@ LinkedList.prototype.removeFirst = function () {
   return returnValue;
 };
 
-// 연결 리스트의 내용을 출력하는 메서드
-LinkedList.prototype.printList = function () {
-  // 연결 리스트가 공백 상태일 경우
+// 연결 리스트의 노드를 출력하는 메서드
+LinkedList.prototype.printNode = function () {
+  // 공백 상태인 경우
   if (this.isEmpty()) {
-    return;
+    throw new TypeError('연결 리스트가 공백상태입니다.');
   }
 
-  let cur = this.head;
-  while (cur.next) {
+  let cur;
+  for (cur = this.head; cur; cur = cur.next) {
     process.stdout.write(`${cur.data}->`);
-    cur = cur.next;
   }
-  process.stdout.write(`${cur.data}->null`);
+  process.stdout.write('null\n');
+};
+
+// 특정 항목이 존재하는지 검색하는 메서드
+LinkedList.prototype.search = function (value) {
+  // 연결 리스트가 공백상태일 경우
+  if (this.isEmpty()) {
+    throw new TypeError('연결 리스트가 공백상태입니다.');
+  }
+
+  let cur;
+  for (cur = this.head; cur.next; cur = cur.next) {
+    if (cur.data === value) return true;
+  }
+  // 마지막 노드 검사
+  if (cur.data === value) return true;
+  return false; // 항목을 찾을 수 없는 경우
 };
 
 const sll = new LinkedList();
@@ -108,11 +122,12 @@ sll.insert(3); // 3 -> null
 sll.insert(2); // 2 -> 3 -> null
 sll.insert(1); // 1 -> 2 -> 3 -> null
 
-console.log(sll.search(3));
-console.log(sll.search(2));
-console.log(sll.search(1));
+sll.insertLast(4);
+sll.insertLast(5);
+sll.insertLast(5);
 
-sll.removeFirst();
+sll.remove(5);
+sll.remove(5);
 
 // 결과 출력
-sll.printList(); // 2 -> 3 -> null
+sll.printNode(); // 2 -> 3 -> null
