@@ -22,36 +22,36 @@ tree.root.right.right = new BinaryTreeNode(25);
 
 // 중위 순회
 // 왼쪽 서브트리 - 루트 - 오른쪽 서브트리
-BinaryTree.prototype.inOrder = function (node) {
+BinaryTree.prototype.inOrder = function (node = this.root) {
   if (node !== null) {
     this.inOrder(node.left);
     process.stdout.write(`${node.value} `);
     this.inOrder(node.right);
   }
 };
-tree.inOrder(tree.root); // 1 4 15 16 20 25
+tree.inOrder(); // 1 4 15 16 20 25
 process.stdout.write('\n');
 
 // 전위 순회
 // 루트 - 왼쪽 서브트리 - 오른쪽 서브트리
-BinaryTree.prototype.preOrder = function (node) {
+BinaryTree.prototype.preOrder = function (node = this.root) {
   if (node !== null) {
     process.stdout.write(`${node.value} `);
     this.preOrder(node.left);
     this.preOrder(node.right);
   }
 };
-tree.preOrder(tree.root); // 15 4 1 20 16 25
+tree.preOrder(); // 15 4 1 20 16 25
 process.stdout.write('\n');
 
 // 후위 순회
 // 왼쪽 서브트리 - 오른쪽 서브트리 - 루트
-BinaryTree.prototype.postOrder = function (node) {
+BinaryTree.prototype.postOrder = function (node = this.root) {
   if (node !== null) {
     this.postOrder(node.left);
     this.postOrder(node.right);
     process.stdout.write(`${node.value} `);
   }
 };
-tree.postOrder(tree.root); // 1 4 16 25 20 15
+tree.postOrder(); // 1 4 16 25 20 15
 process.stdout.write('\n');
