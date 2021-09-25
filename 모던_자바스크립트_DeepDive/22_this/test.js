@@ -1,9 +1,10 @@
-function getThisBinding() {
-  return this;
-}
+const person = {
+  name: 'Lee',
+  foo(callback) {
+    setTimeout(callback.bind(this), 100);
+  }
+};
 
-// this로 사용할 객체
-const obj = { a: 1 };
-
-console.log(getThisBinding.bind(obj));
-console.log(getThisBinding.bind(obj)());
+person.foo(function () {
+  console.log(`Hi! my name is ${this.name}`);
+});
