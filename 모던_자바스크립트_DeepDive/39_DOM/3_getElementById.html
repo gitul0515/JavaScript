@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <ul>
+    <li id="apple">Apple</li>
+    <li id="banana">Banana</li>
+    <li id="orange">Orange</li>
+  </ul>
+  <script>
+    // id를 이용하여 요소 노드를 취득한다. (유일한 값)
+    const $elem1 = document.getElementById('apple');
+    const $elem2 = document.getElementById('banana');
+    const $elem3 = document.getElementById('orange');
+    // id 값을 갖는 요소 노드가 존재하지 않으면 null을 반환한다.
+    const $elem4 = document.getElementById('melon');
+
+    // 취득한 요소 노드의 style.color 프로퍼티 값을 변경한다.
+    $elem1.style.color = 'red';
+    $elem2.style.color = 'green';
+    $elem3.style.color = 'blue';
+    console.log($elem4); // null
+  </script>
+</body>
+</html>

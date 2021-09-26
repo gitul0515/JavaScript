@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <ul>
+    <li class="apple">Apple</li>
+    <li class="banana">Banana</li>
+    <li class="banana">Banana</li>
+    <li class="banana">Banana</li>
+    <li class="orange">Orange</li>
+  </ul>
+  <script>
+    // querySelector 메서드는
+    // CSS 셀렉터를 만족시키는 '하나의' 요소 노드를 탐색한다.
+    // class 어트리뷰트 값이 banana인 '첫 번째' 요소 노드를 탐색한다.
+    const $elem = document.querySelector('.banana');
+    console.log($elem);
+    $elem.style.color = 'red';
+  </script>
+</body>
+</html>

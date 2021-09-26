@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <ul>
+    <li class="fruit apple">Apple</li>
+    <li class="fruit banana">Banana</li>
+    <li class="fruit orange">Orange</li>
+  </ul>
+  <script>
+    // class 값이 'fruit'인 요소 노드를 모두 탐색한다.
+    const $elems = document.getElementsByClassName('fruit');
+    [...$elems].forEach(elem => { elem.style.color = 'red'; });
+
+    // class 값이 'fruit apple'인 요소 노드를 모두 탐색한다.
+    const $apples = document.getElementsByClassName('fruit apple');
+    [...$apples].forEach(apple => { apple.style.color = 'blue'; });
+  </script>
+</body>
+</html>

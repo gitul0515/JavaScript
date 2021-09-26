@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <ul id="fruits">
+    <li>Apple</li>
+    <li>Banana</li>
+    <li>Orange</li>
+  </ul>
+  <ul id="Web">
+    <li>HTML</li>
+    <li>CSS</li>
+    <li>Javascript</li>
+  </ul>
+  <script>
+    // DOM 전체에서 태그 이름이 li인 요소 노드를 모두 탐색
+    const $lisFromDocument = document.getElementsByTagName('li');
+    console.log($lisFromDocument); // HTMLCollection(6)
+    [...$lisFromDocument].forEach(elem => { elem.style.color = 'red'; });
+
+    // ul#fruits 요소의 자손 노드 중에서
+    // 태그 이름이 li인 요소 노드를 모두 탐색
+    const $fruits = document.getElementById('fruits');
+    const $lisFromFruits = $fruits.getElementsByTagName('li');
+    console.log($lisFromFruits); // HTMLCollection(3)
+    [...$lisFromFruits].forEach(elem => { elem.style.color = 'blue'; });
+  </script>
+</body>
+</html>

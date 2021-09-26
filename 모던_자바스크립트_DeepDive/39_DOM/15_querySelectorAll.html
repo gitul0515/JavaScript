@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <ul>
+    <li class="apple">Apple</li>
+    <li class="banana">Banana</li>
+    <li class="orange">Orange</li>
+  </ul>
+  <script>
+    // querySelectorAll 메서드는
+    // CSS 셀렉터를 만족시키는 모든 요소 노드를 탐색한다.
+    // ul > li인 모든 요소 노드를 탐색한다.
+    const $elems = document.querySelectorAll('ul > li');
+    console.log($elems); // NodeList 객체로 반환된다.
+    // NodeList는 forEach 메서드를 제공한다.
+    $elems.forEach(elem => { elem.style.color = 'red'; });
+
+    // 모든 요소 노드를 탐색한다.
+    const $all = document.querySelectorAll('*');
+    console.log($all);
+  </script>
+</body>
+</html>

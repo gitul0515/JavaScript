@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <ul id="fruits">
+    <li class="apple">Apple</li>
+    <li class="banana">Banana</li>
+    <li class="orange">Orange</li>
+  </ul>
+  <span class="banana">Banana</span>
+
+  <script>
+    // DOM 전체에서 class 값이 'banana'인 요소 노드를 탐색한다.
+    const $elems = document.getElementsByClassName('banana');
+    console.log($elems); // HTMLCollection(2)
+    [...$elems].forEach(elem => { elem.style.color = 'red'; });
+
+    // #fruits 요소의 자손 노드 중에서
+    // class 값이 'banana'인 요소 노드를 탐색한다.
+    const $fruits = document.getElementById('fruits');
+    const $banaFromFruits = $fruits.getElementsByClassName('banana');
+    console.log($banaFromFruits); // HTMLCollection(1)
+    [...$banaFromFruits].forEach(elem => { elem.style.color = 'blue'; });
+  </script>
+</body>
+</html>
