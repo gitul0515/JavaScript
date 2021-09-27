@@ -4,16 +4,14 @@
   <meta charset="UTF-8">
 </head>
 <body>
-  <ul>
-    <li id="apple">Apple</li>
-    <li id="banana">Banana</li>
-    <li id="orange">Orange</li>
+  <ul id="fruits">
   </ul>
-
   <script>
-    const $elems = document.getElementsByTagName('li');
-    
-    [...$elems].forEach(elem => { elem.style.color = 'red'; });
+    const $elems = document.getElementById('fruits');
+
+    console.log($elems.hasChildNodes());
+    console.log(!!$elems.children.length);
+    console.log(!!$elems.childElementCount);
   </script>
 </body>
 </html>

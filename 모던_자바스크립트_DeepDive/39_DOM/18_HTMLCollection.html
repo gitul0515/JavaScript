@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <style>
+      .red {
+        color: red;
+      }
+      .blue {
+        color: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <ul id="fruits">
+      <li class="red">Apple</li>
+      <li class="red">Banana</li>
+      <li class="red">Orange</li>
+    </ul>
+    <script>
+      // HTMLCollection은 노드 객체의 상태 변화를
+      // 실시간으로 반영하는 살아있는(live) 객체다.
+      const $elems = document.getElementsByClassName('red');
+      console.log($elems);
+
+      // HTMLCollection 객체의 모든 요소의 class 값을 'blue'로 변경한다.
+      // for (let i = 0; i < $elems.length; i++) {
+      //   $elems[i].className = 'blue';
+      // }
+      // 그러나, 두 번째 li 요소의 class 값은 변경되지 않는다.
+
+      // // 해결1: for 문을 역방향으로 순회
+      // for (let i = $elems.length - 1; i >= 0; i--) {
+      //   $elems[i].className = 'blue';
+      // }
+
+      // // 해결2: while 문을 사용하여 공백이 될 때까지 반복
+      // const i = 0;
+      // while ($elems.length > i) {
+      //   $elems[i].className = 'blue';
+      // }
+
+      // 해결3: HTMLCollection 객체를 배열로 변환한다. (추천)
+      [...$elems].forEach(elem => { elem.className = 'blue'; });
+    </script>
+  </body>
+</html>

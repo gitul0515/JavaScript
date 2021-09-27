@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+  </head>
+  <body>
+    <ul id="fruits">
+      <li class="apple">Apple</li>
+      <li class="banana">Banana</li>
+      <li class="orange">Orange</li>
+    </ul>
+    <script>
+      // 노드 탐색의 기점이 되는 #fruits 요소 노드를 취득한다.
+      const $fruits = document.getElementById('fruits');
+
+      // #fruits 요소의 모든 자식 노드를 탐색한다.
+      console.log($fruits.childNodes); // Nodelist(7), 텍스트 노드 포함
+      console.log($fruits.children); // HTMLCollection(3), 텍스트 노드 포함x
+
+      // #fruits 요소의 첫번째 자식 노드를 탐색한다.
+      console.log($fruits.firstChild); // #text
+      console.log($fruits.firstElementChild);
+
+      // #fruits 요소의 마지막 자식 노드를 탐색한다.
+      console.log($fruits.lastChild); // #text
+      console.log($fruits.lastElementChild);
+    </script>
+  </body>
+</html>
