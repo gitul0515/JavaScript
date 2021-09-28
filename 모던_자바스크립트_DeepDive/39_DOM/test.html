@@ -5,13 +5,16 @@
 </head>
 <body>
   <ul id="fruits">
+    <!-- <li></li>
+    <li></li>
+    <li></li> -->
   </ul>
   <script>
-    const $elems = document.getElementById('fruits');
+    const fruits = document.getElementById('fruits');
+    console.log(fruits.hasChildNodes());
 
-    console.log($elems.hasChildNodes());
-    console.log(!!$elems.children.length);
-    console.log(!!$elems.childElementCount);
+    console.log(!!fruits.children.length);
+    console.log(!!fruits.childElementCount);
   </script>
 </body>
 </html>

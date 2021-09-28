@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+  </head>
+  <body>
+    <div id="fruits">Hello <span>world!</span></div>
+    <script>
+      // innerHTML 프로퍼티는
+      // HTML 마크업이 포함된 문자열을 그대로 반환한다.
+      console.log(document.getElementById('fruits').innerHTML); // 'Hello <span>world!</span>'
+
+      // HTML 마크업이 파싱되어 요소 노드의 자식 노드로 DOM에 반영된다.
+      document.getElementById('fruits').innerHTML = 'Hi <span>there!</span>';
+      console.log(document.getElementById('fruits').innerHTML); // 'Hi <span>there!</span>'
+    </script>
+  </body>
+</html>

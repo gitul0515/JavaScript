@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+  </head>
+  <body>
+    <div id="fruits">
+    </div>
+    <script>
+      // 문서 노드의 노드 정보를 취득한다.
+      console.log(document.nodeType); // 9
+      console.log(document.nodeName); // #document
+      
+      // 요소 노드의 노드 정보를 취득한다.
+      const elem1 = document.getElementById('fruits');
+      console.log(elem1.nodeType); // 1
+      console.log(elem1.nodeName); // DIV
+      
+      // 텍스트 노드의 노드 정보를 취득한다.
+      const elem2 = elem1.firstChild;
+      console.log(elem2.nodeType); // 3
+      console.log(elem2.nodeName); // #text
+    </script>
+  </body>
+</html>

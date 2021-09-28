@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+  </head>
+  <body>
+    <ul id="fruits">
+      <li class="apple">Apple</li>
+      <li class="banana">Banana</li>
+      <li class="orange">Orange</li>
+    </ul>
+    <script>
+      const fruits = document.getElementById('fruits');
+
+      // #fruits 요소의 첫 번째 자식 노드를 탐색한다.
+      // 요소 또는 텍스트 노드를 반환
+      const { firstChild } = fruits;
+      console.log(firstChild);
+
+      // firstChild 요소의 다음 형제 노드를 탐색한다.
+      // 요소 또는 텍스트 노드를 반환
+      const { nextSibling } = firstChild;
+      console.log(nextSibling);
+
+      // nextSibling 요소의 이전 형제 노드를 탐색한다.
+      // 요소 또는 텍스트 노드를 반환
+      const { previousSibling } = nextSibling;
+      console.log(previousSibling);
+
+      // #fruits 요소의 첫 번째 자식 노드를 탐색한다.
+      // 요소 노드만 반환
+      const { firstElementChild } = fruits;
+      console.log(firstElementChild);
+
+      // firstElementChild 요소의 다음 형제 노드를 탐색한다.
+      // 요소 노드만 반환
+      const { nextElementSibling } = firstElementChild;
+      console.log(nextElementSibling);
+      
+      // nextElementSibling 요소의 이전 형제 노드를 탐색한다.
+      // 요소 노드만 반환
+      const { previousElementSibling } = nextElementSibling;
+      console.log(previousElementSibling);
+    </script>
+  </body>
+</html>

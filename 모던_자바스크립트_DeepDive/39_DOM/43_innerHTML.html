@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+  </head>
+  <body>
+    <ul id="fruits">
+      <li class="apple">Apple</li>
+    </ul>
+    <script>
+      const fruits = document.getElementById('fruits');
+
+      // 노드 추가
+      fruits.innerHTML += '<li class="banana">Banana</li>';
+
+      // 노드 교체
+      fruits.innerHTML = '<li class="Orange">orange</li>';
+
+      // 노드 삭제
+      fruits.innerHTML = '';
+    </script>
+  </body>
+</html>

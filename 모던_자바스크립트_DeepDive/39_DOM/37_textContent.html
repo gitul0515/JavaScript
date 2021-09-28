@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+  </head>
+  <body>
+    <div id="fruits">Hello <span>world!</span></div>
+    <script>
+      // #fruits 요소 노드의 텍스트를 모두 취득한다.
+      // 이때 HTML 마크업은 무시된다.
+      console.log(document.getElementById('fruits').textContent); // Hello world!
+
+      // nodeValue를 사용하는 경우 코드가 더 복잡하다.
+      console.log(document.getElementById('fruits').nodeValue); // null
+      console.log(document.getElementById('fruits').firstChild.nodeValue); // 'Hello '
+      console.log(document.getElementById('fruits').lastChild.firstChild.nodeValue); // 'world!'
+    </script>
+  </body>
+</html>

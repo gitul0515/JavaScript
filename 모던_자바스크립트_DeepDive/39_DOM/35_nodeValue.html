@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+  </head>
+  <body>
+    <div id="fruits">Hello</div>
+    <script>
+      console.log(document.nodeValue); // null
+
+      const elem1 = document.getElementById('fruits');
+      console.log(elem1.nodeValue); // null
+      
+      // 텍스트 노드의 값을 취득한다.
+      const elem2 = elem1.firstChild;
+      console.log(elem2.nodeValue); // Hello
+
+      // 텍스트 노드의 값을 변경할 수 있다.
+      elem2.nodeValue = 'Bye';
+      console.log(elem2.nodeValue); // Bye
+    </script>
+  </body>
+</html>
