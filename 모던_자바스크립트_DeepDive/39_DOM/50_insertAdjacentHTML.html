@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+  </head>
+  <body>
+    <!-- beforebegin -->
+    <div class="foo">
+      <!-- afterbegin -->
+      text
+      <!-- beforeend -->
+    </div>
+    <!-- afterend -->
+    <script>
+      const elem = document.querySelector('.foo');
+
+      elem.insertAdjacentHTML('beforebegin', '<p>beforebegin</p>');
+      elem.insertAdjacentHTML('afterbegin', '<p>afterbegin</p>');
+      elem.insertAdjacentHTML('beforeend', '<p>beforeend</p>');
+      elem.insertAdjacentHTML('afterend', '<p>beforeend</p>');
+    </script>
+  </body>
+</html>

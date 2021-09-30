@@ -5,19 +5,18 @@
   </head>
   <body>
     <ul id="fruits">
-      <li class="apple">Apple</li>
+      <li>apple</li>
+      <li>orange</li>
     </ul>
+
     <script>
       const fruits = document.getElementById('fruits');
 
-      // 노드 추가
-      fruits.innerHTML += '<li class="banana">Banana</li>';
+      const li = document.createElement('li');
 
-      // 노드 교체
-      fruits.innerHTML = '<li class="Orange">orange</li>';
+      li.appendChild(document.createTextNode('banana'));
 
-      // 노드 삭제
-      fruits.innerHTML = '';
+      fruits.insertBefore(li, null);
     </script>
   </body>
 </html>

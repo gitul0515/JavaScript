@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+  </head>
+  <body>
+    <ul id="fruits"></ul>
+    <script>
+      const fruits = document.getElementById('fruits');
+
+      // DocumentFragment 노드 생성
+      const fragment = document.createDocumentFragment();
+
+      ['apple', 'banana', 'orange'].forEach(text => {
+        // 1. 요소 노드 생성
+        const li = document.createElement('li');
+
+        // 2. 텍스트 노드 생성
+        const textNode = document.createTextNode(text);
+
+        // 3. 텍스트 노드를 요소 노드의 자식으로 추가
+        li.appendChild(textNode);
+
+        // 4. 요소 노드를 DocumentFragment 노드의 자식으로 추가
+        fragment.appendChild(li);
+      });
+      // 5. DocumentFragment 노드를 #fruits 노드의 자식으로 추가
+      fruits.appendChild(fragment);
+    </script>
+  </body>
+</html>
