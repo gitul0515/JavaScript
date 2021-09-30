@@ -20,6 +20,18 @@
       const elem2 = elem1.firstChild;
       console.log(elem2.nodeType); // 3
       console.log(elem2.nodeName); // #text
+
+      // #fruits의 부모 노드
+      console.log(elem1.parentNode.nodeType); // 1
+      console.log(elem1.parentNode.nodeName); // BODY
+
+      // #fruits의 부모의 부모 노드
+      console.log(elem1.parentNode.parentNode.nodeType); // 1
+      console.log(elem1.parentNode.parentNode.nodeName); // HTML
+
+      // #fruits의 부모의 부모의 부모 노드
+      console.log(elem1.parentNode.parentNode.parentNode.nodeType); // 9
+      console.log(elem1.parentNode.parentNode.parentNode.nodeName); // #document
     </script>
   </body>
 </html>
