@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+    <title>노드 삭제</title>
+  </head>
+  <body>
+    <ul id="fruits">
+      <li>Apple</li>
+      <li>Banana</li>
+      <li>Orange</li>
+      <li>Melon</li>
+      <li>Grape</li>
+    </ul>
+    <script>
+      const fruits = document.getElementById('fruits');
+
+      // #fruits의 모든 자식 요소를 삭제
+      while (fruits.children.length) { // 5 => 0
+        fruits.removeChild(fruits.lastElementChild);
+      }
+    </script>
+  </body>
+</html>

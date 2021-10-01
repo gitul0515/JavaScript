@@ -4,19 +4,16 @@
     <meta charset="UTF-8">
   </head>
   <body>
-    <ul id="fruits">
-      <li>apple</li>
-      <li>orange</li>
+    <ul id="numbers">
+      <li>first</li>
     </ul>
-
     <script>
-      const fruits = document.getElementById('fruits');
+      const numbers = document.getElementById('numbers');
 
-      const li = document.createElement('li');
+      const newNode = document.createElement('li');
+      newNode.textContent = 'second';
 
-      li.appendChild(document.createTextNode('banana'));
-
-      fruits.insertBefore(li, null);
+      numbers.replaceChild(newNode, numbers.firstElementChild);
     </script>
   </body>
 </html>

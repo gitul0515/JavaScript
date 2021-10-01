@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+    <title>노드 교체</title>
+  </head>
+  <body>
+    <ul id="fruits">
+      <li>Apple</li>
+    </ul>
+    <script>
+      const fruits = document.getElementById('fruits');
+
+      // 기존 노드와 교체할 요소 노드를 생성
+      const newNode = document.createElement('li');
+      newNode.textContent = 'Banana';
+
+      // #fruits의 첫 번째 자식 요소를 newNode로 교체
+      // 교체된 요소는 DOM에서 제거된다.
+      fruits.replaceChild(newNode, fruits.firstElementChild);
+    </script>
+  </body>
+</html>
