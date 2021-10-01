@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+  </head>
+  <body>
+    <input id="user" type="text" value="ungmo">
+    <script>
+      const input = document.getElementById('user');
+
+      // value 어트리뷰트 값을 취득
+      const inputValue = input.getAttribute('value');
+      console.log(inputValue); // 'ungmo'
+
+      // value 어트리뷰트 값을 변경
+      input.setAttribute('value', 'kwon');
+      console.log(input.getAttribute('value')); // 'kwon'
+    </script>
+  </body>
+</html>
