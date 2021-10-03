@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>선택 정렬</title>
+  </head>
+  <body>
+    <script>
+      // 배열 생성
+      const array = [];
+      for (let i = 0; i < 100; i++) { // 난수를 생성하여 배열에 저장
+        array[i] = Math.floor(Math.random() * 100); // 난수 범위: 0~99
+      }
+
+      // 배열의 두 요소 값을 교환하는 함수
+      const swap = function (array, x, y) {
+        const temp = array[x];
+        array[x] = array[y];
+        array[y] = temp;
+      };
+
+      // 선택 정렬 함수 (작은 것부터 정렬)
+      const selectionSort = function (array, n) {
+        let i; let j; let min;
+        for (i = 0; i < n - 1; i++) {
+          min = i;
+          for (j = i + 1; j < n; j++) { // 최소값 탐색
+            if (array[min] > array[j]) min = j;
+          }
+          if (array[i] !== array[min]) { // 최소값이 변경된 경우에만 교환한다.
+            swap(array, i, min);
+          }
+        }
+      };
+      // 선택 정렬 호출
+      selectionSort(array, array.length);
+
+      // 정렬 결과 출력
+      console.log(`정렬 결과: ${array.join(', ')}`);
+
+      // // 선택 정렬 함수 (큰 것부터 정렬)
+      // const selectionSort = function (array, num) {
+      //   let i; let j; let max;
+      //   for (i = num - 1; i > 0; i--) {
+      //     max = i;
+      //     for (j = i - 1; j >= 0; j--) { // 최대값 탐색
+      //       if (array[j] > array[max]) max = j;
+      //     }
+      //     if (array[i] !== array[max]) { // 최대값이 변경된 경우에만 교환한다.
+      //       swap(array, i, max);
+      //     }
+      //   }
+      // };
+    </script>
+  </body>
+</html>

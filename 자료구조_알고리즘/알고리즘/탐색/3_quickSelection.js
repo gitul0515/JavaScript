@@ -1,7 +1,7 @@
 // 퀵 선택 알고리즘의 활용
 const array = [21, 10, 34, 41, 30, 12, 19, 7, 43, 28, 56, 50, 91, 83, 81, 75]; // 샘플 데이터
 const num = 45; // 기준점
-const i = 10;
+const i = 4;
 
 // num에서 i번째로 값이 근접한 숫자를 탐색하는 함수
 function proximityNumber(array, num, i) {
@@ -55,7 +55,7 @@ function quickSlection(array, left, right, i) {
   const k = q - left + 1;
 
   if (i < k) return quickSlection(array, left, q - 1, i);
-  if (i > k) return quickSlection(array, q + 1, right, i);
+  if (i > k) return quickSlection(array, q + 1, right, i - k);
   if (i === k) return array[q];
 }
 
