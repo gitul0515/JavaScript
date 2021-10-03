@@ -38,6 +38,21 @@
       // 정렬 결과 출력
       console.log(`정렬 결과: ${array.join(', ')}`);
 
+      // 선택 정렬 함수 (중간 원소까지만 정렬)
+      // const selectionSortMid = function (array, l, r) {
+      //   const mid = parseInt(r / 2, 10);
+      //   let i; let j; let min;
+      //   for (i = 0; i < mid; i++) {
+      //     min = i;
+      //     for (j = i + 1; j <= mid; j++) { // 최소값 탐색
+      //       if (array[min] > array[j]) min = j;
+      //     }
+      //     if (array[i] !== array[min]) { // 최소값이 변경된 경우에만 교환한다.
+      //       swap(array, i, min);
+      //     }
+      //   }
+      // };
+
       // // 선택 정렬 함수 (큰 것부터 정렬)
       // const selectionSort = function (array, num) {
       //   let i; let j; let max;

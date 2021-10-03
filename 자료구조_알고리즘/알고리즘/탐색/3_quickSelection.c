@@ -47,13 +47,11 @@ int proximity_search(int* list, int anchor_num, int prox) {
   p_location = p_index + 1;
 
   // prox가 p_location보다 작으면 왼쪽 그룹으로 범위를 좁힌다.
-  // quickSlection 함수를 호출하여
-  // (p_location - prox)번째로 작은 숫자를 탐색한다.
+  // quickSlection 함수를 호출한다.
   if (prox < p_location) {
     return quickSlection(list, 0, p_index - 1, p_location - prox); 
   } else if (prox >= p_location) { // prox가 p_location 이상이면 오른쪽 그룹으로 범위를 좁힌다.
-    // quickSlection 함수를 통해 prox번째로 작은 숫자를 탐색한다.
-    return quickSlection(list, p_index + 1, MAX_SIZE - 1, prox);
+    return quickSlection(list, p_index + 1, MAX_SIZE - 1, prox); // quickSlection 함수를 호출한다.
   }
 }
 

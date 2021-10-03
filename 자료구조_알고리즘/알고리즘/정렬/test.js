@@ -12,8 +12,8 @@ const swap = function (array, x, y) {
 };
 
 // 선택 정렬 함수 (중간 원소까지만 정렬)
-const selectionSort = function (array, l, r) {
-  const mid = r / 2;
+const selectionSortMid = function (array, l, r) {
+  const mid = parseInt(r / 2, 10);
   let i; let j; let min;
   for (i = 0; i < mid; i++) {
     min = i;
@@ -26,7 +26,7 @@ const selectionSort = function (array, l, r) {
   }
 };
 // 선택 정렬 호출
-selectionSort(array, 0, array.length - 1);
+selectionSortMid(array, 0, array.length - 1);
 
 // 정렬 결과 출력
 console.log(`정렬 결과: ${array.join(', ')}`);
