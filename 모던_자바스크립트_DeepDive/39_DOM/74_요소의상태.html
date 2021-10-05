@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+  </head>
+  <body>
+    <input id="user" type="text" value="ungmo">
+    <script>
+      // DOM 프로퍼티 vs HTML 어트리뷰트
+      // DOM 프로퍼티는 요소 노드의 최신 상태를 관리한다.
+      const input = document.getElementById('user');
+
+      input.id = 'user2';
+      input.type = 'password';
+      input.value = 'kwon';
+
+      console.log(input.id); // user2
+      console.log(input.type); // password
+      console.log(input.value); // kwon
+    </script>
+  </body>
+</html>

@@ -69,7 +69,7 @@ int linearSelect(int* list, int l, int r, int i) {
   int size = r - l + 1;
   if (size <= 5) {
     selection_sort(list, l, r);
-    return list[i - 1];
+    return list[l + i - 1];
   }
 
   // 배열을 5개씩의 원소를 가진 m개의 하위 배열로 나눈다.
@@ -114,7 +114,7 @@ int linearSelect(int* list, int l, int r, int i) {
   if (i < p_location) // pivot의 순서보다 작은 원소를 찾으면
     return linearSelect(list, l, p_index - 1, i); // 왼쪽 그룹으로 범위를 좁힌다.
   else if (i > p_location) // pivot의 순서보다 큰 원소를 찾으면
-    return linearSelect(list, p_index + 1, r, i); // 오른쪽 그룹으로 범위를 좁힌다.
+    return linearSelect(list, p_index + 1, r, i - p_location); // 오른쪽 그룹으로 범위를 좁힌다.
   else return list[p_index]; // pivot의 순서와 일치하면, pivot이 바로 찾는 원소다.
 }
 

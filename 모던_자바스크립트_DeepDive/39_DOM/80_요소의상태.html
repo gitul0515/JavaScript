@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+  </head>
+  <body>
+    <input id="user" type="text" value="ungmo">
+    <script>
+      // DOM 프로퍼티 vs HTML 어트리뷰트
+      const input = document.getElementById('user');
+
+      // id 어트리뷰트와 id 프로퍼티는
+      // 사용자 입력과 관계없이 항상 동일한 값으로 연동한다.
+      input.id = 'kwon';
+      
+      console.log(input.id); // kwon
+      console.log(input.getAttribute('id')); // kwon
+    </script>
+  </body>
+</html>

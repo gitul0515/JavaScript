@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+  </head>
+  <body>
+    <input id="user" type="text" value="ungmo">
+    <script>
+      // DOM 프로퍼티 vs HTML 어트리뷰트
+      const input = document.getElementById('user');
+
+      // DOM 프로퍼티 값은 요소의 최신 상태를 관리한다.
+      input.value = 'kwon';
+      console.log(input.value); // kwon
+
+      // getAttribute로 취득한 HTML 어트리뷰트 값은 변하지 않고 유지된다.
+      console.log(input.getAttribute('value')); // ungmo
+    </script>
+  </body>
+</html>

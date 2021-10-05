@@ -8,11 +8,10 @@
     <script>
       const input = document.getElementById('user');
 
-      if (input.hasAttribute('value')) {
-        input.removeAttribute('value');
-      }
+      input.value = 'kwon';
 
-      console.log(input.hasAttribute('value'));
+      console.log(input.value);
+      console.log(input.getAttribute('value'));
     </script>
   </body>
 </html>
