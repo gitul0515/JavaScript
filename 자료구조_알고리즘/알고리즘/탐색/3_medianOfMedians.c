@@ -1,25 +1,24 @@
 //퀵 선택 알고리즘의 활용 (작성자: 2014044120 권기홍)
 #include<stdio.h>
 #include<stdlib.h>
-#include<math.h>
-#define MAX_SIZE 16 + 1
-#define SWAP(X,Y,T) ((T)=(X),(X)=(Y),(Y)=(T))
+#define MAX_SIZE 16 + 1 // 샘플 데이터 + 기준 숫자
+#define SWAP(X,Y,T) ((T)=(X),(X)=(Y),(Y)=(T)) // X와 Y를 교환하는 매크로 함수
 
 int proximity_search(int* list, int anchor_num, int prox);
+int linearSelect(int list[], int l, int r, int i);
 int partition(int* list, int left, int right);
 void print_list(int* list, int pivot);
 void selection_sort(int* list, int l, int r);
-int linearSelect(int list[], int l, int r, int i);
 
 int main()
 {
   int anchor_num; // 기준 숫자 
 	int prox; // 근접 거리
-	int list[MAX_SIZE] = { 21, 10, 34, 41, 30, 12, 19, 7, 
-                         43, 28, 56, 50, 91, 83, 81, 75, }; // 샘플 데이터
+	int list[MAX_SIZE] = { 21, 10, 34, 75, 41, 30, 12, 19, 
+                         56, 50, 7, 43, 28, 91, 83, 81, }; // 샘플 데이터
 
   // 사용자로부터 탐색 정보를 입력받는다.
-  printf("기준점을 입력하세요: ");
+  printf("기준 숫자를 입력하세요: ");
   scanf("%d", &anchor_num);
   printf("몇 번째로 근접한 숫자를 찾을까요? ");
   scanf("%d", &prox);
@@ -34,25 +33,22 @@ int main()
 	return 0;
 }
 
-// anchor_num에서 prox번째로 값이 근접한 숫자를 탐색한다.
+// anchor_num과 prox번째로 값이 근접한 숫자를 탐색한다.
 int proximity_search(int* list, int anchor_num, int prox) {
-  int p_index;
-  int p_location;
-
   // 기준 숫자를 배열의 마지막 위치에 삽입한다.
   list[MAX_SIZE - 1] = anchor_num;
 
-  // 퀵 정렬 파티션 함수를 호출한다.
+  // 파티션 함수를 호출한다.
   // 기준 숫자를 피벗으로 하여 정렬이 1번 수행된다.
-  p_index = partition(list, 0, MAX_SIZE - 1);
+  int p_index = partition(list, 0, MAX_SIZE - 1);
 
   // 기준 숫자(피벗)는 전체에서 p_location번째 작은 원소다.
-  p_location = p_index + 1;
+  int p_location = p_index + 1;
 
   // prox가 p_location보다 작으면 왼쪽 그룹으로 범위를 좁힌다.
   // linearSelect 함수를 호출한다.
   if (prox < p_location) {
-    return linearSelect(list, 0, p_index - 1, p_location - prox); 
+    return linearSelect(list, 0, p_index - 1, p_location - prox);
   } else if (prox >= p_location) { // prox가 p_location 이상이면 오른쪽 그룹으로 범위를 좁힌다.
     return linearSelect(list, p_index + 1, MAX_SIZE - 1, prox); // linearSelect 함수를 호출한다.
   }
@@ -60,7 +56,7 @@ int proximity_search(int* list, int anchor_num, int prox) {
 
 // 배열 list[l...r]에서 i번째로 작은 원소를 탐색한다.
 int linearSelect(int* list, int l, int r, int i) {
-  // 원소가 하나밖에 없으면 i는 반드시 1이다.
+  // 원소가 하나뿐이라면 i는 반드시 1이다.
   // 첫번째 값을 반환한다.
   if (l == r) return list[l];
 
@@ -118,21 +114,23 @@ int linearSelect(int* list, int l, int r, int i) {
   else return list[p_index]; // pivot의 순서와 일치하면, pivot이 바로 찾는 원소다.
 }
 
-// 퀵 정렬 파티션 함수
+// 파티션 함수
 int partition(int* list, int left, int right)
 {
-	int pivot = list[right];
+  // i가 가리키는 위치에는 피벗보다 작은 값이,
+  // j가 가리키는 위치에는 피벗보다 큰 값이 오도록 정렬한다.
+	int pivot = list[right]; // 마지막에 위치한 요소를 피벗으로 할당한다.
 	int i = left - 1;
 	int temp;
 
 	for (int j = left; j < right; j++)
-		if (list[j] <= pivot) {
+		if (list[j] <= pivot) { // j에 저장된 요소가 피벗보다 작거나 같으면
 			i++;
-			SWAP(list[i], list[j], temp);
+			SWAP(list[i], list[j], temp); // i를 1 증가시킨 후, i의 요소와 j의 요소를 교환한다.
 		}
-	SWAP(list[i + 1], list[right], temp);
+	SWAP(list[i + 1], list[right], temp); // i+1의 요소와 피벗을 교환한다.
 
-  print_list(list, i + 1);
+  print_list(list, i + 1); // 정렬 결과를 출력한다.
 
 	return i + 1; // 피벗의 위치를 반환한다.
 }
@@ -151,7 +149,7 @@ void print_list(int* list, int pivot_index) {
 	printf("\n\n");
 }
 
-// 선택 정렬 함수
+// 배열 list[l...r]을 선택 정렬한다.
 void selection_sort(int* list, int l, int r)
 {
 	int i, j, least, temp;
@@ -159,8 +157,8 @@ void selection_sort(int* list, int l, int r)
 	{
 		least = i;
 		for (j = i + 1; j <= r; j++)
-			if (list[least] > list[j]) least = j;
+			if (list[least] > list[j]) least = j; // 최소값 탐색
 		if (i!=least)
-			SWAP(list[i], list[least], temp);
+			SWAP(list[i], list[least], temp); // 최소값이 변경된 경우에만 교환한다.
 	}
 }

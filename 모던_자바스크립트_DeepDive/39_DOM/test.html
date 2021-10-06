@@ -4,14 +4,17 @@
     <meta charset="UTF-8">
   </head>
   <body>
-    <input id="user" type="text" value="ungmo">
+    <ul class="users">
+      <li id="1" data-user-id="1024" data-user-role="admin">Lee</li>
+      <li id="2" data-user-id="1048" data-user-role="subscriber">Kwon</li>
+    </ul>
     <script>
-      const input = document.getElementById('user');
+      const users = document.querySelector('.users');
 
-      input.value = 'kwon';
+      const user = [...users.children].find(user => user.dataset.userId === '1024');
 
-      console.log(input.value);
-      console.log(input.getAttribute('value'));
+      user.dataset.userRole = 'writer';
+      console.log(user.dataset);
     </script>
   </body>
 </html>

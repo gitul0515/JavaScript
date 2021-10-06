@@ -72,17 +72,17 @@ function linearSelect(array, l, r, i) {
   for (let j = 0; j < m; j++) {
     // 마지막 하위 배열이 아닌 경우 (원소: 5개)
     if (5 * (j + 1) < num) {
-      selectionSort(array, 5 * j, 5 * j + 4); // 하위 배열을 정렬한다. 
+      selectionSort(array, 5 * j, 5 * j + 4); // 하위 배열을 정렬한다.
       median[j] = array[5 * j + 2]; // 하위 배열의 중앙값을 median에 저장한다.
     } else { // 마지막 하위 배열인 경우 (원소: 5개 이하)
       selectionSort(array, 5 * j, r); // 하위 배열을 정렬한다.
-      const endMid = parseInt((5 * j + r) / 2);
+      const endMid = parseInt((5 * j + r) / 2, 10);
       median[j] = array[endMid]; // 하위 배열의 중앙값을 median에 저장한다.
     }
   }
   // 중앙값의 중앙값을 linearSelect를 재귀 호출해서 찾아낸다.
   // 중앙값이 두 개면 작은 수를 찾는다.
-  const medianOfMedians = linearSelect(median, 0, m - 1, Math.ceil(m/2)); // 올림 함수
+  const medianOfMedians = linearSelect(median, 0, m - 1, Math.ceil(m / 2)); // 올림 함수
 
   // 중앙값의 중앙값을 pivot으로 설정한다.
   const pivot = medianOfMedians;
@@ -100,13 +100,13 @@ function linearSelect(array, l, r, i) {
 
   // pivot의 순서보다 작은 원소를 찾으면
   // 왼쪽 그룹으로 범위를 좁힌다.
-  if (i < k) return linearSelect(array, l, q - 1, i); 
+  if (i < k) return linearSelect(array, l, q - 1, i);
 
   // pivot의 순서보다 큰 원소를 찾으면
   // 오른쪽 그룹으로 범위를 좁힌다.
-  if (i > k) return linearSelect(array, q + 1, r, i - k); 
+  if (i > k) return linearSelect(array, q + 1, r, i - k);
 
-   // pivot의 순서와 일치하다면, pivot이 찾는 원소다. 
+  // pivot의 순서와 일치하다면, pivot이 찾는 원소다.
   if (i === k) return array[q];
 }
 

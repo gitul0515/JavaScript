@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+  </head>
+  <body>
+    <!-- HTML 요소에 data 어트리뷰트 추가 -->
+    <ul class="users">
+      <li id="1" data-user-id="7621">Lee</li>
+      <li id="2" data-user-id="9524">Kim</li>
+    </ul>
+    <script>
+      const users = document.querySelector('.users');
+
+      const user = [...users.children].find(user => user.dataset.userId === '7621');
+      
+      // 새로운 data 어트리뷰트를 추가한다.
+      user.dataset.role = 'admin';
+      console.log(user.dataset);
+    </script>
+  </body>
+</html>
