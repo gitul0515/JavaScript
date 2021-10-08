@@ -20,9 +20,49 @@ BinarySearchTree.prototype.inOrder = function (node = this.root) {
   }
 };
 
-// 이진 트리 삽입 함수 (반복)
+// 이진 탐색 트리 탐색 함수 (반복)
+BinarySearchTree.prototype.search1 = function (value) {
+  // 트리가 공백상태인 경우
+  if (!this.root) {
+    throw new TypeError('Tree is empty.');
+  }
+
+  let curRoot = this.root;
+  while (curRoot) {
+    if (curRoot.value < value) {
+      curRoot = curRoot.right; // 오른쪽으로 범위를 좁혀 탐색한다.
+    } else if (curRoot.value > value) {
+      curRoot = curRoot.left; // 왼쪽으로 범위를 좁혀 탐색한다.
+    } else break; // value와 일치하는 경우
+  }
+  return curRoot; // 해당 value가 있는 노드를 반환한다. 없으면 null을 반환
+};
+
+// 이진 탐색 트리 탐색 함수 (재귀)
+BinarySearchTree.prototype.search2 = function (value) {
+  // 트리가 공백상태인 경우
+  if (!this.root) {
+    throw new TypeError('Tree is empty.');
+  }
+
+  // 즉시 실행 함수를 재귀적으로 호출한다.
+  function Recursion(curRoot) {
+    if (!curRoot) return curRoot; // curRoot가 null인 경우, 탐색 실패
+    if (curRoot.value < value) {
+      return Recursion(curRoot.right); // 오른쪽으로 범위를 좁혀 탐색한다.
+    }
+    if (curRoot.value > value) {
+      return Recursion(curRoot.left); // 왼쪽으로 범위를 좁혀 탐색한다.
+    }
+    return curRoot; // 탐색 성공. 해당 value가 있는 노드를 반환한다.
+  }
+
+  return Recursion(this.root);
+};
+
+// 이진 탐색 트리 삽입 함수 (반복)
 BinarySearchTree.prototype.insert1 = function (value) {
-  if (!this.root) { // 이진 트리가 공백 상태인 경우
+  if (!this.root) { // 트리가 공백 상태인 경우
     this.root = new BinarySearchTreeNode(value);
   } else {
     let curRoot = this.root;
@@ -37,38 +77,17 @@ BinarySearchTree.prototype.insert1 = function (value) {
           curRoot.left = new BinarySearchTreeNode(value);
           break;
         } else curRoot = curRoot.left;
-      } else break; // 중복된 값이면 반복문을 빠져나온다.
-    } // 이진 탐색 트리는 중복값을 허용하지 않는다.
-  }
-};
-
-const tree = new BinarySearchTree();
-tree.insert1(30); tree.insert1(20); tree.insert1(10);
-tree.insert1(40); tree.insert1(50); tree.insert1(60);
-tree.insert1(60);
-tree.inOrder();
-
-// 이진 트리 삽입 함수 (재귀)
-BinarySearchTree.prototype.insert2 = function (value) {
-  if (!this.root) {
-    this.root = new BinarySearchTreeNode(value);
-  } else {
-    (function insertRecursion(curRoot) {
-      if (curRoot.value < value) {
-        if (curRoot.right === null) {
-          curRoot.right = new BinarySearchTreeNode(value);
-        } else insertRecursion(curRoot.right);
-      } else if (curRoot.value > value) {
-        if (curRoot.left === null) {
-          curRoot.left = new BinarySearchTreeNode(value);
-        } else insertRecursion(curRoot.left);
+      } else { // 현재 루트와 값이 같은 경우.
+        break; // 이진 탐색 트리는 중복값을 허용하지 않는다.
       }
-    }(this.root));
+    }
   }
 };
+const tree1 = new BinarySearchTree();
+tree1.insert1(30); tree1.insert1(20);
+tree1.insert1(10); tree1.insert1(40);
+tree1.insert1(50); tree1.insert1(60);
 
-const tree2 = new BinarySearchTree();
-tree2.insert2(30); tree2.insert2(20); tree2.insert2(10);
-tree2.insert2(40); tree2.insert2(50); tree2.insert2(60);
-tree2.insert2(60);
-tree2.inOrder();
+console.log(tree1.search2(10));
+console.log(tree1.search2(60));
+console.log(tree1.search2(12)); // null

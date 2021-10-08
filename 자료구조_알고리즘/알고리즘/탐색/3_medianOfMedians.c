@@ -64,23 +64,22 @@ int linearSelect(int* list, int l, int r, int i) {
   // 배열을 정렬한 뒤, 원하는 원소를 반환하고 끝낸다.
   int size = r - l + 1;
   if (size <= 5) {
-    selection_sort(list, l, r);
+    selection_sort(list, l, r); // 선택 정렬
     return list[l + i - 1];
   }
 
   // 배열을 5개씩의 원소를 가진 m개의 하위 배열로 나눈다.
   int m = (size + 4) / 5; // 올림 계산: 배열 사이즈에 4를 더하고 5로 나눈다.
-
   // 각 하위 배열의 중앙값을 저장할 배열 선언 (동적 할당)
+  
   int *median = (int*)malloc(sizeof(int) * m);
-
   for (int j = 0; j < m; j++) {
     // 마지막 하위 배열이 아닌 경우 (원소 5개)
     if (5 * (j + 1) < size) {
-      selection_sort(list, 5 * j, 5 * j + 4); // 하위 배열을 정렬한다.
+      selection_sort(list, 5 * j, 5 * j + 4); // 하위 배열을 선택 정렬한다.
       median[j] = list[5 * j + 2]; // 하위 배열의 중앙값을 median에 저장한다.
     } else { // 마지막 하위 배열인 경우 (원소 5개 이하)
-      selection_sort(list, 5 * j, r); // 하위 배열을 정렬한다. r은 마지막 인덱스
+      selection_sort(list, 5 * j, r); // 하위 배열을 선택 정렬한다. r은 마지막 인덱스
       int endMid = (5 * j + r) / 2; // 하위 배열의 중앙값을 median에 저장한다.
       median[j] = list[endMid];
     }
