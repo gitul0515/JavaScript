@@ -44,20 +44,16 @@ BinarySearchTree.prototype.search2 = function (value) {
   if (!this.root) {
     throw new TypeError('Tree is empty.');
   }
-
   // 즉시 실행 함수를 재귀적으로 호출한다.
-  function Recursion(curRoot) {
-    if (!curRoot) return curRoot; // curRoot가 null인 경우, 탐색 실패
-    if (curRoot.value < value) {
+  return (function Recursion(curRoot) {
+    if (curRoot && curRoot.value < value) {
       return Recursion(curRoot.right); // 오른쪽으로 범위를 좁혀 탐색한다.
     }
-    if (curRoot.value > value) {
+    if (curRoot && curRoot.value > value) {
       return Recursion(curRoot.left); // 왼쪽으로 범위를 좁혀 탐색한다.
-    }
-    return curRoot; // 탐색 성공. 해당 value가 있는 노드를 반환한다.
-  }
-
-  return Recursion(this.root);
+    } // 탐색 성공 또는 실패
+    return curRoot; // 성공 시 해당 value가 있는 노드를 반환. 실패 시 null을 반환
+  }(this.root));
 };
 
 // 이진 탐색 트리 삽입 함수 (반복)

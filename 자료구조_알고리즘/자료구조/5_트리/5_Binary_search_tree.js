@@ -20,6 +20,42 @@ BinarySearchTree.prototype.inOrder = function (node = this.root) {
   }
 };
 
+// 이진 탐색 트리 탐색 함수 (반복)
+BinarySearchTree.prototype.search1 = function (value) {
+  // 트리가 공백상태인 경우
+  if (!this.root) {
+    throw new TypeError('Tree is empty.');
+  }
+
+  let curRoot = this.root;
+  while (curRoot) {
+    if (curRoot.value < value) {
+      curRoot = curRoot.right; // 오른쪽으로 범위를 좁혀 탐색한다.
+    } else if (curRoot.value > value) {
+      curRoot = curRoot.left; // 왼쪽으로 범위를 좁혀 탐색한다.
+    } else break; // value와 일치하는 경우
+  }
+  return curRoot; // 해당 value가 있는 노드를 반환한다. 없으면 null을 반환
+};
+
+// 이진 탐색 트리 탐색 함수 (재귀)
+BinarySearchTree.prototype.search2 = function (value) {
+  // 트리가 공백상태인 경우
+  if (!this.root) {
+    throw new TypeError('Tree is empty.');
+  }
+  // 즉시 실행 함수를 재귀적으로 호출한다.
+  return (function Recursion(curRoot) {
+    if (curRoot && curRoot.value < value) {
+      return Recursion(curRoot.right); // 오른쪽으로 범위를 좁혀 탐색한다.
+    }
+    if (curRoot && curRoot.value > value) {
+      return Recursion(curRoot.left); // 왼쪽으로 범위를 좁혀 탐색한다.
+    } // 탐색 성공 또는 실패
+    return curRoot; // 성공 시 해당 value가 있는 노드를 반환. 실패 시 null을 반환
+  }(this.root));
+};
+
 // 이진 탐색 트리 삽입 함수 (반복)
 BinarySearchTree.prototype.insert1 = function (value) {
   if (!this.root) { // 트리가 공백 상태인 경우
