@@ -5,15 +5,15 @@
   </head>
   <body>
     <ul class="users">
-      <li id="1" data-user-id="1024" data-user-role="admin">Lee</li>
-      <li id="2" data-user-id="1048" data-user-role="subscriber">Kwon</li>
+      <li id="1" data-user-id="1234" data-role="admin">Lee</li>
+      <li id="2" data-user-id="4321" data-role="subscriber">Kwon</li>
     </ul>
     <script>
       const users = document.querySelector('.users');
+      const user = [...users.children].find(user => user.dataset.userId === '1234');
 
-      const user = [...users.children].find(user => user.dataset.userId === '1024');
-
-      user.dataset.userRole = 'writer';
+      console.log(user.dataset.role);
+      user.dataset.role = 'writer';
       console.log(user.dataset);
     </script>
   </body>

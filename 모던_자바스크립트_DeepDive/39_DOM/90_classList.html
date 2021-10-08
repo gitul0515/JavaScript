@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+    <style>
+      .box {
+        width: 100px; height: 100px;
+        background-color: antiquewhite;
+      }
+      .red { color: red; }
+      .blue { color: blue; }
+    </style>
+  </head>
+  <body>
+    <div class="box red">Hello World</div>
+    <script>
+      const box = document.querySelector('.box');
+
+      // .box 요소의 class 어트리뷰트 정보를 담은
+      // DOMTokenList 객체를 취득한다.
+      // 노드 객체의 상태 변화를 실시간으로 반영하는 살아 있는 객체다.
+      console.log(box.classList);
+
+      // .box 요소의 class 어트리뷰트 값 중에서 'red'만 'blue'로 변경
+      box.classList.replace('red', 'blue');
+    </script>
+  </body>
+</html>

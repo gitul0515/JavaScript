@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+    <style>
+      .box {
+        width: 100px; height: 100px;
+        background-color: antiquewhite;
+      }
+      .red { color: red; }
+      .blue { color: blue; }
+    </style>
+  </head>
+  <body>
+    <div class="box red">Hello World</div>
+    <script>
+      const box = document.querySelector('.box');
+
+      // 살아 있는 객체다.
+      console.log(box.classList);
+
+      // DOMTokenList 객체는 다음과 같이 유용한 메서드들을 제공한다.
+      box.classList.add('foo'); // class = "box red foo"
+      box.classList.add('bar', 'baz'); // class = "box red foo bar baz"
+
+      box.classList.remove('foo');
+      box.classList.remove('bar', 'baz');
+
+      console.log(box.classList.item(0)); // 'box'
+      console.log(box.classList.item(1)); // 'red'
+
+      console.log(box.classList.contains('box')); // true
+      console.log(box.classList.contains('purple')); // false
+
+      box.classList.replace('red', 'blue');
+
+      box.classList.toggle('foo'); // 추가
+      box.classList.toggle('foo'); // 제거
+
+      box.classList.toggle('foo', true); // 추가만
+      box.classList.toggle('foo', false); // 제거만
+
+      // 그 외에도 forEach, entries, keys, values, supports 메서드를 제공
+      box.classList.forEach(elem => console.log(elem));
+    </script>
+  </body>
+</html>
