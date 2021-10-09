@@ -1,4 +1,4 @@
-// 이진 탐색 트리 알고리즘
+// 이진 탐색 트리 알고리즘 (탐색, 삽입)
 // 이진 탐색 트리 노드 생성자 함수
 const BinarySearchTreeNode = function (value) {
   this.value = value;
@@ -85,7 +85,7 @@ tree1.insert1(10); tree1.insert1(40);
 tree1.insert1(50); tree1.insert1(60);
 
 // 중위 순회를 통해 삽입 결과 확인
-tree1.inOrder(tree1.root); // 10 20 30 40 50 60
+tree1.inOrder(); // 10 20 30 40 50 60
 process.stdout.write('\n');
 
 // 이진 탐색 트리 삽입 함수 (재귀)

@@ -1,8 +1,25 @@
-const arr = [];
+const BinarySearchTreeNode = function (value) {
+  this.value = value;
+  this.left = null;
+  this.right = null;
+};
 
-arr.push({ root: 0 });
-arr.push({ value: 1, left: null, right: null });
-arr.push({ value: 2, left: null, right: null });
-arr.push({ value: 3, left: null, right: null });
-arr.push({ value: 4, left: null, right: null });
-console.log(arr);
+const BinarySearchTree = function () {
+  this.root = null;
+};
+
+const tree = new BinarySearchTree();
+tree.root = new BinarySearchTreeNode(1);
+// tree.root.left = new BinarySearchTreeNode(2);
+// tree.root.right = new BinarySearchTreeNode(3);
+
+// let curRoot = tree.root;
+// curRoot = null;
+
+function getThisBinding() {
+  return this;
+}
+
+const thisArg = { a: 1 };
+getThisBinding.apply(tree.root) = null;
+console.log(getThisBinding.apply(tree.root));
