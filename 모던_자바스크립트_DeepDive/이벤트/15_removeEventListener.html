@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <button>Click me</button>
+  <script>
+    const button = document.querySelector('button');
+
+    // 기명 이벤트 핸들러 내부에서
+    // removeEventListener를 호출하여 이벤트 핸들러를 제거하는 것은 가능하다.
+    // 이 때 이벤트 핸들러는 단 한 번만 호출된다.
+    const handleClick = () => {
+      console.log('button click');
+      button.removeEventListener('click', handleClick);
+    };
+
+    // 이벤트 핸들러 등록
+    button.addEventListener('click', handleClick);
+</script>
+</body>
+</html>

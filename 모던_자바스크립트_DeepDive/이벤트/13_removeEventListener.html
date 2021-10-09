@@ -4,16 +4,18 @@
   <meta charset="UTF-8">
 </head>
 <body>
-  <button>Click me!</button>
+  <button>Click me</button>
   <script>
     const button = document.querySelector('button');
 
     const handleClick = () => { console.log('button click'); };
 
-    // 참조가 동일한 이벤트 핸들러를 중복 등록하면 하나의 핸들러만 등록된다.
-    // 하나만 호출되어 실행된다.
+    // 이벤트 핸들러 등록
     button.addEventListener('click', handleClick);
-    button.addEventListener('click', handleClick);
-  </script>
+
+    // 이벤트 핸들러 제거
+    button.removeEventListener('click', handleClick, true); // 실패
+    button.removeEventListener('click', handleClick); // 성공
+</script>
 </body>
 </html>

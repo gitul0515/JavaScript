@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <input type="text" value="default">
+  <script>
+    const input = document.querySelector('input');
+
+    const keyEvent = function () {
+      alert('입력을 시작합니다.');
+      input.removeEventListener('keydown', keyEvent);
+    };
+
+    input.addEventListener('keydown', keyEvent);
+  </script>
+</body>
+</html>
