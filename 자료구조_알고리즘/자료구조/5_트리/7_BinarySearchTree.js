@@ -9,7 +9,6 @@ const BinarySearchTreeNode = function (value) {
 // 이진 탐색 트리 생성자 함수
 const BinarySearchTree = function () {
   this.root = null;
-  // this.size = 0; // 노드의 개수
 };
 
 // 중위 순회 함수
@@ -25,20 +24,17 @@ BinarySearchTree.prototype.inOrder = function (root = this.root) {
 BinarySearchTree.prototype.insert1 = function (value) {
   if (!this.root) { // 트리가 공백 상태인 경우
     this.root = new BinarySearchTreeNode(value);
-    // this.size++;
   } else {
     let curRoot = this.root;
     for (;;) {
       if (curRoot.value < value) {
         if (curRoot.right === null) {
           curRoot.right = new BinarySearchTreeNode(value);
-          // this.size++;
           break;
         } else curRoot = curRoot.right;
       } else if (curRoot.value > value) {
         if (curRoot.left === null) {
           curRoot.left = new BinarySearchTreeNode(value);
-          // this.size++;
           break;
         } else curRoot = curRoot.left;
       } else { // 현재 루트와 값이 같은 경우.
@@ -52,7 +48,6 @@ tree.insert1(30); tree.insert1(20);
 tree.insert1(10); tree.insert1(25);
 tree.insert1(40); tree.insert1(50);
 tree.inOrder(); console.log();
-console.log(tree.size);
 
 BinarySearchTree.prototype.remove = function (value) {
   function findMin(curRoot) {
@@ -90,10 +85,33 @@ BinarySearchTree.prototype.remove = function (value) {
   }
   return removeRecursively.call(this, this.root, value);
 };
-tree.remove(20);
-tree.remove(30);
-tree.remove(40);
-tree.remove(10);
-tree.remove(25);
-tree.remove(50);
-tree.inOrder();
+// tree.remove(20);
+// tree.remove(30);
+// tree.remove(40);
+// tree.remove(10);
+// tree.remove(25);
+// tree.remove(50);
+// tree.inOrder();
+
+// 트리의 노드 개수를 반환하는 함수 
+BinarySearchTree.prototype.nodeCount = function (curRoot = this.root) {
+  if (curRoot) {
+    return 1 + this.nodeCount(curRoot.left) + this.nodeCount(curRoot.right);
+  }
+  return 0; // curRoot가 null인 경우 (undefined를 반환하면 숫자 합산이 안 되므로 명시적으로 0을 반환)
+};
+
+console.log(tree.nodeCount());
+
+// 트리의 단말 노드 개수를 반환하는 함수
+BinarySearchTree.prototype.leafNodeCount = function (curRoot = this.root) {
+  if (curRoot) {
+    if (!curRoot.left && !curRoot.right) { // 단말 노드라면 1을 반환
+      return 1
+    } // 단말 노드가 아니면
+    return this.leafNodeCount(curRoot.left) + this.leafNodeCount(curRoot.right); // 자식 노드를 재귀적으로 호출
+  }
+  return 0; // curRoot가 null인 경우
+};
+
+console.log(tree.leafNodeCount());

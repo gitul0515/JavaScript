@@ -2,8 +2,7 @@
 // 배열 생성 및 초기화
 const preArray = []; // 초기 배열
 for (let i = 0; i < 30; i++) { // 30개의 난수 생성
-  const num = Math.floor(Math.random()*100 + 1); // 난수 범위: 1 ~ 100;
-  preArray[i] = num;
+  preArray[i] = Math.floor(Math.random()*100 + 1); // 난수 범위: 1 ~ 100;
 }
 const numMax = 100; // 난수의 최대값
 console.log('초기 배열: ', preArray);

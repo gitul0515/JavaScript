@@ -4,16 +4,16 @@
   <meta charset="UTF-8">
 </head>
 <body>
-  <input type="text" value="default">
+  <button>Click me!</button>
   <script>
-    const input = document.querySelector('input');
+    const button = document.querySelector('button');
 
-    const keyEvent = function () {
-      alert('입력을 시작합니다.');
-      input.removeEventListener('keydown', keyEvent);
-    };
+    const clickFunction = () => {
+      alert('button clicked');
+      button.removeEventListener('click', clickFunction);
+    }
 
-    input.addEventListener('keydown', keyEvent);
+    button.addEventListener('click', clickFunction);
   </script>
 </body>
 </html>
