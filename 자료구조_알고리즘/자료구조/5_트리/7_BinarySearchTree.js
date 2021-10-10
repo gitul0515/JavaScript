@@ -55,6 +55,13 @@ tree.inOrder(); console.log();
 console.log(tree.size);
 
 BinarySearchTree.prototype.remove = function (value) {
+  function findMin(curRoot) {
+    while(curRoot.left) {
+      curRoot = curRoot.left;
+    }
+    return curRoot;
+  }
+
   function removeRecursively(curRoot, value) {
     // 트리가 공백이거나, 삭제할 값이 존재하지 않는 경우
     if (!curRoot) return null;
@@ -69,21 +76,24 @@ BinarySearchTree.prototype.remove = function (value) {
           this.root = null;
         }
         return null;
+      } else if (!curRoot.left) { // 자식 노드가 1개인 경우 (오른쪽 자식 노드)
+        return curRoot.right;
+      } else if (!curRoot.right) { // 자식 노드가 1개인 경우 (왼쪽 자식 노드)
+        return curRoot.left;
+      } else { // 자식 노드가 2개인 경우: 오른쪽 서브 트리에서 최소값을 찾는다
+        const temp = findMin(curRoot.right);
+        curRoot.value = temp.value;
+        curRoot.right = removeRecursively(curRoot.right, temp.value);
       }
-      // } else if (!curRoot.left) { // 자식 노드가 1개인 경우 (오른쪽 자식 노드)
-      //   return curRoot.right;
-      // } else if (!curRoot.right) { // 자식 노드가 1개인 경우 (왼쪽 자식 노드)
-      //   return curRoot.left;
-      // }
     }
     return curRoot;
   }
   return removeRecursively.call(this, this.root, value);
 };
-tree.remove(25);
-tree.remove(10);
 tree.remove(20);
-tree.remove(50);
-tree.remove(40);
 tree.remove(30);
+tree.remove(40);
+tree.remove(10);
+tree.remove(25);
+tree.remove(50);
 tree.inOrder();
