@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <input type="checkbox">
+  <em class="message">off</em>
+  <script>
+    const input = document.querySelector('input[type=checkbox]');
+    const msg = document.querySelector('.message');
+    
+    input.addEventListener('change', e => {
+      msg.textContent = e.target.checked ? 'on' : 'off';
+    });
+  </script>
+</body>
+</html>
