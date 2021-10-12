@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    .box {
+      width: 100px;
+      height: 100px;
+      background-color: yellow;
+      border: 5px solid orange;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <!-- mousedown, mouseup, mousemove 이벤트 추가 실습 -->
+  <div class="box"></div>
+  <em class="messageDown"></em>
+  <em class="messageUp"></em>
+  <em class="messageMove"></em>
+  <script>
+    const box = document.querySelector('.box');
+    const msgDown = document.querySelector('.messageDown');
+    const msgUp = document.querySelector('.messageUp');
+    const msgMove = document.querySelector('.messageMove');
+
+    let numDown = 0;
+    let numUp = 0;
+    let numMove = 0;
+
+    box.addEventListener('mousedown', () => {
+      numDown++;
+      msgDown.textContent = String(numDown);
+    })
+
+    box.addEventListener('mouseup', () => {
+      numUp++;
+      msgUp.textContent = String(numUp);
+    })
+
+    box.addEventListener('mousemove', () => {
+      numMove++;
+      msgMove.textContent = String(numMove);
+    })
+  </script>
+</body>
+</html>
