@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+</head>
+<body>
+  <script>
+    // Event 생성자 함수를 호출하여 foo 이벤트 타입의 Event 객체를 생성한다.
+    let e = new Event('foo');
+    console.log(e);
+    console.log(e.type); // 'foo'
+    console.log(e instanceof Event); // true
+    console.log(e instanceof Object); // true
+
+    e = new FocusEvent('focus');
+    console.log(e);
+    console.log(e.type); // 'focus'
+
+    e = new MouseEvent('click');
+    console.log(e);
+    console.log(e.type); // 'click'
+
+    e = new KeyboardEvent('keyup');
+    console.log(e);
+    console.log(e.type); // 'keyup'
+
+    e = new InputEvent('change');
+    console.log(e);
+    console.log(e.type); // 'change'
+  </script>
+</body>
+</html>
