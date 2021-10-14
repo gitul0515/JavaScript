@@ -4,14 +4,18 @@
   <meta charset="UTF-8">
 </head>
 <body>
-  <input type="checkbox">
-  <em class="message">off</em>
+  <input type="text">
+  <em class="message"></em>
   <script>
-    const input = document.querySelector('input[type=checkbox]');
+    const input = document.querySelector('input[type=text]');
     const msg = document.querySelector('.message');
-    
-    input.addEventListener('change', e => {
-      msg.textContent = e.target.checked ? 'on' : 'off';
+
+    input.addEventListener('keydown', e => {
+      if (e.key !== 'Enter')
+        return;
+
+        msg.textContent = e.target.value;
+        e.target.value = '';
     });
   </script>
 </body>
