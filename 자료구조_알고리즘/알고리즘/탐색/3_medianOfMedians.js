@@ -35,7 +35,7 @@ function mideanOfMedians(array, l, r) {
   // 배열을 선택 정렬한 뒤, 중앙값을 피벗으로 반환한다.
   if (num <= 5) {
     selectionSort(array, l, r);
-    return array[parseInt((l + r) / 2, 10)];
+    return array[parseInt(r / 2, 10)];
   }
 
   // 배열을 5개씩의 원소를 가진 m개의 하위 배열로 나눈다.
@@ -43,15 +43,15 @@ function mideanOfMedians(array, l, r) {
 
   const median = []; // 각 하위 배열의 중앙값을 저장할 배열 선언
 
-  for (let j = 0; j < m; j++) {
+  for (let i = 0; i < m; i++) {
     // 마지막 하위 배열이 아닌 경우 (원소: 5개)
-    if (5 * (j + 1) < num) {
-      selectionSort(array, 5 * j, 5 * j + 4); // 하위 배열을 정렬한다.
-      median[j] = array[5 * j + 2]; // 하위 배열의 중앙값을 median에 저장한다.
+    if (5 * (i + 1) < num) {
+      selectionSort(array, 5 * i, 5 * i + 4); // 하위 배열을 정렬한다.
+      median[i] = array[5 * i + 2]; // 하위 배열의 중앙값을 median에 저장한다.
     } else { // 마지막 하위 배열인 경우 (원소: 5개 이하)
-      selectionSort(array, 5 * j, r); // 하위 배열을 정렬한다.
-      const endMid = parseInt((5 * j + r) / 2, 10);
-      median[j] = array[endMid]; // 하위 배열의 중앙값을 median에 저장한다.
+      selectionSort(array, 5 * i, r); // 하위 배열을 정렬한다.
+      const endMid = parseInt((5 * i + r) / 2, 10);
+      median[i] = array[endMid]; // 하위 배열의 중앙값을 median에 저장한다.
     }
   }
   // median 배열 출력 (확인용)
