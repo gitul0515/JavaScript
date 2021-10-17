@@ -1,8 +1,9 @@
 // 레드블랙트리 알고리즘 (작성자: 2014044120 권기홍)
 #include <stdio.h>
 #include <stdlib.h>
-#define BLACK 0; // 수정: BLACK을 0으로 정의
-#define RED 1; // 수정: RED를 1로 정의
+#include<memory.h>
+#define BLACK 0 // 수정: BLACK을 0으로 정의
+#define RED 1 // 수정: RED를 1로 정의
 
 typedef int element;
 typedef struct TreeNode {
@@ -17,6 +18,8 @@ typedef struct RBTree {
   struct TreeNode * root; // 루트를 가리킨다.
   struct TreeNode * nil; // nil 노드를 가리킨다.
 }RBTree;
+
+void RBT_insert_fixup(RBTree *T, TreeNode * z);
 
 // 노드 생성 함수
 TreeNode * new_node(int item)
@@ -117,6 +120,48 @@ void RBT_insert(RBTree *T, TreeNode * z)
   RBT_insert_fixup(T, z); // RBT_insert_fixup 함수를 호출한다.
 }
 
+void RBT_insert_fixup(RBTree *T, TreeNode * z)
+{
+  while(z->parent->color == RED){ // z의 부모 노드가 RED 색깔인 경우 반복문을 수행한다.
+    if (z->parent == z->parent->parent->left) { // z의 부모가 왼쪽 자식 노드인 경우
+      TreeNode * y = z->parent->parent->right; // z의 조부모의 오른쪽 자식 노드 y를 선언한다.
+      if (y->color == RED) { // case 1: 삼촌 노드 y의 색깔이 RED인 경우
+        z->parent->color = BLACK; // z의 부모 색깔을 BLACK으로 변경
+        y->color = BLACK; // y의 색깔을 BLACK으로 변경
+        z->parent->parent->color = RED; // z의 조부모의 색깔을 RED로 변경
+        z = z->parent->parent; // z를 z의 조부모로 변경한다 (z의 조부모에서 같은 문제가 발생할 수 있으므로)
+      } 
+      else { // 삼촌 노드 y의 색깔이 BLACK인 경우
+        if (z == z->parent->right) { // case 2: z가 부모의 오른쪽 자식 노드인 경우
+          z = z->parent; // z를 z의 부모로 변경한다.
+          left_rotate(T, z); // left_rotate 함수를 호출
+        } // case 3: z가 부모의 왼쪽 자식 노드인 경우
+        z->parent->color = BLACK; // z의 부모의 색깔을 BLACK으로 변경
+        z->parent->parent->color = RED; // z의 조부모의 색깔을 RED로 변경
+        right_rotate(T, z->parent->parent); // z의 조부모를 기준으로 right_rotate 함수를 호출
+      }
+    } 
+    else { // z의 부모가 오른쪽 자식 노드인 경우 (위 경우와 left-right가 대칭된다)
+      TreeNode * y = z->parent->parent->left; // z의 조부모의 왼쪽 자식 노드 y를 선언한다.
+      if (y->color == RED) { // case 4: 삼촌 노드 y의 색깔이 RED인 경우
+        z->parent->color = BLACK; // z의 부모 색깔을 BLACK으로 변경
+        y->color = BLACK; // y의 색깔을 BLACK으로 변경
+        z->parent->parent->color = RED; // z의 조부모의 색깔을 RED로 변경
+        z = z->parent->parent; // z를 z의 조부모로 변경한다 (z의 조부모에서 같은 문제가 발생할 수 있으므로)
+      }
+      else { // 삼촌 노드 y의 색깔이 BLACK인 경우
+        if (z == z->parent->left) { // case 5: z가 부모의 왼쪽 자식 노드인 경우
+          z = z->parent; // z를 z의 부모로 변경한다.
+          right_rotate(T, z); // right_rotate 함수 호출
+        } // case 6: z가 부모의 오른쪽 자식 노드인 경우
+        z->parent->color = BLACK; // z의 부모의 색깔을 BLACK으로 변경
+        z->parent->parent->color = RED; // z의 조부모의 색깔을 RED로 변경
+        left_rotate(T, z->parent->parent); // z의 조부모를 기준으로 left_rotate 함수 호출
+      }
+    }
+  }
+  T->root->color = BLACK;
+}
 
 // 최소값을 가진 노드를 반환하는 함수
 TreeNode * min_value_node(TreeNode * node)
@@ -179,12 +224,12 @@ TreeNode * delete_node(TreeNode * root, int key)
 }
 
 // 수정: 중위 순회 코드 추가 (결과 확인용)
-void inorder(RBTree* rb, TreeNode* curRoot) {
-	if (curRoot != rb->nil) // curRoot가 nil이 아닐 경우
+void inorder(RBTree* T, TreeNode* curRoot) {
+	if (curRoot != T->nil) // curRoot가 nil이 아닐 경우
 	{ // 왼쪽 서브트리 - 루트 - 오른쪽 서브트리로 순회한다.
-		inorder(rb, curRoot->left);
+		inorder(T, curRoot->left);
 		printf("[%d] ", curRoot->key);
-		inorder(rb, curRoot->right);
+		inorder(T, curRoot->right);
 	}
 }
 
@@ -192,20 +237,23 @@ int main(void)
 {
 	// 삭제: TreeNode * root = NULL;
 	// 삭제: TreeNode * tmp = NULL;
-  RBTree* rb = create_RBTree(); // 수정: 레드블랙트리 생성 및 초기화
+  RBTree* T = create_RBTree(); // 수정: 레드블랙트리 생성 및 초기화
+  TreeNode* z;
 
-	root = insert_node(root, 30);
-	root = insert_node(root, 20);
-	root = insert_node(root, 10);
-	root = insert_node(root, 40);
-	root = insert_node(root, 50);
-	root = insert_node(root, 60);
+  z = new_node(30);
+  RBT_insert(T, z);
+  z = new_node(20);
+  RBT_insert(T, z);
+  z = new_node(10);
+  RBT_insert(T, z);
+  z = new_node(40);
+  RBT_insert(T, z);
+  z = new_node(50);
+  RBT_insert(T, z);
+  z = new_node(60);
+  RBT_insert(T, z);
 
 	printf("레드블랙트리에서 각 리프노드 도달시 블랙높이 계산 \n");
-
-
-
-
 
 	return 0;
 }
