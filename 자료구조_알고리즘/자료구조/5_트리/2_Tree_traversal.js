@@ -75,7 +75,7 @@ class Stack {
 // 중위 순회 알고리즘 (반복)
 BinaryTree.prototype.inOrder = function () {
   let curRoot = this.root;
-  if (!curRoot) return;
+  if (!curRoot) return null;
 
   const stack = new Stack(); // 스택 생성
     while (1) {
@@ -90,4 +90,54 @@ BinaryTree.prototype.inOrder = function () {
 };
 
 tree.inOrder(); // 1 4 15 16 20 25
+process.stdout.write('\n');
+
+// 전위 순회 알고리즘 (반복)
+BinaryTree.prototype.preOrder = function () {
+  let curRoot = this.root;
+  if (!curRoot) return null;
+
+  const stack = new Stack(); // 스택 생성
+    while (1) {
+      for (; curRoot; curRoot = curRoot.left) { // 가장 왼쪽 서브트리로 이동하면서
+        process.stdout.write(`${curRoot.value} `); // 해당 노드의 값을 출력하고
+        stack.push(curRoot); // 스택에 삽입한다. 
+      }
+      curRoot = stack.pop();
+      if (!curRoot) break; // 꺼낸 노드가 null이라면 반복을 종료
+      curRoot = curRoot.right; // 오른쪽 자식 노드로 이동한다. (없을 경우 null을 저장)
+    }
+};
+
+tree.preOrder(); // 15 4 1 20 16 25
+process.stdout.write('\n');
+
+// 후위 순회 알고리즘 (반복)
+BinaryTree.prototype.postOrder = function () {
+  let curRoot = this.root;
+  if (!curRoot) return null;
+
+  const stack = new Stack(); // 스택 생성
+  const visited = {}; // 방문 여부를 체크할 객체 생성
+    while (1) {
+      for (; curRoot; curRoot = curRoot.left) { // 가장 왼쪽 서브트리로 이동하면서
+        stack.push(curRoot); // 스택에 삽입한다. 
+        visited[curRoot.value] = false; // 노드의 방문 여부를 초기화
+      }
+      curRoot = stack.peek(); // peek로 꺼낼 노드를 확인
+      if (!curRoot) break; // 꺼낸 노드가 null이면 반복을 종료
+
+      // 오른쪽 자식 노드가 있고, 해당 노드를 방문한 적이 없으면
+      if (curRoot.right && visited[curRoot.value] === false) {
+        visited[curRoot.value] = true // 해당 노드는 방문한 것으로 표시
+        curRoot = curRoot.right; // 오른쪽 자식 노드로 이동한다.
+      } else {
+        curRoot = stack.pop(); 
+        process.stdout.write(`${curRoot.value} `); // 스택에서 꺼내어 출력한다.
+        curRoot = null;
+      }
+    }
+};
+
+tree.postOrder(); // 1 4 16 25 20 15
 process.stdout.write('\n');
