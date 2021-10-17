@@ -32,7 +32,7 @@ TreeNode * new_node(int item)
 // 수정: 레드블랙트리 생성 함수
 RBTree* create_RBTree () 
 {
-  RBTree* rb = (RBTree*)malloc(sizeof(RBTree));
+  RBTree* T = (RBTree*)malloc(sizeof(RBTree));
   TreeNode* nil_node = (TreeNode*)malloc(sizeof(TreeNode));
 
   // nil_node를 초기화한다.
@@ -42,24 +42,24 @@ RBTree* create_RBTree ()
   nil_node->key = 0;
   nil_node->color = BLACK; // nil_node의 색깔은 BLACK이다.
 
-  rb->nil = nil_node; // nil이 생성한 nil_node를 가리키게 한다.
-  rb->root = rb->nil; // 루트에는 nil을 저장하여 초기화
+  T->nil = nil_node; // nil이 생성한 nil_node를 가리키게 한다.
+  T->root = T->nil; // 루트에는 nil을 저장하여 초기화
 
-  return rb;
+  return T;
 }
 
 // 수정: x 노드를 중심으로 왼쪽으로 회전하는 함수
-void left_rotate(RBTree *rb, TreeNode * x) {
+void left_rotate(RBTree *T, TreeNode * x) {
   TreeNode * y = x->right; // x의 오른쪽 노드를 y로 선언한다.
 
   x->right = y->left; // x의 오른쪽 노드에 y의 왼쪽 자식을 할당한다.
 
-  if (y->left != rb->nil) // y의 왼쪽 자식이 nil 노드가 아니라면
+  if (y->left != T->nil) // y의 왼쪽 자식이 nil 노드가 아니라면
     y->left->parent = x; // y의 왼쪽 자식의 부모를 x로 할당한다.
 
   y->parent = x->parent; // y의 부모에 x의 부모를 할당한다. 
-  if (x->parent == rb->nil) // x가 트리의 루트 노드였다면
-    rb->root = y; // y가 새로운 루트다.
+  if (x->parent == T->nil) // x가 트리의 루트 노드였다면
+    T->root = y; // y가 새로운 루트다.
   else if (x == x->parent->left) // x가 부모의 왼쪽 자식 노드였다면
     x->parent->left = y;
   else // x가 부모의 오른쪽 자식 노드였다면
@@ -70,17 +70,17 @@ void left_rotate(RBTree *rb, TreeNode * x) {
 }
 
 // 수정: x 노드를 중심으로 오른쪽으로 회전하는 함수
-void right_rotate(RBTree *rb, TreeNode * x) {
+void right_rotate(RBTree *T, TreeNode * x) {
   TreeNode * y = x->left; // x의 왼쪽 노드를 y로 선언한다.
 
   x->left = y->right; // x의 왼쪽 노드에 y의 오른쪽 자식을 할당한다.
 
-  if (y->right != rb->nil) // y의 오른쪽 자식이 nil 노드가 아니라면
+  if (y->right != T->nil) // y의 오른쪽 자식이 nil 노드가 아니라면
     y->right->parent = x; // y의 오른쪽 자식의 부모를 x로 할당한다.
 
   y->parent = x->parent; // y의 부모에 x의 부모를 할당한다. 
-  if (x->parent == rb->nil) // x가 트리의 루트 노드였다면
-    rb->root = y; // y가 새로운 루트다.
+  if (x->parent == T->nil) // x가 트리의 루트 노드였다면
+    T->root = y; // y가 새로운 루트다.
   else if (x == x->parent->left) // x가 부모의 왼쪽 자식 노드였다면
     x->parent->left = y;
   else // x가 부모의 오른쪽 자식 노드였다면
@@ -90,22 +90,33 @@ void right_rotate(RBTree *rb, TreeNode * x) {
   x->parent = y; // x의 부모로 y를 할당한다.
 }
 
-
-// 삽입 함수
-TreeNode * insert_node(TreeNode * node, int key)
+// 수정: 레드블랙트리 삽입 함수
+void RBT_insert(RBTree *T, TreeNode * z)
 {
-	// 트리가 공백이면 새로운 노드를 반환한다. 
-	if (node == NULL) return new_node(key);
+  TreeNode * y = T->nil; // y 노드를 선언하여 nil을 할당한다.
+  TreeNode * x = T->root; // x 노드를 선언하여 루트를 할당한다.
 
-	// 그렇지 않으면 순환적으로 트리를 내려간다. 
-	if (key < node->key)
-		node->left = insert_node(node->left, key);
-	else if (key > node->key)
-		node->right = insert_node(node->right, key);
+  while (x != T->nil) { // x가 nil이 아니면 반복문을 수행한다.
+    y = x;              // y에 x를 할당한다. (y는 x를 한 레벨 차이로 쫓아내려온다)
+    if (z->key < x->key) // z의 key가 x의 key보다 작으면
+      x = x->left; // x에 x의 왼쪽 자식을 할당한다.
+    else x = x->right; //z의 key가 x의 key보다 크면, x에 x의 오른쪽 자식을 할당한다.
+  }
 
-	// 변경된 루트 포인터를 반환한다. 
-	return node;
+  z->parent = y; // z의 부모를 y로 변경한다.
+  if (y == T->nil) // y가 nil이라면
+    T->root = z; // z는 트리의 루트다.
+  else if (z->key < y->key) // z의 key가 y의 key보다 작으면
+    y->left = z; // y의 왼쪽 자식으로 z를 할당한다.
+  else y->right = z; // z의 key가 y의 key보다 크면, y의 오른쪽 자식으로 z를 할당한다.
+
+  z->left = T->nil; // z의 왼쪽 자식에 nil을 할당한다.
+  z->right = T->nil; // z의 오른쪽 자식에 nil을 할당한다. 
+  z->color = RED; // z의 색깔을 RED로 할당한다.
+
+  RBT_insert_fixup(T, z); // RBT_insert_fixup 함수를 호출한다.
 }
+
 
 // 최소값을 가진 노드를 반환하는 함수
 TreeNode * min_value_node(TreeNode * node)
