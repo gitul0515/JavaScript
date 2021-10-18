@@ -19,10 +19,7 @@ typedef struct RBTree {
   struct TreeNode * nil; // nil 노드를 가리킨다.
 }RBTree;
 
-
 void RBT_insert_fixup(RBTree *T, TreeNode * z);
-void RBT_delete_fixup(RBTree * T, TreeNode * z);
-TreeNode * min_value_node(TreeNode * node);
 
 // 노드 생성 함수
 TreeNode * new_node(int item)
@@ -123,7 +120,7 @@ void RBT_insert(RBTree *T, TreeNode * z)
   RBT_insert_fixup(T, z); // RBT_insert_fixup 함수를 호출한다.
 }
 
-void RBT_insert_fixup(RBTree * T, TreeNode * z)
+void RBT_insert_fixup(RBTree *T, TreeNode * z)
 {
   while(z->parent->color == RED){ // z의 부모 노드가 RED 색깔인 경우 반복문을 수행한다.
     if (z->parent == z->parent->parent->left) { // z의 부모가 왼쪽 자식 노드인 경우
@@ -166,42 +163,6 @@ void RBT_insert_fixup(RBTree * T, TreeNode * z)
   T->root->color = BLACK;
 }
 
-// 레드블랙트리 삭제 함수
-TreeNode * RBT_delete(RBTree * T, TreeNode * z) {
-  TreeNode * y;
-  TreeNode * x;
-  if (z->left == T->nil || z->right == T->nil)
-    y = z;
-  else 
-    y = min_value_node(z);
-  
-  if (y->left != T->nil)
-    x = y->left;
-  else 
-    x = y->right;
-
-  x->parent = y->parent;
-  if (y->parent == T->nil)
-    T->root = x;
-  else if (y == y->parent->left)
-    y->parent->left = x;
-  else
-    y->parent->right = x;
-  
-  if (y != z)
-    z->key = y->key;
-
-  if (y->color == BLACK)
-    RBT_delete_fixup(T, x);
-  return y;
-}
-
-void RBT_delete_fixup(RBTree * T, TreeNode * z) {
-
-
-
-}
-
 // 최소값을 가진 노드를 반환하는 함수
 TreeNode * min_value_node(TreeNode * node)
 {
@@ -225,6 +186,43 @@ TreeNode * search(TreeNode * node, int key)
 		return search(node->right, key);
 }
 
+
+// 이진 탐색 트리와 키가 주어지면 키가 저장된 노드를 삭제하고 
+// 새로운 루트 노드를 반환한다. 
+TreeNode * delete_node(TreeNode * root, int key)
+{
+	if (root == NULL) return root;
+
+	// 만약 키가 루트보다 작으면 왼쪽 서브 트리에 있는 것임
+	if (key < root->key)
+		root->left = delete_node(root->left, key);
+	// 만약 키가 루트보다 크면 오른쪽 서브 트리에 있는 것임
+	else if (key > root->key)
+		root->right = delete_node(root->right, key);
+	// 키가 루트와 같으면 이 노드를 삭제하면 됨
+	else {
+		// 첫 번째나 두 번째 경우
+		if (root->left == NULL) {
+			TreeNode * temp = root->right;
+			free(root);
+			return temp;
+		}
+		else if (root->right == NULL) {
+			TreeNode * temp = root->left;
+			free(root);
+			return temp;
+		}
+		// 세 번째 경우
+		TreeNode * temp = min_value_node(root->right);
+
+		// 중외 순회시 후계 노드를 복사한다. 
+		root->key = temp->key;
+		// 중외 순회시 후계 노드를 삭제한다. 
+		root->right = delete_node(root->right, temp->key);
+	}
+	return root;
+}
+
 // 수정: 중위 순회 코드 추가 (결과 확인용)
 void inorder(RBTree* T, TreeNode* curRoot) {
 	if (curRoot != T->nil) // curRoot가 nil이 아닐 경우
@@ -242,14 +240,20 @@ int main(void)
   RBTree* T = create_RBTree(); // 수정: 레드블랙트리 생성 및 초기화
   TreeNode* z;
 
-  z = new_node(30); RBT_insert(T, z);
-  z = new_node(20); RBT_insert(T, z);
-  z = new_node(10); RBT_insert(T, z);
-  z = new_node(40); RBT_insert(T, z);
-  z = new_node(50); RBT_insert(T, z);
-  z = new_node(60); RBT_insert(T, z);
+  z = new_node(30);
+  RBT_insert(T, z);
+  z = new_node(20);
+  RBT_insert(T, z);
+  z = new_node(10);
+  RBT_insert(T, z);
+  z = new_node(40);
+  RBT_insert(T, z);
+  z = new_node(50);
+  RBT_insert(T, z);
+  z = new_node(60);
+  RBT_insert(T, z);
 
 	printf("레드블랙트리에서 각 리프노드 도달시 블랙높이 계산 \n");
-  printf("중위 순회: "); inorder(T, T->root);
+
 	return 0;
 }
