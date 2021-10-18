@@ -1,7 +1,7 @@
 // 레드블랙트리 알고리즘 (작성자: 2014044120 권기홍)
 #include <stdio.h>
 #include <stdlib.h>
-#include<memory.h>
+#include <memory.h>
 #define BLACK 0 // 수정: BLACK을 0으로 정의
 #define RED 1 // 수정: RED를 1로 정의
 
@@ -96,7 +96,7 @@ void right_rotate(RBTree *T, TreeNode * x) {
   x->parent = y; // x의 부모로 y를 할당한다.
 }
 
-// 수정: 레드블랙트리 삽입 함수
+// 레드블랙트리 삽입 함수
 void RBT_insert(RBTree *T, TreeNode * z)
 {
   TreeNode * y = T->nil; // y 노드를 선언하여 nil을 할당한다.
@@ -123,6 +123,7 @@ void RBT_insert(RBTree *T, TreeNode * z)
   RBT_insert_fixup(T, z); // RBT_insert_fixup 함수를 호출한다.
 }
 
+// 삽입 후 레드블랙트리의 규칙에 맞게 조정하는 함수
 void RBT_insert_fixup(RBTree * T, TreeNode * z)
 {
   while(z->parent->color == RED){ // z의 부모 노드가 RED 색깔인 경우 반복문을 수행한다.
@@ -191,15 +192,68 @@ TreeNode * RBT_delete(RBTree * T, TreeNode * z) {
   if (y != z)
     z->key = y->key;
 
-  if (y->color == BLACK)
-    RBT_delete_fixup(T, x);
+  if (y->color == BLACK) // y의 색깔이 BLACK이라면
+    RBT_delete_fixup(T, x); // RBT_delete_fixup 함수 호출
   return y;
 }
 
-void RBT_delete_fixup(RBTree * T, TreeNode * z) {
-
-
-
+// 삭제 후 레드블랙트리의 규칙에 맞게 조정하는 함수
+void RBT_delete_fixup(RBTree * T, TreeNode * x) {
+  while(x != T->root && x->color == BLACK) { // x가 루트가 아니고, x의 색깔이 블랙이라면 반복문을 수행한다.
+    if (x == x->parent->left) { // x가 왼쪽 자식 노드인 경우 
+      TreeNode * w = x->parent->right; // x의 오른쪽 형제 노드 w를 선언
+      if (w->color == RED) { // case 1: w의 색깔이 RED인 경우
+        w->color = BLACK; // w의 색깔을 BLACK으로 할당한다.
+        x->parent->color = RED; // 
+        left_rotate(T, x->parent);
+        w = x->parent->right;
+      }
+      if (w->left->color == BLACK && w->right->color == BLACK) { // case 2: w는 BLACK, w의 자식들도 BLACK
+        w->color = RED;
+        x = x->parent;
+      }
+      else { 
+        if (w->right->color == BLACK) { // case 3: w는 BLACK, w의 왼쪽 자식이 RED
+          w->left->color = BLACK;
+          w->color = RED;
+          right_rotate(T, w);
+          w = x->parent->right;
+        }
+        w->color = x->parent->color; // case 4: w는 BLACK, w의 오른쪽 자식이 RED
+        x->parent->color = BLACK;
+        w->right->color = BLACK;
+        right_rotate(T, x->parent);
+        x = T->root;
+      }
+    }
+    else {
+      TreeNode * w = x->parent->left; // x의 왼쪽 형제 노드 w를 선언
+      if (w->color == RED) { // case 5: w의 색깔이 RED인 경우
+        w->color = BLACK;
+        x->parent->color = RED;
+        right_rotate(T, x->parent);
+        w = x->parent->left;
+      }
+      if (w->left->color == BLACK && w->right->color == BLACK) { // case 6: w는 BLACK, w의 자식들도 BLACK
+        w->color = RED;
+        x = x->parent;
+      }
+      else { 
+        if (w->left->color == BLACK) { // case 7: w는 BLACK, w의 오른쪽 자식이 RED
+          w->right->color = BLACK;
+          w->color = RED;
+          left_rotate(T, w);
+          w = x->parent->left;
+        }
+        w->color = x->parent->color; // case 8: w는 BLACK, w의 왼쪽 자식이 RED
+        x->parent->color = BLACK;
+        w->left->color = BLACK;
+        left_rotate(T, x->parent);
+        x = T->root; // x에 트리의 루트를 할당하여 반복문을 종료한다 (트리의 루트가 변한 것은 아니다)
+      }
+    }
+  }
+  x->color = BLACK; // x를 통해 루트의 색깔을 BLACK으로 변경한다
 }
 
 // 최소값을 가진 노드를 반환하는 함수
@@ -225,7 +279,7 @@ TreeNode * search(TreeNode * node, int key)
 		return search(node->right, key);
 }
 
-// 수정: 중위 순회 코드 추가 (결과 확인용)
+// 중위 순회 함수 (결과 확인용)
 void inorder(RBTree* T, TreeNode* curRoot) {
 	if (curRoot != T->nil) // curRoot가 nil이 아닐 경우
 	{ // 왼쪽 서브트리 - 루트 - 오른쪽 서브트리로 순회한다.
@@ -237,19 +291,51 @@ void inorder(RBTree* T, TreeNode* curRoot) {
 
 int main(void)
 {
-	// 삭제: TreeNode * root = NULL;
-	// 삭제: TreeNode * tmp = NULL;
-  RBTree* T = create_RBTree(); // 수정: 레드블랙트리 생성 및 초기화
-  TreeNode* z;
+  RBTree* T = create_RBTree(); // 레드블랙트리 생성 및 초기화
 
-  z = new_node(30); RBT_insert(T, z);
-  z = new_node(20); RBT_insert(T, z);
-  z = new_node(10); RBT_insert(T, z);
-  z = new_node(40); RBT_insert(T, z);
-  z = new_node(50); RBT_insert(T, z);
-  z = new_node(60); RBT_insert(T, z);
+  // 노드 생성
+  TreeNode* node_30 = new_node(30); 
+  TreeNode* node_20 = new_node(20); 
+  TreeNode* node_10 = new_node(10); 
+  TreeNode* node_40 = new_node(40); 
+  TreeNode* node_50 = new_node(50); 
+  TreeNode* node_60 = new_node(60); 
 
-	printf("레드블랙트리에서 각 리프노드 도달시 블랙높이 계산 \n");
+  // 레드블랙트리에 삽입
+  RBT_insert(T, node_30);
+  RBT_insert(T, node_20);
+  RBT_insert(T, node_10);
+  RBT_insert(T, node_40);
+  RBT_insert(T, node_50);
+  RBT_insert(T, node_60);
+
+  // 결과 출력
+  printf("삽입 결과\n");
+  printf("=================================================\n");
+	printf("각 리프노드 도달시 블랙높이: \n");
   printf("중위 순회: "); inorder(T, T->root);
+  printf("\n\n");
+
+  printf("삭제 결과\n");
+  printf("=================================================\n");
+  RBT_delete(T, node_10);
+  printf("노드 10 삭제: "); inorder(T, T->root); 
+  printf("\n"); 
+  RBT_delete(T, node_20);
+  printf("노드 20 삭제: "); inorder(T, T->root);
+  printf("\n"); 
+  RBT_delete(T, node_60);
+  printf("노드 60 삭제: "); inorder(T, T->root);
+  printf("\n"); 
+  RBT_delete(T, node_50);
+  printf("노드 50 삭제: "); inorder(T, T->root);
+  printf("\n"); 
+  RBT_delete(T, node_40);
+  printf("노드 40 삭제: "); inorder(T, T->root);
+  printf("\n"); 
+  RBT_delete(T, node_30);
+  printf("노드 30 삭제: "); inorder(T, T->root);
+  printf("\n"); 
+  
 	return 0;
 }
