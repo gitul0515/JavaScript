@@ -54,7 +54,7 @@ RBTree* create_RBTree ()
   return T;
 }
 
-// 수정: x 노드를 중심으로 왼쪽으로 회전하는 함수
+// x 노드를 중심으로 왼쪽으로 회전하는 함수
 void left_rotate(RBTree *T, TreeNode * x) {
   TreeNode * y = x->right; // x의 오른쪽 노드를 y로 선언한다.
 
@@ -75,7 +75,7 @@ void left_rotate(RBTree *T, TreeNode * x) {
   x->parent = y; // x의 부모로 y를 할당한다.
 }
 
-// 수정: x 노드를 중심으로 오른쪽으로 회전하는 함수
+// x 노드를 중심으로 오른쪽으로 회전하는 함수
 void right_rotate(RBTree *T, TreeNode * x) {
   TreeNode * y = x->left; // x의 왼쪽 노드를 y로 선언한다.
 
@@ -96,7 +96,7 @@ void right_rotate(RBTree *T, TreeNode * x) {
   x->parent = y; // x의 부모로 y를 할당한다.
 }
 
-// 레드블랙트리 삽입 함수
+// 레드블랙트리에 z 노드를 삽입하는 함수
 void RBT_insert(RBTree *T, TreeNode * z)
 {
   TreeNode * y = T->nil; // y 노드를 선언하여 nil을 할당한다.
@@ -167,7 +167,7 @@ void RBT_insert_fixup(RBTree * T, TreeNode * z)
   T->root->color = BLACK;
 }
 
-// 레드블랙트리 삭제 함수
+// 레드블랙트리에서 z 노드를 삭제하는 함수
 TreeNode * RBT_delete(RBTree * T, TreeNode * z) {
   TreeNode * y;
   TreeNode * x;
@@ -226,7 +226,7 @@ void RBT_delete_fixup(RBTree * T, TreeNode * x) {
         x = T->root;
       }
     }
-    else {
+    else { // x가 오른쪽 자식 노드인 경우 (위 경우와 left-right가 대칭된다)
       TreeNode * w = x->parent->left; // x의 왼쪽 형제 노드 w를 선언
       if (w->color == RED) { // case 5: w의 색깔이 RED인 경우
         w->color = BLACK;
