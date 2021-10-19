@@ -126,7 +126,7 @@ void RBT_insert(RBTree *T, TreeNode * z)
 // 삽입 후 레드블랙트리의 규칙에 맞게 조정하는 함수
 void RBT_insert_fixup(RBTree * T, TreeNode * z)
 {
-  while(z->parent->color == RED){ // z의 부모 노드가 RED 색깔인 경우 반복문을 수행한다.
+  while(z != T->root && z->parent->color == RED ){ // z의 부모 노드가 RED 색깔인 경우 반복문을 수행한다.
     if (z->parent == z->parent->parent->left) { // z의 부모가 왼쪽 자식 노드인 경우
       TreeNode * y = z->parent->parent->right; // z의 조부모의 오른쪽 자식 노드 y를 선언한다.
       if (y->color == RED) { // case 1: 삼촌 노드 y의 색깔이 RED인 경우
@@ -135,7 +135,7 @@ void RBT_insert_fixup(RBTree * T, TreeNode * z)
         z->parent->parent->color = RED; // z의 조부모의 색깔을 RED로 변경
         z = z->parent->parent; // z를 z의 조부모로 변경한다 (z의 조부모에서 같은 문제가 발생할 수 있으므로)
       } 
-      else { // 삼촌 노드 y의 색깔이 BLACK인 경우
+      else { // 삼촌 노드 y의 색깔이 BLACK인 경우 (nil 노드 포함)
         if (z == z->parent->right) { // case 2: z가 부모의 오른쪽 자식 노드인 경우
           z = z->parent; // z를 z의 부모로 변경한다.
           left_rotate(T, z); // left_rotate 함수를 호출
@@ -153,7 +153,7 @@ void RBT_insert_fixup(RBTree * T, TreeNode * z)
         z->parent->parent->color = RED; // z의 조부모의 색깔을 RED로 변경
         z = z->parent->parent; // z를 z의 조부모로 변경한다 (z의 조부모에서 같은 문제가 발생할 수 있으므로)
       }
-      else { // 삼촌 노드 y의 색깔이 BLACK인 경우
+      else { // 삼촌 노드 y의 색깔이 BLACK인 경우 (nil 노드 포함)
         if (z == z->parent->left) { // case 5: z가 부모의 왼쪽 자식 노드인 경우
           z = z->parent; // z를 z의 부모로 변경한다.
           right_rotate(T, z); // right_rotate 함수 호출
@@ -289,6 +289,26 @@ void inorder(RBTree* T, TreeNode* curRoot) {
 	}
 }
 
+// x 노드의 블랙높이를 계산하는 함수
+// 블랙높이: x로부터 리프노드까지의 경로상의 블랙 노드의 개수(X 자신은 불포함)
+int black_height(RBTree* T, TreeNode* x) {
+  int black_node_count = 0;
+
+  /* 레드블랙트리의 특성 4에 의하여, 
+  x에서 어떤 경로로 내려가든 블랙높이는 동일하다. */
+  while (x != T->nil) { // x가 nil 노드가 아니면 반복문을 수행한다.
+    if (x->left != T->nil) // x의 왼쪽 자식이 존재한다면
+      x = x->left; // x를 x의 왼쪽 자식으로 변경한다.
+    else // 그렇지 않다면 (x가 단말 노드이거나 오른쪽 자식만 존재하는 경우)
+      x= x->right; // x를 x의 오른쪽 자식으로 변경한다.
+
+    // 노드의 색깔이 블랙이면 개수를 1 증가시킨다. (nil 노드 포함)
+    if (x->color == BLACK)
+      black_node_count++;
+  }
+  return black_node_count; // 블랙 노드의 개수를 반환한다.
+}
+
 int main(void)
 {
   RBTree* T = create_RBTree(); // 레드블랙트리 생성 및 초기화
@@ -316,26 +336,40 @@ int main(void)
   printf("중위 순회: "); inorder(T, T->root);
   printf("\n\n");
 
-  printf("삭제 결과\n");
-  printf("=================================================\n");
-  RBT_delete(T, node_10);
-  printf("노드 10 삭제: "); inorder(T, T->root); 
-  printf("\n"); 
-  RBT_delete(T, node_20);
-  printf("노드 20 삭제: "); inorder(T, T->root);
-  printf("\n"); 
-  RBT_delete(T, node_60);
-  printf("노드 60 삭제: "); inorder(T, T->root);
-  printf("\n"); 
-  RBT_delete(T, node_50);
-  printf("노드 50 삭제: "); inorder(T, T->root);
-  printf("\n"); 
-  RBT_delete(T, node_40);
-  printf("노드 40 삭제: "); inorder(T, T->root);
-  printf("\n"); 
-  RBT_delete(T, node_30);
-  printf("노드 30 삭제: "); inorder(T, T->root);
-  printf("\n"); 
+  printf("%d %d \n", T->root->key, T->root->color);
+  printf("%d %d \n", T->root->left->key, T->root->left->color);
+  printf("%d %d \n", T->root->right->key, T->root->right->color);
+  printf("%d %d \n", T->root->right->left->key, T->root->right->left->color);
+  printf("%d %d \n", T->root->right->right->key, T->root->right->right->color);
+  printf("%d %d \n", T->root->right->right->right->key, T->root->right->right->right->color);
+
+  printf("%d \n", black_height(T, node_20));
+  printf("%d \n", black_height(T, node_10));
+  printf("%d \n", black_height(T, node_40));
+  printf("%d \n", black_height(T, node_30));
+  printf("%d \n", black_height(T, node_50));
+  printf("%d \n", black_height(T, node_60));
+
+  // printf("삭제 결과\n");
+  // printf("=================================================\n");
+  // RBT_delete(T, node_10);
+  // printf("노드 10 삭제: "); inorder(T, T->root); 
+  // printf("\n"); 
+  // RBT_delete(T, node_20);
+  // printf("노드 20 삭제: "); inorder(T, T->root);
+  // printf("\n"); 
+  // RBT_delete(T, node_60);
+  // printf("노드 60 삭제: "); inorder(T, T->root);
+  // printf("\n"); 
+  // RBT_delete(T, node_50);
+  // printf("노드 50 삭제: "); inorder(T, T->root);
+  // printf("\n"); 
+  // RBT_delete(T, node_40);
+  // printf("노드 40 삭제: "); inorder(T, T->root);
+  // printf("\n"); 
+  // RBT_delete(T, node_30);
+  // printf("노드 30 삭제: "); inorder(T, T->root);
+  // printf("\n"); 
   
 	return 0;
 }

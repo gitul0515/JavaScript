@@ -4,7 +4,7 @@ const array = [];
 for (let i = 0; i < 10; i++) { // 10개의 난수 생성
   array[i] = Math.floor(Math.random() * 100 + 1); // 난수 범위: 1~100
 }
-console.log('배열:', array);
+console.log('array:', array);
 
 // 배열의 두 요소 값을 교환하는 함수
 const swap = function (array, x, y) {
@@ -26,13 +26,9 @@ const arrayMid = function (array, l, r) {
     }
     if (i !== min) swap(array, i, min); // 최소값을 i의 자리에 삽입한다.
   }
-  console.log(l);
-  console.log(r);
-  console.log(mid);
-  console.log(array);
   return array[l + mid]; // 중앙값을 반환한다.
 };
 
 // 배열(array[4...8])의 중앙값 출력
 const midValue = arrayMid(array, 4, 8);
-console.log('중앙값:', midValue);
+console.log('array[4...8]의 중앙값:', midValue);
