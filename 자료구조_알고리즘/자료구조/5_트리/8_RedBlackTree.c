@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <memory.h>
+#define max(a,b) (((a) > (b)) ? (a) : (b))
 #define BLACK 0 // 수정: BLACK을 0으로 정의
 #define RED 1 // 수정: RED를 1로 정의
 
@@ -23,6 +24,7 @@ typedef struct RBTree {
 void RBT_insert_fixup(RBTree *T, TreeNode * z);
 void RBT_delete_fixup(RBTree * T, TreeNode * z);
 TreeNode * min_value_node(TreeNode * node);
+int height(RBTree* T, TreeNode* x);
 
 // 노드 생성 함수
 TreeNode * new_node(int item)
@@ -291,7 +293,7 @@ void inorder(RBTree* T, TreeNode* curRoot) {
 
 // x 노드의 블랙높이를 계산하는 함수
 // 블랙높이: x로부터 리프노드까지의 경로상의 블랙 노드의 개수(X 자신은 불포함)
-int black_height(RBTree* T, TreeNode* x) {
+int get_black_height(RBTree* T, TreeNode* x) {
   int black_node_count = 0;
 
   /* 레드블랙트리의 특성 4에 의하여, 
@@ -307,6 +309,15 @@ int black_height(RBTree* T, TreeNode* x) {
       black_node_count++;
   }
   return black_node_count; // 블랙 노드의 개수를 반환한다.
+}
+
+//트리의 높이를 구하는 함수
+int get_height(RBTree* T, TreeNode* x) {
+	int height = 0;
+
+	if (x != T->nil)
+		height = 1 + max(get_height(T, x->left), get_height(T, x->right));
+	return height;
 }
 
 int main(void)
@@ -332,44 +343,51 @@ int main(void)
   // 결과 출력
   printf("삽입 결과\n");
   printf("=================================================\n");
-	printf("각 리프노드 도달시 블랙높이: \n");
-  printf("중위 순회: "); inorder(T, T->root);
+  printf("node_20의 블랙높이: %d, 컬러: %d \n", 
+  get_black_height(T, node_20), node_20->color);
+  printf("node_10의 블랙높이: %d, 컬러: %d \n", 
+  get_black_height(T, node_10), node_10->color);
+  printf("node_40의 블랙높이: %d, 컬러: %d \n", 
+  get_black_height(T, node_40), node_40->color);
+  printf("node_30의 블랙높이: %d, 컬러: %d \n", 
+  get_black_height(T, node_30), node_30->color);
+  printf("node_50의 블랙높이: %d, 컬러: %d \n", 
+  get_black_height(T, node_50), node_50->color);
+  printf("node_60의 블랙높이: %d, 컬러: %d \n", 
+  get_black_height(T, node_60), node_60->color);
+  printf("     (컬러 0은 BLACK, 1은 RED) \n");
   printf("\n\n");
 
-  printf("%d %d \n", T->root->key, T->root->color);
-  printf("%d %d \n", T->root->left->key, T->root->left->color);
-  printf("%d %d \n", T->root->right->key, T->root->right->color);
-  printf("%d %d \n", T->root->right->left->key, T->root->right->left->color);
-  printf("%d %d \n", T->root->right->right->key, T->root->right->right->color);
-  printf("%d %d \n", T->root->right->right->right->key, T->root->right->right->right->color);
+  printf("삭제 결과\n");
+  printf("=================================================\n");
+  printf("삭제 전 중위 순회: "); inorder(T, T->root);
+  printf("\n"); 
+  RBT_delete(T, node_10);
+  printf("노드 10 삭제: "); inorder(T, T->root); 
+  printf("\n"); 
+  RBT_delete(T, node_30);
+  printf("노드 30 삭제: "); inorder(T, T->root);
+  printf("\n"); 
+  RBT_delete(T, node_60);
+  printf("노드 60 삭제: "); inorder(T, T->root);
+  printf("\n"); 
+  RBT_delete(T, node_50);
+  printf("노드 50 삭제: "); inorder(T, T->root);
+  printf("\n"); 
+  RBT_delete(T, node_40);
+  printf("노드 40 삭제: "); inorder(T, T->root);
+  printf("\n"); 
+  RBT_delete(T, node_20);
+  printf("노드 20 삭제: "); inorder(T, T->root);
+  printf("\n"); 
 
-  printf("%d \n", black_height(T, node_20));
-  printf("%d \n", black_height(T, node_10));
-  printf("%d \n", black_height(T, node_40));
-  printf("%d \n", black_height(T, node_30));
-  printf("%d \n", black_height(T, node_50));
-  printf("%d \n", black_height(T, node_60));
-
-  // printf("삭제 결과\n");
-  // printf("=================================================\n");
-  // RBT_delete(T, node_10);
-  // printf("노드 10 삭제: "); inorder(T, T->root); 
-  // printf("\n"); 
-  // RBT_delete(T, node_20);
-  // printf("노드 20 삭제: "); inorder(T, T->root);
-  // printf("\n"); 
-  // RBT_delete(T, node_60);
-  // printf("노드 60 삭제: "); inorder(T, T->root);
-  // printf("\n"); 
-  // RBT_delete(T, node_50);
-  // printf("노드 50 삭제: "); inorder(T, T->root);
-  // printf("\n"); 
-  // RBT_delete(T, node_40);
-  // printf("노드 40 삭제: "); inorder(T, T->root);
-  // printf("\n"); 
-  // RBT_delete(T, node_30);
-  // printf("노드 30 삭제: "); inorder(T, T->root);
-  // printf("\n"); 
+  // printf("%d %d \n", T->root->key, T->root->color);
+  // printf("%d %d \n", T->root->left->key, T->root->left->color);
+  // printf("%d %d \n", T->root->right->key, T->root->right->color);
+  // printf("%d %d \n", T->root->right->left->key, T->root->right->left->color);
+  // printf("%d %d \n", T->root->right->right->key, T->root->right->right->color);
+  // printf("%d %d \n", T->root->right->right->right->key, 
+  // T->root->right->right->right->color);
   
 	return 0;
 }
