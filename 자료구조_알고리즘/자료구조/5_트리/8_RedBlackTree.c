@@ -2,27 +2,25 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <memory.h>
-#define BLACK 1 // 수정: BLACK을 1로 정의
-#define RED 0 // 수정: RED를 0으로 정의
+#define BLACK 1 // BLACK을 1로 정의
+#define RED 0 // RED를 0으로 정의
 
 typedef int element;
 typedef struct TreeNode {
 	element key;
 	struct TreeNode *left, *right;
-  struct TreeNode *parent; // 수정: 부모 노드를 가리키는 포인터
-  int color; // 수정: 노드는 색깔을 보유한다
+  struct TreeNode *parent; // 부모 노드를 가리키는 포인터
+  int color; // 노드는 색깔을 보유한다
 } TreeNode;
 
-// 수정: 레드블랙트리 구조체 선언
+// 레드블랙트리 구조체 선언
 typedef struct RBTree {
-  struct TreeNode * root; // 루트를 가리킨다.
-  struct TreeNode * nil; // nil 노드를 가리킨다.
+  struct TreeNode * root; // 루트 노드를 가리킨다
+  struct TreeNode * nil; // nil 노드를 가리킨다
 }RBTree;
-
 
 void RBT_insert_fixup(RBTree *T, TreeNode * z);
 void RBT_delete_fixup(RBTree * T, TreeNode * z);
-int height(RBTree* T, TreeNode* x);
 TreeNode* tree_successor(RBTree* T, TreeNode * node);
 TreeNode* min_value_node(RBTree* T, TreeNode * node);
 
@@ -32,26 +30,26 @@ TreeNode * new_node(int item)
 	TreeNode * temp = (TreeNode *)malloc(sizeof(TreeNode));
 	temp->key = item;
 	temp->left = temp->right = NULL;
-  temp->parent = NULL; // 수정: 부모 노드를 가리키는 포인터 초기화
-  temp->color = RED; // 수정: 새로운 노드의 색깔은 RED다.
+  temp->parent = NULL; // 부모 노드를 가리키는 포인터 초기화
+  temp->color = RED; // 새 노드의 색깔은 RED다
 	return temp;
 };
 
-// 수정: 레드블랙트리 생성 함수
+// 레드블랙트리 생성 함수
 RBTree* create_RBTree () 
 {
   RBTree* T = (RBTree*)malloc(sizeof(RBTree));
   TreeNode* nil_node = (TreeNode*)malloc(sizeof(TreeNode));
 
-  // nil_node를 초기화한다.
+  // nil_node를 초기화한다
   nil_node->left = NULL;
   nil_node->right = NULL;
   nil_node->parent = NULL;
   nil_node->key = 0;
-  nil_node->color = BLACK; // nil_node의 색깔은 BLACK이다.
+  nil_node->color = BLACK; // nil_node의 색깔은 BLACK이다
 
-  T->nil = nil_node; // nil이 생성한 nil_node를 가리키게 한다.
-  T->root = T->nil; // 루트에는 nil을 저장하여 초기화
+  T->nil = nil_node; // nil이 생성한 nil_node를 가리키게 한다
+  T->root = T->nil; // 루트에 nil을 저장하여 초기화
 
   return T;
 }
@@ -176,20 +174,20 @@ TreeNode * RBT_delete(RBTree * T, TreeNode * z) {
   if (z->left == T->nil || z->right == T->nil) // z가 단말 노드이거나 자식이 하나인 경우
     y = z;
   else // z의 자식이 두 개인 경우
-    y = tree_successor(T, z);  // tree_successor 함수를 호출하여 z의 successor를 반환
+    y = tree_successor(T, z); // tree_successor 함수를 호출하여 z의 successor를 반환
 
   // y는 자식 노드가 없거나, 자식 노드가 하나다.
   if (y->left != T->nil) // y의 왼쪽 자식이 nil 노드가 아니면
     x = y->left; // x에 y의 왼쪽 자식을 할당한다.
-  else // 그렇지 않으면
+  else
     x = y->right; // x에 y의 오른쪽 자식을 할당한다. (nil 노드 포함)
 
   x->parent = y->parent; // x의 부모 노드로 y의 부모 노드를 할당한다.
-  if (y->parent == T->nil) // y가 루트노드였다면
+  if (y->parent == T->nil) // y가 루트 노드였다면
     T->root = x; // 트리의 루트 노드는 x가 된다.
   else if (y == y->parent->left) // y가 부모의 왼쪽 자식이었다면
     y->parent->left = x; // y의 부모의 왼쪽 자식으로 x를 할당한다.
-  else // y가 부모의 오른쪽 자식이었다면
+  else
     y->parent->right = x; // y의 부모의 오른쪽 자식으로 x를 할당한다.
   
   if (y != z) // y와 z가 같지 않다면
@@ -206,60 +204,60 @@ void RBT_delete_fixup(RBTree * T, TreeNode * x) {
     if (x == x->parent->left) { // x가 왼쪽 자식 노드인 경우 
       TreeNode * w = x->parent->right; // x의 오른쪽 형제 노드 w를 선언
       if (w->color == RED) { // case 1: w의 색깔이 RED인 경우
-        w->color = BLACK; // w의 색깔을 BLACK으로 할당한다.
-        x->parent->color = RED; // 
-        left_rotate(T, x->parent);
-        w = x->parent->right;
+        w->color = BLACK; // w의 색깔을 BLACK으로 변경한다.
+        x->parent->color = RED; // x의 부모의 색깔을 RED로 변경한다.
+        left_rotate(T, x->parent); // x의 부모를 중심으로 left_rotate
+        w = x->parent->right; // 형제 노드 w를 새롭게 저장한다.
       }
       if (w->left->color == BLACK && w->right->color == BLACK) { // case 2: w는 BLACK, w의 자식들도 BLACK
-        w->color = RED;
-        x = x->parent;
+        w->color = RED; // w의 색깔을 RED로 변경한다.
+        x = x->parent; // x를 x의 부모로 변경한다.
       }
       else { 
         if (w->right->color == BLACK) { // case 3: w는 BLACK, w의 왼쪽 자식이 RED
-          w->left->color = BLACK;
-          w->color = RED;
-          right_rotate(T, w);
-          w = x->parent->right;
-        }
-        w->color = x->parent->color; // case 4: w는 BLACK, w의 오른쪽 자식이 RED
-        x->parent->color = BLACK;
-        w->right->color = BLACK;
-        right_rotate(T, x->parent);
-        x = T->root;
+          w->left->color = BLACK; // w의 왼쪽 자식의 색깔을 BLACK으로 변경한다
+          w->color = RED; // w의 색깔을 RED로 변경한다
+          right_rotate(T, w); // w를 중심으로 right_rotate
+          w = x->parent->right; // 형제 노드 w를 새롭게 저장한다
+        } // case 4: w는 BLACK, w의 오른쪽 자식이 RED
+        w->color = x->parent->color; // w의 색깔을 x의 부모의 색깔로 변경
+        x->parent->color = BLACK; // x의 부모의 색깔을 BLACK으로 변경
+        w->right->color = BLACK; // w의 오른쪽 자식의 색깔을 BLACK으로 변경
+        left_rotate(T, x->parent); // x의 부모를 중심으로 left_rotate
+        x = T->root; // x에 트리의 루트를 할당하여 반복문을 종료시킨다. (실제 루트에는 변화가 없다)
       }
     }
     else { // x가 오른쪽 자식 노드인 경우 (위 경우와 left-right가 대칭된다)
       TreeNode * w = x->parent->left; // x의 왼쪽 형제 노드 w를 선언
       if (w->color == RED) { // case 5: w의 색깔이 RED인 경우
-        w->color = BLACK;
-        x->parent->color = RED;
-        right_rotate(T, x->parent);
-        w = x->parent->left;
+        w->color = BLACK; // w의 색깔을 BLACK으로 변경한다.
+        x->parent->color = RED; // x의 부모의 색깔을 RED로 변경한다.
+        right_rotate(T, x->parent); // x의 부모를 중심으로 right_rotate
+        w = x->parent->left; // 형제 노드 w를 새롭게 저장한다.
       }
       if (w->left->color == BLACK && w->right->color == BLACK) { // case 6: w는 BLACK, w의 자식들도 BLACK
-        w->color = RED;
-        x = x->parent;
+        w->color = RED; // w의 색깔을 RED로 변경한다.
+        x = x->parent; // x를 x의 부모로 변경한다.
       }
       else { 
         if (w->left->color == BLACK) { // case 7: w는 BLACK, w의 오른쪽 자식이 RED
-          w->right->color = BLACK;
-          w->color = RED;
-          left_rotate(T, w);
-          w = x->parent->left;
-        }
-        w->color = x->parent->color; // case 8: w는 BLACK, w의 왼쪽 자식이 RED
-        x->parent->color = BLACK;
-        w->left->color = BLACK;
-        left_rotate(T, x->parent);
-        x = T->root; // x에 트리의 루트를 할당하여 반복문을 종료한다 (트리의 루트가 변한 것은 아니다)
+          w->right->color = BLACK; // w의 오른쪽 자식의 색깔을 BLACK으로 변경한다
+          w->color = RED; // w의 색깔을 RED로 변경한다
+          left_rotate(T, w); // w를 중심으로 left_rotate
+          w = x->parent->left; // 형제 노드 w를 새롭게 저장한다
+        } // case 8: w는 BLACK, w의 왼쪽 자식이 RED
+        w->color = x->parent->color; // w의 색깔을 x의 부모의 색깔로 변경 
+        x->parent->color = BLACK; // x의 부모의 색깔을 BLACK으로 변경
+        w->left->color = BLACK; // w의 왼쪽 자식의 색깔을 BLACK으로 변경
+        right_rotate(T, x->parent); // x의 부모를 중심으로 right_rotate
+        x = T->root; // x에 트리의 루트를 할당하여 반복문을 종료시킨다. (실제 루트에는 변화가 없다)
       }
     }
   }
-  x->color = BLACK; // x를 통해 루트의 색깔을 BLACK으로 변경한다
+  x->color = BLACK; // x의 색깔을 BLACK으로 변경한다
 }
 
-// node의 successor를 반환하는 함수
+// 노드의 successor를 반환하는 함수
 TreeNode* tree_successor(RBTree* T, TreeNode * node) {
   TreeNode * x = node;
 
@@ -292,27 +290,6 @@ TreeNode * min_value_node(RBTree* T, TreeNode * node)
 	return current;
 }
 
-// 순환적인 탐색 함수
-TreeNode * search(TreeNode * node, int key)
-{
-	if (node == NULL) return NULL;
-	if (key == node->key) return node;
-	else if (key < node->key)
-		return search(node->left, key);
-	else
-		return search(node->right, key);
-}
-
-// 중위 순회 함수 (결과 확인용)
-void inorder(RBTree* T, TreeNode* curRoot) {
-	if (curRoot != T->nil) // curRoot가 nil이 아닐 경우
-	{ // 왼쪽 서브트리 - 루트 - 오른쪽 서브트리로 순회한다.
-		inorder(T, curRoot->left);
-		printf("[%d] ", curRoot->key);
-		inorder(T, curRoot->right);
-	}
-}
-
 // x 노드의 블랙높이를 계산하는 함수
 // 블랙높이: x로부터 리프노드까지의 경로상의 블랙 노드의 개수(x 자신은 미포함)
 int get_black_height(RBTree* T, TreeNode* x) {
@@ -333,9 +310,20 @@ int get_black_height(RBTree* T, TreeNode* x) {
   return black_node_count; // 블랙 노드의 개수를 반환한다.
 }
 
+// 중위 순회 함수 (결과 확인용)
+void inorder(RBTree* T, TreeNode* curRoot) {
+	if (curRoot != T->nil) // curRoot가 nil이 아닐 경우
+	{ // 왼쪽 서브트리 - 루트 - 오른쪽 서브트리로 순회한다.
+		inorder(T, curRoot->left);
+		printf("[%d] ", curRoot->key);
+		inorder(T, curRoot->right);
+	}
+}
+
 int main(void)
 {
-  RBTree* T = create_RBTree(); // 레드블랙트리 생성 및 초기화
+  // 레드블랙트리 생성 및 초기화
+  RBTree* T = create_RBTree();
 
   // 노드 생성
   TreeNode* node_30 = new_node(30); 
@@ -356,6 +344,7 @@ int main(void)
   // 결과 출력
   printf("삽입 결과\n");
   printf("=================================================\n");
+  printf("루트: node_%d \n", T->root->key);
   printf("node_20의 블랙높이: %d, 컬러: %d \n", 
   get_black_height(T, node_20), node_20->color);
   printf("node_10의 블랙높이: %d, 컬러: %d \n", 
@@ -368,39 +357,31 @@ int main(void)
   get_black_height(T, node_50), node_50->color);
   printf("node_60의 블랙높이: %d, 컬러: %d \n", 
   get_black_height(T, node_60), node_60->color);
-  printf("     (컬러 1은 BLACK, 0은 RED) \n");
+  printf("      (컬러 1은 BLACK, 0은 RED) \n");
   printf("\n\n");
 
   printf("삭제 결과\n");
   printf("=================================================\n");
   printf("삭제 전 중위 순회: "); inorder(T, T->root);
-  printf("\n"); 
+  printf("\n");
   RBT_delete(T, node_10);
-  printf("노드 10 삭제: "); inorder(T, T->root); 
+  printf("node_10 삭제: "); inorder(T, T->root); 
   printf("\n"); 
   RBT_delete(T, node_30);
-  printf("노드 30 삭제: "); inorder(T, T->root);
+  printf("node_30 삭제: "); inorder(T, T->root);
   printf("\n"); 
   RBT_delete(T, node_60);
-  printf("노드 60 삭제: "); inorder(T, T->root);
+  printf("node_60 삭제: "); inorder(T, T->root);
   printf("\n"); 
   RBT_delete(T, node_50);
-  printf("노드 50 삭제: "); inorder(T, T->root);
+  printf("node_50 삭제: "); inorder(T, T->root);
   printf("\n"); 
   RBT_delete(T, node_40);
-  printf("노드 40 삭제: "); inorder(T, T->root);
+  printf("node_40 삭제: "); inorder(T, T->root);
   printf("\n"); 
   RBT_delete(T, node_20);
-  printf("노드 20 삭제: "); inorder(T, T->root);
+  printf("node_20 삭제: "); inorder(T, T->root);
   printf("\n"); 
-
-  // printf("%d %d \n", T->root->key, T->root->color);
-  // printf("%d %d \n", T->root->left->key, T->root->left->color);
-  // printf("%d %d \n", T->root->right->key, T->root->right->color);
-  // printf("%d %d \n", T->root->right->left->key, T->root->right->left->color);
-  // printf("%d %d \n", T->root->right->right->key, T->root->right->right->color);
-  // printf("%d %d \n", T->root->right->right->right->key, 
-  // T->root->right->right->right->color);
   
 	return 0;
 }
