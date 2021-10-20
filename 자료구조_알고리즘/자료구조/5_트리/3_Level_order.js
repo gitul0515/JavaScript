@@ -79,7 +79,7 @@ BinaryTree.prototype.levelOrder = function () {
 
     // 큐가 공백이 될 때까지 반복한다
     while (!queue.isEmpty()) {
-      const curRoot = queue.dequeue(); // 처음에 있는 데이터를 꺼내어 출력한다. (const의 유효 범위 확인)
+      const curRoot = queue.dequeue(); // 처음에 있는 데이터를 꺼내어 출력한다.
       process.stdout.write(`${curRoot.value} `);
       if (curRoot.left) queue.enqueue(curRoot.left); // 왼쪽 서브트리가 null이 아니면 큐에 삽입
       if (curRoot.right) queue.enqueue(curRoot.right); // 오른쪽 서브트리가 null이 아니면 큐에 삽입

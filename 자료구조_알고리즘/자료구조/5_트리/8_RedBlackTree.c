@@ -2,9 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <memory.h>
-#define max(a,b) (((a) > (b)) ? (a) : (b))
-#define BLACK 0 // 수정: BLACK을 0으로 정의
-#define RED 1 // 수정: RED를 1로 정의
+#define BLACK 1 // 수정: BLACK을 1로 정의
+#define RED 0 // 수정: RED를 0으로 정의
 
 typedef int element;
 typedef struct TreeNode {
@@ -23,8 +22,9 @@ typedef struct RBTree {
 
 void RBT_insert_fixup(RBTree *T, TreeNode * z);
 void RBT_delete_fixup(RBTree * T, TreeNode * z);
-TreeNode * min_value_node(TreeNode * node);
 int height(RBTree* T, TreeNode* x);
+TreeNode* tree_successor(RBTree* T, TreeNode * node);
+TreeNode* min_value_node(RBTree* T, TreeNode * node);
 
 // 노드 생성 함수
 TreeNode * new_node(int item)
@@ -173,26 +173,27 @@ void RBT_insert_fixup(RBTree * T, TreeNode * z)
 TreeNode * RBT_delete(RBTree * T, TreeNode * z) {
   TreeNode * y;
   TreeNode * x;
-  if (z->left == T->nil || z->right == T->nil)
+  if (z->left == T->nil || z->right == T->nil) // z가 단말 노드이거나 자식이 하나인 경우
     y = z;
-  else 
-    y = min_value_node(z);
-  
-  if (y->left != T->nil)
-    x = y->left;
-  else 
-    x = y->right;
+  else // z의 자식이 두 개인 경우
+    y = tree_successor(T, z);  // tree_successor 함수를 호출하여 z의 successor를 반환
 
-  x->parent = y->parent;
-  if (y->parent == T->nil)
-    T->root = x;
-  else if (y == y->parent->left)
-    y->parent->left = x;
-  else
-    y->parent->right = x;
+  // y는 자식 노드가 없거나, 자식 노드가 하나다.
+  if (y->left != T->nil) // y의 왼쪽 자식이 nil 노드가 아니면
+    x = y->left; // x에 y의 왼쪽 자식을 할당한다.
+  else // 그렇지 않으면
+    x = y->right; // x에 y의 오른쪽 자식을 할당한다. (nil 노드 포함)
+
+  x->parent = y->parent; // x의 부모 노드로 y의 부모 노드를 할당한다.
+  if (y->parent == T->nil) // y가 루트노드였다면
+    T->root = x; // 트리의 루트 노드는 x가 된다.
+  else if (y == y->parent->left) // y가 부모의 왼쪽 자식이었다면
+    y->parent->left = x; // y의 부모의 왼쪽 자식으로 x를 할당한다.
+  else // y가 부모의 오른쪽 자식이었다면
+    y->parent->right = x; // y의 부모의 오른쪽 자식으로 x를 할당한다.
   
-  if (y != z)
-    z->key = y->key;
+  if (y != z) // y와 z가 같지 않다면
+    z->key = y->key; // z의 key에 y의 key를 복사해준다.
 
   if (y->color == BLACK) // y의 색깔이 BLACK이라면
     RBT_delete_fixup(T, x); // RBT_delete_fixup 함수 호출
@@ -258,13 +259,34 @@ void RBT_delete_fixup(RBTree * T, TreeNode * x) {
   x->color = BLACK; // x를 통해 루트의 색깔을 BLACK으로 변경한다
 }
 
+// node의 successor를 반환하는 함수
+TreeNode* tree_successor(RBTree* T, TreeNode * node) {
+  TreeNode * x = node;
+
+  // x의 오른쪽 자식이 존재하는 경우
+  if (x->right != T->nil)
+    return min_value_node(T, x->right); // 오른쪽 서브트리에서 최솟값을 찾아 반환한다.
+
+  // x의 오른쪽 자식이 존재하지 않는 경우
+  // 어떤 노드 y의 왼쪽 서브트리의 최대값이 x일 때, y가 x의 successor다.
+  TreeNode * y = x->parent;
+
+   // y가 nil 노드가 아니고, y의 오른쪽 자식이 x라면 반복문을 수행한다.
+  while (y != T->nil && y->right == x) {
+    // 루트를 향해서 한 레벨씩 올라간다.
+    x = y; 
+    y = y->parent;
+  }
+  return y;
+}
+
 // 최소값을 가진 노드를 반환하는 함수
-TreeNode * min_value_node(TreeNode * node)
+TreeNode * min_value_node(RBTree* T, TreeNode * node)
 {
 	TreeNode * current = node;
 
-	// 맨 왼쪽 단말 노드를 찾으러 내려감
-	while (current->left != NULL)
+	// 맨 왼쪽 단말 노드를 찾으러 내려간다
+	while (current->left != T->nil)
 		current = current->left;
 
 	return current;
@@ -292,7 +314,7 @@ void inorder(RBTree* T, TreeNode* curRoot) {
 }
 
 // x 노드의 블랙높이를 계산하는 함수
-// 블랙높이: x로부터 리프노드까지의 경로상의 블랙 노드의 개수(X 자신은 불포함)
+// 블랙높이: x로부터 리프노드까지의 경로상의 블랙 노드의 개수(x 자신은 미포함)
 int get_black_height(RBTree* T, TreeNode* x) {
   int black_node_count = 0;
 
@@ -309,15 +331,6 @@ int get_black_height(RBTree* T, TreeNode* x) {
       black_node_count++;
   }
   return black_node_count; // 블랙 노드의 개수를 반환한다.
-}
-
-//트리의 높이를 구하는 함수
-int get_height(RBTree* T, TreeNode* x) {
-	int height = 0;
-
-	if (x != T->nil)
-		height = 1 + max(get_height(T, x->left), get_height(T, x->right));
-	return height;
 }
 
 int main(void)
@@ -355,7 +368,7 @@ int main(void)
   get_black_height(T, node_50), node_50->color);
   printf("node_60의 블랙높이: %d, 컬러: %d \n", 
   get_black_height(T, node_60), node_60->color);
-  printf("     (컬러 0은 BLACK, 1은 RED) \n");
+  printf("     (컬러 1은 BLACK, 0은 RED) \n");
   printf("\n\n");
 
   printf("삭제 결과\n");
