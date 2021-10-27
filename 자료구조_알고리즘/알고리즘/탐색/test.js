@@ -42,7 +42,29 @@ function mideanOfMedians(array, l, r) {
       median[i] = subArray[Mid];
     }
   }
+  // median 배열 출력 (확인용)
+  console.log(median);
 
   // 중앙값의 중앙값을 재귀적으로 구한다.
   return mideanOfMedians(median, 0, m - 1);
 }
+
+// 퀵 선택 함수 
+// array[left...right]에서 i번째로 작은 원소를 반환한다
+function quickSlection(array, left, right, i) {
+  // 원소가 1개라면 i는 반드시 1이다. 첫 번째 원소를 반환한다.
+  if (left === right) return array[left];
+
+  // 피벗을 기준으로 배열의 원소를 분할한다.
+  const q = partition(array, left, right);
+
+  // 피벗은 배열에서 k번째 작은 원소다.
+  const k = q - left + 1;
+
+  // k번째보다 작은 원소를 찾으면 왼쪽으로 범위를 좁힌다.
+  if (i < k) return quickSlection(array, left, q - 1, i);
+  else if (i === k) return array[q]; // i와 k가 같다면 피벗이 바로 찾는 원소다.
+  else return quickSlection(array, q + 1, right, i - k); // 오른쪽으로 범위를 좁힌다.
+}
+
+console.log(mideanOfMedians(array, 0, array.length - 1));

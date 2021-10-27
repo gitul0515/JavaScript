@@ -329,6 +329,17 @@ void inorder(RBTree* T, TreeNode* curRoot) {
     }
 }
 
+// 순환적인 탐색 함수
+TreeNode * search(TreeNode * node, int key)
+{
+  if (node == NULL) return NULL;
+  if (key == node->key) return node;
+  else if (key < node->key)
+    return search(node->left, key);
+  else
+    return search(node->right, key);
+} 
+
 int main(void)
 {
     // 레드블랙트리 생성 및 초기화
