@@ -14,6 +14,9 @@
             // 'world'를 대소문자를 구별하지 않고 전역 검색한다.
             const str3 = str1.replace(/world/gi, 'new');
             console.log(str3); // 'Hello new new'
+
+            // replace는 원본 배열을 변경하지 않는다.
+            console.log(str1); // Hello world world
         </script>
     </body>
 </html>
