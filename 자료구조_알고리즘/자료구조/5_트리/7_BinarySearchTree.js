@@ -1,4 +1,4 @@
-// 이진 탐색 트리 알고리즘 (삭제)
+// 이진 탐색 트리 알고리즘 (삭제) + 추가 연산
 // 이진 탐색 트리 노드 생성자 함수
 const BinarySearchTreeNode = function (value) {
   this.value = value;
@@ -93,6 +93,7 @@ BinarySearchTree.prototype.remove = function (value) {
 // tree.remove(50);
 // tree.inOrder();
 
+// 추가 연산
 // 트리의 노드 개수를 반환하는 함수 
 BinarySearchTree.prototype.nodeCount = function (curRoot = this.root) {
   if (curRoot) {
@@ -100,8 +101,7 @@ BinarySearchTree.prototype.nodeCount = function (curRoot = this.root) {
   }
   return 0; // curRoot가 null인 경우 (undefined를 반환하면 숫자 합산이 안 되므로 명시적으로 0을 반환)
 };
-
-console.log(tree.nodeCount());
+console.log(tree.nodeCount()); // 6
 
 // 트리의 단말 노드 개수를 반환하는 함수
 BinarySearchTree.prototype.leafNodeCount = function (curRoot = this.root) {
@@ -113,5 +113,15 @@ BinarySearchTree.prototype.leafNodeCount = function (curRoot = this.root) {
   }
   return 0; // curRoot가 null인 경우
 };
+console.log(tree.leafNodeCount()); // 3
 
-console.log(tree.leafNodeCount());
+// 트리의 높이를 반환하는 함수
+BinarySearchTree.prototype.getHeight = function (curRoot = this.root) {
+  let height = 0;
+  if (curRoot) {
+    height++;
+    height += Math.max(this.getHeight(curRoot.left), this.getHeight(curRoot.right));
+  }
+  return height;
+}
+console.log(tree.getHeight()); // 3
