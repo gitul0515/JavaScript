@@ -76,17 +76,17 @@ class Stack {
 BinaryTree.prototype.dFSearch = function () {
   let curRoot = this.root;
   if (!curRoot) return null;
-  
   const stack = new Stack(); // 스택 생성
+
   while (1) {
     for (; curRoot; curRoot = curRoot.left) { // 왼쪽 서브트리로 내려간다
       process.stdout.write(`${curRoot.value} `); // 해당 노드를 출력하고 스택에 push
-      stack.push(curRoot); 
+      stack.push(curRoot);
     }
     curRoot = stack.pop();
-    if (!curRoot) break; 
+    if (!curRoot) break;
     curRoot = curRoot.right;
   }
-}
+};
 
 tree.dFSearch(); // 15 4 1 3 20 16 25

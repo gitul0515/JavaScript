@@ -3,15 +3,16 @@
     <body>
         <script>
             const person = {
-                name : 'Lee',
-                address : 'seoul',
-                __proto__ : { age : 20 }
+              name: 'Lee',
+              address: 'seoul',
+              __proto__: { age: 20 }
             };
 
-            for(const key in person){
-                //객체 자신의 고유 프로퍼티인 경우만 출력한다.
-                if (person.hasOwnProperty(key))
-                    console.log(`${key} : ${person[key]}`)
+            for (const key in person) {
+              // 객체 자신의 고유 프로퍼티인 경우만 출력한다.
+              if (Object.prototype.hasOwnProperty.call(person, key)) {
+                console.log(`${key} : ${person[key]}`);
+              }
             }
         </script>
     </body>

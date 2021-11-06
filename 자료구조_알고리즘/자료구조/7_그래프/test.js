@@ -1,12 +1,16 @@
-const array = [['a', 'b'], ['c', 'd'], ['e', 'f'], ['g', 'h'], ['i', 'j']] // array[5][2]
+// 이차원 배열 함수 만들기
+function create2dArray(rows, columns, initial) {
+  const array = [];
+  for (let i = 0; i < rows; i++) {
+    array.push([]);
+    for (let j = 0; j < columns; j++) {
+      array[i][j] = initial;
+    }
+  }
+  return array;
+}
+console.log(create2dArray(5, 3, 1));
 
-console.log(array[0][0]);
-console.log(array[0][1]);
-console.log(array[1][0]);
-console.log(array[1][1]);
-console.log(array[2][0]);
-console.log(array[2][1]);
-console.log(array[3][0]);
-console.log(array[3][1]);
-console.log(array[4][0]);
-console.log(array[4][1]);
+// from, fill 메소드를 사용하여 이차원 배열 만들기
+const arr1 = Array.from(Array(5), () => new Array(3).fill(1));
+console.log(arr1);

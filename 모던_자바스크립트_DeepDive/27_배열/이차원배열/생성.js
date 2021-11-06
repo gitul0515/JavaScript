@@ -3,8 +3,8 @@
 // 1차원 배열에 다른 배열 객체를 추가해 2차원 배열을 만든다.
 
 // 1. 초기값을 할당하여 생성하기
- // array[5][2]
-let array = [['a', 'b'], ['c', 'd'], ['e', 'f'], ['g', 'h'], ['i', 'j']]
+// array[5][2]
+let array = [['a', 'b'], ['c', 'd'], ['e', 'f'], ['g', 'h'], ['i', 'j']];
 
 // 2. 반복문을 사용하여 빈 배열 생성
 // array[5][2]
@@ -25,6 +25,18 @@ function create2DArray(rows, columns, initial) {
 const arr = create2DArray(5, 2, 0);
 console.log(arr);
 
+function create2dArray(rows, columns, initial) {
+  const array = [];
+  for (let i = 0; i < rows; i++) {
+    array.push([]);
+    for (let j = 0; j < columns; j++) {
+      array[i][j] = initial;
+    }
+  }
+  return array;
+}
+console.log(create2dArray(5, 3, 1));
+
 // 4. Array 객체에 배열 생성 함수를 추가
 Array.matrix = function (rows, columns, initial) {
   let a = [];
@@ -37,7 +49,7 @@ Array.matrix = function (rows, columns, initial) {
     mat[i] = a;
   }
   return mat;
-}
+};
 const ar = Array.matrix(5, 2, 0);
 console.log(ar);
 

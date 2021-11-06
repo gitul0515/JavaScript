@@ -3,7 +3,7 @@ class Graph {
   constructor(size = 1) {
     this.size = size;
 
-     // 2차원 배열 생성
+    // 2차원 배열 생성
     this.matrix = [];
     for (let i = 0; i < size; i++) {
       this.matrix.push([]);
@@ -48,7 +48,9 @@ class Graph {
   }
 
   // 정점 제거 메서드
-  removeVertex(vertex) {
+  removeVertex(vertexParam) {
+    let vertex = vertexParam;
+
     if (vertex < 0 || vertex > this.size - 1) {
       console.log('invalid vertex');
     } else {
@@ -97,4 +99,3 @@ console.log();
 
 graph.removeVertex(1);
 graph.printMatrix();
-
