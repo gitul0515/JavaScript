@@ -1,3 +1,4 @@
+// 나누기 방법 & 선형 조사
 function HashTable(size) {
   this.size = size;
   this.keys = this.initArray(size);
@@ -11,7 +12,7 @@ HashTable.prototype.put = function (key, value) {
 
   let hashedIndex = this.hash(key);
 
-  // 선형 탐사
+  // 선형 조사
   while (this.keys[hashedIndex] !== null) {
     hashedIndex++;
     hashedIndex %= this.size;
@@ -22,13 +23,21 @@ HashTable.prototype.put = function (key, value) {
   this.limit++;
 };
 
-// 해시 테이블에서 자료를 얻기
+// 해시 테이블에서 자료를 취득
 HashTable.prototype.get = function (key) {
   let hashedIndex = this.hash(key);
+  let probeCnt = 0; // 조사 횟수를 기록하는 변수
 
+  // 선형 조사
   while (this.keys[hashedIndex] !== key) {
     hashedIndex++;
     hashedIndex %= this.size;
+
+    // 잘못된 키를 입력한 경우
+    probeCnt++;
+    if (probeCnt === this.size) { // 한 바퀴를 돌았는데 hashedIndex를 찾지 못했다면
+      throw new TypeError('key error'); // 키 에러이다.
+    }
   }
   return this.values[hashedIndex];
 };
@@ -39,7 +48,7 @@ HashTable.prototype.hash = function (key) {
   if (!Number.isInteger(key)) {
     throw new TypeError('must be int');
   }
-  return key % this.size;
+  return key % this.size; // 나누기 방법
 };
 
 // 해시 테이블 초기화 함수
@@ -66,3 +75,4 @@ console.log(hash.values);
 console.log(hash.get(59)); // 'wow'
 console.log(hash.get(72)); // 'forty'
 console.log(hash.get(98)); // 'sad'
+console.log(hash.get(100)); // key error
