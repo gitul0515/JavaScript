@@ -1,3 +1,4 @@
+// 해시 테이블 (나누기 방법 & 선형 조사)
 function HashTable(size) {
   this.size = size;
   this.keys = this.initArray(size);
@@ -5,12 +6,14 @@ function HashTable(size) {
   this.limit = 0;
 }
 
-// 해시 테이블에 데이터를 삽입
+// 해시 테이블에 데이터를 입력
 HashTable.prototype.put = function (key, value) {
-  if (this.limit >= this.size) throw new TypeError('hashtable is full');
+  if (this.limit >= this.size) {
+    throw new TypeError('hashtable is full');
+  }
 
   let hashedIndex = this.hash(key);
-  // 선형 탐사
+  // 선형 조사
   while (this.keys[hashedIndex] !== null) {
     hashedIndex++;
     hashedIndex %= this.size;
@@ -23,16 +26,20 @@ HashTable.prototype.put = function (key, value) {
 // 해시 테이블에서 데이터를 취득
 HashTable.prototype.get = function (key) {
   let hashedIndex = this.hash(key);
+  let probeCnt = 0;
 
-  // 선형 탐사
   while (this.keys[hashedIndex] !== key) {
     hashedIndex++;
     hashedIndex %= this.size;
+
+    probeCnt++;
+    if (probeCnt === this.size) {
+      throw new TypeError('key error');
+    }
   }
   return this.values[hashedIndex];
 };
 
-// 해시 함수
 HashTable.prototype.hash = function (key) {
   if (!Number.isInteger(key)) {
     throw new TypeError('must be int');
@@ -40,11 +47,10 @@ HashTable.prototype.hash = function (key) {
   return key % this.size; // 나누기 방법
 };
 
-// 해시 테이블 초기화 함수
 HashTable.prototype.initArray = function (size) {
   const array = [];
   for (let i = 0; i < size; i++) {
-    array.push(null);
+    array[i] = null;
   }
   return array;
 };
@@ -61,6 +67,7 @@ hash.put(98, 'sad');
 console.log(hash.keys);
 console.log(hash.values);
 
-console.log(hash.get(72));
-console.log(hash.get(85));
-console.log(hash.get(86));
+console.log(hash.get(59)); // 'wow'
+console.log(hash.get(72)); // 'forty'
+console.log(hash.get(98)); // 'sad'
+console.log(hash.get(100)); // key error

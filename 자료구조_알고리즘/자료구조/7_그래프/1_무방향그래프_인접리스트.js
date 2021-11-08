@@ -4,15 +4,30 @@ function UndirectedGraph() {
   this.edges = {}; // 간선을 저장하는 객체
 }
 
+// 숫자인지 판별하는 함수
+UndirectedGraph.prototype.isNumber = function (value) {
+  return typeof value === 'number' && Number.isFinite(value);
+};
+
 // 정점 삽입 함수
 UndirectedGraph.prototype.addVertex = function (vertex) {
   this.edges[vertex] = {}; // this.edges 객체 안에 객체 형태로 저장한다.
 };
 
 // 가중치가 있는 간선 삽입 함수
-UndirectedGraph.prototype.addEdge = function (vertex1, vertex2, weight = 0) {
-  this.edges[vertex1][vertex2] = weight;
-  this.edges[vertex2][vertex1] = weight;
+UndirectedGraph.prototype.addEdge = function (vertex1, vertex2, weight) {
+  // 가중치가 숫자인지 판별한다
+  if (!this.isNumber(weight)) {
+    throw new TypeError('weight must be number');
+  }
+
+  // 유효한 정점인지 확인 후, 간선을 삽입
+  if (this.edges[vertex1] && this.edges[vertex2]) {
+    this.edges[vertex1][vertex2] = weight;
+    this.edges[vertex2][vertex1] = weight;
+  } else {
+    throw new TypeError('invalid vertex');
+  }
 };
 
 const graph = new UndirectedGraph();
