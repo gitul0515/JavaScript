@@ -12,7 +12,7 @@ HashTable.prototype.put = function (key, value) {
   let i = 0;
   let hashedIndex = this.hash(key);
 
-  // 더블 해싱
+  // 이중 해싱
   while (this.keys[hashedIndex] !== null) {
     i++;
     hashedIndex = (hashedIndex + i * this.hash2(key)) % this.size;
@@ -27,7 +27,7 @@ HashTable.prototype.get = function (key) {
   let i = 0;
   let hashedIndex = this.hash(key);
 
-  // 더블 해싱
+  // 이중 해싱
   while (this.keys[hashedIndex] !== key) {
     i++;
     hashedIndex = (hashedIndex + i * this.hash2(key)) % this.size;
@@ -51,7 +51,8 @@ HashTable.prototype.hash = function (key) {
 
 // 해시 함수2
 HashTable.prototype.hash2 = function (key) {
-  return 1 + (key % 11);
+  const R = this.size - 2; // 1
+  return R - (key % R);
 };
 
 // 해시 테이블 초기화 함수
@@ -87,7 +88,7 @@ console.log(hash.get(98)); // 'sad'
 /*
   해시 함수
   1. 0번째 hash(key) = key % 13
-  2. hash2(key) = 1 + (key % 11)
+  2. hash2(key) = 11 - (key % 11)
   3. i번째 hash(key) = (i - 1번째 hash(key) + i * hash2(key)) % 13  (조건: i >= 1)
-  * 타당한지 확인 필요
+  * 균등하게 분배되었고, 충돌이 발생했지만 모두 두 번만에 답을 찾았다
 */

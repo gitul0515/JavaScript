@@ -1,4 +1,4 @@
-// 나누기 방법 & 이중 해싱 (미완료)
+// 나누기 방법 & 이중 해싱
 function HashTable(size) {
   this.size = size;
   this.keys = this.initArray(size);
@@ -12,7 +12,7 @@ HashTable.prototype.put = function (key, value) {
   let i = 0;
   let hashedIndex = this.hash(key);
 
-  // 더블 해싱
+  // 이중 해싱
   while (this.keys[hashedIndex] !== null) {
     i++;
     hashedIndex = (hashedIndex + i * this.hash2(key)) % this.size;
@@ -27,7 +27,7 @@ HashTable.prototype.get = function (key) {
   let i = 0;
   let hashedIndex = this.hash(key);
 
-  // 더블 해싱
+  // 이중 해싱
   while (this.keys[hashedIndex] !== key) {
     i++;
     hashedIndex = (hashedIndex + i * this.hash2(key)) % this.size;
@@ -51,7 +51,8 @@ HashTable.prototype.hash = function (key) {
 
 // 해시 함수2
 HashTable.prototype.hash2 = function (key) {
-  return 1 + (key % 11);
+  const R = this.size - 2; // 11
+  return 1 + (key % R);
 };
 
 // 해시 테이블 초기화 함수

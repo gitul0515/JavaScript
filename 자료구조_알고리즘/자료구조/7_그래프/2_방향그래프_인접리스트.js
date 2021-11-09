@@ -4,6 +4,11 @@ function DirectedGraph() {
   this.edges = {}; // 간선을 저장하는 객체
 }
 
+// 유효한 숫자인지 판별하는 함수
+DirectedGraph.prototype.isNumber = function (value) {
+  return typeof value === 'number' && Number.isFinite(value);
+};
+
 // 정점 삽입 함수
 DirectedGraph.prototype.addVertex = function (vertex) {
   this.edges[vertex] = {}; // this.edges 객체 안에 객체 형태로 저장한다.
@@ -11,8 +16,17 @@ DirectedGraph.prototype.addVertex = function (vertex) {
 
 // 간선 삽입 함수
 DirectedGraph.prototype.addEdge = function (origVertex, destVertex, weight = 0) {
-  // [출발점][도착점]
-  this.edges[origVertex][destVertex] = weight;
+  // 가중치가 유효한 숫자인지 확인한다
+  if (!this.isNumber(weight)) {
+    throw new TypeError('weight must be number');
+  }
+
+  // 유효한 정점인지 확인 후 간선을 만든다
+  if (this.edges[origVertex] && this.edges[destVertex]) {
+    this.edges[origVertex][destVertex] = weight;
+  } else {
+    throw new TypeError('invalid vertex');
+  }
 };
 
 const graph = new DirectedGraph();
@@ -52,7 +66,7 @@ DirectedGraph.prototype.removeVertex = function (vertex) {
     }
   }
 
-  // vertex의 진입 간선을 제거
+  // vertex의 진입 간선을 제거 (중요)
   // vertext를 도착점으로 하는 정점을 찾는다
   for (const origVertex in this.edges) {
     if (Object.prototype.hasOwnProperty.call(this.edges, origVertex)) {
@@ -75,8 +89,3 @@ console.log(graph);
 // 정점 삭제
 graph.removeVertex('B');
 console.log(graph);
-graph.removeVertex('C');
-graph.removeVertex('J');
-graph.removeVertex('D');
-graph.removeVertex('E');
-graph.removeVertex('A');
