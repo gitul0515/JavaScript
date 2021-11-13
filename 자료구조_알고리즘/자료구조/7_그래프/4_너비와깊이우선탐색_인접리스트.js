@@ -1,4 +1,4 @@
-// 너비 우선 탐색 알고리즘 (인접리스트 사용)
+// 너비 & 깊이우선탐색 알고리즘 (인접리스트 사용)
 // 방향 그래프 생성자 함수
 function DirectedGraph() {
   this.edges = {}; // 간선을 저장하는 객체
@@ -91,8 +91,8 @@ DirectedGraph.prototype.isEmpty = function () {
   return Object.keys(this.edges).length === 0;
 };
 
-// 너비 우선 탐색 함수
-DirectedGraph.prototype.bFSearch = function (vertex) {
+// 너비우선탐색 함수
+DirectedGraph.prototype.BFSearch = function (vertex) {
   if (this.isEmpty()) return null;
 
   const queue = new Queue([vertex]);
@@ -113,5 +113,22 @@ DirectedGraph.prototype.bFSearch = function (vertex) {
     }
   }
 };
+graph.BFSearch('A');
+console.log();
 
-graph.bFSearch('B');
+// 깊이우선탐색 함수 (순환)
+DirectedGraph.prototype.DFSearch = function (vertex, _visited = {}) {
+  const visited = _visited;
+
+  visited[vertex] = true;
+  process.stdout.write(`${vertex} `);
+  console.log(visited);
+  for (const adjacentVertex in this.edges[vertex]) {
+    if (Object.hasOwnProperty.call(this.edges[vertex], adjacentVertex)) {
+      if (!visited[adjacentVertex]) {
+        this.DFSearch(adjacentVertex, visited);
+      }
+    }
+  }
+};
+graph.DFSearch('A');
