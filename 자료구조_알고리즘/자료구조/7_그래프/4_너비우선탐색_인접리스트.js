@@ -1,31 +1,31 @@
 // 너비 우선 탐색 알고리즘 (인접리스트 사용)
 // 방향 그래프 생성자 함수
-function directedGraph() {
+function DirectedGraph() {
   this.edges = {}; // 간선을 저장하는 객체
 }
 
 // 정점 삽입 함수
-directedGraph.prototype.addVertex = function (vertex) {
+DirectedGraph.prototype.addVertex = function (vertex) {
   this.edges[vertex] = {}; // this.edges 객체 안에 객체 형태로 저장한다.
 };
 
 // 간선 삽입 함수
-directedGraph.prototype.addEdge = function (origVertex, destVertex, weight = 0) {
+DirectedGraph.prototype.addEdge = function (origVertex, destVertex, weight = 0) {
   // [출발점][도착점]
   this.edges[origVertex][destVertex] = weight;
 };
 
-const graph = new directedGraph();
+const graph = new DirectedGraph();
 // 정점 삽입
 graph.addVertex('A');
 graph.addVertex('B');
 graph.addVertex('C');
-graph.addVertex('D'); 
+graph.addVertex('D');
 graph.addVertex('E');
 graph.addVertex('F');
 graph.addVertex('G');
-graph.addVertex('H'); 
-graph.addVertex('J'); 
+graph.addVertex('H');
+graph.addVertex('J');
 
 // 간선 삽입
 graph.addEdge('A', 'B', 1);
@@ -86,26 +86,32 @@ class Queue {
 // ----------- 큐 코드 종료 --------------
 
 // 공백 상태 검출 함수
-directedGraph.prototype.isEmpty = function () {
+DirectedGraph.prototype.isEmpty = function () {
   // this.edges 객체에 프로퍼티가 없으면 공백 상태이다.
   return Object.keys(this.edges).length === 0;
-}
+};
 
 // 너비 우선 탐색 함수
-directedGraph.prototype.bFSearch = function (vertex) {
+DirectedGraph.prototype.bFSearch = function (vertex) {
   if (this.isEmpty()) return null;
 
-  const queue = new Queue([this.edges[vertex]]);
+  const queue = new Queue([vertex]);
   const visited = { vertex: false };
+
+  process.stdout.write(`정점 ${vertex}로부터 너비우선탐색: `);
   while (!queue.isEmpty()) {
-    let curVertex = queue.dequeue()
-    if (visited[curVertex] === false) {
+    const curVertex = queue.dequeue();
+    if (!visited[curVertex]) {
       visited[curVertex] = true;
-      process.stdout.write(curVertex);
-      for (let adjVertex in this.edges[vertex]) {
-        queue.enqueue(this.edges[adjVertex]);
-        visited[adjVertex] = false;
+      process.stdout.write(`${curVertex} `);
+      for (const adjVertex in this.edges[curVertex]) {
+        if (Object.prototype.hasOwnProperty.call(this.edges[curVertex], adjVertex)) {
+          queue.enqueue(adjVertex);
+          visited[adjVertex] = false;
+        }
       }
     }
   }
-}
+};
+
+graph.bFSearch('B');
