@@ -91,35 +91,36 @@ DirectedGraph.prototype.isEmpty = function () {
   return Object.keys(this.edges).length === 0;
 };
 
-// 너비우선탐색 함수
-DirectedGraph.prototype.BFSearch = function (vertex) {
-  if (this.isEmpty()) return null;
+// 그래프 너비우선탐색 함수을 작성하세요
+DirectedGraph.prototype.BFSearch = function (_vertex) {
+  if (this.isEmpty()) console.log('그래프가 공백상태입니다.');
 
+  let vertex = _vertex;
   const queue = new Queue([vertex]);
   const visited = { vertex: false };
-
-  process.stdout.write(`정점 ${vertex}로부터 너비우선탐색: `);
   while (!queue.isEmpty()) {
-    const curVertex = queue.dequeue();
-    if (!visited[curVertex]) {
-      visited[curVertex] = true;
-      process.stdout.write(`${curVertex} `);
-      for (const adjVertex in this.edges[curVertex]) {
-        if (Object.prototype.hasOwnProperty.call(this.edges[curVertex], adjVertex)) {
-          queue.enqueue(adjVertex);
-          visited[adjVertex] = false;
+    vertex = queue.dequeue();
+    if (!visited[vertex]) {
+      visited[vertex] = true;
+      process.stdout.write(`${vertex} `);
+      for (const adjacentVertex in this.edges[vertex]) {
+        if (Object.hasOwnProperty.call(this.edges[vertex], adjacentVertex)) {
+          queue.enqueue(adjacentVertex);
+          visited[adjacentVertex] = false;
         }
       }
     }
   }
 };
+
 graph.BFSearch('A');
 console.log();
 
-// 깊이우선탐색 함수 (순환)
+// 그래프 깊이우선탐색 함수를 작성하세요 (재귀 사용)
 DirectedGraph.prototype.DFSearch = function (vertex, _visited = {}) {
-  const visited = _visited;
+  if (this.isEmpty()) console.log('그래프가 공백상태입니다.');
 
+  const visited = _visited;
   visited[vertex] = true;
   process.stdout.write(`${vertex} `);
 
