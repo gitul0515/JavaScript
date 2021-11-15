@@ -1,18 +1,25 @@
-class Base {
-  constructor(name) {
-    this.name = name;
+class Animal {
+  constructor(age, weight) {
+    this.age = age;
+    this.weight = weight;
   }
 
-  sayHi() {
-    return `Hi! ${this.name}`;
+  move() {
+    return 'move';
+  }
+
+  eat() {
+    return 'eat';
   }
 }
 
-class Derived extends Base {
-  sayHi() {
-    return `${super.sayHi()}. How are you doing?`;
+class Bird extends Animal {
+  fly() {
+    return 'fly';
   }
 }
 
-const derived = new Derived('Kwon');
-console.log(derived.sayHi());
+const bird = new Bird();
+console.log(bird.eat());
+console.log(bird.move());
+console.log(bird.fly());

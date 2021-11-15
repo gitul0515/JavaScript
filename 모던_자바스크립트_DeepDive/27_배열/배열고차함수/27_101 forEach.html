@@ -8,9 +8,9 @@
               numberArray = [];
 
               multiply(arr) {
-                  arr.forEach(function (item) {
-                      this.numberArray.push(item * item);
-                  }, this);
+                arr.forEach(function (item) {
+                  this.numberArray.push(item * item);
+                }, this);
               }
             }
             const numbers = new Numbers();
