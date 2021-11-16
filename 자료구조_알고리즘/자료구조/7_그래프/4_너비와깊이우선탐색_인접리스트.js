@@ -118,13 +118,14 @@ console.log();
 
 // 깊이우선탐색 함수 (순환)
 DirectedGraph.prototype.DFSearch = function (vertex, _visited = {}) {
-  const visited = _visited;
+  const visited = _visited; // 방문 여부를 기록
 
+  // 해당 정점을 방문한다
   visited[vertex] = true;
   process.stdout.write(`${vertex} `);
-  for (const adjacentVertex in this.edges[vertex]) {
+  for (const adjacentVertex in this.edges[vertex]) { // 해당 정점의 인접 정점을 탐색한다
     if (Object.hasOwnProperty.call(this.edges[vertex], adjacentVertex)) {
-      if (!visited[adjacentVertex]) {
+      if (!visited[adjacentVertex]) { // 방문하지 않은 인접 정점을 깊이우선탐색 (순환)
         this.DFSearch(adjacentVertex, visited);
       }
     }
