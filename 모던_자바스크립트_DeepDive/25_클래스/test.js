@@ -1,25 +1,22 @@
-class Animal {
-  constructor(age, weight) {
-    this.age = age;
-    this.weight = weight;
+class Person {
+  constructor(name) {
+    this.name = name;
   }
 
-  move() {
-    return 'move';
+  // 정적 메서드
+  static sayHi() {
+    console.log('Hi~');
   }
 
-  eat() {
-    return 'eat';
-  }
-}
-
-class Bird extends Animal {
-  fly() {
-    return 'fly';
+  // 프로토타입 메서드
+  sayName() {
+    console.log(this.name);
   }
 }
 
-const bird = new Bird();
-console.log(bird.eat());
-console.log(bird.move());
-console.log(bird.fly());
+// 정적 메서드는 클래스로 호출한다.
+Person.sayHi(); // Hi~
+
+// 정적 메서드는 인스턴스로 호출할 수 없다.
+const me = new Person('kwon');
+me.sayHi(); // TypeError: me.sayHi is not a function

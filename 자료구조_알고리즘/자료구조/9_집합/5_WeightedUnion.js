@@ -15,8 +15,7 @@ class DisjointSet {
 
   find = u => {
     if (u === this.set[u]) return u;
-    this.set[u] = this.find(this.set[u]);
-    return this.set[u];
+    return this.find(this.set[u]);
   }
 
   union = (_u, _v) => {
@@ -41,12 +40,6 @@ test.union(1, 0);
 test.union(2, 1);
 test.union(4, 3);
 test.union(0, 3);
-
-console.log(test.set);
-console.log(test.rank);
-
-test.find(1);
-test.find(2);
 
 console.log(test.set);
 console.log(test.rank);
