@@ -23,16 +23,23 @@ class Graph {
     }
   }
 
-  // 간선 추가 메서드
-  addEdge(vertex1, vertex2, weight = 1) {
+  // 간선 삽입 메서드
+  addEdge(vertex1, vertex2, weight) {
     if (vertex1 > this.size - 1 || vertex2 > this.size - 1) {
-      throw new TypeError('invalid vertex');
+      throw new TypeError('Invalid vertex');
     } else if (vertex1 === vertex2) {
-      throw new TypeError('same vertex');
+      throw new TypeError('Same vertex');
+    } else if (!Graph.weightIsNumber(weight)) {
+      throw new TypeError('weight must be number');
     } else {
       this.matrix[vertex1][vertex2] = weight;
       this.matrix[vertex2][vertex1] = weight;
     }
+  }
+
+  // 가중치의 유효성을 확인 (유한한 숫자이어야 한다)
+  static weightIsNumber(weight) {
+    return typeof weight === 'number' && Number.isFinite(weight);
   }
 
   // 간선 제거 메서드
@@ -52,7 +59,7 @@ class Graph {
     let vertex = _vertex;
 
     if (vertex < 0 || vertex > this.size - 1) {
-      console.log('invalid vertex');
+      throw new TypeError('invalid vertex');
     } else {
       while (vertex < this.size - 1) {
         for (let i = 0; i < this.size; i++) {
@@ -84,7 +91,7 @@ const graph = new Graph();
 graph.addVertex();
 graph.addVertex();
 graph.addVertex();
-graph.addEdge(0, 1, 1);
+graph.addEdge(1, 2, 1);
 graph.addEdge(0, 2, 1);
 graph.addEdge(0, 3, 1);
 graph.addEdge(1, 2, 1);
