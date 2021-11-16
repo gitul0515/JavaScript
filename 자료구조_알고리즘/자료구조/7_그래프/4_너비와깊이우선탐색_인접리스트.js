@@ -92,28 +92,28 @@ DirectedGraph.prototype.isEmpty = function () {
 };
 
 // 너비우선탐색 함수
-DirectedGraph.prototype.BFSearch = function (vertex) {
+DirectedGraph.prototype.BFSearch = function (_vertex) {
   if (this.isEmpty()) return null;
 
+  let vertex = _vertex;
   const queue = new Queue([vertex]);
-  const visited = { vertex: false };
+  const visited = { vertex: false }; // 방문 여부를 기록
 
   process.stdout.write(`정점 ${vertex}로부터 너비우선탐색: `);
   while (!queue.isEmpty()) {
-    const curVertex = queue.dequeue();
-    if (!visited[curVertex]) {
-      visited[curVertex] = true;
-      process.stdout.write(`${curVertex} `);
-      for (const adjVertex in this.edges[curVertex]) {
-        if (Object.prototype.hasOwnProperty.call(this.edges[curVertex], adjVertex)) {
+    vertex = queue.dequeue(); // 큐에서 정점을 꺼내어 방문한다
+    visited[vertex] = true;
+    process.stdout.write(`${vertex} `);
+    for (const adjVertex in this.edges[vertex]) { // 꺼낸 정점의 인접 정점을 탐색한다
+      if (Object.hasOwnProperty.call(this.edges[vertex], adjVertex)) {
+        if (!visited[adjVertex]) { // 방문하지 않은 인접 정점만 큐에 삽입한다
           queue.enqueue(adjVertex);
-          visited[adjVertex] = false;
         }
       }
     }
   }
 };
-graph.BFSearch('A');
+graph.BFSearch('A'); // A B C E D G F H J
 console.log();
 
 // 깊이우선탐색 함수 (순환)
@@ -122,7 +122,6 @@ DirectedGraph.prototype.DFSearch = function (vertex, _visited = {}) {
 
   visited[vertex] = true;
   process.stdout.write(`${vertex} `);
-  console.log(visited);
   for (const adjacentVertex in this.edges[vertex]) {
     if (Object.hasOwnProperty.call(this.edges[vertex], adjacentVertex)) {
       if (!visited[adjacentVertex]) {
@@ -131,4 +130,4 @@ DirectedGraph.prototype.DFSearch = function (vertex, _visited = {}) {
     }
   }
 };
-graph.DFSearch('A');
+graph.DFSearch('A'); // A B C D G H F J E

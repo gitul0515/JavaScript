@@ -91,39 +91,39 @@ DirectedGraph.prototype.isEmpty = function () {
   return Object.keys(this.edges).length === 0;
 };
 
-// 그래프 너비우선탐색 함수을 작성하세요
+// 너비우선탐색 함수를 작성하세요
 DirectedGraph.prototype.BFSearch = function (_vertex) {
-  if (this.isEmpty()) console.log('그래프가 공백상태입니다.');
+  if (this.isEmpty()) {
+    console.log('그래프가 공백상태입니다.');
+  } else {
+    let vertex = _vertex;
+    const queue = new Queue([vertex]);
+    const visited = { vertex: false };
 
-  let vertex = _vertex;
-  const queue = new Queue([vertex]);
-  const visited = { vertex: false };
-  while (!queue.isEmpty()) {
-    vertex = queue.dequeue();
-    if (!visited[vertex]) {
-      visited[vertex] = true;
-      process.stdout.write(`${vertex} `);
-      for (const adjacentVertex in this.edges[vertex]) {
-        if (Object.hasOwnProperty.call(this.edges[vertex], adjacentVertex)) {
-          queue.enqueue(adjacentVertex);
-          visited[adjacentVertex] = false;
+    while (!queue.isEmpty()) {
+      vertex = queue.dequeue();
+      if (!visited[vertex]) {
+        visited[vertex] = true;
+        process.stdout.write(`${vertex} `);
+        for (const adjacentVertex in this.edges[vertex]) {
+          if (Object.hasOwnProperty.call(this.edges[vertex], adjacentVertex)) {
+            if (!visited[adjacentVertex]) {
+              queue.enqueue(adjacentVertex);
+            }
+          }
         }
       }
     }
   }
 };
-
 graph.BFSearch('A');
 console.log();
 
-// 그래프 깊이우선탐색 함수를 작성하세요 (재귀 사용)
+// 깊이우선탐색 함수를 작성하세요 (순환)
 DirectedGraph.prototype.DFSearch = function (vertex, _visited = {}) {
-  if (this.isEmpty()) console.log('그래프가 공백상태입니다.');
-
   const visited = _visited;
   visited[vertex] = true;
   process.stdout.write(`${vertex} `);
-
   for (const adjacentVertex in this.edges[vertex]) {
     if (Object.hasOwnProperty.call(this.edges[vertex], adjacentVertex)) {
       if (!visited[adjacentVertex]) {
