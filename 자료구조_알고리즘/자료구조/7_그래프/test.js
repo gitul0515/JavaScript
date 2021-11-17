@@ -1,136 +1,79 @@
-// 너비 & 깊이우선탐색 알고리즘 (인접리스트 사용)
-// 방향 그래프 생성자 함수
-function DirectedGraph() {
+// 무방향 그래프 구현 (인접 리스트 사용)
+// 생성자 함수
+function UndirectedGraph() {
   this.edges = {}; // 간선을 저장하는 객체
 }
 
+// 숫자인지 판별하는 함수
+UndirectedGraph.prototype.isNumber = function (value) {
+  return typeof value === 'number' && Number.isFinite(value);
+};
+
 // 정점 삽입 함수
-DirectedGraph.prototype.addVertex = function (vertex) {
+UndirectedGraph.prototype.addVertex = function (vertex) {
   this.edges[vertex] = {}; // this.edges 객체 안에 객체 형태로 저장한다.
 };
 
-// 간선 삽입 함수
-DirectedGraph.prototype.addEdge = function (origVertex, destVertex, weight = 0) {
-  // [출발점][도착점]
-  this.edges[origVertex][destVertex] = weight;
+// 가중치가 있는 간선 삽입 함수
+UndirectedGraph.prototype.addEdge = function (vertex1, vertex2, weight) {
+  // 가중치가 숫자인지 판별한다
+  if (!this.isNumber(weight)) {
+    throw new TypeError('weight must be number');
+  }
+
+  // 유효한 정점인지 확인 후, 간선을 삽입
+  if (this.edges[vertex1] && this.edges[vertex2]) {
+    this.edges[vertex1][vertex2] = weight;
+    this.edges[vertex2][vertex1] = weight;
+  } else {
+    throw new TypeError('invalid vertex');
+  }
 };
 
-const graph = new DirectedGraph();
-// 정점 삽입
-graph.addVertex('A');
-graph.addVertex('B');
-graph.addVertex('C');
-graph.addVertex('D');
-graph.addVertex('E');
-graph.addVertex('F');
-graph.addVertex('G');
-graph.addVertex('H');
-graph.addVertex('J');
+const graph = new UndirectedGraph();
+graph.addVertex(1); graph.addVertex(2);
+graph.addEdge(1, 2, 1);
+graph.addVertex(3); graph.addVertex(4);
+graph.addVertex(5);
+graph.addEdge(1, 5, 88);
+graph.addEdge(2, 3, 8);
+graph.addEdge(3, 4, 10);
+graph.addEdge(4, 5, 100);
+console.log(graph.edges);
+console.log(Object.keys(graph.edges));
 
-// 간선 삽입
-graph.addEdge('A', 'B', 1);
-graph.addEdge('B', 'C', 1);
-graph.addEdge('B', 'E', 1);
-graph.addEdge('C', 'D', 1);
-graph.addEdge('D', 'G', 1);
-graph.addEdge('D', 'F', 1);
-graph.addEdge('G', 'H', 1);
-graph.addEdge('F', 'J', 1);
-
-console.log(graph);
-
-// ----------- 큐 코드 시작 --------------
-class Queue {
-  #array; // private class member
-
-  constructor(array = []) {
-    if (!Array.isArray(array)) {
-      throw new TypeError(`${array} is not an array.`);
+for (const vertex in graph.edges) {
+  if (Object.hasOwnProperty.call(graph.edges, vertex)) {
+    for (const adjacentVertex in graph.edges[vertex]) {
+      if (Object.hasOwnProperty.call(graph.edges[vertex], adjacentVertex)) {
+        const weight = graph.edges[vertex][adjacentVertex];
+        console.log([vertex, adjacentVertex, weight]);
+      }
     }
-    this.#array = array;
-  }
-
-  // 큐가 공백상태인지 확인한다.
-  isEmpty() {
-    return this.#array.length === 0;
-  }
-
-  // 큐의 가장 마지막에 데이터를 밀어 넣는다.
-  enqueue(value) {
-    return this.#array.push(value);
-  }
-
-  // 큐의 가장 처음 데이터를 꺼낸다.
-  dequeue() {
-    // 큐가 공백상태라면 null을 반환한다.
-    if (this.isEmpty()) {
-      return null;
-    }
-    return this.#array.shift();
-  }
-
-  // 큐의 가장 처음 데이터를 확인한다.
-  peek() {
-    // 큐가 공백상태라면 null을 반환한다.
-    if (this.isEmpty()) {
-      return null;
-    }
-    return this.#array[0];
-  }
-
-  // 큐의 복사본 배열을 반환한다.
-  entries() {
-    return this.#array.slice();
   }
 }
-// ----------- 큐 코드 종료 --------------
 
-// 공백 상태 검출 함수
-DirectedGraph.prototype.isEmpty = function () {
-  // this.edges 객체에 프로퍼티가 없으면 공백 상태이다.
-  return Object.keys(this.edges).length === 0;
-};
-
-// 너비우선탐색 함수를 작성하세요
-DirectedGraph.prototype.BFSearch = function (_vertex) {
-  if (this.isEmpty()) {
-    console.log('그래프가 공백상태입니다.');
-  } else {
-    let vertex = _vertex;
-    const queue = new Queue([vertex]);
-    const visited = { vertex: false };
-
-    while (!queue.isEmpty()) {
-      vertex = queue.dequeue();
-      if (!visited[vertex]) {
-        visited[vertex] = true;
-        process.stdout.write(`${vertex} `);
-        for (const adjacentVertex in this.edges[vertex]) {
-          if (Object.hasOwnProperty.call(this.edges[vertex], adjacentVertex)) {
-            if (!visited[adjacentVertex]) {
-              queue.enqueue(adjacentVertex);
-            }
-          }
-        }
-      }
-    }
+// 간선 삭제 함수
+UndirectedGraph.prototype.removeEdge = function (vertex1, vertex2) {
+  // 해당 정점들과 간선이 존재하는지 확인한 후 삭제한다
+  if (this.edges[vertex1] && this.edges[vertex1][vertex2] !== undefined) {
+    delete this.edges[vertex1][vertex2];
+  }
+  if (this.edges[vertex2] && this.edges[vertex2][vertex1] !== undefined) {
+    delete this.edges[vertex2][vertex1];
   }
 };
-graph.BFSearch('A');
-console.log();
 
-// 깊이우선탐색 함수를 작성하세요 (순환)
-DirectedGraph.prototype.DFSearch = function (vertex, _visited = {}) {
-  const visited = _visited;
-  visited[vertex] = true;
-  process.stdout.write(`${vertex} `);
+// 정점 삭제 함수
+UndirectedGraph.prototype.removeVertex = function (vertex) {
+  // 정점을 삭제하기 전에
+  // 해당 정점과 연결된 모든 간선을 삭제한다.
   for (const adjacentVertex in this.edges[vertex]) {
-    if (Object.hasOwnProperty.call(this.edges[vertex], adjacentVertex)) {
-      if (!visited[adjacentVertex]) {
-        this.DFSearch(adjacentVertex, visited);
-      }
+    if (Object.prototype.hasOwnProperty.call(this.edges[vertex], adjacentVertex)) {
+      this.removeEdge(vertex, adjacentVertex);
     }
   }
+  delete this.edges[vertex];
 };
 
-graph.DFSearch('A');
+
