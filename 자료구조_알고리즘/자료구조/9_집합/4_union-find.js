@@ -6,20 +6,20 @@ class DisjointSet {
   }
 
   // n개의 집합을 생성한다
-  makeSet = n => {
+  makeSet(n) {
     for (let i = 0; i < n; i++) {
-      this.set[i] = i; // 자기 자신을 저장한다
+      this.set[i] = i; // 자기 자신이 대표 원소
     }
   }
 
   // u가 속한 집합을 찾는다 (대표 원소인 루트를 반환)
-  find = u => {
+  find(u) {
     if (u === this.set[u]) return u;
     return this.find(this.set[u]);
   }
 
   // u와 v를 하나의 집합으로 만든다
-  union = (_u, _v) => {
+  union(_u, _v) {
     const u = this.find(_u);
     const v = this.find(_v);
     if (u !== v) {

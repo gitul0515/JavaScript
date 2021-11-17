@@ -4,21 +4,22 @@ class DisjointSet {
   constructor() {
     this.set = [];
     this.rank = []; // 각 노드의 Rank를 저장할 배열
+    // Rank: 각 노드가 자신을 루트로 하는 서브 트리의 높이
   }
 
-  makeSet = n => {
+  makeSet(n) {
     for (let i = 0; i < n; i++) {
       this.set[i] = i;
       this.rank[i] = 0; // 단말 노드의 Rank는 0으로 저장
     }
   }
 
-  find = u => {
+  find(u) {
     if (u === this.set[u]) return u;
     return this.find(this.set[u]);
   }
 
-  union = (_u, _v) => {
+  union(_u, _v) {
     const u = this.find(_u);
     const v = this.find(_v);
     if (u === v) return;
@@ -26,14 +27,13 @@ class DisjointSet {
       this.set[v] = u;
     } else {
       this.set[u] = v;
-      // 두 집합의 Rank가 같은 경우에만 전체 Rank의 크기가 커진다
+      // 두 집합의 Rank가 같은 경우 전체 Rank의 크기가 커진다
       if (this.rank[u] === this.rank[v]) {
         this.rank[v]++;
       }
     }
   }
 }
-
 const test = new DisjointSet();
 test.makeSet(5);
 test.union(1, 0);
@@ -41,8 +41,5 @@ test.union(2, 1);
 test.union(4, 3);
 test.union(0, 3);
 
-console.log(test.set);
-console.log(test.rank);
-
-// 보충: Rank는 일반적인 '높이'와는 차이가 있다.
-// 각 노드가 자신을 루트로 하는 서브 트리의 높이를 뜻한다.
+console.log(test.set); // [ 3, 0, 0, 3, 3 ]
+console.log(test.rank); // [ 1, 0, 0, 2, 0 ]
