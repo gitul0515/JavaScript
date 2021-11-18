@@ -42,15 +42,30 @@ graph.addEdge(4, 5, 100);
 console.log(graph.edges);
 console.log(Object.keys(graph.edges));
 
+// 무방향 그래프의 간선을 중복 없이 저장한다
+const array = [];
 for (const vertex in graph.edges) {
   if (Object.hasOwnProperty.call(graph.edges, vertex)) {
     for (const adjacentVertex in graph.edges[vertex]) {
       if (Object.hasOwnProperty.call(graph.edges[vertex], adjacentVertex)) {
         const weight = graph.edges[vertex][adjacentVertex];
-        console.log([vertex, adjacentVertex, weight]);
+        array.push([vertex, adjacentVertex, weight]);
+        console.log();
       }
     }
   }
+}
+
+// 
+function print(arr = []) {
+  const key0 = arr[0];
+  const key1 = arr[1];
+
+  for (let i = 0; i < array.length; i++) {
+    if (array[i][0] === key0 && array[i][1] === key1) return;
+    if (array[i][0] === key1 && array[i][1] === key0) return;
+  }
+  array.push(arr);
 }
 
 // 간선 삭제 함수

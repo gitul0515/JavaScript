@@ -69,7 +69,7 @@ function Kruskal() {
     if (set.find(u) !== set.find(v)) {
       set.union(u, v);
       mst.push([u, v, w]);
-      if (set.size === vertexNum) break;
+      if (mst.length >= vertexNum - 1) return;
     }
   }
 }
