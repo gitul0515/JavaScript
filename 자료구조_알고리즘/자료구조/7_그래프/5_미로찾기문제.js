@@ -1,21 +1,21 @@
-// 너비 & 깊이우선탐색 알고리즘 (인접리스트 사용)
-// 무방향 그래프 생성자 함수
-function DirectedGraph() {
+// DFS를 활용한 미로찾기 문제
+// 무방향 그래프 생성
+function Graph() {
   this.edges = {}; // 간선을 저장하는 객체
 }
 
 // 정점 삽입 함수
-DirectedGraph.prototype.addVertex = function (vertex) {
-  this.edges[vertex] = {}; // this.edges 객체 안에 객체 형태로 저장한다.
+Graph.prototype.addVertex = function (vertex) {
+  this.edges[vertex] = {};
 };
 
 // 간선 삽입 함수
-DirectedGraph.prototype.addEdge = function (vertex1, vertex2, weight = 0) {
+Graph.prototype.addEdge = function (vertex1, vertex2, weight = 0) {
   this.edges[vertex1][vertex2] = weight;
   this.edges[vertex2][vertex1] = weight;
 };
 
-const graph = new DirectedGraph();
+const graph = new Graph();
 
 // --------- 미로를 그래프로 변환한다 ---------
 // 정점 삽입
@@ -42,11 +42,11 @@ graph.addEdge('12', '13', 1);
 graph.addEdge('13', '14', 1);
 console.log(graph);
 
-const start = '0'; // 출발점
-const goal = '11'; // 도착점
+const start = '2'; // 출발점
+const goal = '9'; // 도착점
 
 // DFS를 활용한 미로찾기 함수
-DirectedGraph.prototype.findMaze = function (start, goal, _visited = {}) {
+Graph.prototype.findMaze = function (start, goal, _visited = {}) {
   let finish = false; // goal에 도착했는가를 판정
   const visited = _visited; // 방문 여부를 기록
 
@@ -59,8 +59,8 @@ DirectedGraph.prototype.findMaze = function (start, goal, _visited = {}) {
 
   for (const adjacent in this.edges[start]) { // 해당 정점의 인접 정점을 탐색한다
     if (Object.hasOwnProperty.call(this.edges[start], adjacent)) {
-      if (!visited[adjacent] && !finish) { // 방문하지 않은 정점이며, goal에 도착하지 않은 경우
-        finish = this.findMaze(adjacent, goal, visited);
+      if (!visited[adjacent] && !finish) { // 방문하지 않았고, goal에 도착하지 않았다면
+        finish = this.findMaze(adjacent, goal, visited); // 해당 정점으로부터 재귀 호출
       }
     }
   }
