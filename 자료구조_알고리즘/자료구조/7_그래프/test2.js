@@ -1,5 +1,5 @@
 // 너비 & 깊이우선탐색 알고리즘 (인접리스트 사용)
-// 방향 그래프 생성자 함수 (무방향 그래프도 같은 결과가 나온다)
+// 무방향 그래프 생성자 함수
 function DirectedGraph() {
   this.edges = {}; // 간선을 저장하는 객체
 }
@@ -10,9 +10,9 @@ DirectedGraph.prototype.addVertex = function (vertex) {
 };
 
 // 간선 삽입 함수
-DirectedGraph.prototype.addEdge = function (origVertex, destVertex, weight = 0) {
-  // [출발점][도착점]
-  this.edges[origVertex][destVertex] = weight;
+DirectedGraph.prototype.addEdge = function (vertex1, vertex2, weight = 0) {
+  this.edges[vertex1][vertex2] = weight;
+  this.edges[vertex2][vertex1] = weight;
 };
 
 const graph = new DirectedGraph();
