@@ -66,4 +66,4 @@ Graph.prototype.findMaze = function (start, goal, _visited = {}) {
   }
   return finish;
 };
-graph.findMaze(start, goal);
+graph.findMaze(start, goal); // 2, 9

@@ -1,4 +1,6 @@
-const map = new Map([['1', '2'], ['', '']]);
-map.set('key1', 'value3');
-console.log(map);
+const string = '' + 1;
+const number = +'1';
+
+console.log(typeof string);
+console.log(typeof number);
 
