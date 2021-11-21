@@ -1,11 +1,11 @@
-// Floyd의 최단 경로 알고리즘
+// Dijkstra의 최단 경로 알고리즘
 // 무방향 그래프 (인접 행렬)
 class Graph {
   constructor(size = 1) {
     this.size = size;
 
-    // 2차원 배열 생성
-    this.matrix = []; // 원본 데이터
+    // 원본 데이터를 저장할 2차원 배열 초기화
+    this.matrix = [];
     for (let i = 0; i < size; i++) {
       this.matrix.push([]);
       for (let j = 0; j < size; j++) {
@@ -13,7 +13,8 @@ class Graph {
         else this.matrix[i][j] = Infinity; // 다른 정점들은 Infinity로 초기화
       }
     }
-    this.distance = []; // 최단 경로를 저장할 배열
+    this.distance = []; // 시작 정점으로부터의 최단경로 거리
+    this.visited = []; // 방문한 정점 표시;
   }
 
   // 간선 삽입 메서드
@@ -35,33 +36,61 @@ class Graph {
     return typeof weight === 'number' && Number.isFinite(weight);
   }
 
-  // 행렬을 출력하는 메서드
-  print(matrix) {
+  // 원본 데이터를 출력하는 메서드
+  printMatrix() {
     for (let i = 0; i < this.size; i++) {
       let result = '';
       for (let j = 0; j < this.size; j++) {
-        if (matrix[i][j] === Infinity) result += '* ';
-        else result += `${matrix[i][j]} `;
+        if (this.matrix[i][j] === Infinity) result += '* ';
+        else result += `${this.matrix[i][j]} `;
       }
       console.log(result);
     }
   }
 
-  // floyd의 최단 경로 알고리즘
-  floyd() {
-    // 최단경로를 갱신하여 저장하는 배열
-    this.distance = this.matrix; // 초기화
+  // distance가 가장 작은 정점을 찾는 메서드
+  minDistance() {
+    let min = Infinity;
+    let minPos = -1;
+    for (let i = 0; i < this.size; i++) {
+      if (this.distance[i] < min && !this.visited[i]) {
+        min = this.distance[i];
+        minPos = i;
+      }
+    }
+    return minPos;
+  }
 
-    for (let k = 0; k < this.size; k++) {
-      for (let i = 0; i < this.size; i++) {
-        for (let j = 0; j < this.size; j++) {
-          if (this.distance[i][k] + this.distance[k][j] < this.distance[i][j]) {
-            this.distance[i][j] = this.distance[i][k] + this.distance[k][j];
+  // distance 배열을 출력한다.
+  printDistance() {
+    let result = '';
+    for (let i = 0; i < this.size; i++) {
+      result += `${this.distance[i]} `;
+    }
+    console.log(result);
+  }
+
+  // Dijkstra의 최단 경로 알고리즘
+  Dijkstra(start) {
+    // 초기화
+    this.distance = this.matrix[start];
+    this.visited.fill(false);
+
+    this.visited[start] = true; //  시작 정점 방문 표시
+    this.distance[start] = 0;
+
+    for (let i = 0; i < this.size - 1; i++) {
+      const u = this.minDistance();
+      this.visited[u] = true;
+      for (let w = 0; w < this.size; w++) { // distance 배열을 갱신한다
+        if (!this.visited[w]) {
+          if (this.distance[u] + this.matrix[u][w] < this.distance[w]) {
+            this.distance[w] = this.distance[u] + this.matrix[u][w];
           }
         }
       }
     }
-    this.print(this.distance);
+    this.printDistance();
   }
 }
 const graph = new Graph(7);
