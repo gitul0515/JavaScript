@@ -20,8 +20,6 @@ const vertexNum = 7;
 
 // 가중치를 기준으로 오름차순 정렬
 graph.sort((a, b) => a[2] - b[2]);
-// 오답노트: 비교함수에서 a, b는 인덱스가 아니라 요소값이다.
-// graph.sort((a, b) => graph[a][2] - graph[b][2]); // 잘못된 코드
 console.log(graph);
 
 // 유니온-파인드 자료구조 (Weighted Union)
@@ -65,7 +63,7 @@ set.makeSet(vertexNum);
 
 function Kruskal() {
   for (let i = 0; i < graph.length; i++) {
-    if (mst.length >= vertexNum - 1) return;
+    if (mst.length >= vertexNum - 1) break;
     const [u, v, w] = graph[i];
     if (set.find(u) !== set.find(v)) {
       set.union(u, v);

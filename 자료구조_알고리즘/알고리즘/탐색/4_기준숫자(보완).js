@@ -3,7 +3,38 @@ const data = [21, 10, 34, 41, 30, 12, 19, 7, 43, 28, 56, 50, 91, 83, 81, 75]; //
 const target = 45; // 기준 숫자
 let level = 0; // 피벗을 통한 정렬의 횟수를 기록한다
 
- // 기준점 45와의 차이를 계산하여 distance 배열에 저장
+function swap(array, x, y) {
+  const temp = array[x];
+  array[x] = array[y];
+  array[y] = temp;
+}
+
+// 파티션 함수
+// 피벗보다 작은 요소는 왼쪽, 큰 요소는 오른쪽으로 정렬한다
+function partition(array, l, r) {
+  const pivot = Math.abs(array[r]); // 마지막 원소의 절대값을 피벗으로 할당한다
+  let i = l - 1;
+
+  for (let j = l; j < r; j++) {
+    if (Math.abs(array[j]) <= pivot) { // 절대값을 비교한다
+      swap(array, ++i, j);
+    }
+  }
+  swap(array, i + 1, r);
+  return i + 1;
+}
+
+// 배열의 상태를 출력하는 함수
+function showArray(array, pivot) {
+  console.log();
+  console.log('level:', ++level);
+  console.log('=======================================');
+  console.log('pivot:', pivot);
+  console.log(array.join(', '));
+  console.log();
+}
+
+// 기준점 45와의 차이를 계산하여 distance 배열에 저장
 const distance = [];
 for (let i = 0; i < data.length; i++) {
   distance[i] = data[i] - 45; // 절대값을 저장한다
@@ -31,8 +62,8 @@ function linearSelect(array, l, r, i) {
 
   // 피벗보다 작은 원소를 찾으면 왼쪽으로 범위를 좁힌다.
   if (i < k) return linearSelect(array, l, q - 1, i);
-  else if (i === k) return array[q]; // i와 k가 일치한다면, 피벗이 바로 찾는 원소다.
-  else return linearSelect(array, q + 1, r, i - k); // 오른쪽으로 범위를 좁힌다.
+  if (i === k) return array[q]; // i와 k가 일치한다면, 피벗이 바로 찾는 원소다.
+  if (i > k) return linearSelect(array, q + 1, r, i - k); // 오른쪽으로 범위를 좁힌다.
 }
 
 // 보완적인 선택 알고리즘
@@ -41,7 +72,7 @@ function linearSelect(array, l, r, i) {
 function linearSelect2(array, l, r, i) {
   // 배열의 원소가 1개뿐이면, 그 원소를 반환한다.
   if (l === r) return array[l];
-  
+
   // 배열의 원소가 5개 이하면, 원하는 원소를 찾고 끝낸다.
   const arrayNum = r - l + 1;
   if (arrayNum <= 5) {
@@ -58,8 +89,7 @@ function linearSelect2(array, l, r, i) {
     // 마지막 하위 배열이 아닌 경우 (원소 5개)
     if (j < m - 1) {
       median[j] = linearSelect(array, 5 * j, 5 * j + 4, 3); // 기본적인 선택 알고리즘 호출
-    }
-    else { // 마지막 하위 배열인 경우 (원소 5개 이하)
+    } else { // 마지막 하위 배열인 경우 (원소 5개 이하)
       const arrayLen = r - 5 * j + 1; // 원소의 개수를 구한다
       // 중앙값이 두 개면 작은 숫자를 찾는다
       median[j] = linearSelect(array, 5 * j, r, Math.ceil(arrayLen / 2));
@@ -88,40 +118,10 @@ function linearSelect2(array, l, r, i) {
   // 피벗보다 작은 원소를 찾으면, 왼쪽으로 범위를 좁힌다
   if (i < k) {
     return linearSelect2(array, l, p - 1, i);
-  } else if (i === k) { // 피벗과 일치하다면, 피벗이 바로 찾는 원소다
+  } if (i === k) { // 피벗과 일치하다면, 피벗이 바로 찾는 원소다
     return array[p];
-  } else { // 피벗보다 큰 원소를 찾으면, 오른쪽으로 범위를 좁힌다
+  } if (i < k) { // 피벗보다 큰 원소를 찾으면, 오른쪽으로 범위를 좁힌다
     return linearSelect2(array, p + 1, r, i - k);
   }
 }
 
-// 파티션 함수
-// 피벗보다 작은 요소는 왼쪽, 큰 요소는 오른쪽으로 정렬한다
-function partition(array, l, r) {
-  const pivot = Math.abs(array[r]); // 마지막 원소의 절대값을 피벗으로 할당한다
-  let i = l - 1;
-
-  for (let j = l; j < r; j++) {
-    if (Math.abs(array[j]) <= pivot) { // 절대값을 비교한다
-      swap(array, ++i, j);
-    }
-  }
-  swap(array, i + 1, r);
-  return i + 1;
-}
-
-function swap(array, x, y) {
-  const temp = array[x];
-  array[x] = array[y];
-  array[y] = temp;
-}
-
-// 배열의 상태를 출력하는 함수
-function showArray(array, pivot) {
-  console.log();
-  console.log("level:", ++level);
-  console.log("=======================================");
-  console.log("pivot:", pivot);
-  console.log(array.join(', '));
-  console.log();  
-}
