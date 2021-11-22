@@ -23,17 +23,10 @@ class Graph {
       throw new TypeError('Invalid vertex');
     } else if (vertex1 === vertex2) {
       throw new TypeError('Same vertex');
-    } else if (!Graph.weightIsNumber(weight)) {
-      throw new TypeError('weight must be number');
     } else {
       this.matrix[vertex1][vertex2] = weight;
       this.matrix[vertex2][vertex1] = weight;
     }
-  }
-
-  // 가중치의 유효성을 확인 (유한한 숫자이어야 한다)
-  static weightIsNumber(weight) {
-    return typeof weight === 'number' && Number.isFinite(weight);
   }
 
   // 원본 데이터를 출력하는 메서드
@@ -108,6 +101,4 @@ graph.addEdge(3, 4, 11);
 graph.addEdge(3, 5, 9);
 graph.addEdge(3, 6, 4);
 graph.addEdge(4, 6, 5);
-graph.print(graph.matrix);
-console.log();
-graph.floyd();
+graph.Dijkstra(0);
