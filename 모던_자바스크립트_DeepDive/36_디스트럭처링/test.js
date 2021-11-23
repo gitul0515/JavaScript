@@ -1,19 +1,11 @@
-const todos = [
-  { id: 1, content: 'HTML', completed: true },
-  { id: 2, content: 'CSS', completed: false },
-  { id: 3, content: 'JS', completed: false },
-];
+const str = 'Hello';
 
-const [, , {content}] = todos;
-console.log(content);
+const { length: strLen } = str;
+console.log(strLen);
 
-const user = {
-  name: 'Lee',
-  address: {
-    city: 'Seoul',
-    zipCode: '06581'
-  }
-};
+const person = { name: 'Kwon', sex: 'male', age: 28 };
+function introduce({ name, age }) {
+  console.log(`${name}은 ${age < 30 ? 20 : 30}대입니다.`);
+}
 
-const { address: {zipCode} } = user;
-console.log(zipCode);
+introduce(person);
