@@ -75,9 +75,10 @@ class Graph {
     for (let i = 0; i < this.size - 1; i++) {
       const u = this.minDistance();
       this.visited[u] = true;
-      for (let w = 0; w < this.size; w++) { // distance 배열을 갱신한다
+      for (let w = 0; w < this.size; w++) { // distance 배열을 갱신
+        // 시작 정점에서 w로 갈 때, u를 거치는 경우와 거치지 않는 경우를 비교한다
         if (!this.visited[w]) {
-          if (this.distance[u] + this.matrix[u][w] < this.distance[w]) {
+          if (this.distance[u] + this.matrix[u][w] < this.distance[w]) { // 작은 것을 선택한다
             this.distance[w] = this.distance[u] + this.matrix[u][w];
           }
         }
