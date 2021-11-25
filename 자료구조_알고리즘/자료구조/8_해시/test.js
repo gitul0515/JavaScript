@@ -1,4 +1,4 @@
-// 해시 테이블 (나누기 방법 & 선형 조사)
+// 나누기 방법 & 이중 해싱
 function HashTable(size) {
   this.size = size;
   this.keys = this.initArray(size);
@@ -6,51 +6,60 @@ function HashTable(size) {
   this.limit = 0;
 }
 
-// 해시 테이블에 데이터를 입력
+// 해시 테이블에 자료를 저장
 HashTable.prototype.put = function (key, value) {
-  if (this.limit >= this.size) {
-    throw new TypeError('hashtable is full');
-  }
-
+  if (this.limit >= this.size) throw new TypeError('hash table is full');
+  let i = 0;
   let hashedIndex = this.hash(key);
-  // 선형 조사
+
+  // 이중 해싱
   while (this.keys[hashedIndex] !== null) {
-    hashedIndex++;
-    hashedIndex %= this.size;
+    i++;
+    hashedIndex = (hashedIndex + i * this.hash2(key)) % this.size;
   }
   this.keys[hashedIndex] = key;
   this.values[hashedIndex] = value;
   this.limit++;
 };
 
-// 해시 테이블에서 데이터를 취득
+// 해시 테이블에서 자료를 취득
 HashTable.prototype.get = function (key) {
+  let i = 0;
   let hashedIndex = this.hash(key);
-  let probeCnt = 0;
 
+  // 이중 해싱
   while (this.keys[hashedIndex] !== key) {
-    hashedIndex++;
-    hashedIndex %= this.size;
+    i++;
+    hashedIndex = (hashedIndex + i * this.hash2(key)) % this.size;
 
-    probeCnt++;
-    if (probeCnt === this.size) {
-      throw new TypeError('key error');
+    // 잘못된 키를 입력한 경우
+    if (i > 100) { // hashedIndex를 계속 찾지 못한다면
+      throw new TypeError('key error'); // 키 에러이다.
     }
   }
   return this.values[hashedIndex];
 };
 
+// 해시 함수1
 HashTable.prototype.hash = function (key) {
+  // 키가 정수인지 확인한다.
   if (!Number.isInteger(key)) {
     throw new TypeError('must be int');
   }
   return key % this.size; // 나누기 방법
 };
 
+// 해시 함수2
+HashTable.prototype.hash2 = function (key) {
+  const R = this.size - 2; // 11
+  return 1 + (key % R);
+};
+
+// 해시 테이블 초기화 함수
 HashTable.prototype.initArray = function (size) {
   const array = [];
   for (let i = 0; i < size; i++) {
-    array[i] = null;
+    array.push(null); // null로 초기화
   }
   return array;
 };
@@ -67,7 +76,19 @@ hash.put(98, 'sad');
 console.log(hash.keys);
 console.log(hash.values);
 
+console.log(hash.get(7)); // 'hi'
+console.log(hash.get(20)); // 'hello'
+console.log(hash.get(33)); // 'sunny'
+console.log(hash.get(46)); // 'weather'
 console.log(hash.get(59)); // 'wow'
 console.log(hash.get(72)); // 'forty'
+console.log(hash.get(85)); // 'happy'
 console.log(hash.get(98)); // 'sad'
-console.log(hash.get(100)); // key error
+
+/*
+  해시 함수
+  1. 0번째 hash(key) = key % 13
+  2. hash2(key) = 1 + (key % 11)
+  3. i번째 hash(key) = (i - 1번째 hash(key) + i * hash2(key)) % 13  (조건: i >= 1)
+  * 균등하게 분배되었고, 충돌이 발생했지만 모두 두 번만에 답을 찾았다
+*/
