@@ -19,6 +19,8 @@
       // "warn" or 1 - turn the rule on as a warning (doesn’t affect exit code)
       // "error" or 2 - turn the rule on as an error (exit code is 1 when triggered)
       // "no-var": "off",
+      "allowElseIf": "off",
+      "no-else-return": "off",
       "no-console": "off",
       "no-plusplus": "off",
       "no-shadow": "off",
@@ -48,7 +50,6 @@
         "ignoreTemplateLiterals": true
       }], // prettier의 printWidth 옵션 대신 사용
       "linebreak-style": ["error", "windows"],
-      "camelcase": "off", 
-      "allowElseIf": 0
+      "camelcase": "off"
     }
   }
