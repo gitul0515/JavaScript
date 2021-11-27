@@ -8,23 +8,21 @@ const matrix = [
   [7, 17, 3, 3],
   [8, 10, 14, 9]
 ];
-
-function wrap(_i, _j) {
-  const [i, j] = [_i - 1, _j - 1];
-  return (function matrixPath(i, j) {
-    if (i === 0 && j === 0) return matrix[i][j];
-    else if (i === 0) return matrixPath(i, j - 1) + matrix[i][j];
-    else if (j === 0) return matrixPath(i - 1, j) + matrix[i][j];
-    else return Math.min(matrixPath(i, j - 1), matrixPath(i - 1, j)) + matrix[i][j];
-  }(i, j));
+const memo = [];
+for (let i = 0; i < 4; i++) {
+  memo[i] = new Array(4).fill(-1);
 }
 
-// console.log(matrixPath(0, 0)); // 6
-// console.log(matrixPath(0, 2)); // 25
-// console.log(matrixPath(2, 0)); // 18
-// console.log(matrixPath(1, 2)); // 25
+function matrixPath(i, j) {
+  if (memo[i][j] > -1) return memo[i][j];
 
-console.log(wrap(1, 1)); // 6
-console.log(wrap(1, 3)); // 25
-console.log(wrap(3, 1)); // 18
-console.log(wrap(2, 3)); // 25
+  if (i === 0 && j === 0) memo[i][j] = matrix[i][j];
+  else if (i === 0) memo[i][j] = matrixPath(i, j - 1) + matrix[i][j];
+  else if (j === 0) memo[i][j] = matrixPath(i - 1, j) + matrix[i][j];
+  else memo[i][j] = Math.min(matrixPath(i, j - 1), matrixPath(i - 1, j)) + matrix[i][j];
+  return memo[i][j];
+}
+console.log(matrixPath(0, 0)); // 6
+console.log(matrixPath(0, 2)); // 25
+console.log(matrixPath(2, 0)); // 18
+console.log(matrixPath(1, 2)); // 25
