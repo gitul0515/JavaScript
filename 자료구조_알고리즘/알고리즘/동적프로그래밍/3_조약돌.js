@@ -33,8 +33,24 @@ function pebble(i, p) {
     let max = -1000000;
     for (let q = 1; q <= 4; q++) {
       if (patternCheck(p, q)) { // 패턴 p와 q가 양립하는지 확인한다
-
+        const temp = pebble(i - 1, q);
+        if (temp > max) max = temp;
       }
     }
+    return max + w[i][p];
   }
 }
+console.log(pebble(3, 1)); // 29
+
+// i열까지 조약돌을 놓은 방법 중 최대 점수 합
+function pebbleSum(i) {
+  let max = -1000000;
+  for (let p = 1; p <= 4; p++) {
+    const temp = pebble(i, p);
+    if (temp > max) max = temp;
+  }
+  return max;
+}
+console.log(pebbleSum(3)); // 55
+
+// 최적화 1: Memoization
