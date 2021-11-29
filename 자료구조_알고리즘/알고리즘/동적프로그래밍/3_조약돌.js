@@ -83,4 +83,43 @@ function pebbleMemo(i, p) {
 }
 console.log(pebbleMemo(3, 1)); // 29
 
-// 최적화 2: Dynamic Programming
+// 최적화 2: Dynamic Programming (미완성)
+function pebbleDynamic(i, p) {
+  if (i === 0) return w[i][p];
+
+  // 초기화
+  // D[x][y]: x열이 패턴 y로 놓일 때 x열까지의 최대 점수 합
+  const D = new Array(i + 1).fill([null]);
+  D[0] = w[0].slice(); // 0열을 얕은 복사한다
+
+  for (let x = 1; x <= i; x++) { // 1열부터 i열까지
+    for (let y = 1; y <= 4; y++) { // 패턴 1부터 패턴 4까지
+      let max = -1000000;
+      for (let q = 1; q <= 4; q++) {
+        if (patternCheck(y, q)) { // 패턴 y와 q가 양립하는지 확인한다
+          const temp = D[x - 1][q];
+          if (temp > max) max = temp;
+        }
+      }
+      console.log('max ', max);
+      D[x][y] = max + w[x][y];
+    }
+  }
+  console.log(D);
+  return D[i][p];
+}
+
+const D = new Array(3).fill([null]); // 문제점
+D[0] = w[0].slice(); // 0열을 얕은 복사한다
+D[1][1] = 1;
+D[1][2] = 2;
+D[1][3] = 3;
+D[1][4] = 4;
+D[2][1] = 1;
+D[2][1] = 2;
+D[2][1] = 3;
+D[2][1] = 4;
+
+console.log(D);
+
+// console.log(pebbleDynamic(2, 1));
