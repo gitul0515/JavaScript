@@ -54,3 +54,33 @@ function pebbleSum(i) {
 console.log(pebbleSum(3)); // 55
 
 // 최적화 1: Memoization
+function pebbleMemo(i, p) {
+  // Memo 배열 생성
+  const M = [];
+  for (let i = 0; i < 8; i++) {
+    M.push([null]);
+    for (let j = 1; j <= 4; j++) {
+      M[i][j] = 0; // 초기화
+    }
+  }
+
+  return (function _pebbleMemo(i, p) {
+    if (M[i][p] !== 0) return M[i][p];
+
+    if (i === 0) M[i][p] = w[i][p];
+    else {
+      let max = -1000000;
+      for (let q = 1; q <= 4; q++) {
+        if (patternCheck(p, q)) { // 패턴 p와 q가 양립하는지 확인한다
+          const temp = _pebbleMemo(i - 1, q);
+          if (temp > max) max = temp;
+        }
+      }
+      M[i][p] = max + w[i][p];
+    }
+    return M[i][p];
+  }(i, p));
+}
+console.log(pebbleMemo(3, 1)); // 29
+
+// 최적화 2: Dynamic Programming

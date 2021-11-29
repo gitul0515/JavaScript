@@ -17,13 +17,13 @@ function matrixPath(i, j) {
     memo[i] = new Array(4).fill(-1);
   }
 
-  return (function recursion(i, j) {
+  return (function _matrixPath(i, j) {
     if (memo[i][j] > -1) return memo[i][j];
 
     if (i === 0 && j === 0) memo[i][j] = matrix[i][j];
-    else if (i === 0) memo[i][j] = recursion(i, j - 1) + matrix[i][j];
-    else if (j === 0) memo[i][j] = recursion(i - 1, j) + matrix[i][j];
-    else memo[i][j] = Math.min(recursion(i, j - 1), recursion(i - 1, j)) + matrix[i][j];
+    else if (i === 0) memo[i][j] = _matrixPath(i, j - 1) + matrix[i][j];
+    else if (j === 0) memo[i][j] = _matrixPath(i - 1, j) + matrix[i][j];
+    else memo[i][j] = Math.min(_matrixPath(i, j - 1), _matrixPath(i - 1, j)) + matrix[i][j];
     return memo[i][j];
   }(i, j));
 }
