@@ -1,6 +1,7 @@
 // 작성자: 2014044120 권기홍
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <limits.h>
 
 #define TURE 1
@@ -16,7 +17,7 @@ typedef struct GraphType {
 // ======== 첫 번째 문제: Dijkstra algorithm 사용 ========
 int distance[MAX_VERTICES]; // 시작정점으로부터의 최단경로 거리
 int visited[MAX_VERTICES]; // 방문한 정점 표시
-int route[MAX_VERTICES]; // 경로를 저장하는 배열
+char* route[MAX_VERTICES]; // 경로를 저장하는 배열
 
 // 방문하지 않은 정점 중, 
 // distance 값이 가장 작은 정점을 반환한다
@@ -59,15 +60,15 @@ void Dijkstra(GraphType* g, int start)
     {
         distance[i] = g->weight[start][i];
         visited[i] = FALSE;
+        sprintf(route[i], "%d", start);
     }
     visited[start] = 1; // 시작 정점 방문 표시
     distance[start] = 0;
-    route[v++] = start; // 경로에 저장
+    printf("%s \n", route);
 
     for (i = 0; i < g->n - 1; i++) {
         u = choose(distance, g->n, visited); // distance 값이 가장 작은 정점을 선택
         visited[u] = 1; // 방문 표시
-        route[v++] = u; // 경로에 저장
         for (w = 0; w < g->n; w++) { // distance를 갱신
             // 시작 정점에서 w로 갈 때, u를 거치는 경우와 거치지 않는 경우를 비교한다
             if (!visited[w])
@@ -103,8 +104,6 @@ void print_answer2(GraphType* g)
     int max_i = 0, max_j = 0;
     for (i = 0; i < g->n; i++) {
         for (j = 0; j < g->n; j++) {
-            if (A[i][j] == INF) // INF는 제외한다
-                continue;
             if (A[i][j] > max) {
                 max = A[i][j];
                 max_i = i;
@@ -113,7 +112,7 @@ void print_answer2(GraphType* g)
         }
     }
     printf("모든 정점 간 최단경로 중 가장 먼 노드(INF 제외)\n");
-    printf("<%d, %d> (길이 %d)\n", max_i, max_j, max);
+    printf("(%d, %d) (길이 %d)\n", max_i, max_j, max);
 }
 
 void floyd(GraphType* g)
@@ -139,11 +138,11 @@ int main()
     GraphType g = { 6,
       {
         { 0, 50, 45, 10, INF, INF },
-        { INF, 0, 10, 15, INF, INF },
-        { INF, INF, 0, INF, 30, INF },
-        { 20, INF, INF, 0, 15, INF },
-        { INF, 20, 35, INF, 0, 3 },
-        { INF, INF, INF, INF, INF, 0}
+        { 50, 0, 10, 15, 20, INF },
+        { 45, 10, 0, INF, 30, INF },
+        { 10, 15, INF, 0, 15, INF },
+        { INF, 20, 30, 15, 0, 3 },
+        { INF, INF, INF, INF, 3, 0}
       }
     };
     printf("첫 번째 문제 결과 \n");
