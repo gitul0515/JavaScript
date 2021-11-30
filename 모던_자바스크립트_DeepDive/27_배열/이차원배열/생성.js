@@ -1,6 +1,7 @@
 // 자바스크립트에 공식적인 2차원 배열은 없다.
 // const arr = [][]와 같은 선언은 불가능하다. 대신,
 // 1차원 배열에 다른 배열 객체를 추가해 2차원 배열을 만든다.
+// new Array()는 권장하지 않는 방법이다.
 
 // 1. 초기값을 할당하여 생성하기
 // array[5][2]
@@ -8,7 +9,7 @@ let array = [['a', 'b'], ['c', 'd'], ['e', 'f'], ['g', 'h'], ['i', 'j']];
 
 // 2. 반복문을 사용하여 빈 배열 생성
 // array[5][2]
-array = new Array(5);
+array = new Array(5); // (권장하지 않음)
 for (let i = 0; i < array.length; i++) {
   array[i] = new Array(2).fill(0);
 }

@@ -89,7 +89,8 @@ function pebbleDynamic(i, p) {
 
   // 초기화
   // D[x][y]: x열이 패턴 y로 놓일 때 x열까지의 최대 점수 합
-  const D = new Array(i + 1).fill([null]);
+  const D = [];
+  for (let j = 0; j <= i; j++) D.push([null]);
   D[0] = w[0].slice(); // 0열을 얕은 복사한다
 
   for (let x = 1; x <= i; x++) { // 1열부터 i열까지
@@ -101,25 +102,27 @@ function pebbleDynamic(i, p) {
           if (temp > max) max = temp;
         }
       }
-      console.log('max ', max);
       D[x][y] = max + w[x][y];
     }
   }
   console.log(D);
   return D[i][p];
 }
+console.log(pebbleDynamic(3, 1));
 
-const D = new Array(3).fill([null]); // 문제점
-D[0] = w[0].slice(); // 0열을 얕은 복사한다
-D[1][1] = 1;
-D[1][2] = 2;
-D[1][3] = 3;
-D[1][4] = 4;
-D[2][1] = 1;
-D[2][1] = 2;
-D[2][1] = 3;
-D[2][1] = 4;
-
-console.log(D);
-
-// console.log(pebbleDynamic(2, 1));
+// new Array()의 문제점
+// const D = new Array(4).fill([null]);
+// D[0] = w[0].slice(); // 0열을 얕은 복사한다
+// D[1][1] = 1;
+// D[1][2] = 2;
+// D[1][3] = 3;
+// D[1][4] = 4;
+// D[2][1] = 1000;
+// D[2][2] = 2000;
+// D[2][3] = 3000;
+// D[2][4] = 4000;
+// D[3][1] = 100;
+// D[3][2] = 200;
+// D[3][3] = 300;
+// D[3][4] = 400;
+// console.log(D);
