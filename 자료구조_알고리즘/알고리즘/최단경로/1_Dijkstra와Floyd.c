@@ -17,7 +17,7 @@ typedef struct GraphType {
 // ======== 첫 번째 문제: Dijkstra algorithm 사용 ========
 int distance[MAX_VERTICES]; // 시작정점으로부터의 최단경로 거리
 int visited[MAX_VERTICES]; // 방문한 정점 표시
-char* route[MAX_VERTICES]; // 경로를 저장하는 배열
+int path[MAX_VERTICES]; // 경로를 저장하는 배열. path[도착점] = 출발점
 
 // 방문하지 않은 정점 중, 
 // distance 값이 가장 작은 정점을 반환한다
@@ -39,13 +39,30 @@ void print_answer1(GraphType* g, int start)
 {
     int i;
 
-    for (i = 0; i < g->n; i++)
+    for (i = 0; i < g->n; i++) {
         printf("정점 %d에서 정점 %d까지의 최단경로 길이: %d \n", start, i, distance[i]);
+        printf("최단경로: "); print_path(start, i); // 경로 출력 함수를 호출한다.
+        printf("\n");
+    }
 
     printf("경로(경유한 노드들): ");
     for (i = 0; i < g->n; i++)
-        printf("%d ", route[i]); // 경로(경유한 정점들)을 순서대로 출력한다.
+        printf("%d ", path[i]); // 경로(경유한 정점들)을 순서대로 출력한다.
     printf("\n\n");
+}
+
+// 배열 path를 통해 경로를 역추적하여 출력한다.
+void print_path(int from, int to) { // from: 출발점, to: 도착점
+  /* 예: 출발점이 0이고 도착점이 5인 경우,
+     path[] = { -1, 3, 1, 0, 3, 4 } 에서 path[5] = 4이다. 
+     정점 4 -> 5로 경로가 형성되었음을 의미한다. 
+     이어서 path[4] = 3, path[3] = 0, path[0] = -1을 확인하여 
+     경로를 역추적할 수 있다. 0 -> 3 -> 4 -> 5 */
+
+  
+
+
+
 }
 
 // Dijkstra algorithm
@@ -60,20 +77,25 @@ void Dijkstra(GraphType* g, int start)
     {
         distance[i] = g->weight[start][i];
         visited[i] = FALSE;
-        sprintf(route[i], "%d", start);
+        path[i] = -1; // 경로는 -1로 초기화
     }
     visited[start] = 1; // 시작 정점 방문 표시
     distance[start] = 0;
-    printf("%s \n", route);
 
     for (i = 0; i < g->n - 1; i++) {
         u = choose(distance, g->n, visited); // distance 값이 가장 작은 정점을 선택
         visited[u] = 1; // 방문 표시
+        if (distance[u] == g->weight[start][u]) // distance 값이 바뀌지 않은 정점이라면 
+            path[u] = start; // 시작 정점에서 방문한 정점이다. 경로를 저장한다
+
         for (w = 0; w < g->n; w++) { // distance를 갱신
             // 시작 정점에서 w로 갈 때, u를 거치는 경우와 거치지 않는 경우를 비교한다
-            if (!visited[w])
-                if (distance[u] + g->weight[u][w] < distance[w]) // 작은 쪽을 선택한다
+            if (!visited[w]) {
+                if (distance[u] + g->weight[u][w] < distance[w]) { // 작은 쪽을 선택한다
                     distance[w] = distance[u] + g->weight[u][w];
+                    path[w] = u; // 경로를 저장한다
+                }
+            }
         }
     }
     print_answer1(g, start);
