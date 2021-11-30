@@ -14,6 +14,9 @@ typedef struct GraphType {
     int weight[MAX_VERTICES][MAX_VERTICES];
 } GraphType;
 
+void print_answer1(GraphType* g, int start);
+void print_answer2(GraphType* g);
+
 // ======== 첫 번째 문제: Dijkstra algorithm 사용 ========
 int distance[MAX_VERTICES]; // 시작정점으로부터의 최단경로 거리
 int visited[MAX_VERTICES]; // 방문한 정점 표시
@@ -32,37 +35,6 @@ int choose(int distance[], int n, int visited[])
             minpos = i;
         }
     return minpos;
-}
-
-// 첫 번째 문제의 답을 출력한다
-void print_answer1(GraphType* g, int start)
-{
-    int i;
-
-    for (i = 0; i < g->n; i++) {
-        printf("정점 %d에서 정점 %d까지의 최단경로 길이: %d \n", start, i, distance[i]);
-        printf("최단경로: "); print_path(start, i); // 경로 출력 함수를 호출한다.
-        printf("\n");
-    }
-
-    printf("경로(경유한 노드들): ");
-    for (i = 0; i < g->n; i++)
-        printf("%d ", path[i]); // 경로(경유한 정점들)을 순서대로 출력한다.
-    printf("\n\n");
-}
-
-// 배열 path를 통해 경로를 역추적하여 출력한다.
-void print_path(int from, int to) { // from: 출발점, to: 도착점
-  /* 예: 출발점이 0이고 도착점이 5인 경우,
-     path[] = { -1, 3, 1, 0, 3, 4 } 에서 path[5] = 4이다. 
-     정점 4 -> 5로 경로가 형성되었음을 의미한다. 
-     이어서 path[4] = 3, path[3] = 0, path[0] = -1을 확인하여 
-     경로를 역추적할 수 있다. 0 -> 3 -> 4 -> 5 */
-
-  
-
-
-
 }
 
 // Dijkstra algorithm
@@ -101,41 +73,43 @@ void Dijkstra(GraphType* g, int start)
     print_answer1(g, start);
 }
 
-// ======== 두 번째 문제: Floyd Warshall Algorithm 사용 ========
-int A[MAX_VERTICES][MAX_VERTICES]; // 최단경로 저장 배열
+// 배열 path를 통해 경로를 역추적하여 출력한다.
+void search_path(GraphType* g, int from, int to) { // from: 출발점, to: 도착점
+  /* 예: 출발점이 0이고 도착점이 4인 경우,
+     path[] = { -1, 3, 1, 0, 3, 4 } 에서 path[4] = 3이다. 
+     정점 3 -> 4로 경로가 형성되었음을 의미한다. 
+     이어서 path[3] = 0, path[0] = -1을 확인하여 
+     경로를 역추적할 수 있다. 0 -> 3 -> 4 */
+    
+  // 경로를 역추적하여 search 배열에 저장한다. (도착점은 제외)
+  int i = 0;
+  int search[g->n + 1];
+  int v = path[to];
+  while(v != -1) {
+    search[i++] = v; // search 배열에 역순으로 저장한다 (출발점이 맨 끝에 저장)
+    v = path[v];
+  }
 
-// 두 번째 문제의 답을 출력한다
-void print_answer2(GraphType* g)
+  // 경로를 출력한다.
+  for (int j = i - 1; j >= 0; j--) // 출발점부터 출력
+    printf("%d -> ", search[j]);
+  printf("%d \n", to); // 도착점 출력
+}
+
+// 첫 번째 문제의 답을 출력한다
+void print_answer1(GraphType* g, int start)
 {
-    int i, j;
-
-    // 모든 정점간 최단경로 출력
-    printf("모든 정점간 최단경로 \n");
+    int i;
     for (i = 0; i < g->n; i++) {
-        for (j = 0; j < g->n; j++) {
-            if (A[i][j] == INF)
-                printf("  * ");
-            else printf("%3d ", A[i][j]);
-        }
+        printf("정점 %d에서 정점 %d까지의 최단경로\n", start, i);
+        printf("길이: %d, ", distance[i]);
+        printf("경로: "); search_path(g, start, i); // 경로 출력 함수를 호출
         printf("\n");
     }
-    printf("\n");
-
-    // 모든 정점간 최단경로 중 가장 먼 노드를 찾는다
-    int max = A[0][0]; // 초기화
-    int max_i = 0, max_j = 0;
-    for (i = 0; i < g->n; i++) {
-        for (j = 0; j < g->n; j++) {
-            if (A[i][j] > max) {
-                max = A[i][j];
-                max_i = i;
-                max_j = j;
-            }
-        }
-    }
-    printf("모든 정점 간 최단경로 중 가장 먼 노드(INF 제외)\n");
-    printf("(%d, %d) (길이 %d)\n", max_i, max_j, max);
 }
+
+// ======== 두 번째 문제: Floyd Warshall Algorithm 사용 ========
+int A[MAX_VERTICES][MAX_VERTICES]; // 최단경로 저장 배열
 
 void floyd(GraphType* g)
 {
@@ -155,8 +129,40 @@ void floyd(GraphType* g)
     print_answer2(g);
 }
 
+// 두 번째 문제의 답을 출력한다
+void print_answer2(GraphType* g)
+{
+    int i, j;
+
+    // 모든 정점간 최단경로 출력
+    printf("모든 정점간 최단경로 \n");
+    for (i = 0; i < g->n; i++) {
+        for (j = 0; j < g->n; j++) {
+            printf("%3d ", A[i][j]);
+        }
+        printf("\n");
+    }
+    printf("\n");
+
+    // 모든 정점간 최단경로 중 가장 먼 노드를 찾는다
+    int max = A[0][0]; // 초기화
+    int max_i = 0, max_j = 0;
+    for (i = 0; i < g->n; i++) {
+        for (j = 0; j < g->n; j++) {
+            if (A[i][j] > max) {
+                max = A[i][j];
+                max_i = i;
+                max_j = j;
+            }
+        }
+    }
+    printf("모든 정점 간 최단경로 중 가장 먼 노드\n");
+    printf("(%d, %d) (길이 %d)\n", max_i, max_j, max);
+}
+
 int main()
 {
+    // 무방향 그래프
     GraphType g = { 6,
       {
         { 0, 50, 45, 10, INF, INF },
@@ -167,6 +173,9 @@ int main()
         { INF, INF, INF, INF, 3, 0}
       }
     };
+    /* 두 정점 간에 간선이 두 개인 경우가 있었습니다. (예: 정점 0과 정점 3)
+       길이가 더 작은 간선을 선택했습니다. */
+
     printf("첫 번째 문제 결과 \n");
     printf("============================================\n");
     Dijkstra(&g, 0); // Dijkstra algorithm
