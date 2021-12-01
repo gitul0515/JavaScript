@@ -83,7 +83,7 @@ function pebbleMemo(i, p) {
 }
 console.log(pebbleMemo(3, 1)); // 29
 
-// 최적화 2: Dynamic Programming (미완성)
+// 최적화 2: Dynamic Programming
 function pebbleDynamic(i, p) {
   if (i === 0) return w[i][p];
 
