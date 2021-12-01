@@ -1,7 +1,6 @@
 // 작성자: 2014044120 권기홍
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <limits.h>
 
 #define TURE 1
@@ -57,15 +56,15 @@ void Dijkstra(GraphType* g, int start)
     for (i = 0; i < g->n - 1; i++) {
         u = choose(distance, g->n, visited); // distance 값이 가장 작은 정점을 선택
         visited[u] = 1; // 방문 표시
-        if (distance[u] == g->weight[start][u]) // distance 값이 바뀌지 않은 정점이라면 
-            path[u] = start; // 시작 정점에서 방문한 정점이다. 경로를 저장한다
+        if (distance[u] == g->weight[start][u]) // distance 값이 갱신되지 않았다면 
+            path[u] = start; // 시작 정점을 거쳐 방문한 정점이다. 경로를 저장한다
 
         for (w = 0; w < g->n; w++) { // distance를 갱신
             // 시작 정점에서 w로 갈 때, u를 거치는 경우와 거치지 않는 경우를 비교한다
             if (!visited[w]) {
                 if (distance[u] + g->weight[u][w] < distance[w]) { // 작은 쪽을 선택한다
                     distance[w] = distance[u] + g->weight[u][w];
-                    path[w] = u; // 경로를 저장한다
+                    path[w] = u; // 경로를 저장한다. path[도착점] = 출발점
                 }
             }
         }
@@ -73,27 +72,27 @@ void Dijkstra(GraphType* g, int start)
     print_answer1(g, start);
 }
 
-// 배열 path를 통해 경로를 역추적하여 출력한다.
-void search_path(GraphType* g, int from, int to) { // from: 출발점, to: 도착점
+// 배열 path를 통해 경로를 추적하여 출력한다.
+void search_path(int from, int to) { // from: 출발점, to: 도착점
   /* 예: 출발점이 0이고 도착점이 4인 경우,
-     path[] = { -1, 3, 1, 0, 3, 4 } 에서 path[4] = 3이다. 
-     정점 3 -> 4로 경로가 형성되었음을 의미한다. 
-     이어서 path[3] = 0, path[0] = -1을 확인하여 
-     경로를 역추적할 수 있다. 0 -> 3 -> 4 */
-    
-  // 경로를 역추적하여 search 배열에 저장한다. (도착점은 제외)
-  int i = 0;
-  int search[g->n + 1];
-  int v = path[to];
-  while(v != -1) {
-    search[i++] = v; // search 배열에 역순으로 저장한다 (출발점이 맨 끝에 저장)
-    v = path[v];
-  }
+     path[] = { -1, 3, 1, 0, 3, 4 } 에서 path[4] = 3이다.
+     정점 3 -> 4로 경로가 형성되었음을 의미한다.
+     이어서 path[3] = 0, path[0] = -1을 확인하여
+     경로를 추적할 수 있다. 0 -> 3 -> 4 */
 
-  // 경로를 출력한다.
-  for (int j = i - 1; j >= 0; j--) // 출발점부터 출력
-    printf("%d -> ", search[j]);
-  printf("%d \n", to); // 도착점 출력
+    // 경로를 추적하여 search 배열에 저장한다. (도착점은 제외)
+    int i = 0;
+    int search[MAX_VERTICES];
+    int v = path[to];
+    while (v != -1) {
+        search[i++] = v; // search 배열에 역순으로 저장한다 (출발점이 맨 끝에 저장)
+        v = path[v];
+    }
+
+    // 경로를 출력한다.
+    for (int j = i - 1; j >= 0; j--) // 출발점부터 출력
+        printf("%d -> ", search[j]);
+    printf("%d \n", to); // 도착점 출력
 }
 
 // 첫 번째 문제의 답을 출력한다
@@ -103,7 +102,7 @@ void print_answer1(GraphType* g, int start)
     for (i = 0; i < g->n; i++) {
         printf("정점 %d에서 정점 %d까지의 최단경로\n", start, i);
         printf("길이: %d, ", distance[i]);
-        printf("경로: "); search_path(g, start, i); // 경로 출력 함수를 호출
+        printf("경로: "); search_path(start, i); // 경로 출력 함수를 호출
         printf("\n");
     }
 }
@@ -162,7 +161,8 @@ void print_answer2(GraphType* g)
 
 int main()
 {
-    // 무방향 그래프
+    /* 그래프에서 정점 간에 간선이 두 개인 경우가 있었습니다. (예: 정점 0과 정점 3)
+       이 경우, 길이가 더 작은 간선을 선택했습니다. */
     GraphType g = { 6,
       {
         { 0, 50, 45, 10, INF, INF },
@@ -173,8 +173,6 @@ int main()
         { INF, INF, INF, INF, 3, 0}
       }
     };
-    /* 두 정점 간에 간선이 두 개인 경우가 있었습니다. (예: 정점 0과 정점 3)
-       길이가 더 작은 간선을 선택했습니다. */
 
     printf("첫 번째 문제 결과 \n");
     printf("============================================\n");
