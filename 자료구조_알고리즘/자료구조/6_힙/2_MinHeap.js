@@ -44,8 +44,9 @@ MinHeap.prototype.insert = function (item) {
 
   // 부모 노드가 자식 노드보다 크면 값을 교환한다.
   while (this.parent(idx) && this.parent(idx) > this.array[idx]) {
-    this.swap(idx, Math.floor(idx / 2));
-    idx = Math.floor(idx / 2); // 인덱스를 위로 갱신한다.
+    const parentIdx = Math.floor(idx / 2);
+    this.swap(idx, parentIdx);
+    idx = parentIdx; // 인덱스를 위로 갱신한다.
   }
 };
 
@@ -78,11 +79,10 @@ MinHeap.prototype.delete = function () {
   return item; // 최소값 반환
 };
 
-console.log(hp.root());
+console.log(hp.root()); // 2
 console.log(hp.delete()); // 2
 console.log(hp.delete()); // 4
 console.log(hp.delete()); // 12
 console.log(hp.delete()); // 13
 console.log(hp.delete()); // 23
-console.log(hp.delete()); // undefined
 console.log(hp.delete()); // undefined
