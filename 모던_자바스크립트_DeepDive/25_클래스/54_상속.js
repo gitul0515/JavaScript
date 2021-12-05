@@ -21,3 +21,6 @@ console.log(bird instanceof Animal); // true
 console.log(bird.eat()); // 'eat'
 console.log(bird.move()); // 'move'
 console.log(bird.fly()); // 'fly'
+
+console.log(bird.age); // 1
+console.log(bird.weight); // 5
