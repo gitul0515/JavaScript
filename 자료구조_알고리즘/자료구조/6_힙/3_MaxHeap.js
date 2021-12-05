@@ -6,49 +6,27 @@ const Heap = function () {
 
 // 배열의 두 값을 교환하는 메서드
 Heap.prototype.swap = function (index1, index2) { // 인덱스를 전달받는다
-  const temp = this.array[index1];
-  this.array[index1] = this.array[index2];
-  this.array[index2] = temp;
-};
-
-// 부모의 인덱스를 리턴하는 메서드
-Heap.prototype.parentIndex = function (index) {
-  return parseInt(index / 2, 10);
+  [this.array[index1], this.array[index2]] = [this.array[index2], this.array[index1]];
 };
 
 // 부모의 값을 리턴하는 메서드
 Heap.prototype.parent = function (index) {
-  return this.array[this.parentIndex(index)];
-};
-
-// 왼쪽 자식의 인덱스를 리턴하는 메서드
-Heap.prototype.leftChildIndex = function (index) {
-  return index * 2;
+  return this.array[Math.floor(index / 2)];
 };
 
 // 왼쪽 자식의 값을 리턴하는 메서드
 Heap.prototype.leftChild = function (index) {
-  return this.array[this.leftChildIndex(index)];
-};
-
-// 오른쪽 자식의 인덱스를 리턴하는 메서드
-Heap.prototype.rightChildIndex = function (index) {
-  return (index * 2) + 1;
+  return this.array[index * 2];
 };
 
 // 오른쪽 자식의 값을 리턴하는 메서드
 Heap.prototype.rightChild = function (index) {
-  return this.array[this.rightChildIndex(index)];
+  return this.array[index * 2 + 1];
 };
 
-// 루트 노드의 값을 반환하는 메서드 (최대값 or 최소값)
-Heap.prototype.peek = function () {
-  return this.array[1];
-};
-
-// 힙의 크기를 반환하는 메서드
-Heap.prototype.size = function () {
-  return this.array.length - 1;
+// 루트의 값을 반환하는 메서드 (최대값)
+Heap.prototype.root = function () {
+  return this.array[1] ? this.array[1] : null;
 };
 // ----------- 힙 기본 함수 끝 -----------
 
@@ -63,19 +41,13 @@ MaxHeap.prototype = Object.create(Heap.prototype);
 MaxHeap.prototype.insert = function (item) {
   this.array[this.array.length] = item; // 마지막 노드에 삽입한다.
   let idx = this.array.length - 1;
-  // 부모가 자식 노드보다 작으면 값을 교환해야 한다.
+
+  // 부모 노드가 자식 노드보다 작으면 값을 교환한다.
   while (this.parent(idx) && this.parent(idx) < this.array[idx]) {
-    this.swap(this.parentIndex(idx), idx);
-    idx = this.parentIndex(idx); // 인덱스를 위로 갱신한다.
+    this.swap(idx, Math.floor(idx / 2));
+    idx = Math.floor(idx / 2); // 인덱스를 위로 갱신한다.
   }
 };
-
-const hp = new MaxHeap();
-
-hp.insert(1); hp.insert(10);
-hp.insert(5); hp.insert(100);
-hp.insert(8);
-console.log(hp.array); // [null, 100, 10, 5, 1, 8]
 
 // 최대 힙 삭제 함수
 MaxHeap.prototype.delete = function () {
@@ -85,19 +57,27 @@ MaxHeap.prototype.delete = function () {
 
   // 최대 힙의 순서를 유지하는 코드
   let idx = 1;
-  // 부모가 자식 노드보다 작으면 값을 교환해야 한다.
+  // 부모가 자식 노드보다 작으면 값을 교환한다.
+  // (힙에서 오른쪽 자식만 존재하는 경우는 있을 수 없다)
   while (this.leftChild(idx) && (this.leftChild(idx) > this.array[idx]
   || this.rightChild(idx) > this.array[idx])) {
     // 왼쪽과 오른쪽 자식 노드 중 큰 값과 교환한다.
-    let biggerIndex = this.leftChildIndex(idx);
-    if (this.rightChild(idx) && this.rightChild(idx) > this.array[biggerIndex]) {
-      biggerIndex = this.rightChildIndex(idx);
+    let biggerIdx = idx * 2;
+    if (this.rightChild(idx) && this.rightChild(idx) > this.leftChild(idx)) {
+      biggerIdx++;
     }
-    this.swap(biggerIndex, idx);
-    idx = biggerIndex; // 인덱스를 밑으로 갱신한다.
+    this.swap(biggerIdx, idx);
+    idx = biggerIdx; // 인덱스를 밑으로 갱신한다.
   }
   return item; // 최대값 반환
 };
+
+const hp = new MaxHeap();
+
+hp.insert(1); hp.insert(10);
+hp.insert(5); hp.insert(100);
+hp.insert(8);
+console.log(hp.array); // [null, 100, 10, 5, 1, 8]
 
 console.log(hp.delete()); // 100
 console.log(hp.delete()); // 10

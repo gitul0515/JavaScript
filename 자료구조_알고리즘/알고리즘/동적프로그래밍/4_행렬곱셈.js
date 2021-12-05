@@ -43,4 +43,3 @@ console.log(matrixMultiply(A, B));
 
 // 행렬곱 A_i...A_j를 구하는 최소 비용 (미완성)
 // rMatrixChain(i, j)
-
