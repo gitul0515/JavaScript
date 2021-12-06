@@ -1,10 +1,12 @@
 // Prim의 최소비용 신장트리 알고리즘
-const visited = [];
-const distance = [];
+const distance = []; // 현재의 신장 트리 집합에서 방문할 수 있는 최단 거리
+const visited = []; // 정점의 방문 여부
+const path = []; // 신장 트리 경로. path[도착점] = 출발점
 
+// distance 값이 가장 작은 정점을 반환한다
 function getMinVertex(g) {
   let min = Infinity;
-  let minPos;
+  let minPos = null;
 
   for (let i = 0; i < g.length; i++) {
     if (!visited[i] && distance[i] < min) {
@@ -18,30 +20,27 @@ function getMinVertex(g) {
 function prim(g, start) {
   // 초기화
   for (let i = 0; i < g.length; i++) {
-    distance[i] = Infinity;
+    distance[i] = g[start][i];
     visited[i] = false;
+    path[i] = -1;
   }
-  distance[start] = 0;
   visited[start] = true;
-  process.stdout.write(`시작 정점 ${start} 방문\n`);
+  console.log(`시작 정점 ${start} 방문`);
 
   for (let i = 0; i < g.length; i++) {
-    if (g[start][i] !== Infinity) {
-      distance[i] = g[start][i];
-    }
-  }
-
-  for (let i = 0; i < g.length; i++) {
+    // distance가 가장 작은 정점 u를 방문한다
     const u = getMinVertex(g);
-    if (u === undefined) return;
+    if (u === null) return;
+    if (distance[u] === g[start][u]) path[u] = start;
     visited[u] = true;
-    process.stdout.write(`정점 ${u} 방문, 가중치는 ${distance[u]}\n`);
+    console.log(`정점 ${u} 방문, 간선은 (${path[u]}, ${u}) : ${distance[u]}`);
 
-    // distance 값을 갱신
+    // 정점 u와 인접한 정점 v의 distance 값을 갱신한다
     for (let v = 0; v < g.length; v++) {
       if (g[u][v] !== Infinity && !visited[v]) {
         if (g[u][v] < distance[v]) {
           distance[v] = g[u][v];
+          path[v] = u; // path[도착점] = 출발점
         }
       }
     }
