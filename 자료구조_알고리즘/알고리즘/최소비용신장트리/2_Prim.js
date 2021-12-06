@@ -27,10 +27,9 @@ function prim(g, start) {
   visited[start] = true;
   console.log(`시작 정점 ${start} 방문`);
 
-  for (let i = 0; i < g.length; i++) {
+  for (let i = 0; i < g.length - 1; i++) {
     // distance가 가장 작은 정점 u를 방문한다
     const u = getMinVertex(g);
-    if (u === null) return;
     if (distance[u] === g[start][u]) path[u] = start;
     visited[u] = true;
     console.log(`정점 ${u} 방문, 간선은 (${path[u]}, ${u}) : ${distance[u]}`);
@@ -58,4 +57,13 @@ function prim(g, start) {
     [Infinity, 15, Infinity, 18, 25, Infinity, 0]
   ];
   prim(graph, 0);
+  /*
+    시작 정점 0 방문
+    정점 5 방문, 간선은 (0, 5) : 10
+    정점 4 방문, 간선은 (5, 4) : 27
+    정점 3 방문, 간선은 (4, 3) : 22
+    정점 2 방문, 간선은 (3, 2) : 12
+    정점 1 방문, 간선은 (2, 1) : 16
+    정점 6 방문, 간선은 (1, 6) : 15
+  */
 }());
