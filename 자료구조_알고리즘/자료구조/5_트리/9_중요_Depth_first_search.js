@@ -8,7 +8,7 @@ const BinaryTreeNode = function (value) {
 
 // 이진 트리 기본 생성자 함수
 const BinaryTree = function () {
-  this.root = null; // 이진 트리에는 항상 루트 노드가 있다.
+  this.root = null;
 };
 
 // 이진 트리 생성

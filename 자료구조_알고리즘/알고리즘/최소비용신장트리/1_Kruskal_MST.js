@@ -1,4 +1,4 @@
-// Kruskal의 MST 알고리즘
+// Kruskal의 최소비용 신장트리 알고리즘
 // 무방향 그래프
 const graph = [
   // [vertex1, vertex2, weight]

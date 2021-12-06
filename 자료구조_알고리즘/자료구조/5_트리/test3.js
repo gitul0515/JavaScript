@@ -1,7 +1,7 @@
 // 계수 정렬 알고리즘
 const preArray = [];
 for (let i = 0; i < 30; i++) { // 30개의 난수 생성
-  preArray[i] = Math.floor(Math.random()*10 + 1); // 난수 범위: 1~10
+  preArray[i] = Math.floor(Math.random() * 10 + 1); // 난수 범위: 1~10
 }
 console.log('초기 배열: ', preArray);
 const maxNum = 10; // 난수의 최대 범위
