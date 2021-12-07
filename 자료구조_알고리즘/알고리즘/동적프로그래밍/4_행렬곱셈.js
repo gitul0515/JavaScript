@@ -41,5 +41,27 @@ function matrixMultiply(A = [], B = []) {
 }
 console.log(matrixMultiply(A, B));
 
-// 행렬곱 A_i...A_j를 구하는 최소 비용 (미완성)
-// rMatrixChain(i, j)
+// --------------------------------------------------
+// 행렬의 크기 데이터 (행 * 열)
+const matrixSize = [
+  null, // 인덱스 0은 사용하지 않는다
+  [10, 100],
+  [100, 5],
+  [5, 50]
+];
+
+// 행렬곱 A_i...A_j를 계산하는 최소 비용
+function rMatrixChain(i, j, p) {
+  if (i === j) return 0;
+  else {
+    let min = Infinity;
+    for (let k = i; k < j; k++) {
+      const temp = rMatrixChain(i, k, p) + rMatrixChain(k + 1, j, p) + p[i][0] * p[k][1] * p[j][1];
+      if (temp < min) {
+        min = temp;
+      }
+    }
+    return min;
+  }
+}
+console.log(rMatrixChain(1, 3, matrixSize));
