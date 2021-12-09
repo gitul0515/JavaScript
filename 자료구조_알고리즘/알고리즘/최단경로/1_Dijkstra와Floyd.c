@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <limits.h>
 
-#define TURE 1
+#define TRUE 1
 #define FALSE 0
 #define MAX_VERTICES 100
 #define INF 1000000 // 무한대 (연결이 없는 경우)
@@ -50,12 +50,12 @@ void Dijkstra(GraphType* g, int start)
         visited[i] = FALSE;
         path[i] = -1; // 경로는 -1로 초기화
     }
-    visited[start] = 1; // 시작 정점 방문 표시
+    visited[start] = TRUE; // 시작 정점 방문 표시
     distance[start] = 0;
 
     for (i = 0; i < g->n - 1; i++) {
         u = choose(distance, g->n, visited); // distance 값이 가장 작은 정점을 선택
-        visited[u] = 1; // 방문 표시
+        visited[u] = TRUE; // 방문 표시
         if (distance[u] == g->weight[start][u]) // distance 값이 갱신되지 않았다면 
             path[u] = start; // 시작 정점을 거쳐 방문한 정점이다. 경로를 저장한다
 
@@ -75,20 +75,19 @@ void Dijkstra(GraphType* g, int start)
 // 배열 path를 통해 경로를 추적하여 출력한다.
 void search_path(int from, int to) { // from: 출발점, to: 도착점
   /* 예: 출발점이 0이고 도착점이 4인 경우,
-     path[] = { -1, 3, 1, 0, 3, 4 } 에서 path[4] = 3이다.
+     path[] = { -1, 4, 0, 0, 3, 4 } 에서 path[4] = 3이다.
      정점 3 -> 4로 경로가 형성되었음을 의미한다.
      이어서 path[3] = 0, path[0] = -1을 확인하여
-     경로를 추적할 수 있다. 0 -> 3 -> 4 */
+     경로를 추적할 수 있다. 0 -> 3 -> 4를 출력한다. */
 
-    // 경로를 추적하여 search 배열에 저장한다. (도착점은 제외)
+     // 경로를 추적하여 search 배열에 저장한다. (도착점은 제외)
     int i = 0;
     int search[MAX_VERTICES];
     int v = path[to];
-    while (v != -1) {
-        search[i++] = v; // search 배열에 역순으로 저장한다 (출발점이 맨 끝에 저장)
+    while (v != path[from]) {
+        search[i++] = v; // search 배열에 역순으로 저장한다 (출발점이 마지막에 저장)
         v = path[v];
     }
-
     // 경로를 출력한다.
     for (int j = i - 1; j >= 0; j--) // 출발점부터 출력
         printf("%d -> ", search[j]);
@@ -109,7 +108,6 @@ void print_answer1(GraphType* g, int start)
 
 // ======== 두 번째 문제: Floyd Warshall Algorithm 사용 ========
 int A[MAX_VERTICES][MAX_VERTICES]; // 최단경로 저장 배열
-
 void floyd(GraphType* g)
 {
     int i, j, k;
@@ -137,7 +135,9 @@ void print_answer2(GraphType* g)
     printf("모든 정점간 최단경로 \n");
     for (i = 0; i < g->n; i++) {
         for (j = 0; j < g->n; j++) {
-            printf("%3d ", A[i][j]);
+            if (A[i][j] == INF)
+                printf("INF ");
+            else printf("%3d ", A[i][j]);
         }
         printf("\n");
     }
@@ -148,6 +148,7 @@ void print_answer2(GraphType* g)
     int max_i = 0, max_j = 0;
     for (i = 0; i < g->n; i++) {
         for (j = 0; j < g->n; j++) {
+            if (A[i][j] == INF) continue; // INF는 제외한다
             if (A[i][j] > max) {
                 max = A[i][j];
                 max_i = i;
@@ -155,22 +156,21 @@ void print_answer2(GraphType* g)
             }
         }
     }
-    printf("모든 정점 간 최단경로 중 가장 먼 노드\n");
-    printf("(%d, %d) (길이 %d)\n", max_i, max_j, max);
+    printf("모든 정점 간 최단경로 중 가장 먼 노드(INF 제외)\n");
+    printf("<%d, %d> (길이 %d)\n", max_i, max_j, max);
 }
+
 
 int main()
 {
-    /* 그래프에서 정점 간에 간선이 두 개인 경우가 있었습니다. (예: 정점 0과 정점 3)
-       이 경우, 길이가 더 작은 간선을 선택했습니다. */
     GraphType g = { 6,
       {
         { 0, 50, 45, 10, INF, INF },
-        { 50, 0, 10, 15, 20, INF },
-        { 45, 10, 0, INF, 30, INF },
-        { 10, 15, INF, 0, 15, INF },
-        { INF, 20, 30, 15, 0, 3 },
-        { INF, INF, INF, INF, 3, 0}
+        { INF, 0, 10, 15, INF, INF },
+        { INF, INF, 0, INF, 30, INF },
+        { 20, INF, INF, 0, 15, INF },
+        { INF, 20, 35, INF, 0, 3 },
+        { INF, INF, INF, INF, INF, 0}
       }
     };
 

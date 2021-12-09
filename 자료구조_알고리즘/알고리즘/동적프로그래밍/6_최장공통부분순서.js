@@ -7,15 +7,15 @@ function LSC(X = '', Y = '') {
   const j = Y.length;
 
   return (function _LSC(i, j) {
-    let length;
+    let result;
 
-    if (i === 0 || j === 0) length = 0; // 문자열의 길이가 0이면 LCS가 없다
+    if (i === 0 || j === 0) result = 0; // 문자열의 길이가 0이면 LCS가 없다
     else if (i > 0 && j > 0 && X[i] === Y[j]) { // X[i]와 Y[j]가 LCS에 포함된다
-      length = _LSC(i - 1, j - 1) + 1;
+      result = _LSC(i - 1, j - 1) + 1;
     } else { // X[i]와 Y[j]는 LCS에 동시에 포함되지 않는다
-      length = Math.max(_LSC(i, j - 1), _LSC(i - 1, j));
+      result = Math.max(_LSC(i, j - 1), _LSC(i - 1, j));
     }
-    return length;
+    return result;
   }(i, j));
 }
 
@@ -26,3 +26,5 @@ function LSC(X = '', Y = '') {
   const result = LSC(X, Y);
   console.log(result);
 }());
+
+// bottom-up 방식으로 최적화
