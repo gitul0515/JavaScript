@@ -44,7 +44,6 @@ console.log(matrixMultiply(A, B));
 // --------------------------------------------------
 // 행렬의 크기 데이터 (행 * 열)
 const matrixSize = [
-  null, // 인덱스 0은 사용하지 않는다
   [10, 100],
   [100, 5],
   [5, 50]
@@ -64,4 +63,25 @@ function rMatrixChain(i, j, p) {
     return min;
   }
 }
-console.log(rMatrixChain(1, 3, matrixSize));
+console.log(rMatrixChain(0, 2, matrixSize));
+
+// 동적 프로그래밍 (Bottom-up)
+function matrixChain(n, p) { // n은 행렬의 개수
+  const M = Array.from({ length: n }, () => Array.from({ length: n }));
+
+  for (let i = 0; i < n; i++) {
+    M[i][i] = 0;
+  }
+
+  // 대각선의 순서로 값을 채워나간다
+  for (let r = 0; r < n - 1; r++) {
+    for (let i = 0; i < n - r - 1; i++) {
+      const j = i + r + 1;
+      for (let k = i; k < j; k++) {
+        M[i][j] = M[i][k] + M[k + 1][j] + p[i][0] * p[k][1] * p[j][1];
+      }
+    }
+  }
+  return M[0][n - 1];
+}
+console.log(matrixChain(3, matrixSize));
