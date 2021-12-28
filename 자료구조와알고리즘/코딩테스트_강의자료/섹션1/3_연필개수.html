@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(n) {
+              const answer = Math.ceil(n / 12);
+              return answer;
+            }
+            console.log(solution(178));
+            console.log(solution(25));
+
+            // Math.ceil 메서드를 쓰지 않는 경우
+            function solution2(n) {
+              let answer;
+              if ((n / 12) % 1 !== 0) {
+                answer = parseInt(n / 12, 10) + 1;
+              } else {
+                answer = n / 12;
+              }
+              return answer;
+            }
+            console.log(solution2(178));
+            console.log(solution2(25));
+            console.log(solution2(24));
+        </script>
+    </body>
+</html>

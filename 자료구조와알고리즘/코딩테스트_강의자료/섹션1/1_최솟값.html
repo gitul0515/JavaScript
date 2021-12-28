@@ -1,0 +1,15 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>1. 세 수 중 가장 작은 값을 출력하기</title>
+    </head>
+    <body>
+        <script>
+            function solution(a, b, c) {
+              const answer = a < b ? (a < c ? a : c) : (b < c ? b : c);
+              return answer;
+            }
+            console.log(solution(2, 5, 1));
+        </script>
+    </body>
+</html>

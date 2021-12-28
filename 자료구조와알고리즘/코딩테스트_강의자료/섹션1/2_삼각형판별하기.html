@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>2. 삼각형 판별하기</title>
+    </head>
+    <body>
+        <script>
+          // 삼각형의 길이 조건:
+          // 가장 긴 변의 길이 < 나머지 두 변 길이의 합
+          function solution(a, b, c) {
+            let answer = 'YES';
+            let max; // 가장 긴 변의 길이
+            let else1; let else2; // 나머지 두 변의 길이
+
+            if (a > b) {
+              else1 = b;
+              if (a > c) {
+                max = a;
+                else2 = c;
+              } else {
+                max = c;
+                else2 = a;
+              }
+            } else {
+              else1 = a;
+              if (b > c) {
+                max = b;
+                else2 = c;
+              } else {
+                max = c;
+                else2 = b;
+              }
+            }
+            answer = max < else1 + else2 ? 'YES' : 'NO';
+            return answer;
+          }
+          console.log(solution(6, 7, 11)); // YES
+          console.log(solution(13, 33, 17)); // NO
+        </script>
+    </body>
+</html>
