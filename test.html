@@ -2,45 +2,11 @@
 <html lang="ko">
   <head>
     <title>연습장</title>
+    <link rel="stylesheet" href="test.css">
   </head>
   <body>
-    <script>
-      // DOM
-      const box = document.createElement('div');
-      const textNode = document.createTextNode('Box');
-      box.appendChild(textNode);
-      document.body.appendChild(box);
-
-      // CSS
-      document.body.style.height = '100vh';
-      document.body.style.display = 'flex';
-      document.body.style.justifyContent = 'center';
-      document.body.style.alignItems = 'center';
-      
-      box.style.backgroundColor = 'yellow';
-      box.style.width = '100px';
-      box.style.height = '100px';
-      box.style.textAlign = 'center';
-      box.style.lineHeight = '100px';
-      box.style.fontWeight = 'bold';
-
-      // Event
-      function colorRed() {
-        box.style.backgroundColor = 'red';
-      }
-      function colorYellow() {
-        box.style.backgroundColor = 'yellow';
-      }
-
-      box.addEventListener('mouseover', colorRed);
-      box.addEventListener('mouseout', colorYellow);
-
-      box.addEventListener('click', () => {
-        colorYellow();
-
-        box.removeEventListener('mouseover', colorRed);
-        box.removeEventListener('mouseout', colorYellow);
-      });
-    </script>
+    <div class="box">click</div>
+    <div class="rainbow"></div>
+    <script src="test.js"></script>
   </body>
 </html>

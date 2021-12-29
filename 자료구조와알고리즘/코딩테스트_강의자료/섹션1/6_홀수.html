@@ -6,12 +6,23 @@
     <body>
         <script>
             function solution(arr){
-                let answer = [];
+                let answer = '';
+                let sum = 0;
+                let min = Infinity;
+
+                for (let i = 0; i < arr.length; i++) {
+                  if (arr[i] % 2) {
+                    sum += arr[i];
+                    if (min > arr[i]) {
+                      min = arr[i];
+                    }
+                  }
+                }
+                answer += `${sum}\n${min}`;
                 return answer;
             }
-            
             arr = [12, 77, 38, 41, 53, 92, 85];
-            console.log(solution(arr));
+            console.log(solution(arr)); // 256 41
         </script>
     </body>
 </html>

@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            // 정규표현식 사용
+            function solution(s) {
+                let answer='';
+                answer = s.replace(/A/g, '#');
+                return answer;
+            }
+            let str='BANANA';
+            console.log(solution(str));
+        </script>
+    </body>
+</html>
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            // 정규표현식 미사용
+            // 배열로 변환한 후 요소를 교체한다
+            function solution(s) {
+                let tempArray = [...s];
+                for (let i = 0; i < tempArray.length; i++) {
+                  if (tempArray[i] === 'A') {
+                    tempArray[i] = '#';
+                  }
+                }
+                return tempArray.join('');
+            }
+            let str='BANANA';
+            console.log(solution(str));
+        </script>
+    </body>
+</html>

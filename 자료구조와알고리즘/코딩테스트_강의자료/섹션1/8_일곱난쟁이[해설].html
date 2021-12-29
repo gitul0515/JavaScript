@@ -1,0 +1,34 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(arr) {
+                let answer = []; // 일곱 난쟁이를 저장
+                let sum = 0;
+                let latest; // 가장 최근에 선택한 난쟁이
+
+                for (let i = 0; i < arr.length; i++) {
+                  if (sum + arr[i] <= 100) {
+                    sum += arr[i];
+                    answer.push(arr[i]);
+                    latest = i;
+                  }
+
+                  // 난쟁이들의 키의 총합이 100이 아닌 경우
+                  if (i === arr.length - 1 && sum !== 100) {
+                    // 가장 최근에 선택한 난쟁이를 제외
+                    sum -= arr[latest];
+                    answer.pop();
+                    i = latest + 1;
+                  }
+                }
+                return answer.join(', '); // 문자열로 반환
+            }
+            let arr = [20, 7, 23, 19, 10, 15, 25, 8, 13];
+            console.log(solution(arr)); // 20, 7, 23, 19, 10, 8, 13
+        </script>
+    </body>
+</html>

@@ -6,12 +6,17 @@
     <body>
         <script>
             function solution(day, arr){
-                let answer=0;
+                let answer = 0;
+                for (let i = 0; i < arr.length; i++) {
+                  if (arr[i] % 10 === day) answer++;
+                }
                 return answer;
             }
-            
-            arr=[25, 23, 11, 47, 53, 17, 33];
-            console.log(solution(3, arr));
+            arr1 = [25, 23, 11, 47, 53, 17, 33];
+            console.log(solution(3, arr1)); // 3
+
+            arr2 = [12, 20, 54, 30, 87, 91, 30];
+            console.log(solution(0, arr2)); // 3
         </script>
     </body>
 </html>
