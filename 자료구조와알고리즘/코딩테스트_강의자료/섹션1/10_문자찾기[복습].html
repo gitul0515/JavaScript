@@ -1,0 +1,49 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            // 정규표현식 생성자 함수
+            function solution(s, t) {
+              const regexp = new RegExp(`${t}`, 'g');
+              const result = s.match(regexp).length;
+              return result;
+            }
+            const str = 'COMPUTERPROGRAMMING';
+            console.log(solution(str, 'R')); // 3
+
+            // 정규표현식 리터럴 표기법
+            // function solution(s, t) {
+            //   let result;
+            //   result = s.match(/${t}/).length;
+            //   return result;
+            // }
+            // let str="COMPUTERPROGRAMMING";
+            // console.log(solution(str, 'R'));
+        </script>
+    </body>
+</html>
+
+<!-- <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            // 정규표현식 미사용
+            function solution(s, t) {
+              let answer = 0;
+              for (let i = 0; i < s.length; i++) {
+                if (s[i] === t) answer++;
+              }
+              return answer;
+            }
+            let str="COMPUTERPROGRAMMING";
+            console.log(solution(str, 'R'));
+        </script>
+    </body>
+</html> -->
+

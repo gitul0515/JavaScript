@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(s) {
+              const array = [...s];
+              const lowerArray = [...s.toLowerCase()];
+
+              for (let i = 0; i < array.length; i++) {
+                // 소문자인 경우 대문자로 변환
+                if (array[i] === lowerArray[i]) {
+                  array[i] = array[i].toUpperCase();
+                } else { // 대문자인 경우 소문자로 변환
+                  array[i] = lowerArray[i];
+                }
+              }
+              return array.join('');
+            }
+            console.log(solution('StuDY'));
+        </script>
+    </body>
+</html>

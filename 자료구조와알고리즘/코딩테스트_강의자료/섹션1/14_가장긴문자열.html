@@ -5,11 +5,20 @@
     </head>
     <body>
         <script>
-            function solution(s){  
-                let answer="";
-                return answer;
+            function solution(s) {
+              // 초기값
+              let answer = s[0];
+              let longest = s[0].length;
+
+              for (let i = 1; i < s.length; i++) {
+                if (longest < s[i].length) {
+                  answer = s[i];
+                  longest = s[i].length;
+                }
+              }
+              return answer;
             }
-            let str=["teacher", "time", "student", "beautiful", "good"];
+            const str = ['teacher', 'time', 'student', 'beautiful', 'good'];
             console.log(solution(str));
         </script>
     </body>

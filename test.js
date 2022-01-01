@@ -1,7 +1,3 @@
-const box = document.querySelector('.box');
-const rainbow = document.querySelector('.rainbow');
+const arr = [1];
 
-box.addEventListener('click', () => {
-  rainbow.classList.toggle('show');
-})
-
+arr.c
