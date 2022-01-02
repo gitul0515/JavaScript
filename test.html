@@ -1,31 +1,22 @@
 <!DOCTYPE html>
 <html lang="ko">
   <head>
-    <title>연습장</title>
-    <link rel="stylesheet" href="test.css">
+    <meta charset="UTF-8">
+    <title>자유 연습장</title>
   </head>
   <body>
-    <div class="box red">Hello World</div>
-    <script>
-      const box = document.querySelector('.box');
-      console.log(box.classList);
-
-      box.classList.add('blue');
-      box.classList.add('green');
-
-      box.classList.remove('blue');
-      box.classList.remove('green');
-
-      console.log(box.classList.item(0));
-      console.log(box.classList.item(1));
-      
-      console.log(box.classList.contains('red'));
-      console.log(box.classList.contains('blue'));
-    
-      box.classList.replace('red', 'blue');
-
-      box.classList.toggle('green');
-      box.classList.toggle('green');
-    </script>
+    <ul id="fruits"></ul>
   </body>
+  <script>
+    const fruits = document.getElementById('fruits');
+    const fragment = document.createDocumentFragment();
+
+    ['apple', 'banana', 'orange'].forEach(text => {
+      const li = document.createElement('li');
+      const textNode = document.createTextNode(text);
+      li.appendChild(textNode);
+      fragment.appendChild(li);
+    });
+    fruits.appendChild(fragment);
+  </script>
 </html>
