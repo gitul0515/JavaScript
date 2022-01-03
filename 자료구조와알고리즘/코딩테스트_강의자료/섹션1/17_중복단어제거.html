@@ -1,3 +1,23 @@
+<!-- <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(s) {
+              // 배열을 집합으로 만들어 중복 제거
+              const set = new Set(s);
+              // 집합을 배열로 변환하여 리턴
+              const answer = [...set];
+              return answer;
+            }
+            const str = ['good', 'time', 'good', 'time', 'student'];
+            console.log(solution(str)); // ['good', 'time', 'student']
+        </script>
+    </body>
+</html> -->
+
 <html>
     <head>
         <meta charset="UTF-8">
@@ -5,12 +25,18 @@
     </head>
     <body>
         <script>
-            function solution(s){  
-                let answer;
-                return answer;
+            function solution(s) {
+              const answer = [];
+              // indexOf 메서드를 사용하여 중복 제거
+              for (let i = 0; i < s.length; i++) {
+                if (answer.indexOf(s[i]) === -1) {
+                  answer.push(s[i]);
+                }
+              }
+              return answer;
             }
-            let str=["good", "time", "good", "time", "student"];
-            console.log(solution(str));
+            const str = ['good', 'time', 'good', 'time', 'student'];
+            console.log(solution(str)); // ['good', 'time', 'student']
         </script>
     </body>
 </html>

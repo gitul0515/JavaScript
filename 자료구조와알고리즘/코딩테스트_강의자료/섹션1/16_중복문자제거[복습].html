@@ -1,0 +1,18 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(s) {
+              // 문자열을 집합으로 만들어 중복 제거
+              const set = new Set(s);
+              // 집합을 배열로, 배열을 문자열로 변환하여 리턴
+              const answer = [...set].join('');
+              return answer;
+            }
+            console.log(solution('ksekkset')); // kset
+        </script>
+    </body>
+</html>

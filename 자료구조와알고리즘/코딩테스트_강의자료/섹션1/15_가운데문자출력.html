@@ -7,9 +7,16 @@
         <script>
             function solution(s) {
               let answer;
+              const midIdx = Math.floor(s.length / 2);
+              if (s.length % 2 === 1) { // 문자열의 길이가 홀수
+                answer = s[midIdx];
+              } else if (s.length % 2 === 0) { // 문자열의 길이가 짝수
+                answer = s[midIdx - 1] + s[midIdx];
+              }
               return answer;
             }
-            console.log(solution('study'));
+            console.log(solution('study')); // u
+            console.log(solution('good')); // o
         </script>
     </body>
 </html>
