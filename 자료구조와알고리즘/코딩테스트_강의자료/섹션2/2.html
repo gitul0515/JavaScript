@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(arr) {
+              let answer = 0; // 선생님이 볼 수 있는 학생의 수
+              let tallest = 0; // 가장 큰 학생의 키
+            
+              for (let i = 0; i < arr.length; i++) {
+                if (tallest < arr[i]) {
+                  tallest = arr[i];
+                  answer++;
+                }
+              }
+              return answer;
+            }
+            const arr = [130, 135, 148, 140, 145, 150, 150, 153];
+            console.log(solution(arr)); // 5
+        </script>
+    </body>
+</html>
