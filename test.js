@@ -1,10 +1,3 @@
-let count = 0;
+const arr = [[0, 1, 2, 3, 4]];
 
-const timerId = setInterval(() => {
-  count++;
-  console.log(count);
-
-  if (count >= 5) {
-    clearInterval(timerId);
-  }
-}, 1000);
+console.log(arr[1][0] < 1);

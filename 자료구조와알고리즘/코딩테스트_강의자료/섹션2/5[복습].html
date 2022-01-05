@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(arr) {
+              const rank = [1]; // 등수를 저장하는 배열
+              // 기존의 점수들과 비교, 등수를 조정한다
+              for (let i = 1; i < arr.length; i++) {
+                rank[i] = 1; // 초기값
+                for (let j = i - 1; j >= 0; j--) { // j는 기존의 점수들
+                  if (arr[j] > arr[i]) rank[i]++;
+                  else if (arr[j] < arr[i]) rank[j]++;
+                }
+              }
+              return rank.join(' ');
+            }
+            const arr = [87, 89, 92, 100, 76]; // 4 3 2 1 5
+            console.log(solution(arr));
+        </script>
+    </body>
+</html>
