@@ -1,0 +1,51 @@
+<!-- <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(s){
+                let answer="YES";
+                return answer;
+            }
+            
+            let str="goooG";
+            console.log(solution(str));
+        </script>
+    </body>
+</html> -->
+
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(s) {
+              let answer = 'NO';
+              // 검사하기 쉽게 문자열을 소문자화
+              const str = s.toLowerCase();
+              for (let i = 0; i < str.length; i++) {
+                const j = str.length - 1 - i;
+                if (i >= j) {
+                  answer = 'YES';
+                  break;
+                }
+                if (str[i] !== str[j]) {
+                  break;
+                }
+              }
+              return answer;
+            }
+            console.log(solution('')); // NO
+            console.log(solution('A')); // YES
+            console.log(solution('AB')); // NO
+            console.log(solution('AA')); // YES
+            console.log(solution('ABC')); // NO
+            console.log(solution('ABA')); // YES
+        </script>
+    </body>
+</html>

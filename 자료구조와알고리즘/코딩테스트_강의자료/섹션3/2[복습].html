@@ -1,0 +1,62 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(s) {
+              let answer = 'NO';
+              // 알파벳이 아닌 문자는 모두 삭제
+              let string = s.replace(/[^A-Za-z]/g, '');
+              string = string.toLowerCase();
+
+              for (let i = 0; i < string.length; i++) {
+                const j = string.length - 1 - i;
+                if (i >= j) {
+                  answer = 'YES';
+                  break;
+                }
+                if (string[i] !== string[j]) break;
+              }
+              return answer;
+            }
+            const str = 'found7, time: study; Yduts; emit, 7Dnuof';
+            console.log(solution(str));
+        </script>
+    </body>
+</html>
+
+<!-- <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(s) {
+              let answer = 'NO';
+              const str = s.toLowerCase();
+              const regExp = /[a-z]{1}/; // 알파벳 정규식
+
+              for (let i = 0; i < str.length; i++) {
+                const j = str.length - 1 - i;
+                // 문자가 모두 알파벳인지 확인한다
+                if (regExp.test(str[i]) && regExp.test(str[j])) {
+                  if (i >= j) {
+                    answer = 'YES';
+                    break;
+                  }
+                  if (str[i] !== str[j]) {
+                    break;
+                  }
+                }
+              }
+              return answer;
+            }
+            const str = 'found7, time: study; Yduts; emit, 7Dnuof';
+            console.log(solution(str)); // YES
+        </script>
+    </body>
+</html> -->
+

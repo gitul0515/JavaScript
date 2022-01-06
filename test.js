@@ -1,3 +1,8 @@
-const arr = [[0, 1, 2, 3, 4]];
+// console.log(/[a-z]{1}/.test('s'));
+// console.log(/[a-z]{1}/.test(' '));
+// console.log(/[a-z]{1}/.test('?'));
+// console.log(/[a-z]{1}/.test('!'));
 
-console.log(arr[1][0] < 1);
+const str = 'Hello world';
+const result = str.replace(/[a-z]/g, '');
+console.log(result);

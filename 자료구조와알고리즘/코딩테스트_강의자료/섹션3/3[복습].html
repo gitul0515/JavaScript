@@ -1,0 +1,23 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(str) {
+              let answer = '';
+
+              // 숫자만 추출
+              const number = str.match(/[0-9]/g);
+              // 먼저 나오는 '0'은 제외한다
+              const start = number.findIndex(elem => elem !== '0'); // 문자임에 주의!
+              // 문자열로 변환
+              answer = number.slice(start).join('');
+              return answer;
+            }
+            const str = 'g0en2T0s8eSoft';
+            console.log(solution(str));
+        </script>
+    </body>
+</html>

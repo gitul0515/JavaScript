@@ -20,10 +20,12 @@
               for (let i = 1; i <= arr.length; i++) {
                 for (let j = 1; j <= arr.length; j++) {
                   // 자신의 상하좌우보다 크면 봉우리이다.
-                  if (tempArr[i][j] > tempArr[i - 1][j] && tempArr[i][j] > tempArr[i][j - 1]
-                  && tempArr[i][j] > tempArr[i][j + 1] && tempArr[i][j] > tempArr[i + 1][j]) {
-                    answer++;
-                  }
+                  let max = tempArr[i][j];
+                  if (max < tempArr[i - 1][j]) max = tempArr[i - 1][j];
+                  if (max < tempArr[i + 1][j]) max = tempArr[i + 1][j];
+                  if (max < tempArr[i][j - 1]) max = tempArr[i][j - 1];
+                  if (max < tempArr[i][j + 1]) max = tempArr[i][j + 1];
+                  if (max === tempArr[i][j]) answer++;
                 }
               }
               return answer;
