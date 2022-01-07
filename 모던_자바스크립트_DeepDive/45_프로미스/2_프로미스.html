@@ -20,7 +20,7 @@
           } else {
             reject(new Error('no network'));
           }
-        }, 2000);
+        }, 3000);
       });
 
       // 2. Consumers: then, catch, finally
@@ -36,7 +36,18 @@
         });
 
       // 3. Promise chaining
-      const fetchNumber = new Promise()
+      const fetchNumber = new Promise((resolve, reject) => {
+        setTimeout(() => { resolve(1); }, 1000);
+      });
+
+      fetchNumber
+        .then(num => num + 1)
+        .then(num => num + 2)
+        .then(num => num + 2)
+        .then(num => new Promise((resolve, reject) => {
+          setTimeout(() => resolve(num - 1), 1000);
+        }))
+        .then(num => console.log(num)); // 5
     </script>
   </body>
 </html>
