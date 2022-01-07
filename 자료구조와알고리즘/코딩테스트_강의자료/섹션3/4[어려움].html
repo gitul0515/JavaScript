@@ -1,0 +1,36 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(s, t) {
+              // 문자열 s의 각 문자가 문자 t와 떨어진 최소거리
+              const answer = [];
+              let distance = 1;
+              let tIdx = -1; // 이전 t의 인덱스
+              for (let i = 0; i < s.length; i++) {
+                if (s[i] !== t) {
+                  answer[i] = distance;
+                  distance++;
+                } else {
+                  answer[i] = 0;
+                  distance = 1;
+                  // 현재 t에서 역행하면서 distance를 바로잡는다
+                  const mid = Math.floor((tIdx + i) / 2); // 이전 t와 현재 t의 중간 인덱스
+                  for (let j = i - 1; j > mid; j--) {
+                    answer[j] = distance;
+                    distance++;
+                  }
+                  tIdx = i;
+                  distance = 1;
+                }
+              }
+              return answer.join(' ');
+            }
+            const str = 'teachermode';
+            console.log(solution(str, 'e'));
+        </script>
+    </body>
+</html>
