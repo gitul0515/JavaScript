@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body>
+  <script>
+    class UserStorage {
+      static loginUser(id, password, onSuccess, onError) {
+        setTimeout(() => {
+          if ((id === 'gitul0515' && password === '1199010')
+          || (id === 'mathlad' && password === '870621')
+          || (id === 'linhong' && password === '123456')) {
+            alert(`${id}님, 환영합니다.`);
+            onSuccess(id); // 성공 처리
+          } else {
+            onError('not found'); // 실패 처리
+          }
+        }, 2000);
+      }
+
+      static getUserAdmin(id, onSuccess, onError) {
+        setTimeout(() => {
+          if (id === 'gitul0515') {
+            onSuccess('gihong', 'teacher'); // 성공 처리
+          } else if (id === 'mathlad') {
+            onSuccess('gonggong', 'student'); // 성공 처리
+          } else {
+            onError('no access'); // 실패 처리
+          }
+        }, 1000);
+      }
+    }
+
+    const id = prompt('id를 입력하세요');
+    const password = prompt('password를 입력하세요');
+
+    UserStorage.loginUser(
+      id,
+      password,
+      user => {
+        UserStorage.getUserAdmin(
+          user,
+          (name, role) => alert(`${name}님의 역할은 ${role}입니다.`),
+          message => alert(message)
+        );
+      },
+      message => alert(message)
+    );
+  </script>
+</body>
+</html>
+
