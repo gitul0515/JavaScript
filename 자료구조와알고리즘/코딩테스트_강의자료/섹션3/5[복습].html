@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(s) {
+              let answer = `${s[0]}`;
+              let char = s[0];
+              let cnt = 1;
+              for (let i = 1; i < s.length; i++) {
+                if (s[i] === char) {
+                  cnt++;
+                } else {
+                  if (cnt !== 1) answer += `${cnt}`; // 반복횟수가 1이 아닌 경우
+                  answer += `${s[i]}`;
+                  char = s[i];
+                  cnt = 1;
+                }
+              }
+              return answer;
+            }
+            const str = 'KKHSSSSSSSE';
+            console.log(solution(str)); // K2HS7E
+        </script>
+    </body>
+</html>
