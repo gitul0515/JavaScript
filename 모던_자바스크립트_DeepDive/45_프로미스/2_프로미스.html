@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  </head>
+  <body>
+    <script>
+      // Promise is a JavaScript object for asyncronous operaion
+      // State: pending -> fulfilled or rejected
+      // Producer vs Consumer
+
+      // 1. Producer
+      // when new Promise is created, the executor run automatically (중요)
+      const promise = new Promise((resolve, reject) => {
+        // doing some heavy work (network, read files)
+        const boolean = false;
+        console.log('doing something...');
+        setTimeout(() => {
+          if (boolean) {
+            resolve('gihong');
+          } else {
+            reject(new Error('no network'));
+          }
+        }, 2000);
+      });
+
+      // 2. Consumers: then, catch, finally
+      promise //
+        .then(name => {
+          console.log(`hello ${name}!`);
+        })
+        .catch(msg => {
+          console.log(msg);
+        })
+        .finally(() => {
+          console.log('finally');
+        });
+
+      // 3. Promise chaining
+      const fetchNumber = new Promise()
+    </script>
+  </body>
+</html>
