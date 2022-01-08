@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body>
+  <script>
+    // 콜백지옥 => 프로미스
+    class UserStorage {
+      static loginUser(id, password) {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            if ((id === 'gitul0515' && password === '1199010')
+          || (id === 'mathlad' && password === '870621')
+          || (id === 'linhong7' && password === '123456')) {
+              resolve(id); // 성공 처리
+            } else {
+              reject(new Error('not found')); // 실패 처리
+            }
+          }, 2000);
+        });
+      }
+
+      static getUserAdmin(id) {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            if (id === 'gitul0515') {
+              resolve({ name: 'gihong', role: 'teacher' }); // 성공 처리
+            } else if (id === 'mathlad') {
+              resolve({ name: 'gonggong', role: 'student' }); // 성공 처리
+            } else {
+              reject(new Error('no access')); // 실패 처리
+            }
+          }, 1000);
+        });
+      }
+    }
+
+    const id = prompt('id를 입력하세요');
+    const password = prompt('password를 입력하세요');
+
+    UserStorage.loginUser(id, password)
+      .then(id => {
+        alert(`${id}님, 환영합니다.`);
+        return UserStorage.getUserAdmin(id);
+      })
+      .then(user => alert(`${user.name}님의 역할은 ${user.role}입니다.`))
+      .catch(alert)
+      .finally(() => console.log('finally'));
+  </script>
+</body>
+</html>
+

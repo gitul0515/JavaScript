@@ -36,18 +36,71 @@
         });
 
       // 3. Promise chaining
-      const fetchNumber = new Promise((resolve, reject) => {
-        setTimeout(() => { resolve(1); }, 1000);
-      });
+      // const fetchNumber = new Promise((resolve, reject) => {
+      //   setTimeout(() => { resolve(1); }, 1000);
+      // });
 
-      fetchNumber
-        .then(num => num + 1)
-        .then(num => num + 2)
-        .then(num => num + 2)
-        .then(num => new Promise((resolve, reject) => {
-          setTimeout(() => resolve(num - 1), 1000);
-        }))
-        .then(num => console.log(num)); // 5
+      // fetchNumber
+      //   .then(num => num + 1)
+      //   .then(num => num + 2)
+      //   .then(num => num + 2)
+      //   .then(num => new Promise((resolve, reject) => {
+      //     setTimeout(() => resolve(num - 1), 1000);
+      //   }))
+      //   .then(num => console.log(num)); // 5
+
+      // function getPotato() {
+      //   return new Promise((resolve, reject) => {
+      //     setTimeout(() => resolve('Potato'), 2000);
+      //   });
+      // }
+
+      // function getOil(potato) {
+      //   return new Promise((resolve, reject) => {
+      //     setTimeout(() => resolve(`${potato} + Oil`), 2000);
+      //   });
+      // }
+
+      // function cook(ingredients) {
+      //   return new Promise((resolve, reject) => {
+      //     setTimeout(() => resolve(`${ingredients} = French fries`), 2000);
+      //   });
+      // }
+
+      // getPotato() //
+      //   .then(getOil) // .then(potato => getOil(potato))
+      //   .then(cook) // .then(ingredients => cook(ingredients))
+      //   .then(console.log) // .then(result => console.log(result))
+      //   .finally(() => console.log('Cooking end!!'));
+
+      // 콜백함수에서 하나의 인자를 다음 함수에 곧바로 전달하는 경우,
+      // 축약하여 표현할 수 있다.
+
+      // 4. Error Handling
+      function _getPotato() {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => resolve('Potato'), 2000);
+        });
+      }
+
+      function _getOil(potato) {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => reject(new Object('error')), 2000);
+        });
+      }
+
+      function _cook(ingredients) {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => resolve(`${ingredients} = French fries`), 2000);
+        });
+      }
+
+      _getPotato() //
+        .then(_getOil) // .then(potato => getOil(potato))
+        .catch(error => 'yam')
+        .then(_cook) // .then(ingredients => cook(ingredients))
+        .catch(console.error)
+        .then(console.log); // .then(result => console.log(result))
     </script>
   </body>
 </html>
