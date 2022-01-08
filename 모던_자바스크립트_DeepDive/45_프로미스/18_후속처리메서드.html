@@ -21,6 +21,12 @@
         .then(res => console.log(res))
         .catch(err => console.error(err))
         .finally(() => console.log('Bye!'));
+
+      const _url = 'https://jsonplaceholder.typicode.com';
+      promiseGet(_url)
+        .then(({ userId }) => promiseGet(`${_url}/users/${userId}`))
+        .then(userInfo => console.log(userInfo))
+        .catch(err => console.error(err));
     </script>
   </body>
 </html>
