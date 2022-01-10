@@ -9,7 +9,7 @@
     <button id="increase">+</button>
     <button id="decrease">-</button>
     <script>
-      const $counter = document.getElementById('counter-x');
+      const $counter = document.getElementById('counter');
       const $increase = document.getElementById('increase');
       const $decrease = document.getElementById('decrease');
 
@@ -18,13 +18,13 @@
         $counter.innerHTML = num;
       };
 
-      $increase.onclick = function(){
+      $increase.onclick = function () {
         num++;
         console.log('increase 버튼 클릭', num);
         render();
       };
 
-      $decrease.onclick = function(){
+      $decrease.onclick = function () {
         num--;
         console.log('decrease 버튼 클릭', num);
         render();

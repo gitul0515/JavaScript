@@ -1,0 +1,55 @@
+<!-- <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(n, arr) {
+              arr.forEach(elem => {
+                const n = String(elem).length;
+                const digits = 10 ** (n - 1);
+
+
+              });
+              return answer;
+            }
+            
+            const arr = [128, 460, 603, 40, 521, 137, 123];
+            console.log(solution(7, arr));
+        </script>
+    </body>
+</html> -->
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(n, arr) {
+              let max = 0; // 자릿수 합의 최대
+              let max_elem = 0; // 자릿수 합이 최대인 자연수
+              arr.forEach(elem => {
+                let sum = 0;
+                // 자릿수에 접근하기 쉽게 elem를 문자열로 변환
+                const str = String(elem);
+                for (const i of str) {
+                  sum += Number(i); // 숫자로 재변환하여 더한다
+                }
+                if (max < sum) {
+                  max = sum;
+                  max_elem = elem;
+                } else if (max === sum) { // 자릿수 합이 같은 경우
+                  // 원래 숫자가 큰 숫자를 선택
+                  max_elem = max_elem >= elem ? max_elem : elem;
+                }
+              });
+              return max_elem;
+            }
+            const arr = [128, 460, 603, 40, 521, 137, 123];
+            console.log(solution(7, arr)); // 137
+        </script>
+    </body>
+</html>
