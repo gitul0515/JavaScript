@@ -9,7 +9,8 @@
             // 소수: 1과 자기 자신만을 약수로 가지는 수
             function isPrime(num) {
               if (num === 1) return false; // 1은 소수가 아니다
-              for (let i = 2; i < num; i++) {
+              // 자기 자신의 절반까지만 검사해도 충분
+              for (let i = 2; i <= Math.floor(num / 2); i++) {
                 if (num % i === 0) {
                   return false;
                 }

@@ -1,1 +1,4 @@
-console.log(Number('00902'));
+const arr = [];
+
+arr.push([[1]]);
+console.log(arr);

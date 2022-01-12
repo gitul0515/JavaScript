@@ -5,11 +5,17 @@
     </head>
     <body>
         <script>
-            function solution(test) {
+            function solution(arr) {
               let answer = 0;
+              const student = arr[0].length; // 학생 수
+              const test = arr.length; // 시험 횟수
+
+              for (let i = 1; i <= student; i++) {
+                for (let j = 0; j < test; j++) {
+                }
+              }
               return answer;
             }
-            
             const arr = [[3, 4, 1, 2], [4, 3, 2, 1], [3, 1, 4, 2]];
             console.log(solution(arr));
         </script>
