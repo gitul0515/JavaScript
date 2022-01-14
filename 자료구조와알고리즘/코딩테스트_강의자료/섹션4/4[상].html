@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            // 조합(combination)
+            function getCombination(arr, r) {
+              const result = [];
+              if (r === 1) return arr.map(elem => [elem]);
+
+              arr.forEach((fixed, index, array) => {
+                const rest = array.slice(index + 1);
+                const add = getCombination(rest, r - 1);
+                add.forEach(elem => result.push([fixed, ...elem]));
+              });
+              return result;
+            }
+
+            function solution(m, product) {
+              let answer = 0; // 현재 예산으로 선물할 수 있는 최대 학생수
+
+              for (let i = product.length; i >= 1; i--) {
+                const combination = getCombination([0, 1, 2, 3, 4], i);
+                let sum;
+                let max;
+                combination.forEach(array => {
+                  sum = 0;
+                  max = 0;
+                  array.forEach(student => {
+                    if (max < product[student][0]) max = product[student][0];
+                    sum += product[student][0] + product[student][1];
+                  });
+                  sum -= max / 2; // 가장 비싼 상품에 쿠폰을 적용
+                });
+                if (sum <= m) {
+                  answer = i;
+                  return answer;
+                }
+              }
+              return answer;
+            }
+            let arr = [[6, 6], [2, 2], [4, 3], [4, 5], [10, 3]];
+            console.log(solution(28, arr));
+        </script>
+    </body>
+</html>
