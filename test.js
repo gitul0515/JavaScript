@@ -1,4 +1,10 @@
-const arr = [[6, 6], [2, 2], [4, 3], [4, 5], [10, 3]];
+startAlert = function () {
+  playAlert = setInterval(function() {
+      alert('Hello!');
+  }, 5000
+  );
+};
 
-arr.sort((a, b) => (a[0] + a[1]) - (b[0] + b[1]));
-console.log(arr);
+stopAlert = function () {
+  clearInterval(playAlert);
+};
