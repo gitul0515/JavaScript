@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .button__container {
+      position: fixed;
+      right: 10px;
+    }
+    .box {
+      width: 100px;
+      height: 100px;
+      background-color: yellow;
+      margin: 10px;
+    }
+    .special {
+      background-color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="button__container">
+    <button class="scroll-by">scroll by 100px(y)</button>
+    <button class="scroll-to">scroll to 100px(y)</button>
+    <button class="scroll-into">scroll into special</button>
+  </div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box special"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <div class="box"></div>
+  <script>
+    const scrollBy = document.querySelector('.scroll-by');
+    const scrollTo = document.querySelector('.scroll-to');
+    const scrollInto = document.querySelector('.scroll-into');
+
+    // 버튼 클릭 시, 스크롤을 100px 밑으로 이동
+    scrollBy.addEventListener('click', () => {
+      window.scrollBy({ top: 100, behavior: 'smooth' });
+    });
+
+    // 버튼 클릭 시, 스크롤을 100px로 이동
+    scrollTo.addEventListener('click', () => {
+      window.scrollTo({ top: 100, behavior: 'smooth' });
+    });
+
+    // 버튼 클릭 시, 스크롤을 special의 위치로 이동
+    const special = document.querySelector('.special');
+    scrollInto.addEventListener('click', () => {
+      special.scrollIntoView({ behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>
