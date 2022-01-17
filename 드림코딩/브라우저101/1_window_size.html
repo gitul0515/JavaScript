@@ -6,43 +6,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
-    .text__container {
-      width: 350px;
+    .text__box {
+      display: inline-block;
       padding: 5px;
-      background-color: blueviolet;
+      background-color: bisque;
       font-weight: bold;
-    }
-    ul {
-      list-style: none;
-      margin: 0;
-      padding-left: 0;
     }
   </style>
 </head>
 <body>
-  <ul class="text__container">
-    <li class="text__screen"></li>
-    <li class="text__outer">window.outer: </li>
-    <li class="text__inner">window.inner: </li>
-    <li class="text__client">documentElement.clientWidth: </li>
-  </ul>
+  <div class="text__box">text</div>
   <div style="height: 100vh;"></div>
   <script>
-    const screen = document.querySelector('.text__screen');
-    const outer = document.querySelector('.text__outer');
-    const inner = document.querySelector('.text__inner');
-    const client = document.querySelector('.text__client');
-
-    screen.innerHTML = `window.screen: ${window.screen.width}, ${window.screen.height}`;
-    outer.innerHTML = `window.outer: ${window.outerWidth}, ${window.outerHeight}`;
-    inner.innerHTML = `window.inner: ${window.innerWidth}, ${window.innerHeight}`;
-    client.innerHTML = `documentElement.clientWidth: ${document.documentElement.clientWidth}, ${document.documentElement.clientHeight}`;
-
+    const textBox = document.querySelector('.text__box');
+    function updateText() {
+      textBox.innerHTML = `
+      window.screen: ${window.screen.width}, ${window.screen.height}<br>
+      window.outer: ${window.outerWidth}, ${window.outerHeight}<br>
+      window.inner: ${window.innerWidth}, ${window.innerHeight}<br>
+      documentElement.client: ${document.documentElement.clientWidth}, ${document.documentElement.clientHeight}
+    `;
+    }
+    updateText();
     window.addEventListener('resize', () => {
-      screen.innerHTML = `window.screen: ${window.screen.width}, ${window.screen.height}`;
-      outer.innerHTML = `window.outer: ${window.outerWidth}, ${window.outerHeight}`;
-      inner.innerHTML = `window.inner: ${window.innerWidth}, ${window.innerHeight}`;
-      client.innerHTML = `documentElement.clientWidth: ${document.documentElement.clientWidth}, ${document.documentElement.clientHeight}`;
+      updateText();
     });
   </script>
 </body>
