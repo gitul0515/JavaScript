@@ -2,11 +2,9 @@ const coord = document.querySelector('.coordinates');
 const coordText = document.querySelector('.coordinates__text');
 
 document.addEventListener('mousemove', e => {
-  const x = e.clientX;
-  const y = e.clientY;
-
-  coord.style.left = `${x}px`;
-  coord.style.top = `${y}px`;
-
+  const rect = coord.getBoundingClientRect();
+  const x = e.clientX - rect.width / 2;
+  const y = e.clientY - rect.height / 2;
+  coord.style.transform = `translate(${x - 6}px, ${y - 5}px)`;
   coordText.innerHTML = `${x}px, ${y}px`;
 });
