@@ -1,3 +1,32 @@
+<!-- <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(m, arr) {
+              let answer = 0;
+              for (let i = 0; i < arr.length; i++) {
+                let sum = 0;
+                for (let j = i; j < arr.length; j++) {
+                  sum += arr[j];
+                  if (sum === m) {
+                    answer++;
+                    break;
+                  } else if (sum > m) {
+                    break;
+                  }
+                }
+              }
+              return answer;
+            }
+            const a = [1, 2, 1, 3, 1, 1, 1, 2];
+            console.log(solution(6, a)); // 3
+        </script>
+    </body>
+</html> -->
+
 <html>
     <head>
         <meta charset="UTF-8">
@@ -5,13 +34,30 @@
     </head>
     <body>
         <script>
-            function solution(m, arr){
-                let answer=0;
-                return answer;
+            function solution(m, arr) {
+              // 가능한 경우를 배열로 저장하기
+              const answer = [];
+              for (let i = 0; i < arr.length; i++) {
+                let sum = 0;
+                for (let j = i; j < arr.length; j++) {
+                  sum += arr[j];
+                  if (sum === m) {
+                    const temp = [];
+                    // arr[i]부터 arr[j]까지 저장한다
+                    for (let k = i; k <= j; k++) {
+                      temp.push(arr[k]);
+                    }
+                    answer.push(temp);
+                    break;
+                  } else if (sum > m) {
+                    break;
+                  }
+                }
+              }
+              return answer;
             }
-            
-            let a=[1, 2, 1, 3, 1, 1, 1, 2];
-            console.log(solution(6, a));
+            const a = [1, 2, 1, 3, 1, 1, 1, 2];
+            console.log(solution(6, a)); // [[2, 1, 3], [1, 3, 1, 1], [3, 1, 1, 1]]
         </script>
     </body>
 </html>
