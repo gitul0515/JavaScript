@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
-    .button__container {
+    .button-container {
       position: fixed;
       right: 10px;
     }
@@ -16,16 +16,16 @@
       background-color: yellow;
       margin: 10px;
     }
-    .special {
+    .box--special {
       background-color: red;
     }
   </style>
 </head>
 <body>
-  <div class="button__container">
-    <button class="scroll-by">scroll by 100px(y)</button>
-    <button class="scroll-to">scroll to 100px(y)</button>
-    <button class="scroll-into">scroll into special</button>
+  <div class="button-container">
+    <button class="button-container__scroll-by">scroll by 100px(y)</button>
+    <button class="button-container__scroll-to">scroll to 100px(y)</button>
+    <button class="button-container__scroll-into">scroll into special</button>
   </div>
   <div class="box"></div>
   <div class="box"></div>
@@ -36,7 +36,7 @@
   <div class="box"></div>
   <div class="box"></div>
   <div class="box"></div>
-  <div class="box special"></div>
+  <div class="box box--special"></div>
   <div class="box"></div>
   <div class="box"></div>
   <div class="box"></div>
@@ -47,9 +47,9 @@
   <div class="box"></div>
   <div class="box"></div>
   <script>
-    const scrollBy = document.querySelector('.scroll-by');
-    const scrollTo = document.querySelector('.scroll-to');
-    const scrollInto = document.querySelector('.scroll-into');
+    const scrollBy = document.querySelector('.button-container__scroll-by');
+    const scrollTo = document.querySelector('.button-container__scroll-to');
+    const scrollInto = document.querySelector('.button-container__scroll-into');
 
     // 버튼 클릭 시, 스크롤을 100px 밑으로 이동
     scrollBy.addEventListener('click', () => {
@@ -62,7 +62,7 @@
     });
 
     // 버튼 클릭 시, 스크롤을 special의 위치로 이동
-    const special = document.querySelector('.special');
+    const special = document.querySelector('.box--special');
     scrollInto.addEventListener('click', () => {
       special.scrollIntoView({ behavior: 'smooth' });
     });
