@@ -1,0 +1,71 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(m, arr) {
+              let answer = 0;
+              // num은 부분수열의 개수
+              // start는 부분수열의 첫 요소의 위치
+              for (let num = 1; num <= arr.length; num++) {
+                for (let start = 0; start <= arr.length - num; start++) {
+                  let i = start;
+                  let sum = 0;
+                  let cnt = 0;
+                  while (cnt < num) { // num개 만큼 더한다
+                    sum += arr[i];
+                    i++;
+                    cnt++;
+                  }
+                  if (sum <= m) {
+                    answer++;
+                  }
+                }
+              }
+              return answer;
+            }
+            const a = [1, 3, 1, 2, 3];
+            console.log(solution(5, a)); // 10
+        </script>
+    </body>
+</html>
+
+<!-- <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(m, arr) {
+              const result = [];
+              // num은 부분수열의 개수
+              // start는 부분수열의 첫 요소의 위치
+              for (let num = 1; num <= arr.length; num++) {
+                for (let start = 0; start <= arr.length - num; start++) {
+                  let i = start;
+                  let sum = 0;
+                  let cnt = 0;
+                  while (cnt < num) { // num개 만큼 더한다
+                    sum += arr[i];
+                    i++;
+                    cnt++;
+                  }
+                  if (sum <= m) {
+                    const temp = [];
+                    for (let j = start; j < i; j++) {
+                      temp.push(arr[j]);
+                    }
+                    result.push(temp);
+                  }
+                }
+              }
+              return result;
+            }
+            const a = [1, 3, 1, 2, 3];
+            console.log(solution(5, a)); // 10
+        </script>
+    </body>
+</html> -->
