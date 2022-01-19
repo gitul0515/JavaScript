@@ -1,10 +1,14 @@
 const coord = document.querySelector('.coordinates');
 const coordText = document.querySelector('.coordinates__text');
 
-document.addEventListener('mousemove', e => {
-  const rect = coord.getBoundingClientRect();
-  const x = e.clientX - rect.width / 2;
-  const y = e.clientY - rect.height / 2;
-  coord.style.transform = `translate(${x - 6}px, ${y - 5}px)`;
-  coordText.innerHTML = `${x}px, ${y}px`;
+window.addEventListener('load', () => {
+  const coordRect = coord.getBoundingClientRect();
+
+  document.addEventListener('mousemove', e => {
+    const x = e.clientX - coordRect.width / 2 - 6;
+    const y = e.clientY - coordRect.height / 2 - 5;
+
+    coord.style.transform = `translate(${x}px, ${y}px)`;
+    coordText.innerHTML = `${e.clientX}px, ${e.clientY}px`;
+  });
 });
