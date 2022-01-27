@@ -1,0 +1,12 @@
+function solution(participant, completion) {
+    let answer = '';
+    for (let i = 0; i < participant.length; i++) {
+        const arr1 = participant.filter(elem => elem === participant[i]);
+        const arr2 = completion.filter(elem => elem === participant[i]);
+        if (arr1.length !== arr2.length) {
+            answer = participant[i];
+            break;
+        }
+    }
+    return answer;
+}
