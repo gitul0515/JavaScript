@@ -3,24 +3,31 @@ import { faPlusSquare, faMinusSquare, faTrash } from "@fortawesome/free-solid-sv
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class Habit extends Component {
-  state = {
-    count: 0,
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0
+    }
+
+    this.increaseCount = this.increaseCount.bind(this);
+    this.decreaseCount = this.decreaseCount.bind(this);
   }
 
-  increaseCount = () => {
+  increaseCount () {
     this.setState({count: this.state.count + 1});
   }
 
-  decreaseCount = () => {
+  decreaseCount () {
     const decreasedCount = this.state.count - 1;
     this.setState({count: decreasedCount < 0 ? 0 : decreasedCount});
   }
 
   render() {
+    const { name, count } = this.props.habit;
     return (
       <li className='habit'>
-        <span className='habit-name'>Reading</span>
-        <span className='habit-count'>{this.state.count}</span>
+        <span className='habit-name'>{name}</span>
+        <span className='habit-count'>{count}</span>
         <button 
           className='habit-btn habit-btn--plus' 
           onClick={this.increaseCount}>
