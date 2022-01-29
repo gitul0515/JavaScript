@@ -1,18 +1,16 @@
 /* eslint-disable linebreak-style */
-/* eslint-disable no-undef-init */
-/* eslint-disable linebreak-style */
 /* eslint-disable prefer-destructuring */
 /* eslint-disable no-use-before-define */
 /* eslint-disable linebreak-style */
+/* eslint-disable strict */
 import Popup from './popup.js';
+import Field from './field.js';
 
 const CARROT_SIZE = 80;
 const CARROT_COUNT = 20;
 const BUG_COUNT = 20;
 const GAME_DURATION_SEC = 20;
 
-const field = document.querySelector('.game__field');
-const fieldRect = field.getBoundingClientRect();
 const gameBtn = document.querySelector('.game__button');
 const timerIndicator = document.querySelector('.game__timer');
 const gameScore = document.querySelector('.game__score');
@@ -25,13 +23,14 @@ const winSound = new Audio('./sound/game_win.mp3');
 
 let started = false;
 let score = 0;
-let timer = undefined;
+let timer;
 const gameResultBanner = new Popup();
 gameResultBanner.setClickListener(() => {
   startGame();
 });
+const gameField = new Field();
+gameField.setClickListener(onFieldClick);
 
-field.addEventListener('click', onFieldClick);
 gameBtn.addEventListener('click', () => {
   if (started) {
     stopGame();
@@ -112,7 +111,7 @@ function updateTimerText(time) {
 
 function initGame() {
   score = 0;
-  field.innerHTML = '';
+  gameField.field.innerHTML = '';
   gameScore.innerText = CARROT_COUNT;
   // 벌레와 당근을 생성한뒤 field에 추가해줌
   addItem('carrot', CARROT_COUNT, 'img/carrot.png');
@@ -153,8 +152,8 @@ function updateScoreBoard() {
 function addItem(className, count, imgPath) {
   const x1 = 0;
   const y1 = 0;
-  const x2 = fieldRect.width - CARROT_SIZE;
-  const y2 = fieldRect.height - CARROT_SIZE;
+  const x2 = gameField.fieldRect.width - CARROT_SIZE;
+  const y2 = gameField.fieldRect.height - CARROT_SIZE;
   for (let i = 0; i < count; i++) {
     const item = document.createElement('img');
     item.setAttribute('class', className);
@@ -164,7 +163,7 @@ function addItem(className, count, imgPath) {
     const y = randomNumber(y1, y2);
     item.style.left = `${x}px`;
     item.style.top = `${y}px`;
-    field.appendChild(item);
+    gameField.field.appendChild(item);
   }
 }
 
