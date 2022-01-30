@@ -3,24 +3,17 @@ import { faPlusSquare, faMinusSquare, faTrash } from "@fortawesome/free-solid-sv
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class Habit extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      count: 0
-    }
-
-    this.increaseCount = this.increaseCount.bind(this);
-    this.decreaseCount = this.decreaseCount.bind(this);
-  }
-
-  increaseCount () {
-    this.setState({count: this.state.count + 1});
-  }
-
-  decreaseCount () {
-    const decreasedCount = this.state.count - 1;
-    this.setState({count: decreasedCount < 0 ? 0 : decreasedCount});
-  }
+  handleIncrement = () => {
+    this.props.onIncrement(this.props.habit);
+  };
+  
+  handleDecrement = () => {
+    this.props.onDecrement(this.props.habit);
+  };
+  
+  handleDelete = () => {
+    this.props.onDelete(this.props.habit);
+  };
 
   render() {
     const { name, count } = this.props.habit;
@@ -30,16 +23,17 @@ class Habit extends Component {
         <span className='habit-count'>{count}</span>
         <button 
           className='habit-btn habit-btn--plus' 
-          onClick={this.increaseCount}>
+          onClick={this.handleIncrement}>
           <FontAwesomeIcon icon={faPlusSquare} />
         </button>
         <button 
           className='habit-btn habit-btn--minus' 
-          onClick={this.decreaseCount}>
+          onClick={this.handleDecrement}>
           <FontAwesomeIcon icon={faMinusSquare} />
         </button>
         <button 
-          className='habit-btn habit-btn--trash'>
+          className='habit-btn habit-btn--trash'
+          onClick={this.handleDelete}>
           <FontAwesomeIcon icon={faTrash} />
         </button>
       </li>
