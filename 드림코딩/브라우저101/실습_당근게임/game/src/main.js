@@ -6,47 +6,30 @@
 import Popup from './popup.js';
 import Field from './field.js';
 import * as sound from './sound.js';
+import Game from './game.js';
 
 const CARROT_COUNT = 20;
 const BUG_COUNT = 20;
 const GAME_DURATION_SEC = 20;
 
-const gameBtn = document.querySelector('.game__button');
-const timerIndicator = document.querySelector('.game__timer');
-const gameScore = document.querySelector('.game__score');
-
 let started = false;
 let score = 0;
 let timer;
+
 const gameResultBanner = new Popup();
-gameResultBanner.setClickListener(() => {
-  startGame();
-});
+gameResultBanner.setClickListener(startGame);
 const gameField = new Field(CARROT_COUNT, BUG_COUNT);
 gameField.setListener(onItemClick);
+const gameState = new Game();
+gameState.setClickListener(onBtnClick);
 
-function onItemClick(item) {
-  if (!started) {
-    return;
-  }
-  if (item === 'carrot') {
-    score++;
-    updateScoreBoard();
-    if (score === CARROT_COUNT) {
-      finishGame(true);
-    }
-  } else if (item === 'bug') {
-    finishGame(false);
-  }
-}
-
-gameBtn.addEventListener('click', () => {
+function onBtnClick() {
   if (started) {
     stopGame();
   } else {
     startGame();
   }
-});
+}
 
 function startGame() {
   started = true;
@@ -124,8 +107,21 @@ function initGame() {
   gameField.init();
 }
 
-
-
 function updateScoreBoard() {
   gameScore.innerText = CARROT_COUNT - score;
+}
+
+function onItemClick(item) {
+  if (!started) {
+    return;
+  }
+  if (item === 'carrot') {
+    score++;
+    updateScoreBoard();
+    if (score === CARROT_COUNT) {
+      finishGame(true);
+    }
+  } else if (item === 'bug') {
+    finishGame(false);
+  }
 }

@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusSquare, faMinusSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class Habit extends Component {
-  handleIncrement = () => {
+  onIncrement = () => {
     this.props.onIncrement(this.props.habit);
-  };
-  
-  handleDecrement = () => {
+  }
+
+  onDecrement = () => {
     this.props.onDecrement(this.props.habit);
-  };
-  
-  handleDelete = () => {
+  }
+
+  onDelete = () => {
     this.props.onDelete(this.props.habit);
-  };
+  }
 
   render() {
     const { name, count } = this.props.habit;
@@ -23,17 +23,17 @@ class Habit extends Component {
         <span className='habit-count'>{count}</span>
         <button 
           className='habit-btn habit-btn--plus' 
-          onClick={this.handleIncrement}>
+          onClick={this.onIncrement}>
           <FontAwesomeIcon icon={faPlusSquare} />
         </button>
         <button 
           className='habit-btn habit-btn--minus' 
-          onClick={this.handleDecrement}>
+          onClick={this.onDecrement}>
           <FontAwesomeIcon icon={faMinusSquare} />
         </button>
         <button 
-          className='habit-btn habit-btn--trash'
-          onClick={this.handleDelete}>
+          className='habit-btn habit-btn--trash' 
+          onClick={this.onDelete}>
           <FontAwesomeIcon icon={faTrash} />
         </button>
       </li>
