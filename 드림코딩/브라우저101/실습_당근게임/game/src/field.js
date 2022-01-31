@@ -1,7 +1,7 @@
 /* eslint-disable no-use-before-define */
-const CARROT_SIZE = 80;
-const carrotSound = new Audio('./sound/carrot_pull.mp3');
+import * as sound from './sound.js';
 
+const CARROT_SIZE = 80;
 export default class Field {
   constructor(carrotCount, bugCount) {
     this.carrotCount = carrotCount;
@@ -43,16 +43,11 @@ export default class Field {
     const { target } = event;
     if (target.matches('.carrot')) {
       target.remove();
-      Field.playSound(carrotSound);
+      sound.playCarrot();
       this.onItemClick && this.onItemClick('carrot');
     } else if (target.matches('.bug')) {
       this.onItemClick && this.onItemClick('bug');
     }
-  }
-
-  static playSound(sound) {
-    sound.currentTime = 0;
-    sound.play();
   }
 
   static randomNumber(min, max) {
