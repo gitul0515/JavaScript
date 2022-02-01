@@ -1,7 +1,6 @@
 import './app.css';
 import React, { Component } from 'react';
 import Header from './components/header';
-import HabitAddForm from './components/habitAddForm';
 import Habits from './components/habits';
 
 class App extends Component {
@@ -59,16 +58,14 @@ class App extends Component {
         <Header 
           habitTypes = {this.state.habits.filter(item => item.count > 0).length}
         />
-
         <Habits 
           habits={this.state.habits}
+          onAdd = {this.onAdd}
           onIncrement = {this.onIncrement}
           onDecrement = {this.onDecrement}
           onDelete = {this.onDelete}
-          onAdd = {this.onAdd}
+          onReset = {this.onReset}
         />
-
-        <button className='btn-reset' onClick={this.onReset}>Reset All</button>
       </section>
     )
   }
