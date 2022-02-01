@@ -18,28 +18,28 @@ class App extends Component {
     const habits = this.state.habits.map(item => {
       if (item.id === habit.id) {
         const count = habit.count + 1;
-        if (count === 1) this.handleHabitTypes(+1);
         return { ...habit, count: count }
       } else return item;
     });
     this.setState({habits});
+    if (habit.count === 0) this.handleHabitTypes(+1);
   }
   
   handleDecrement = habit => {
     const habits = this.state.habits.map(item => {
       if (item.id === habit.id) {
         const count = habit.count - 1;
-        if (count === 0) this.handleHabitTypes(-1);
         return { ...habit, count: count >= 0 ? count : 0 }
       } else return item;
     })
     this.setState({habits});
+    if (habit.count === 1) this.handleHabitTypes(-1);
   }
   
   handleDelete = habit => {
     const habits = this.state.habits.filter(item => item.id !== habit.id);
     this.setState({habits});
-    this.handleHabitTypes(-1);
+    if (habit.count !== 0 ) this.handleHabitTypes(-1);
   }
 
   handleHabitTypes = (num) => {
