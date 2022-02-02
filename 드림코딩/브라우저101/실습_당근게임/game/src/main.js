@@ -1,3 +1,4 @@
+/* eslint-disable import/extensions */
 /* eslint-disable linebreak-style */
 /* eslint-disable prefer-destructuring */
 /* eslint-disable no-use-before-define */
@@ -10,18 +11,16 @@ import Game from './game.js';
 
 const CARROT_COUNT = 20;
 const BUG_COUNT = 20;
-const GAME_DURATION_SEC = 20;
-
 let started = false;
 let score = 0;
-let timer;
 
 const gameResultBanner = new Popup();
 gameResultBanner.setClickListener(startGame);
 const gameField = new Field(CARROT_COUNT, BUG_COUNT);
 gameField.setListener(onItemClick);
-const gameState = new Game();
-gameState.setClickListener(onBtnClick);
+const gameControl = new Game();
+gameControl.setClickListener(onBtnClick);
+gameControl.setFinishGame(finishGame);
 
 function onBtnClick() {
   if (started) {
@@ -34,16 +33,16 @@ function onBtnClick() {
 function startGame() {
   started = true;
   initGame();
-  showStopButton();
-  showTimerAndScore();
-  startGameTimer();
+  gameControl.showStopButton();
+  gameControl.showTimerAndScore();
+  gameControl.startTimer(score);
   sound.playBackground();
 }
 
 function stopGame() {
   started = false;
-  stopGameTimer();
-  hideGameButton();
+  gameControl.stopTimer();
+  gameControl.hideButton();
   gameResultBanner.showWithText('REPLAY❓');
   sound.playAlert();
   sound.stopBackground();
@@ -51,64 +50,21 @@ function stopGame() {
 
 function finishGame(win) {
   started = false;
-  hideGameButton();
+  gameControl.hideButton();
   if (win) {
     sound.playWin();
   } else {
     sound.playBug();
   }
-  stopGameTimer();
+  gameControl.stopTimer();
   sound.stopBackground();
   gameResultBanner.showWithText(win ? 'YOU WON 🎉' : 'YOU LOST 💩');
 }
 
-function showStopButton() {
-  const icon = gameBtn.querySelector('.fas');
-  icon.classList.add('fa-stop');
-  icon.classList.remove('fa-play');
-  gameBtn.style.visibility = 'visible';
-}
-
-function hideGameButton() {
-  gameBtn.style.visibility = 'hidden';
-}
-
-function showTimerAndScore() {
-  timerIndicator.style.visibility = 'visible';
-  gameScore.style.visibility = 'visible';
-}
-
-function startGameTimer() {
-  let remainingTimeSec = GAME_DURATION_SEC;
-  updateTimerText(remainingTimeSec);
-  timer = setInterval(() => {
-    if (remainingTimeSec <= 0) {
-      clearInterval(timer);
-      finishGame(score === CARROT_COUNT);
-      return;
-    }
-    updateTimerText(--remainingTimeSec);
-  }, 1000);
-}
-
-function stopGameTimer() {
-  clearInterval(timer);
-}
-
-function updateTimerText(time) {
-  const minutes = Math.floor(time / 60);
-  const seconds = time % 60;
-  timerIndicator.innerHTML = `${minutes}:${seconds}`;
-}
-
 function initGame() {
   score = 0;
-  gameScore.innerText = CARROT_COUNT;
+  gameControl.initScore();
   gameField.init();
-}
-
-function updateScoreBoard() {
-  gameScore.innerText = CARROT_COUNT - score;
 }
 
 function onItemClick(item) {
@@ -117,7 +73,7 @@ function onItemClick(item) {
   }
   if (item === 'carrot') {
     score++;
-    updateScoreBoard();
+    gameControl.updateScoreBoard(score);
     if (score === CARROT_COUNT) {
       finishGame(true);
     }

@@ -7,25 +7,29 @@ class Habits extends Component {
     const habits = this.props.habits;
     return (
       <section className='habits'>
-        <HabitAddForm 
-          onAdd = {this.props.onAdd}
+        <HabitAddForm
+          onAdd={this.props.onAdd}
         />
         <ul>
           {
             habits.map(habit => (
-              <Habit 
+              <Habit
                 key={habit.id} 
                 habit={habit} 
                 onIncrement={this.props.onIncrement} 
                 onDecrement={this.props.onDecrement} 
-                onDelete={this.props.onDelete} 
+                onDelete={this.props.onDelete}
               />
             ))
           }
         </ul>
-        <button className='btn-reset' onClick={this.props.onReset}>Reset All</button>
+        <button 
+          className='btn--reset' 
+          onClick={this.props.onReset}> 
+          Reset All
+        </button>
       </section>
-    );
+    )
   }
 }
 

@@ -16,28 +16,25 @@ class Habit extends Component {
   }
 
   render() {
-    const { name, count } = this.props.habit;
+    const habit = this.props.habit;
     return (
       <li className='habit'>
-        <span className='habit-name'>{name}</span>
-        <span className='habit-count'>{count}</span>
-        <button 
-          className='habit-btn habit-btn--plus' 
+        <span className='habit__name'>{habit.name}</span>
+        <span className='habit__count'>{habit.count}</span>
+        <button className='habit__btn habit__btn--plus'
           onClick={this.onIncrement}>
-          <FontAwesomeIcon icon={faPlusSquare} />
+          <FontAwesomeIcon icon={faPlusSquare}/>
         </button>
-        <button 
-          className='habit-btn habit-btn--minus' 
+        <button className='habit__btn habit__btn--minus'
           onClick={this.onDecrement}>
-          <FontAwesomeIcon icon={faMinusSquare} />
+          <FontAwesomeIcon icon={faMinusSquare}/>
         </button>
-        <button 
-          className='habit-btn habit-btn--trash' 
+        <button className='habit__btn habit__btn--trash'
           onClick={this.onDelete}>
-          <FontAwesomeIcon icon={faTrash} />
+          <FontAwesomeIcon icon={faTrash}/>
         </button>
       </li>
-    );
+    )
   }
 }
 

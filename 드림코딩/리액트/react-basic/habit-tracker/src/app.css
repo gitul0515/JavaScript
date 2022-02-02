@@ -67,7 +67,7 @@ button {
   padding: 0.3em 0.5em;
 }
 
-.habit-count {
+.habit__count {
   display: inline-block;
   text-align: center;
   font-size: 2rem;
@@ -81,26 +81,26 @@ button {
   border-radius: 50%;
 }
 
-.habit-btn {
+.habit__btn {
   font-size: 2.5rem;
   margin: 0 0.1em;
   background-color: transparent;
 }
 
-.habit-btn:hover {
+.habit__btn:hover {
   opacity: 0.8;
 }
 
-.habit-btn--plus, .habit-btn--minus {
+.habit__btn--plus, .habit__btn--minus {
   color: goldenrod;
 }
 
-.habit-btn--trash {
+.habit__btn--trash {
   font-size: 2rem;
   color: darkred;
 }
 
-.btn-reset {
+.btn--reset {
   color: white;
   background-color: green;
   font-size: 1.2rem;
