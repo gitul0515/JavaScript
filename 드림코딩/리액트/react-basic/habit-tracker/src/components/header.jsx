@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLeaf } from "@fortawesome/free-solid-svg-icons";
 
-class Header extends Component {
+class Header extends PureComponent {
   render() {
+    console.log('Header')
     return (
       <header className='header'>
         <FontAwesomeIcon className='header__icon'icon={faLeaf}/>
