@@ -4,7 +4,6 @@ import { faLeaf } from "@fortawesome/free-solid-svg-icons";
 
 class Header extends PureComponent {
   render() {
-    console.log('header');
     return (
       <header className='header'>
         <FontAwesomeIcon className='header__icon'icon={faLeaf}/>

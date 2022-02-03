@@ -13,7 +13,6 @@ class HabitAddForm extends PureComponent {
   }
 
   render() {
-    console.log('HabitAddForm');
     return (
       <form 
         className='form' 

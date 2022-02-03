@@ -3,6 +3,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlusSquare, faMinusSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 class Habit extends PureComponent {
+  componentDidMount() {
+    console.log('Hi');
+  }
+
+  componentWillUnmount() {
+    console.log('Bye');
+  }
+
+  componentDidUpdate() {
+    console.log('New');
+  }
+
   onIncrement = () => {
     this.props.onIncrement(this.props.habit);
   }
