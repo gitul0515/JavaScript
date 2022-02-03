@@ -2,6 +2,7 @@ import './app.css';
 import React, { Component } from 'react';
 import Header from './components/header';
 import Habits from './components/habits';
+import SimpleHabit from './components/simpleHabit';
 
 class App extends Component {
   state = {
@@ -53,19 +54,20 @@ class App extends Component {
 
   render() {
     return (
-      <section className='app'>
-        <Header 
-          habitTypes={this.state.habits.filter(item => item.count >= 1).length}
-        />
-        <Habits 
-          habits={this.state.habits} 
-          onIncrement={this.handleIncrement} 
-          onDecrement={this.handleDecrement} 
-          onDelete={this.handleDelete} 
-          onAdd={this.handleAdd} 
-          onReset={this.handleReset} 
-        />
-      </section>
+      <SimpleHabit />
+      // <section className='app'>
+      //   <Header 
+      //     habitTypes={this.state.habits.filter(item => item.count >= 1).length}
+      //   />
+      //   <Habits 
+      //     habits={this.state.habits} 
+      //     onIncrement={this.handleIncrement} 
+      //     onDecrement={this.handleDecrement} 
+      //     onDelete={this.handleDelete} 
+      //     onAdd={this.handleAdd} 
+      //     onReset={this.handleReset} 
+      //   />
+      // </section>
     )
   }
 }
