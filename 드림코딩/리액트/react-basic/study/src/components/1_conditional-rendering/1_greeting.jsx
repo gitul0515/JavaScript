@@ -1,16 +1,17 @@
-function UserGreeting() {
-  return <h1>Welcome Back!</h1>;
+function ToUser() {
+  return <h1>Welcome back!</h1>
 }
 
-function GuestGreeting() {
-  return <h1>Please sign up!</h1>;
+function ToGuest() {
+  return <h1>Please sign up.</h1>
 }
 
-export default function Greeting(props) {
-  const isLoggedIn = props.isLoggedIn;
-  if (isLoggedIn) {
-    return <UserGreeting />;
+function Greeting(props) {
+  if (props.isLoggedIn) {
+    return ToUser();
   } else {
-    return <GuestGreeting />;
+    return ToGuest() 
   }
 }
+
+export default Greeting;

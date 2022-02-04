@@ -1,20 +1,12 @@
 import React from "react";
 import Greeting from "./1_greeting";
 
-function LoginButton(props) {
-  return (
-    <button onClick={props.onclick}>
-      Login
-    </button>
-  );
+function ButtonLogin(props) {
+  return <button onClick={props.onLogIn}>LogIn</button>
 }
 
-function LogoutButton(props) {
-  return (
-    <button onClick={props.onclick}>
-      Logout
-    </button>
-  );
+function ButtonLogOut(props) {
+  return <button onClick={props.onLogOut}>LogOut</button>
 }
 
 class ControlLogin extends React.Component {
@@ -23,29 +15,29 @@ class ControlLogin extends React.Component {
     this.state = { isLoggedIn: false };
   }
 
-  handleLoginClick = () => {
-    this.setState({ isLoggedIn: true });
-  };
+  handleToLogIn = () => {
+    this.setState({isLoggedIn: true});
+  }
 
-  handleLogoutClick = () => {
-    this.setState({ isLoggedIn: false });
-  };
+  handleToLogOut = () => {
+    this.setState({isLoggedIn: false});
+  }
 
   render() {
     const isLoggedIn = this.state.isLoggedIn;
     let button;
     if (isLoggedIn) {
-      button = <LogoutButton onclick={this.handleLogoutClick} />
+      button = <ButtonLogOut onLogOut={this.handleToLogOut}/>
     } else {
-      button = <LoginButton onclick={this.handleLoginClick} />
+      button = <ButtonLogin onLogIn={this.handleToLogIn}/>
     }
 
     return (
-      <div>
-        <Greeting isLoggedIn={isLoggedIn} />
+      <>
+        <Greeting isLoggedIn={isLoggedIn}/>
         {button}
-      </div>
-    );
+      </>
+    )
   }
 }
 
