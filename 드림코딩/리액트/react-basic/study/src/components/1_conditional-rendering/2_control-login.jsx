@@ -17,7 +17,7 @@ function LogoutButton(props) {
   );
 }
 
-export default class LoginControl extends React.Component {
+class ControlLogin extends React.Component {
   constructor(props) {
     super(props);
     this.state = { isLoggedIn: false };
@@ -48,3 +48,5 @@ export default class LoginControl extends React.Component {
     );
   }
 }
+
+export default ControlLogin;
