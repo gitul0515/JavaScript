@@ -1,4 +1,6 @@
 import React from "react";
+import { useState } from "react/cjs/react.development";
+import Greeting from "./1_greeting";
 
 function ButtonLogIn(props) {
   return <button onClick={props.onClick}>Log In</button>
@@ -8,33 +10,22 @@ function ButtonLogout(props) {
   return <button onClick={props.onClick}>Log Out</button>
 }
 
-export default class ControlLogin extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { isLoggedIn: false };
+const ControlLogin = () => {
+  const [ isLoggedIn, SetIsLoggedIn ] = useState(false);
+
+  let button;
+  if (isLoggedIn) {
+    button = <ButtonLogout onClick={() => SetIsLoggedIn(false)}/>
+  } else {
+    button = <ButtonLogIn onClick={() => SetIsLoggedIn(true)}/>
   }
 
-  handleLoginClick = () => {
-    this.setState({isLoggedIn: true});
-  }
-
-  handleLogoutClick = () => {
-    this.setState({isLoggedIn: false});
-  }
-
-  render() {
-    const { isLoggedIn } = this.state;
-    let button;
-    if (isLoggedIn) {
-      button = <ButtonLogout onClick={this.handleLogoutClick}/>
-    } else {
-      button = <ButtonLogIn onClick={this.handleLoginClick}/>
-    }
-    return (
-      <>
-        {button}
-      </>
-    )
-  }
+  return (
+    <div>
+      <Greeting isLoggedIn={isLoggedIn}/>
+      {button}
+    </div>
+  )
 }
 
+export default ControlLogin;
