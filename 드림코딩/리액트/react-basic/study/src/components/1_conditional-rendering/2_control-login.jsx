@@ -1,44 +1,40 @@
 import React from "react";
-import Greeting from "./1_greeting";
 
-function ButtonLogin(props) {
-  return <button onClick={props.onLogIn}>LogIn</button>
+function ButtonLogIn(props) {
+  return <button onClick={props.onClick}>Log In</button>
 }
 
-function ButtonLogOut(props) {
-  return <button onClick={props.onLogOut}>LogOut</button>
+function ButtonLogout(props) {
+  return <button onClick={props.onClick}>Log Out</button>
 }
 
-class ControlLogin extends React.Component {
+export default class ControlLogin extends React.Component {
   constructor(props) {
     super(props);
     this.state = { isLoggedIn: false };
   }
 
-  handleToLogIn = () => {
+  handleLoginClick = () => {
     this.setState({isLoggedIn: true});
   }
 
-  handleToLogOut = () => {
+  handleLogoutClick = () => {
     this.setState({isLoggedIn: false});
   }
 
   render() {
-    const isLoggedIn = this.state.isLoggedIn;
+    const { isLoggedIn } = this.state;
     let button;
     if (isLoggedIn) {
-      button = <ButtonLogOut onLogOut={this.handleToLogOut}/>
+      button = <ButtonLogout onClick={this.handleLogoutClick}/>
     } else {
-      button = <ButtonLogin onLogIn={this.handleToLogIn}/>
+      button = <ButtonLogIn onClick={this.handleLoginClick}/>
     }
-
     return (
       <>
-        <Greeting isLoggedIn={isLoggedIn}/>
         {button}
       </>
     )
   }
 }
 
-export default ControlLogin;
