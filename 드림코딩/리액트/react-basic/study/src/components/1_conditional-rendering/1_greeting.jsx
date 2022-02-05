@@ -1,15 +1,15 @@
-function ToUser() {
+function GreetToUser() {
   return <h1>Welcome back!</h1>
 }
 
-function ToGuest() {
+function GreetToGuest() {
   return <h1>Please sign up.</h1>
 }
 
 export default function Greeting(props) {
-  if (props.isLoggedIn) {
-    return <ToUser />
+  if (props.isLoggedin) {
+    return <GreetToUser />
   } else {
-    return <ToGuest />
+    return <GreetToGuest />
   }
 }

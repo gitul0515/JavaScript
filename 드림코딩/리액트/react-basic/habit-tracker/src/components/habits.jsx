@@ -1,36 +1,34 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Habit from './habit';
 import HabitAddForm from './habitAddForm';
 
-class Habits extends Component {
-  render() {
-    const habits = this.props.habits;
-    return (
-      <section className='habits'>
-        <HabitAddForm
-          onAdd={this.props.onAdd}
-        />
-        <ul>
-          {
-            habits.map(habit => (
-              <Habit
-                key={habit.id} 
-                habit={habit} 
-                onIncrement={this.props.onIncrement} 
-                onDecrement={this.props.onDecrement} 
-                onDelete={this.props.onDelete}
-              />
-            ))
-          }
-        </ul>
-        <button 
-          className='btn--reset' 
-          onClick={this.props.onReset}> 
-          Reset All
-        </button>
-      </section>
-    )
-  }
+const Habits = props => {
+  const habits = props.habits;
+  return (
+    <section className='habits'>
+      <HabitAddForm
+        onAdd={props.onAdd}
+      />
+      <ul>
+        {
+          habits.map(habit => (
+            <Habit
+              key={habit.id} 
+              habit={habit} 
+              onIncrement={props.onIncrement} 
+              onDecrement={props.onDecrement} 
+              onDelete={props.onDelete}
+            />
+          ))
+        }
+      </ul>
+      <button 
+        className='btn--reset' 
+        onClick={props.onReset}> 
+        Reset All
+      </button>
+    </section>
+  )
 }
 
 export default Habits;

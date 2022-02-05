@@ -1,8 +1,8 @@
-import React, { memo } from 'react';
+import React, { memo, useRef } from 'react';
 
-export default memo(function HabitAddForm(props) { 
-  const inputRef = React.createRef();
-  const formRef = React.createRef();
+const HabitAddForm = memo(props => { 
+  const inputRef = useRef();
+  const formRef = useRef();
 
   const onAdd = event => {
     event.preventDefault();
@@ -11,8 +11,6 @@ export default memo(function HabitAddForm(props) {
     props.onAdd(name);
     formRef.current.reset();
   }
-
-  console.log('add');
 
   return (
     <form 
@@ -31,3 +29,4 @@ export default memo(function HabitAddForm(props) {
   );
 });
 
+export default HabitAddForm;
