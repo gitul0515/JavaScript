@@ -1,5 +1,5 @@
 import './app.css';
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import Header from './components/header';
 import Habits from './components/habits';
 
@@ -12,18 +12,17 @@ const App = () => {
     ]
   );
 
-  const handleIncrement = habit => {
-    setHabits(
-      habits.map(item => {
+  const handleIncrement = useCallback(habit => {
+    setHabits(habits.map(item => {
         if (item.id === habit.id) {
           return {...habit, count: habit.count + 1}
         } else return item;
       })
     );
-  }
+  }, []);
 
-  const handleDecrement = habit => {
-    setHabits(
+  const handleDecrement = useCallback(habit => {
+    setHabits(habits => 
       habits.map(item => {
         if (item.id === habit.id) {
           const count = habit.count - 1;
@@ -32,29 +31,29 @@ const App = () => {
         return item;
       })
     );
-  }
+  }, []);
 
-  const handleDelete = habit => {
-    setHabits(
+  const handleDelete = useCallback(habit => {
+    setHabits(habits => 
       habits.filter(item => item.id !== habit.id)
     );
-  }
+  }, []);
 
-  const handleReset = () => {
-    setHabits(
+  const handleReset = useCallback(() => {
+    setHabits(habits => 
       habits.map(item => {
         if (item.count === 0) return item;
         return { ...item, count: 0 }
       })
     );
-  }
+  }, []);
 
-  const handleAdd = name => {
+  const handleAdd = useCallback(name => {
     const newId = habits.length + 1;
-    setHabits(
+    setHabits(habits => 
       [...habits, { id: newId, name, count: 0 }]
     );
-  }
+  }, []);
 
   return (
     <section className='app'>
