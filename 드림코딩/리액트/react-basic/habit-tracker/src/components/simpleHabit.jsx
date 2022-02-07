@@ -9,6 +9,8 @@ const SimpleHabit = props => {
     countState(count + 1);
   };
 
+  console.log();
+
   return (
     <li className="habit">
       <span className="habit__name">Reading</span>
