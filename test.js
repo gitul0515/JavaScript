@@ -1,8 +1,9 @@
-const obj = {};
-const arr = [1, 2, 3];
-arr.forEach(elem => {
-  obj[elem] = true;
-});
-console.log(obj);
-obj[2 - 1] = false;
-console.log(obj);
+let requestOptions = {
+  method: 'GET',
+  redirect: 'follow'
+};
+
+fetch("https://youtube.googleapis.com/youtube/v3/videos?part=snippet&chart=mostPopular&maxResults=25&key=AIzaSyApe30tsjafvMnnykLW9pjN1YihHEi04PQ", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));

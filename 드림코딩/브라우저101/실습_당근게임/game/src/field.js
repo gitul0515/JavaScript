@@ -1,31 +1,32 @@
-/* eslint-disable no-use-before-define */
-import * as sound from './sound.js';
-
-const CARROT_SIZE = 80;
 export default class Field {
-  constructor(carrotCount, bugCount) {
+  constructor(carrotSize, carrotCount, bugCount) {
+    this.carrotSize = carrotSize;
     this.carrotCount = carrotCount;
     this.bugCount = bugCount;
+
     this.field = document.querySelector('.game__field');
     this.fieldRect = this.field.getBoundingClientRect();
-    this.field.addEventListener('click', this.onClick);
+    this.field.addEventListener('click', e => {
+      this.onClick && this.onClick(e);
+    });
   }
 
-  setListener(callBack) {
-    this.onItemClick = callBack;
+  setClickListener = onClick => {
+    this.onClick = onClick;
   }
 
-  init() {
+  init = () => {
     this.field.innerHTML = '';
-    this._addItem('carrot', this.carrotCount, 'img/carrot.png');
-    this._addItem('bug', this.bugCount, 'img/bug.png');
+    // 벌레와 당근을 생성한뒤 field에 추가해줌
+    this.addItem('carrot', this.carrotCount, 'img/carrot.png');
+    this.addItem('bug', this.bugCount, 'img/bug.png');
   }
 
-  _addItem(className, count, imgPath) {
+  addItem = (className, count, imgPath) => {
     const x1 = 0;
     const y1 = 0;
-    const x2 = this.fieldRect.width - CARROT_SIZE;
-    const y2 = this.fieldRect.height - CARROT_SIZE;
+    const x2 = this.fieldRect.width - this.carrotSize;
+    const y2 = this.fieldRect.height - this.carrotSize;
     for (let i = 0; i < count; i++) {
       const item = document.createElement('img');
       item.setAttribute('class', className);
@@ -36,17 +37,6 @@ export default class Field {
       item.style.left = `${x}px`;
       item.style.top = `${y}px`;
       this.field.appendChild(item);
-    }
-  }
-
-  onClick = event => {
-    const { target } = event;
-    if (target.matches('.carrot')) {
-      target.remove();
-      sound.playCarrot();
-      this.onItemClick && this.onItemClick('carrot');
-    } else if (target.matches('.bug')) {
-      this.onItemClick && this.onItemClick('bug');
     }
   }
 
