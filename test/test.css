@@ -30,7 +30,7 @@ input[type=radio] {
 }
 
 label {
-  font-size: 2rem;
+  font-size: 1.8rem;
   font-weight: bold;
   display: block;
   margin: 80px 40px;
@@ -45,6 +45,13 @@ input[id=button2]:checked ~ .banner-container .banner-inner {
 }
 input[id=button3]:checked ~ .banner-container .banner-inner {
   transform: translateY(-1000px);
+}
+
+input[id=button1]:checked ~ .buttons label[for=button1], 
+input[id=button2]:checked ~ .buttons label[for=button2], 
+input[id=button3]:checked ~ .buttons label[for=button3] 
+{
+  font-size: 2.6rem;
 }
 
 .banner-container {
