@@ -1,24 +1,42 @@
+/* eslint-disable no-use-before-define */
 // 수직형 무한 슬라이드 배너
-const bannerContainer = document.querySelector('.banner-container');
-const offSetY = bannerContainer.getBoundingClientRect().height;
 const bannerInner = document.querySelector('.banner-inner');
-let i = 0;
-let curBanner;
+let curBanner = bannerInner.children[0];
+let curBannerIndex = 0;
+let offSetY;
 
 let timeId = setInterval(() => {
-  curBanner = bannerInner.children[i];
-  bannerInner.appendChild(curBanner.cloneNode(true));
-  i++;
-  bannerInner.style.transform = `translateY(${-offSetY * i}px)`;
+  moveBannerInner();
 }, 2000);
 
-// const buttons = [...document.querySelectorAll('input[type=radio]')];
-// let i = 0;
-// let curButton = buttons[i];
+function moveBannerInner() {
+  copyCurBanner();
 
-// setInterval(() => {
-//   curButton.removeAttribute('checked');
-//   curButton = buttons[++i];
-//   curButton.setAttribute('checked', '');
-//   if (i >= 2) i = -1;
-// }, 2000);
+  // bannerInner를 offSetY만큼 이동한다.
+  offSetY = -500 * (++curBannerIndex);
+  bannerInner.style.transform = `translateY(${offSetY}px)`;
+}
+
+function copyCurBanner() {
+  // 현재 배너를 bannerInner의 마지막 자식으로 복사한다.
+  curBanner = bannerInner.children[curBannerIndex];
+  bannerInner.appendChild(curBanner.cloneNode(true));
+}
+
+const buttons = document.querySelector('.buttons');
+console.log(buttons);
+buttons.addEventListener('click', e => {
+  const { target: button } = e;
+  button.classList.add('fontsize-up');
+  if (button.className === 'buttons') return;
+  console.log(button.dataset.order);
+  console.log((Number(curBanner.dataset.order + 1) % 3));
+
+  // clearInterval(timeId);
+  // timeId = setInterval(() => {
+  //   if (button.dataset.order === curBanner.dataset.order) {
+  //     button.classList.remove('fontsize-up');
+  //   }
+  //   moveBannerInner();
+  // }, 500);
+});

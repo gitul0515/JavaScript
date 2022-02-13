@@ -8,12 +8,6 @@ ul {
   padding-left: 0;
 }
 
-button {
-  border: none;
-  outline: none;
-  background-color: transparent;
-}
-
 h1 {
   margin: 0;
 }
@@ -25,11 +19,12 @@ body {
   align-items: center;
 }
 
-input[type=radio] {
-  display: none;
-}
+button {
+  /* 초기화 */
+  border: none;
+  outline: none;
+  background-color: transparent;
 
-label {
   font-size: 1.8rem;
   font-weight: bold;
   display: block;
@@ -37,21 +32,9 @@ label {
   cursor: pointer;
 }
 
-input[id=button1]:checked ~ .banner-container .banner-inner {
-  transform: translateY(0);
-}
-input[id=button2]:checked ~ .banner-container .banner-inner {
-  transform: translateY(-500px);
-}
-input[id=button3]:checked ~ .banner-container .banner-inner {
-  transform: translateY(-1000px);
-}
-
-input[id=button1]:checked ~ .buttons label[for=button1], 
-input[id=button2]:checked ~ .buttons label[for=button2], 
-input[id=button3]:checked ~ .buttons label[for=button3] 
-{
-  font-size: 2.6rem;
+button.fontsize-up {
+  font-size: 2.2rem;
+  color: red;
 }
 
 .banner-container {
@@ -71,14 +54,4 @@ input[id=button3]:checked ~ .buttons label[for=button3]
   display: flex;
   flex-direction: column;
   justify-content: center;
-}
-
-.banner:nth-child(1) {
-  /* background-color: yellow; */
-}
-.banner:nth-child(2) {
-  /* background-color: orange; */
-}
-.banner:nth-child(3) {
-  /* background-color: green; */
 }
