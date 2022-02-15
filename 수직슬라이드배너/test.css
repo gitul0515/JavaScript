@@ -37,18 +37,18 @@ button.fontsize-up {
   color: red;
 }
 
-.banner-container {
+.slide-container {
   height: 500px;
   border-right: 1px solid black;
   border-left: 1px solid black;
   overflow: hidden;
 }
 
-.banner-inner {
+.slide-inner {
   transition: 2s ease;
 }
 
-.banner {
+.slide {
   padding: 40px;
   height: 500px;
   display: flex;
