@@ -38,6 +38,7 @@ button.fontsize-up {
 }
 
 .slide-container {
+  width: 500px;
   height: 500px;
   border-right: 1px solid black;
   border-left: 1px solid black;
@@ -54,4 +55,17 @@ button.fontsize-up {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
+
+.slide:nth-child(3n + 1) {
+  background-color: rgb(233, 32, 32);
+}
+.slide:nth-child(3n + 2) {
+  background-color: rgb(250, 162, 0);
+}
+.slide:nth-child(3n + 3) {
+  background-color: rgb(14, 151, 14);
+}
+
+

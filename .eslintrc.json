@@ -50,6 +50,11 @@
         "ignoreTemplateLiterals": true
       }], // prettier의 printWidth 옵션 대신 사용
       "linebreak-style": ["error", "windows"],
-      "camelcase": "off"
+      "camelcase": "off",
+      "no-lone-blocks": "off",
+      "no-use-before-define": "off",
+      "no-unused-vars": "warn", 
+      "no-inner-declarations": "warn",
+      "no-undef": "off"
     }
   }

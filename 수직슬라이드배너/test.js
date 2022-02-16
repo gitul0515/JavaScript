@@ -1,26 +1,26 @@
 /* eslint-disable no-use-before-define */
 // 수직형 무한 슬라이드 배너
-const bannerInner = document.querySelector('.banner-inner');
-let curBanner = bannerInner.children[0];
-let curBannerIndex = 0;
+const slideInner = document.querySelector('.slide-inner');
+let curSlide = slideInner.children[0];
+let curSlideIndex = 0;
 let offSetY;
 
 let timeId = setInterval(() => {
-  moveBannerInner();
+  moveSlideInner();
 }, 2000);
 
-function moveBannerInner() {
-  copyCurBanner();
+function moveSlideInner() {
+  copyCurSlide();
 
-  // bannerInner를 offSetY만큼 이동한다.
-  offSetY = -500 * (++curBannerIndex);
-  bannerInner.style.transform = `translateY(${offSetY}px)`;
+  // slideInner를 offSetY만큼 이동한다.
+  offSetY = -500 * (++curSlideIndex);
+  slideInner.style.transform = `translateY(${offSetY}px)`;
 }
 
-function copyCurBanner() {
-  // 현재 배너를 bannerInner의 마지막 자식으로 복사한다.
-  curBanner = bannerInner.children[curBannerIndex];
-  bannerInner.appendChild(curBanner.cloneNode(true));
+function copyCurSlide() {
+  // 현재 배너를 slideInner의 마지막 자식으로 복사한다.
+  curSlide = slideInner.children[curSlideIndex];
+  slideInner.appendChild(curSlide.cloneNode(true));
 }
 
 const buttons = document.querySelector('.buttons');
@@ -30,13 +30,13 @@ buttons.addEventListener('click', e => {
   button.classList.add('fontsize-up');
   if (button.className === 'buttons') return;
   console.log(button.dataset.order);
-  console.log((Number(curBanner.dataset.order + 1) % 3));
+  console.log((Number(curSlide.dataset.order + 1) % 3));
 
   // clearInterval(timeId);
   // timeId = setInterval(() => {
-  //   if (button.dataset.order === curBanner.dataset.order) {
+  //   if (button.dataset.order === curSlide.dataset.order) {
   //     button.classList.remove('fontsize-up');
   //   }
-  //   moveBannerInner();
+  //   moveSlideInner();
   // }, 500);
 });
