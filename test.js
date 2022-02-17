@@ -1,9 +1,18 @@
-function solution(d, budget) {
-  if (d[0] > budget) {
-    return solution(solution(d.slice(1), budget));
+function solution(num) {
+  let answer = 0;
+  while(1) {
+    if (num === 1) break;
+    if (answer >= 500) {
+      answer = -1;
+      break;
+    }
+    if (num % 2 === 0) num /= 2;
+    else if (num % 2 === 1) num = 3 * num + 1;
+    answer++;
   }
-  if (d.length === 1) return 0;
-  return Math.max(1 + solution(d.slice(1), budget - d[0]), solution(d.slice(1), budget));
+  return answer;
 }
 
-console.log(solution([1, 3, 2, 5, 4], 9));
+console.log(solution(6));
+console.log(solution(16));
+console.log(solution(626331));
