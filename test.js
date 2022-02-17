@@ -1,9 +1,9 @@
-function solution(x, n) {
-  const answer = [];
-  for (let i = 1; i <= n; i++) {
-    answer.push(x * i);
+function solution(d, budget) {
+  if (d[0] > budget) {
+    return solution(solution(d.slice(1), budget));
   }
-  return answer;
+  if (d.length === 1) return 0;
+  return Math.max(1 + solution(d.slice(1), budget - d[0]), solution(d.slice(1), budget));
 }
 
-console.log(solution(2, 5));
+console.log(solution([1, 3, 2, 5, 4], 9));
