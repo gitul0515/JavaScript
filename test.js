@@ -1,18 +1,8 @@
-function solution(num) {
-  let answer = 0;
-  while(1) {
-    if (num === 1) break;
-    if (answer >= 500) {
-      answer = -1;
-      break;
-    }
-    if (num % 2 === 0) num /= 2;
-    else if (num % 2 === 1) num = 3 * num + 1;
-    answer++;
-  }
-  return answer;
+function solution(arr) {
+  const min = Math.min(...arr);
+  const answer = arr.filter(item => item !== min);
+  return answer.length === 0 ? [-1] : answer;
 }
 
-console.log(solution(6));
-console.log(solution(16));
-console.log(solution(626331));
+console.log(solution([4, 3, 2, 1]));
+console.log(solution([10]));
