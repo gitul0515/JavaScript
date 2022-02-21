@@ -11,8 +11,10 @@ function calculate(operator: Operator, num1: number, num2: number): number {
     return num1 * num2;
   } else if (operator === 'divide') {
     return num1 / num2;
-  } else {
+  } else if (operator === 'remainder'){
     return num1 % num2;
+  } else {
+    throw new Error('unknown error');
   }
 }
 
