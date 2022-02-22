@@ -24,16 +24,20 @@
   printLoginState({ state: 'success', response: { body: 'loaded' } }); // 😃 loaded
   printLoginState({ state: 'fail', reason: 'no network' }); // 😱 no network
 
-  function printLoginState(resourceLoadState: ResourceLoadState): void {
+  function printLoginState(resourceLoadState: ResourceLoadState) {
     const { state } = resourceLoadState;
-    if (state === 'loading') {
-      console.log(`👀 ${state}...`);
-    } else if (state === 'success') {
-      console.log(`😃 ${resourceLoadState.response.body}`);
-    } else if (state === 'fail') {
-      console.log(`😱 ${resourceLoadState.reason}`);
-    } else {
-      throw new Error('unexpected error');
+    switch (state) {
+      case 'loading':
+        console.log(`👀 ${state}...`);
+        break;
+      case 'success':
+        console.log(`😃 ${resourceLoadState.response.body}`);
+        break;
+      case 'fail':
+        console.log(`😱 ${resourceLoadState.reason}`);
+        break;
+      default:
+        throw new Error('unexpected error');
     }
   }
 }

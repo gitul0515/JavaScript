@@ -1,7 +1,13 @@
 /**
  * Let's make a game 🕹
  */
-const position = {
+
+type Position = {
+  x: number;
+  y: number;
+}
+
+const position: Position = {
   x: 0,
   y: 0
 };
