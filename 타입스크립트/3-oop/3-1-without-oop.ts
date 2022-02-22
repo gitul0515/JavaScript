@@ -2,7 +2,7 @@
   let coffeeBeans:number = 10;
 
   type Shots = 'one' | 'two';
-  function makeCoffee(numberOfShots: Shots): string | null {
+  function makeCoffee2(numberOfShots: Shots): string | null {
     let result: string;
     switch (numberOfShots) {
       case 'one':
@@ -28,7 +28,7 @@
     return result;
   }
 
-  // console.log('result:', makeCoffee('one'));
-  console.log('result:', makeCoffee('two'));
+  console.log('result:', makeCoffee2('one'));
+  console.log('result:', makeCoffee2('two'));
 }
 
