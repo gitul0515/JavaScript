@@ -11,6 +11,7 @@
       return this.userAge;
     }
     set age(num: number) {
+      if (num < 0) return;
       this.userAge = num;
     }
   }
