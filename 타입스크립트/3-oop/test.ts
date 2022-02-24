@@ -5,8 +5,8 @@
   }
 
   class CoffeeMachine {
-    static readonly BEANS_GRAM_PER_SHOT: number = 7; // class level
-    #coffeeBeans: number = 0; // instance level
+    static readonly BEANS_GRAM_PER_SHOT: number = 7;
+    #coffeeBeans: number = 0;
 
     constructor(beans: number) {
       this.#coffeeBeans = beans;
@@ -27,17 +27,8 @@
     static makeCoffeeMachine(beans: number): CoffeeMachine {
       return new CoffeeMachine(beans);
     }
-
-    addCoffeeBeans(beans: number) {
-      this.#coffeeBeans += beans;
-    }
-
-    get checkCoffeeBeans() {
-      return this.#coffeeBeans;
-    }
   }
-
   const coffeeMachine = CoffeeMachine.makeCoffeeMachine(100);
   console.log(coffeeMachine);
-}
 
+}
