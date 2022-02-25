@@ -42,18 +42,18 @@
       }
     }
 
-    set fillCoffeeBeans(beans: number) {
+    fillCoffeeBeans(beans: number) {
       if (beans < 0) {
         throw new Error('value for beans should be greater than 0');
       }
       this.coffeeBeans += beans;
     }
 
-    get checkCoffeeBeans(): number {
+    checkCoffeeBeans(): number {
       return this.coffeeBeans;
     }
   }
 
   const coffeeMachine = new CoffeeMachine(100);
-  console.log(coffeeMachine.makeCoffee(3));
+  console.log(coffeeMachine.makeCoffee(3)); 
 }
