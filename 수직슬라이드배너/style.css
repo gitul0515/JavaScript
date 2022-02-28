@@ -30,11 +30,11 @@ button {
   display: block;
   margin: 80px 40px;
   cursor: pointer;
+  color: black;
 }
 
-button.fontsize-up {
-  font-size: 2.2rem;
-  color: red;
+button.clicked {
+  transform: scale(1.2);
 }
 
 .slide-container {
