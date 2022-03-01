@@ -12,3 +12,4 @@ class Order {
       Math.min(this.quantity * this.itemPrice * 0.1, 100);
   }
 }
+// pp.176-177
