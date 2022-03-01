@@ -1,38 +1,16 @@
-const runCode = new Promise(
-  (resolve, reject) => {
-    setTimeout(() => {
-      const num = 10;
-      if (num > 9) {
-        resolve(num);
-      } else {
-        reject(num);
-      }
-    }, 1000);
-  }
-);
+function getData() {
+  return new Promise((resolve, reject) => {
+    const data = 100;
+    resolve(data);
+    reject(new Error('invalid data'));
+  })
+}
 
-runCode.then(
-  item => {
-    console.log(`success ${item}`);
-  }, item => {
-    console.log(`error ${item}`);
-  }
-).then(
-  () => {
-    console.log('By gonggong2');
-  }, () => {
-    console.log('error');
-  }
-).then(
-  () => {
-    console.log('By gonggong2');
-  }, () => {
-    console.log('error');
-  }
-).then(
-  () => {
-    console.log('By gonggong2');
-  }, () => {
-    console.log('error');
-  }
-);
+getData()
+.then(res => {
+  console.log(res);
+  return res;
+})
+.then(console.log)
+.catch(err => console.error(err))
+.finally(() => console.log('goodbye!'));
