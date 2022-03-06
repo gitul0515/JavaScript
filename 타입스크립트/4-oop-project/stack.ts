@@ -1,16 +1,18 @@
 {
+  // 객체로 구현한 스택
   type StackValue = string | number | boolean;
   type StackData = {
     [key: string]: StackValue;
   }
 
-  interface StackMethod {
+  interface StackInterface {
+    readonly size: number;
     push(value: StackValue): void;
     pop(): StackValue;
     peek(): StackValue;
   }
 
-  abstract class Stack implements StackMethod {
+  abstract class Stack implements StackInterface {
     protected data: StackData = {};
     protected top:number = -1;
 
