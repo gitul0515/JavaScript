@@ -13,7 +13,7 @@
   </style>
 </head>
 <body>
-  <h1><a href="#!welcome">WEB</a></h1>
+  <h1><a href="index.html">WEB</a></h1>
   <input id="night_day" type="button" value="night" onclick="
     nightDayHandler(this);
   ">
@@ -31,11 +31,8 @@
         document.querySelector('article').innerHTML = text;
       })
     }
-    if (location.hash) {
-      fetchPage(location.hash.substr(2));
-    } else {
-      fetchPage('welcome');
-    }
+
+
   </script>
 </body>
 </html>
