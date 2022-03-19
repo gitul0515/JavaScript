@@ -1,5 +1,5 @@
 {
-  // mapped type 응용: Proxy
+  // Mapped Type 응용: Proxyify
   type Proxy<T> = {
     get(): T;
     set(value: T): void;

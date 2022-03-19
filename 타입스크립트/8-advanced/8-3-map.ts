@@ -1,5 +1,5 @@
 {
-  // mapped type 기초
+  // Mapped Type 기초
   type Video = {
     title: string;
     author: string;

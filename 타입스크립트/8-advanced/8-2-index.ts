@@ -1,4 +1,5 @@
 {
+  // Index Type
   const obj = {
     name: 'gihong',
   }
