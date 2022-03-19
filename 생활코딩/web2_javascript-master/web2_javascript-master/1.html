@@ -27,14 +27,13 @@
     function fetchPage(fileName) {
       fetch(fileName)
       .then(response => response.text())
-      .then(text => {
-        document.querySelector('article').innerHTML = text;
-      })
+      .then(text => { document.querySelector('article').innerHTML = text; })
     }
-    if (location.hash) {
-      fetchPage(location.hash.substr(2));
+    const { hash } = location;
+    if (hash) {
+      fetchPage(hash.substr(2));
     } else {
-      fetchPage('welcome');
+      console.log('no');
     }
   </script>
 </body>
