@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="colors.js"></script>
+  <script src="./fetch-master/fetch-master/fetch.js"></script>
   <style>
     li {
       font-weight: 600;
@@ -17,10 +18,7 @@
   <input id="night_day" type="button" value="night" onclick="
     nightDayHandler(this);
   ">
-  <ol>
-    <li><a href="#!html" onclick="fetchPage('html')">HTML</a></li>
-    <li><a href="#!css" onclick="fetchPage('css')">CSS</a></li>
-    <li><a href="#!javascript" onclick="fetchPage('javascript')">JavaScript</a></li>
+  <ol id="nav">
   </ol>
   <article></article>
   <script>
@@ -35,6 +33,16 @@
     } else {
       console.log('no');
     }
+
+    fetch('list')
+    .then(response => response.text())
+    .then(text => { 
+      let result = '';
+      text.split(', ').forEach(item => {
+        result += `<li><a href="#!${item}" onclick="fetchPage('${item}')">${item}</a></li>\n`;
+      })
+      document.querySelector('#nav').innerHTML = result; 
+    })
   </script>
 </body>
 </html>
