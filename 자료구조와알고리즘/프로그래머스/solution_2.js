@@ -22,7 +22,7 @@ function solution(research, n, k) {
     });
   });
 
-  // 3. 이슈된 각각의 횟수를 계산
+  // 3. 이슈된 횟수를 계산
   const issueCount = {};
   for (const key in searchResult) {
     issueCount[key] = 0;
