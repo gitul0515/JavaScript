@@ -24,7 +24,10 @@ describe('Calculator', () => {
   it('add', () => {
     calculator.add(50);
     expect(calculator.value).toBe(50);
-    expect(() => calculator.add(51)).toThrow('Value can not be greater than 100');
+  });
+
+  it('add should throw an error if value is greater than 100', () => {
+    expect(() => calculator.add(101)).toThrow('Value can not be greater than 100');
   });
 
   it('subtract', () => {
@@ -60,12 +63,3 @@ describe('Calculator', () => {
     });
   })
 });
-
-//   // divide
-//   calculator.set(100);
-//   calculator.divide(5);
-//   expect(calculator.value).toBe(20);
-//   calculator.divide(-5);
-//   expect(calculator.value).toBe(-4);
-// });
-

@@ -14,7 +14,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
 }
 
 .input-wrapper {
@@ -27,6 +27,7 @@ body {
   outline: none;
   border: none;
   padding: 5px;
+  font-size: 1.2rem;
 }
 
 .word-wrapper {
@@ -43,9 +44,13 @@ body {
 .word-item {
   padding: 5px;
   cursor: pointer;
+  font-size: 1.2rem;
 }
 
 .word-item:hover {
   background-color: rgb(217, 232, 245);
 }
 
+.test {
+  display: none;
+}

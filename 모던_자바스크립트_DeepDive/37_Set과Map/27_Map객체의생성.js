@@ -11,5 +11,5 @@ console.log(map2); // Map(1) { 'key1' => 'value2' }
 const map3 = new Map([['one', 1], ['two', 2]]);
 console.log(map3); // Map(2) { 'one' => 1, 'two' => 2 }
 
-const map4 = new Map([1, 2]); // TypeError
-console.log(map4);
+// const map4 = new Map([1, 2]); // TypeError
+// console.log(map4);

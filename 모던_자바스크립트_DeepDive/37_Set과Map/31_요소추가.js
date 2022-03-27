@@ -10,3 +10,8 @@ map
   .set('key2', 'value2')
   .set('key3', 'value3');
 console.log(map); // Map(3) { 'key1' => 'value1', 'key2' => 'value2', 'key3' => 'value3' }
+
+map
+  .set('key4', 'value4')
+  .set('key5', 'value5');
+  console.log(map);

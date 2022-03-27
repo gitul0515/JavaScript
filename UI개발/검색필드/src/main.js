@@ -1,14 +1,12 @@
 import { trie } from "./trie.js";
 
-trie.insert('string');
-trie.insert('str');
-trie.insert('stress');
-trie.insert('star');
-trie.insert('singer');
-trie.insert('sign');
-trie.insert('starcraft');
-trie.insert('southkorea');
-trie.insert('south korea');
+const words = [
+  'string', 'str', 'stress', 'star', 'singer', 'sign', 'starcraft', 'starwars', 'starbucks', 'southkorea', 'south korea'
+];
+
+words.forEach(word => {
+  trie.insert(word);
+});
 
 const searchField = document.querySelector('.input');
 const wordWrapper = document.querySelector('.word-wrapper');

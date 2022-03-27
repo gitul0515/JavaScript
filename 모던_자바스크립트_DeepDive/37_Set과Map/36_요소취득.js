@@ -12,3 +12,7 @@ map
 console.log(map.get(lee)); // developer
 console.log(map.get(kim)); // designer
 console.log(map.get('key')); // undefined
+
+console.log(map.get(lee));
+console.log(map.get(kim));
+
