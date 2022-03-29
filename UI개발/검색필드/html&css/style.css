@@ -9,12 +9,18 @@ ul {
 }
 
 body {
-  background-color: lightblue;
+  background-color: rgb(240, 228, 212);
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   font-size: 1.2rem;
+}
+
+img {
+  display: block;
+  margin-bottom: 50px;
 }
 
 .input-wrapper {
