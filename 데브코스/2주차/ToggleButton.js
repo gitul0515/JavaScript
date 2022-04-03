@@ -56,7 +56,7 @@ function ToggleButtonGroup({
     buttons.forEach(({type, ...props}) => {
       if (type === 'toggle') {
         new ToggleButton({ target: group, ...props });
-      } else if (type === 'timerToggle') {
+      } else {
         new TimerToggleButton({ target: group, ...props });
       }
     });
