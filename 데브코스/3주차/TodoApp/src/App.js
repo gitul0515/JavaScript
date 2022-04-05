@@ -1,22 +1,32 @@
 import Header from "./Header.js";
 import TodoForm from "./TodoForm.js";
 import TodoList from "./TodoList.js";
+import { setItem } from "./storage.js";
 
-export default function App({ $target, initialState }) {
-  new Header({
-    $target,
-    text: 'Simple Todo List'
-  });
+export default class App {
+  constructor({ $target, initialState }) {
+    this.$target = $target;
+    this.initialState = initialState;
+    this.setup();
+  }
 
-  new TodoForm({
-    $target,
-    onSubmit: (text) => {
-      todoList.add(text);
-    }
-  });
+  setup() {
+    new Header({
+      $target: this.$target,
+      text: 'Simple Todo List'
+    });
 
-  const todoList = new TodoList({
-    $target,
-    initialState
-  });
+    new TodoForm({
+      $target: this.$target,
+      onSubmit: (text) => {
+        todoList.add(text);
+        setItem('todos', JSON.stringify(todoList.state));
+      }
+    });
+
+    const todoList = new TodoList({
+      $target: this.$target,
+      initialState: this.initialState
+    });
+  }
 }

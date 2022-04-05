@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" id="name">
+    <button id="save">Save</button>
+    <button id="remove">Remove</button>
+  </body>
+  <script>
+    const storedName = localStorage.getItem('name') || '';
+    if (storedName) {
+      document.querySelector('#name').value = storedName;
+    }
+
+    document.querySelector('#save').addEventListener('click', () => {
+      localStorage.setItem('name', document.querySelector('#name').value);
+    });
+
+    document.querySelector('#remove').addEventListener('click', () => {
+      localStorage.removeItem('name');
+    });
+  </script>
+</html>
