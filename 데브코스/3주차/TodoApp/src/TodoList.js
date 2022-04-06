@@ -1,16 +1,23 @@
 export default class TodoList {
   #state = [];
-  get state() { return this.#state; }
 
-  constructor({ $target, initialState }) {
+  constructor({ $target, initialState, onClickTodo, onClickButton }) {
     this.$target = $target; 
     this.#state = initialState;
+    this.onClickTodo = onClickTodo;
+    this.onClickButton = onClickButton;
     this.setup();
+  }
+
+  setState(newState) {
+    this.#state = newState;
+    this.render();
   }
 
   setup() {
     this.$todoList = document.createElement('div');
     this.render();
+    this.bindEvent();
     this.$target.appendChild(this.$todoList);
   }
 
@@ -19,21 +26,29 @@ export default class TodoList {
   }
 
   getHtml() {
-    return this.#state.reduce((html, { text }) => {
-      html += `<li>${text}</li>`;
-      return html;
-    }, '<ul>') + '</ul>';
+    return `<ul>
+    ${this.#state.map(({ id, text, isCompleted }) => {
+      if (isCompleted) {
+        return `<li>${text}</li>`;
+      } else {
+        return `<li style="text-decoration: line-through">${text}</li>`;
+      }
+    }).join('')}
+    </ul>` 
   }
 
-  add(text) {
-    this.setState([
-      ...this.#state,
-      { text }
-    ]);
-  }
-
-  setState(newState) {
-    this.#state = newState;
-    this.render();
+  bindEvent() {
+    this.$todoList.querySelector('ul').addEventListener('click', e => {
+      if (e.target.matches('li')) {
+        const { id } = e.target.dataset;
+        this.onClickTodo(parseInt(id, 10));
+        return;
+      } 
+      if (e.target.matches('button')) {
+        const { id } = e.target.dataset;
+        this.onClickButton(parseInt(id, 10));
+        return;
+      }
+    })
   }
 }

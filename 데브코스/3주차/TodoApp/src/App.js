@@ -1,32 +1,55 @@
 import Header from "./Header.js";
 import TodoForm from "./TodoForm.js";
 import TodoList from "./TodoList.js";
+import TodoCount from "./TodoCount.js";
 import { setItem } from "./storage.js";
 
 export default class App {
+  #state = [];
+
   constructor({ $target, initialState }) {
     this.$target = $target;
-    this.initialState = initialState;
+    this.#state = initialState;
     this.setup();
   }
 
+  setState(newState) {
+    this.#state = newState;
+    this.todoList.setState(this.#state);
+    // this.todoCount.setState(this.#state);
+  }
+
   setup() {
-    new Header({
+    this.header = new Header({
       $target: this.$target,
       text: 'Simple Todo List'
     });
 
-    new TodoForm({
+    this.todoForm = new TodoForm({
       $target: this.$target,
       onSubmit: (text) => {
-        todoList.add(text);
-        setItem('todos', JSON.stringify(todoList.state));
+        this.setState([
+          ...this.#state,
+          { text, isCompleted: false }
+        ]);
+        setItem('todos', JSON.stringify(this.#state));
       }
     });
 
-    const todoList = new TodoList({
+    this.todoList = new TodoList({
       $target: this.$target,
-      initialState: this.initialState
+      initialState: this.#state,
+      onClickTodo: id => {
+        console.log(id);
+      },
+      onClickButton: id => {
+        console.log(id);
+      }
     });
+
+    // this.todoCount = new TodoCount({
+    //   $target: this.$target,
+    //   initialState: this.#state
+    // })
   }
 }
