@@ -1,0 +1,47 @@
+* {
+  box-sizing: border-box;
+}
+
+.app {
+  width: 300px;
+  margin: 0 auto;
+}
+
+form {
+  display: flex;
+  justify-content: space-between;
+}
+
+input {
+  flex-grow: 1;
+  outline: none;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+li {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+span {
+  pointer-events: none;
+}
+
+dl {
+  display: flex;
+}
+
+dt {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+dd {
+  margin-left: 0;
+  margin-right: 10px;
+}

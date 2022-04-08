@@ -2,5 +2,6 @@
   "files.associations": {
     "memory.h": "c"
   },
-  "js/ts.implicitProjectConfig.strictNullChecks": true
+  "js/ts.implicitProjectConfig.strictNullChecks": true,
+  "liveServer.settings.port": 5501
 }

@@ -2,19 +2,27 @@ export default class TodoList {
   #state = [];
 
   constructor({ $target, initialState, onClickText, onClickButton }) {
+    this.checkValidation();
+
+    if (!Array.isArray(initialState)) {
+      throw new Error('The type of initialState must be an Array');
+    }
     this.$target = $target; 
     this.#state = initialState;
     this.onClickText = onClickText;
     this.onClickButton = onClickButton;
-    this.setup();
+    this.#init();
   }
 
   setState(newState) {
+    if(!Array.isArray(newState)) {
+      throw new Error('The type of newState must be an Array');
+    }
     this.#state = newState;
     this.render();
   }
 
-  setup() {
+  #init() {
     this.$todoList = document.createElement('div');
     this.render();
     this.$target.appendChild(this.$todoList);
@@ -27,15 +35,13 @@ export default class TodoList {
   }
 
   getHtml() {
-    console.log(this.#state);
-    return `<ul>
-    ${this.#state.map(({ id, text, isCompleted }) => {
-      return `<li data-id=${id} data-completed=${isCompleted}>
+    return this.#state.reduce((html, { id, text, isCompleted }) => {
+      html += `<li data-id=${id} data-completed=${isCompleted}>
         <span>${text}</span>
         <button data-id=${id}>삭제</button>
       </li>`;
-    }).join('')}
-    </ul>` 
+      return html;
+    }, '<ul>') + '</ul>';
   }
 
   setStyle() {
@@ -43,7 +49,7 @@ export default class TodoList {
       const { completed } = li.dataset;
       const text = li.querySelector('span');
       text.style.textDecoration = completed === 'true' ? 'line-through' : '';
-    })
+    });
   }
 
   bindEvent() {
@@ -52,12 +58,11 @@ export default class TodoList {
         const { id } = e.target.dataset;
         this.onClickText(parseInt(id, 10));
         return;
-      } 
+      }
       if (e.target.matches('button')) {
         const { id } = e.target.dataset;
         this.onClickButton(parseInt(id, 10));
-        return;
       }
-    })
+    });
   }
 }

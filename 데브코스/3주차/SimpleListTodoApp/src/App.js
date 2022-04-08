@@ -6,21 +6,27 @@ import { setItem } from "./storage.js";
 
 export default class App {
   #state = [];
-  id = 1;
 
   constructor({ $target, initialState }) {
+    if(!Array.isArray(initialState)) {
+      throw new Error('The type of initialState must be an Array');
+    }
     this.$target = $target;
     this.#state = initialState;
-    this.setup();
+    this.init();
   }
 
   setState(newState) {
+    if(!Array.isArray(newState)) {
+      throw new Error('The type of newState must be an Array');
+    }
     this.#state = newState;
     this.todoList.setState(this.#state);
-    // this.todoCount.setState(this.#state);
+    this.todoCount.setState(this.#state);
+    setItem('todoData', JSON.stringify(this.#state));
   }
 
-  setup() {
+  init() {
     this.header = new Header({
       $target: this.$target,
       text: 'Simple Todo List'
@@ -31,10 +37,8 @@ export default class App {
       onSubmit: (text) => {
         this.setState([
           ...this.#state,
-          { id: this.id, text, isCompleted: false }
+          { id: this.createUniqueID(), text, isCompleted: false }
         ]);
-        this.id += 1;
-        // setItem('todos', JSON.stringify(this.#state));
       }
     });
 
@@ -54,9 +58,13 @@ export default class App {
       }
     });
 
-    // this.todoCount = new TodoCount({
-    //   $target: this.$target,
-    //   initialState: this.#state
-    // })
+    this.todoCount = new TodoCount({
+      $target: this.$target,
+      initialState: this.#state
+    })
+  }
+
+  static createUniqueID () {
+    return Math.floor(new Date().valueOf() * Math.random());
   }
 }

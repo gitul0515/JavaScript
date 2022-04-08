@@ -19,6 +19,7 @@ export default function ProductOptions({ $target, initialState, onSelect }) {
 
   $select.addEventListener('change', e => {
     const id = parseInt(e.target.value, 10);
+    console.log(this.state);
     const option = this.state.find(option => option.optionId === id);
     
     if(option) {
