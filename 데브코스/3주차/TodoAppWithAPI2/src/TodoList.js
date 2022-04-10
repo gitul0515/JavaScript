@@ -12,7 +12,6 @@ export default function TodoList({ $target, initialState, onToggle, onRemove }) 
 
   this.render = () => {
     const { isLoaging, todos } = this.state;
-
     if (!isLoaging && todos.length === 0) {
       $todo.innerHTML = 'Todo가 없습니다!';
       return;
