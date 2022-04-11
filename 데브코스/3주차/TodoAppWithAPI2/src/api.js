@@ -9,12 +9,10 @@ export const request = async (url, options = {}) => {
       }
     });
     if (res.ok) {
-      const json = await res.json();
-      return json;
+      return await res.json();
     }
     throw new Error('API 호출 오류');
   } catch(e) {
     alert(e.message);
   }
-  document.querySelector('body')
 }

@@ -3,6 +3,7 @@ import UserList from "./UserList.js";
 import Header from "./Header.js";
 import TodoForm from "./TodoForm.js";
 import TodoList from "./TodoList.js";
+import { parse } from "./queryString.js";
 
 export default function App({
   $target
@@ -15,7 +16,7 @@ export default function App({
 
   this.state = {
     userList: [],
-    selectedUsername: null,
+    selectedUser: null,
     todos: [],
     isLoading: false
   }
@@ -24,10 +25,10 @@ export default function App({
     $target: $userListContainer,
     initialState: this.state.userList,
     onSelect: async username => {
-      history.pushState(null, null, `/?selectedUsername=${username}`);
+      history.pushState(null, null, `/?selectedUser=${username}`);
       this.setState({
         ...this.state,
-        selectedUsername: username
+        selectedUser: username
       });
       await fetchTodos();
     }
@@ -37,7 +38,7 @@ export default function App({
     $target: $todoListContainer,
     initialState: {
       isLoading: this.state.isLoading,
-      selectedUsername: this.state.selectedUsername
+      selectedUser: this.state.selectedUser
     }
   })
 
@@ -47,7 +48,6 @@ export default function App({
       const isFirstTodoAdd = this.state.todos.length === 0;
       const todo = {
         content,
-        isCompleted: false
       }
       this.setState({
         ...this.state,
@@ -56,7 +56,7 @@ export default function App({
           todo
         ]
       })
-      await request(`/${this.state.selectedUsername}`, {
+      await request(`/${this.state.selectedUser}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -75,18 +75,21 @@ export default function App({
     $target: $todoListContainer,
     initialState: {
       isLoading: this.state.isLoading,
-      selectedUsername: this.state.selectedUsername,
+      selectedUser: this.state.selectedUser,
       todos: this.state.todos
     },
     onToggle: async id => {
-      const todoIndex = this.state.todos.findIndex(todo => todo._id === id);
-      const nextTodos = [...this.state.todos];
-      nextTodos[todoIndex].isCompleted = !nextTodos[todoIndex].isCompleted;
+      const nextTodos = this.state.todos.map(todo => {
+        if (todo._id === id) {
+          return { ...todo, isCompleted: !todo.isCompleted }
+        }
+        return todo;
+      });
       this.setState({
         ...this.state,
         todos: nextTodos
       })
-      await request(`/${this.state.selectedUsername}/${id}/toggle`, {
+      await request(`/${this.state.selectedUser}/${id}/toggle`, {
         method: 'PUT'
       });
       await fetchTodos();
@@ -97,7 +100,7 @@ export default function App({
         ...this.state,
         todos: nextTodos
       })
-      await request(`/${this.state.selectedUsername}/${id}`, {
+      await request(`/${this.state.selectedUser}/${id}`, {
         method: 'DELETE'
       });
       await fetchTodos();
@@ -113,13 +116,13 @@ export default function App({
   };
 
   const fetchTodos = async () => {
-    const { selectedUsername } = this.state;
+    const { selectedUser } = this.state;
     this.setState({
       ...this.state,
       isLoading: true
     })
-    if (selectedUsername) {
-      const todos = await request(`/${selectedUsername}`);
+    if (selectedUser) {
+      const todos = await request(`/${selectedUser}`);
       this.setState({
         ...this.state,
         todos,
@@ -130,36 +133,39 @@ export default function App({
 
   this.setState = nextState => {
     this.state = nextState;
+    userList.setState(this.state.userList);
     header.setState({
-      selectedUsername: this.state.selectedUsername,
+      selectedUser: this.state.selectedUser,
       isLoading: this.state.isLoading
     })
     todoList.setState({
+      selectedUser: this.state.selectedUser,
       isLoading: this.state.isLoading,
-      selectedUsername: this.state.selectedUsername,
       todos: this.state.todos
     });
-    userList.setState(this.state.userList);
     this.render();
   }
 
   this.render = () => {
-    const { selectedUsername } = this.state;
-    $todoListContainer.style.display = selectedUsername ? 'block' : 'none';
+    const { selectedUser } = this.state;
+    $todoListContainer.style.display = selectedUser ? 'block' : 'none';
   }
 
   const init = async () => {
     await fetchUserList();
 
-    // url에 특정 사용자를 나타내는 값이 있을 경우
-    if (pathname.length > 1 && pathname.length < 10) {
+    // queryString에 특정 사용자를 나타내는 값이 있을 경우
+    const search = decodeURI(location.search);
+    const { selectedUser } = parse(search.substring(1));
+    if (selectedUser) {
       this.setState({
         ...this.state,
-        selectedUsername: pathname.substring(1)
+        selectedUser
       })
       await fetchTodos();
     }
   }
   this.render();
   init();
+  window.addEventListener('popstate', () => init());
 }

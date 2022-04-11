@@ -35,11 +35,11 @@ export default function UserList({
     }
   });
 
-  $userList.addEventListener('submit', e => {
-    const newUser = $userList.querySelector('.new-user');
-    if (newUser.value.length > 0) {
-      onSelect(newUser.value);
-      newUser.value = '';
+  $userList.addEventListener('submit', () => {
+    const input = $userList.querySelector('.new-user');
+    if (input.value.length > 0) {
+      onSelect(input.value);
+      input.value = '';
     }
   });
   this.render();

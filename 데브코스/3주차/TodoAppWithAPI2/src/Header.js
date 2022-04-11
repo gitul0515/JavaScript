@@ -12,12 +12,12 @@ export default function Header({
   }
 
   this.render = () => {
-    const { selectedUsername, isLoading } = this.state;
-    if (!selectedUsername) {
+    const { selectedUser, isLoading } = this.state;
+    if (!selectedUser) {
       $h2.innerHTML = '';
       return;
     }
-    $h2.innerHTML = `${selectedUsername} 님의 할 일 목록 ${isLoading ? '로딩 중...' : ''}`;
+    $h2.innerHTML = `${selectedUser} 님의 할 일 목록 ${isLoading ? '로딩 중...' : ''}`;
   }
   this.render();
 }

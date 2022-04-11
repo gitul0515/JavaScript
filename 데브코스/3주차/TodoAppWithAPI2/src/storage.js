@@ -6,16 +6,15 @@ export const setItem = (key, value) => {
   } catch (e) {
     console.log(e);
   }
-
 };
+
 export const getItem = (key, defaultValue) => {
   try {
     const storedValue = storage.getItem(key);
     if (!storedValue) {
       return defaultValue;
     }
-    const parsedValue = JSON.parse(storedValue);
-    return parsedValue;
+    return JSON.parse(storedValue);
   } catch (e) {
     return defaultValue;
   }

@@ -34,9 +34,7 @@ export default function TodoList({ $target, initialState, onToggle, onRemove }) 
 
     if ($li) {
       const { id } = $li.dataset;
-
-      const { className } = e.target;
-      if (className === 'remove') {
+      if (e.target.className === 'remove') {
         onRemove(id);
       } else {
         onToggle(id);
