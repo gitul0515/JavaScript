@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- 
+      디바운스(debounce)는 짧은 시간 간격으로 발생하는 이벤트를 그룹화해서
+      마지막에 한 번만 이벤트 핸들러가 호출되도록 한다. 
+    -->
+    <input type="text">
+    <div class="message"></div>
+    <script>
+      const $input = document.querySelector('input');
+      const $message = document.querySelector('.message');
+
+      const debounce = (callback, delay) => {
+        let timeId;
+        return event => {
+          if (timeId) {
+            clearTimeout(timeId);
+          }
+          timeId = setTimeout(callback, delay, event);
+        }
+      };
+
+      $input.addEventListener('input', debounce(e => {
+        $message.textContent = e.target.value;
+      }, 500));
+    </script>
+  </body>
+</html>

@@ -8,6 +8,10 @@ import { parse } from "./queryString.js";
 export default function App({
   $target
 }) {
+  if (!new.target) {
+    return new App({$target});
+  }
+
   const $userListContainer = document.createElement('div');
   const $todoListContainer = document.createElement('div');
 
