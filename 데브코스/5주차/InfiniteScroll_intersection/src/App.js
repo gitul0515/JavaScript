@@ -33,7 +33,7 @@ export default function App({ $target }) {
     photoList.setState({
       photos: this.state.photos,
       isLodaing: this.state.isLodaing,
-      totalCount: this.state.totalCount,
+      totalCount: this.state.totalCount
     });
   };
 
