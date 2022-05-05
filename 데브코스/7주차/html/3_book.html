@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="독서 관리 앱 '북모리'를 클론 코딩한 앱입니다. book 화면입니다."
+    />
+    <meta name="keywords" content="북모리, 독서, 노트, 홈 화면" />
+    <meta name="author" content="권기홍" />
+    <title>북모리 클론 앱 - book</title>
+    <!-- Fonts-->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdn.jsdelivr.net/font-iropke-batang/1.2/font-iropke-batang.css"
+    />
+    <!-- Fontawesome -->
+    <script src="https://kit.fontawesome.com/fb9a82cb4a.js" crossorigin="anonymous"></script>
+    <!-- Normailze -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+      integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- CSS -->
+    <link href="../css/3_book.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <h1 class="header__title">업적</h1>
+      <h3 class="header__message">20권의 책을 다 읽으셨어요!</h3>
+      <button class="search-btn">
+        <i class="search-btn__icon fa-solid fa-magnifying-glass"></i>
+      </button>
+    </header>
+
+    <!-- Content -->
+    <main class="content">
+      <button class="sort-btn">낮은 별점부터</button>
+      <ul class="book-list">
+        <li class="book">
+          <div>
+            <img
+              class="book__thumbnail"
+              src="../assets/images/books/book-3.jpg"
+              alt="표지 이미지"
+            />
+            <div class="book__rating">
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+            </div>
+          </div>
+          <h3 class="book__title">사피엔스</h3>
+        </li>
+        <li class="book">
+          <div>
+            <img
+              class="book__thumbnail"
+              src="../assets/images/books/book-7.jpg"
+              alt="표지 이미지"
+            />
+            <div class="book__rating">
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+            </div>
+          </div>
+          <h3 class="book__title">해커와 화가</h3>
+        </li>
+        <li class="book">
+          <div>
+            <img
+              class="book__thumbnail"
+              src="../assets/images/books/book-5.jpg"
+              alt="표지 이미지"
+            />
+            <div class="book__rating">
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+            </div>
+          </div>
+          <h3 class="book__title">생각에 관한 생각</h3>
+        </li>
+        <li class="book">
+          <div>
+            <img
+              class="book__thumbnail"
+              src="../assets/images/books/book-3.jpg"
+              alt="표지 이미지"
+            />
+            <div class="book__rating">
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+            </div>
+          </div>
+          <h3 class="book__title">사피엔스</h3>
+        </li>
+        <li class="book">
+          <div>
+            <img
+              class="book__thumbnail"
+              src="../assets/images/books/book-7.jpg"
+              alt="표지 이미지"
+            />
+            <div class="book__rating">
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+            </div>
+          </div>
+          <h3 class="book__title">해커와 화가</h3>
+        </li>
+      </ul>
+    </main>
+
+    <!-- Navigation -->
+    <nav class="navigation">
+      <ul class="navigation__tab-list">
+        <li class="navigation__tab">
+          <a class="tab__anchor" href="./1_home.html">
+            <i class="tab__icon fa-solid fa-book-open"></i>
+          </a>
+        </li>
+        <li class="navigation__tab">
+          <a class="tab__anchor" href="./2_note.html">
+            <i class="tab__icon fa-solid fa-lightbulb"></i>
+          </a>
+        </li>
+        <li class="navigation__tab active">
+          <a class="tab__anchor" href="./3_book.html">
+            <i class="tab__icon fa-solid fa-medal"></i>
+          </a>
+        </li>
+        <li class="navigation__tab">
+          <a class="tab__anchor" href="./4_mypage.html">
+            <i class="tab__icon fa-solid fa-regular fa-user"></i>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </body>
+</html>

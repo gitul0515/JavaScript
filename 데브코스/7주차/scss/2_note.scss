@@ -1,0 +1,150 @@
+@import './variables/color';
+@import './variables//icon';
+@import './variables/typography';
+@import './base/reset';
+@import './components/header';
+@import './components/navigation';
+@import './components/search-btn';
+
+.content {
+  padding: 24px;
+  margin-top: 10px;
+  margin-bottom: 46px;
+}
+
+.tab-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+
+  .tab {
+    width: 42vw;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: $white-transparent;
+    border-radius: 8px;
+    position: relative;
+
+    &__title {
+      color: $title;
+      @include font-18;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+    }
+  }
+}
+
+.tab--random::before {
+  background: url(../assets/images/note/img-notes.png) no-repeat center center;
+  background-size: contain;
+  width: 55px;
+  height: 55px;
+  top: -34px;
+  left: 15px;
+}
+
+.tab--favorite::before {
+  background: url(../assets/images/note/img-love.png) no-repeat center center;
+  background-size: contain;
+  width: 65px;
+  height: 65px;
+  top: -36px;
+  left: 12px;
+  transform: rotate(-10deg);
+}
+
+.note {
+  border-radius: 10px;
+  padding: 14px;
+  margin-top: 32px;
+  position: relative;
+  background-color: $white;
+  box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.2);
+  color: $secondary;
+  @include font-13;
+
+  &__book-information {
+    display: flex;
+  }
+
+  &__book-thumbnail {
+    width: 48px;
+    border-radius: 6px;
+    margin-right: 10px;
+    flex-shrink: 0;
+    box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.1);
+  }
+
+  &__book-title {
+    color: $primary;
+  }
+
+  &__book-author {
+    color: $tertiary;
+  }
+
+  &__information {
+    margin-top: 6px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__page {
+    span {
+      color: $tertiary;
+      @include font-12;
+    }
+  }
+
+  &__content {
+    padding: 40px 0;
+
+    p {
+      color: $primary;
+      font-family: $font-note;
+      @include font-16;
+    }
+  }
+
+  &__footer {
+    @include font-16;
+  }
+
+  &__btns {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__btn {
+    padding: 7px;
+    margin-bottom: -7px;
+
+    i {
+      color: $secondary;
+    }
+
+    &--download {
+      transform: scale(1.6);
+
+      i {
+        color: $blue-dark;
+      }
+    }
+  }
+
+  &::after {
+    content: '책 속 문장';
+    padding: 2px 24px;
+    color: $white;
+    background-color: $blue-sky;
+    position: absolute;
+    top: 24%;
+    right: -10px;
+  }
+}

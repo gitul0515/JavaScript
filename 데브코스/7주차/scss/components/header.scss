@@ -1,0 +1,25 @@
+.header {
+  padding: 24px;
+  background-color: $blue;
+  position: relative;
+
+  &__title {
+    font-family: $font-title;
+    font-weight: 800;
+  }
+
+  &__message {
+    color: $blue-sky-light;
+  }
+
+  &::after {
+    content: '';
+    width: 100vw;
+    height: 230px;
+    position: absolute;
+    left: 0;
+    border-radius: 0 0 33% 33%;
+    background-color: $blue;
+    z-index: -1;
+  }
+}

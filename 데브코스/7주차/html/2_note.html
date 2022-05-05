@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="독서 관리 앱 '북모리'를 클론 코딩한 앱입니다. note 화면입니다."
+    />
+    <meta name="keywords" content="북모리, 독서, 노트, 홈 화면" />
+    <meta name="author" content="권기홍" />
+    <title>북모리 클론 앱 - note</title>
+    <!-- Fonts-->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css"
+    />
+    <link
+      rel="stylesheet"
+      href="//cdn.jsdelivr.net/font-iropke-batang/1.2/font-iropke-batang.css"
+    />
+    <!-- Fontawesome -->
+    <script src="https://kit.fontawesome.com/fb9a82cb4a.js" crossorigin="anonymous"></script>
+    <!-- Normailze -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+      integrity="sha512-NhSC1YmyruXifcj/KFRWoC561YpHpc5Jtzgvbuzx5VozKpWvQ+4nXhPdFgmx8xqexRcpAglTj9sIBWINXa8x5w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- CSS -->
+    <link href="../css/2_note.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <h1 class="header__title">기억하기</h1>
+      <h3 class="header__message">177개의 노트를 작성하셨군요!</h3>
+      <button class="search-btn">
+        <i class="search-btn__icon fa-solid fa-magnifying-glass"></i>
+      </button>
+    </header>
+
+    <!-- Content -->
+    <main class="content">
+      <div class="tab-container">
+        <a class="tab tab--random" href="#">
+          <h2 class="tab__title">랜덤 노트</h2>
+          <h3 class="tab__message">노트를 읽으세요!</h3>
+        </a>
+        <a class="tab tab--favorite" href="#">
+          <h2 class="tab__title">좋아하는 노트</h2>
+          <h3 class="tab__message">노트 17개</h3>
+        </a>
+      </div>
+      <ul class="note-list">
+        <li class="note">
+          <header class="note__header">
+            <div class="note__book-information">
+              <img
+                class="note__book-thumbnail"
+                src="../assets/images/books/img-book1.jpg"
+                alt="책 이미지"
+              />
+              <div>
+                <h3 class="note__book-title">딥 워크</h3>
+                <span class="note__book-author">칼 뉴포트</span>
+              </div>
+            </div>
+            <div class="note__information">
+              <p class="note__created-at">2022년 5월 3일 16:29</p>
+              <span class="note__page">p. 62 <span>(17.3%)</span></span>
+            </div>
+          </header>
+          <section class="note__content">
+            <p>집중하는 삶이 최선의 삶이다.</p>
+          </section>
+          <footer class="note__footer">
+            <div class="note__btns">
+              <div>
+                <button class="note__btn note__btn--count">
+                  <i class="fa-solid fa-check"></i>
+                </button>
+                <button class="note__btn note__btn--favorite">
+                  <i class="fa-regular fa-heart"></i>
+                </button>
+                <button class="note__btn note__btn--copy">
+                  <i class="fa-regular fa-file"></i>
+                </button>
+                <button class="note__btn note__btn--comment">
+                  <i class="fa-regular fa-comment"></i>
+                </button>
+              </div>
+              <div>
+                <button class="note__btn note__btn--download">
+                  <i class="fa-solid fa-circle-down"></i>
+                </button>
+                <button class="note__btn note__btn--options">
+                  <i class="fa-solid fa-ellipsis-vertical"></i>
+                </button>
+              </div>
+            </div>
+          </footer>
+        </li>
+        <li class="note">
+          <header class="note__header">
+            <div class="note__book-information">
+              <img
+                class="note__book-thumbnail"
+                src="../assets/images/books/img-book1.jpg"
+                alt="책 이미지"
+              />
+              <div>
+                <h3 class="note__book-title">딥 워크</h3>
+                <span class="note__book-author">칼 뉴포트</span>
+              </div>
+            </div>
+            <div class="note__information">
+              <p class="note__created-at">2022년 5월 3일 16:29</p>
+              <span class="note__page">p. 62 <span>(17.3%)</span></span>
+            </div>
+          </header>
+          <section class="note__content">
+            <p>집중하는 삶이 최선의 삶이다.</p>
+          </section>
+          <footer class="note__footer">
+            <div class="note__btns">
+              <div>
+                <button class="note__btn note__btn--count">
+                  <i class="fa-solid fa-check"></i>
+                </button>
+                <button class="note__btn note__btn--favorite">
+                  <i class="fa-regular fa-heart"></i>
+                </button>
+                <button class="note__btn note__btn--copy">
+                  <i class="fa-regular fa-file"></i>
+                </button>
+                <button class="note__btn note__btn--comment">
+                  <i class="fa-regular fa-comment"></i>
+                </button>
+              </div>
+              <div>
+                <button class="note__btn note__btn--download">
+                  <i class="fa-solid fa-circle-down"></i>
+                </button>
+                <button class="note__btn note__btn--options">
+                  <i class="fa-solid fa-ellipsis-vertical"></i>
+                </button>
+              </div>
+            </div>
+          </footer>
+        </li>
+      </ul>
+    </main>
+
+    <!-- Navigation -->
+    <nav class="navigation">
+      <ul class="navigation__tab-list">
+        <li class="navigation__tab">
+          <a class="tab__anchor" href="./1_home.html">
+            <i class="tab__icon fa-solid fa-book-open"></i>
+          </a>
+        </li>
+        <li class="navigation__tab active">
+          <a class="tab__anchor" href="./2_note.html">
+            <i class="tab__icon fa-solid fa-lightbulb"></i>
+          </a>
+        </li>
+        <li class="navigation__tab">
+          <a class="tab__anchor" href="./3_book.html">
+            <i class="tab__icon fa-solid fa-medal"></i>
+          </a>
+        </li>
+        <li class="navigation__tab">
+          <a class="tab__anchor" href="./4_mypage.html">
+            <i class="tab__icon fa-solid fa-regular fa-user"></i>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </body>
+</html>

@@ -1,0 +1,11 @@
+.search-btn {
+  padding: 10px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+
+  &__icon {
+    color: $blue-sky-light;
+    font-size: $icon-small;
+  }
+}

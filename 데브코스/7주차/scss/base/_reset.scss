@@ -1,0 +1,70 @@
+* {
+  margin: 0;
+  font-family: $font-main;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: $font-main;
+  @include font-15;
+}
+
+body {
+  width: 100vw;
+  min-height: 100vh;
+  font-family: $font-main;
+  color: $primary;
+  background-color: $background;
+}
+
+h1 {
+  @include font-32;
+  font-family: $font-title;
+  color: $title;
+  margin: 0;
+}
+
+h2 {
+  @include font-24;
+  font-size: 22px;
+  font-weight: 400;
+  color: $primary;
+  margin: 0;
+}
+
+h3 {
+  @include font-15;
+  font-weight: 400;
+  color: $blue-sky-light;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  background-color: transparent;
+  padding: 0;
+  border: 0;
+
+  &:focus {
+    outline: none;
+    box-shadow: none;
+  }
+}
+
+a,
+button {
+  cursor: pointer;
+}
+
+ul,
+ol {
+  list-style: none;
+  padding-left: 0;
+}
